@@ -8,9 +8,7 @@
   <h1>Updates | Socials</h1>
   <p>
   Get the latest updates by joining the official <a href="https://discord.gg/j3YamACwPu" target="_blank">Discord Server</a>.
-  </p>
   </br>
-  <p>
   Talk about the novel in the official <a href="https://www.reddit.com/r/StarOfLibby/comments/yy0bck/official_website/" target="_blank">Subreddit</a>.
   </p>
   <h1>Credits</h1>
