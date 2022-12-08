@@ -14,8 +14,10 @@
   <h1>Credits</h1>
   <p>
   @Shinpi
+  </br>
+  @BadBoyPlays
   </p>
-  
+
   <p>
     <a href="https://discord.gg/j3YamACwPu">
       <img class="website" title="Website" src="https://shinpitekita.repl.co/api/circle?url=https://cdn.discordapp.com/avatars/870413726711435297/9b87fb18882d84c79140be8bc15d3256.png">
