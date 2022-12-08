@@ -1,0 +1,28 @@
+{
+  "name": "Shinpi's-Novels",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Shinpi-Tekita/novels.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Shinpi-Tekita/novels/issues"
+  },
+  "homepage": "https://github.com/Shinpi-Tekita/novels",
+  "dependencies": {
+    "axios": "^0.27.2",
+    "cors": "^2.8.5",
+    "express": "^4.18.1",
+    "node": "^17.3.0",
+    "path": "^0.12.7",
+  }
+}
