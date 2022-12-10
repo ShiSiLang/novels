@@ -1,12 +1,11 @@
 const express = require("express");
-//var cors = require('cors');
 const novel = require('./starOfLibby');
 const app = express();
 const fs = require('fs');
 const axios = require('axios');
 
 const dir = (text) => `${__dirname}/html/${text}.html`;
-//const link = (input) => `https://Star-of-Libby.shinpitekita.repl.co/${input}`;
+const link = (input) => `https://novels-production.up.railway.app/${input}`;
 
 app.use(express.json());
 app.use(express.urlencoded({
