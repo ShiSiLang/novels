@@ -6,7 +6,7 @@ const fs = require('fs');
 const axios = require('axios');
 
 const dir = (text) => `${__dirname}/html/${text}.html`;
-const link = (input) => `https://Star-of-Libby.shinpitekita.repl.co/${input}`;
+//const link = (input) => `https://Star-of-Libby.shinpitekita.repl.co/${input}`;
 
 app.use(express.json());
 app.use(express.urlencoded({
