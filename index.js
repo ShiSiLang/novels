@@ -25,7 +25,7 @@ app.get('/read/:chapter', async (req, res) => {
   let file = fs.readFileSync("./html/sol.html", {
 		encoding: "utf8"
 	})
-  file = file.replace("$$change$$", `'https://star-of-libby.shinpitekita.repl.co/novel/${Number(chapter) - 1}'`)
+  file = file.replace("$$change$$", `'https://novels-production.up.railway.app/novel/${Number(chapter) - 1}'`)
   file = file.replace("$$change2$$", `${Number(chapter) + 1}`)
   file = file.replace("$$change3$$", `${Number(chapter) - 1}`)
   file = file.replace("$$change4$$", novel[chapter - 1]?.chapter || "Chapter Not Found.")
