@@ -1,5 +1,5 @@
 const express = require("express");
-var cors = require('cors');
+//var cors = require('cors');
 const novel = require('./starOfLibby');
 const app = express();
 const fs = require('fs');
@@ -8,8 +8,10 @@ const axios = require('axios');
 const dir = (text) => `${__dirname}/html/${text}.html`;
 const link = (input) => `https://Star-of-Libby.shinpitekita.repl.co/${input}`;
 
-app.use(cors())
-app.use(express.urlencoded())
+app.use(express.json());
+app.use(express.urlencoded({
+  extended: true
+}));
 app.get('/', (_, res) => res.redirect(link('home')));
 app.get('/home', async (_, res) => {
     const fetched = await axios.get(`https://api.countapi.xyz/hit/star-of-libby.shinpitekita.repl.co/${process.env.count}`);
