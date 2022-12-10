@@ -64,19 +64,7 @@
       justify-content: center;
       align-items: center;
       flex-direction: column;
-    }
-
-    .website-counter {
-      background-color: #22303C;
-      height: 80px;
-      width: 100px;
-      color: #FFFFFF;
-      border-radius: 30px;
-      font-weight: 700;
-      font-size: 25px;
-      margin-bottom: 30px;
-    }
-    
+    }  
     .topnav {
       width: 100%;
       background-color: #22303C;
@@ -89,28 +77,40 @@
       width: 55px;
       height: 50;
       position: absolute;
-      margin: 2px;
+      margin-bottom: 2px;
       right: 0;
-    }
-    .topnav img:hover {
+      z-index: 0;
+      }
+      .topnav img:hover {
       transform: scale(1.1);
       border-radius: 40%;
-    }
-    .topnav a {
+      box-shadow: 0px 0px 9px 4px #818589;
+      animation: glow 1.5s linear infinite alternate;
+      }
+      .topnav a {
       display: inline-block;
+      border-radius: 30px;
       padding: 19px 16px;
       transition-duration: 0.2s;
-      font-family: "Roboto", sans-serif;
+      font-family: 'Open Sans', Verdana, Geneva, Tahoma, sans-serif;
+      font-size: 1.0em;
+      font-weight: 650;
       text-decoration: none;
+      /*text-transform: uppercase;*/
       color: white;
-    }
-    .topnav a.active {
-      background-color: rgba(0, 0, 0, 0.2);
-    }
-    .topnav a:hover {
-      background: white;
-      color: black;
-    }
+      }
+      .topnav a.active {
+        background-color: rgba(0, 0, 0, 0.2);
+      }
+      .topnav a:hover {
+        background-color: white;
+        color: #161919;
+      }
+     @keyframes glow{
+       to {
+         box-shadow: 0px 0px 30px 20px #535FED;
+       }
+     }
     .footer {
       bottom: 0;
       width: 100%;
@@ -178,20 +178,17 @@
       <h1>Updates | Socials</h1>
       <p>
         Get the latest updates by joining the official <a href="https://discord.gg/j3YamACwPu" target="_blank">Discord Server</a>.
-      </br>
-    Talk about the novel in the official <a href="https://www.reddit.com/r/StarOfLibby/comments/yy0bck/official_website/" target="_blank">Subreddit</a>.
-    </p>
+      </p>
+    </br>
+     <p>
+        Talk about the novel in the official <a href="https://www.reddit.com/r/StarOfLibby/comments/yy0bck/official_website/" target="_blank">Subreddit</a>.
+      </p>
       <h1>Credits</h1>
       <p>
         @Shinpi
-         </br>
-        @BadBoyPlays
       </p>
       <h1>Website visit count:</h1>
       <h2>This site has been visited $$visits$$ times.</h2>
-    </div>
-    <div class="flex">
-    <div class="website-counter"></div>
     </div>
         <div class="footer">
       <div class="footer-text">Copyright © 2022 Shinpi_Tekita</div>
