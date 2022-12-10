@@ -40,9 +40,9 @@ app.get('/discord', (_, res) => res.redirect('https://discord.gg/j3YamACwPu'));
 
 app.use((_, res) => res.status(404).sendFile(dir('error')));
 
-app.listen(5000, () => {
-	console.log("Website is up!")
-})
+app.listen(process.env.PORT || 80, () => {
+	console.log('Server Started');
+});
 
 console.log(__dirname)
 
