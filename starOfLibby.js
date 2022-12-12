@@ -85,7 +85,7 @@ module.exports = [
     intro: '',
     credits: 'Author: Shinpi</br>Proofreaders: BUMAN, Abstraction, Keita',
     chapter: 'Chapter 10: ',
-    timer: "Dec 15, 2020 11:00:00",
+    timer: 'Dec 15 2022',
     comments: [],
     story: `Coming Soon`
   }
