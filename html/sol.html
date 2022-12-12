@@ -342,7 +342,7 @@
             var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
             var seconds = Math.floor((distance % (1000 * 60)) / 1000);
             // Display the result in the element with id="demo"
-            div.innerHTML += `
+            div.innerHTML = `
 			      
 		
 		<h1>${json.title}</h1>
@@ -359,7 +359,7 @@
             if (distance < 0)clearInterval(x);
           }, 1000);
         } else {
-          div.innerHTML += `
+          div.innerHTML = `
 		      
 		
 		<h1>${json.title}</h1>
@@ -373,7 +373,7 @@
 		<p>${json.credits}</p>
 		      `
           if (json.comments.length === 0) {
-            div4.innerHTML += `
+            div4.innerHTML = `
 			      
 		
 		<p>No comments for this chapter</p>`
