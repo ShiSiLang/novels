@@ -356,22 +356,7 @@
 		<p>${json.credits}</p>
 			      `
             // If the count down is finished, write some text
-            if (distance < 0) {
-              clearInterval(x);
-              div.innerHTML += `
-				      
-		
-		<h1>${json.title}</h1>
-		<p>${json.intro}</p>
-		<h2>${json.chapter}</h2>
-		<p>${json.story}</p>`
-              div2.innerHTML += `
-				      
-		
-		<h1>Credits</h1>
-		<p>${json.credits}</p>
-				      `
-            }
+            if (distance < 0)clearInterval(x);
           }, 1000);
         } else {
           div.innerHTML += `
