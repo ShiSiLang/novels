@@ -86,7 +86,7 @@ module.exports = [
     credits: 'Author: Shinpi</br>Editor: Keita</br>Proofreaders: BUMAN, Abstraction, Keita',
     chapter: 'Chapter 10: ',
     timer: 'Dec 15 2022 11:00:00',
-    comments: [],
+    //comments: [{ image: 'https://i.imgur.com/lGLKiVd.png', name: 'Shinpi', date: '15 December, 2020', comment: 'I love bowling.'}, { image: 'https://cdn.discordapp.com/avatars/814179005515038720/c623f79154d8dceaac6cc24f3b6ab6c6.png?size=1024', name: 'Keita', date: '15 December, 2020', comment: 'They're okay.'}, { image: 'https://cdn.discordapp.com/avatars/558453654647209999/ca1972383014a16523eba644086998b8.png?size=1024', name: 'List3', date: '15 December, 2020', comment: 'bad words >:('}],
     story: `Coming Soon`
   },
   {
