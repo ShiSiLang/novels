@@ -88,5 +88,14 @@ module.exports = [
     timer: 'Dec 15 2022 11:00:00',
     comments: [],
     story: `Coming Soon`
+  },
+  {
+    title: 'Star of Libby',
+    intro: '',
+    credits: 'Author: Shinpi</br>Editor: Keita</br>Proofreaders: BUMAN, Abstraction, Keita',
+    chapter: 'Chapter 11: ',
+    timer: 'Dec 22 2022 11:00:00',
+    comments: [],
+    story: `Coming Soon`
   }
   ]
