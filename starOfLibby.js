@@ -83,7 +83,7 @@ module.exports = [
   {
     title: 'Star of Libby',
     intro: '',
-    credits: 'Author: Shinpi</br>Proofreaders: BUMAN, Abstraction, Keita',
+    credits: 'Author: Shinpi</br>Editor: Keita</br>Proofreaders: BUMAN, Abstraction, Keita',
     chapter: 'Chapter 10: ',
     timer: 'Dec 15 2022 11:00:00',
     comments: [],
