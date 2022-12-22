@@ -95,6 +95,15 @@ module.exports = [
     credits: 'Author: Shinpi</br>Editor: Keita</br>Proofreaders: BUMAN, Abstraction, Keita, List3',
     chapter: 'Chapter 11: ',
     timer: 'Dec 22 2022 11:00:00',
+    comments: [{ image: 'https://i.imgur.com/lGLKiVd.png', name: 'Shinpi', date: '22 December, 2020', comment: 'Gender reveals be like.'}, { image: 'https://cdn.discordapp.com/avatars/814179005515038720/c623f79154d8dceaac6cc24f3b6ab6c6.png?size=1024', name: 'Keita', date: '22 December, 2020', comment: 'Pronouns\nVery important\nbut other than that it\'s alr'}],
+    story: `Coming Soon`
+  },
+  {
+    title: 'Star of Libby',
+    intro: '',
+    credits: 'Author: Shinpi</br>Editor: Keita</br>Proofreaders: BUMAN, Abstraction, Keita, List3',
+    chapter: 'Chapter 12: ',
+    timer: 'Dec 29 2022 11:00:00',
     comments: [],
     story: `Coming Soon`
   }
