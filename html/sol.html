@@ -343,52 +343,51 @@
             var seconds = Math.floor((distance % (1000 * 60)) / 1000);
             // Display the result in the element with id="demo"
             div.innerHTML = `
-			      
-		
-		<h1>${json.title}</h1>
-		<p>${json.intro}</p>
-		<h2>${json.chapter}</h2>
-		<p>${days + "d " + hours + "h " + minutes + "m " + seconds + "s "}</p>`
+            <h1>${json.title}</h1>
+            <p>${json.intro}</p>
+            <h2>${json.chapter}</h2>
+            <p>${days + "d " + hours + "h " + minutes + "m " + seconds + "s "}</p>`
             div2.innerHTML = `
-			      
-		
-		<h1>Credits</h1>
-		<p>${json.credits}</p>
+            <h1>Credits</h1>
+            <p>${json.credits}</p>
 			      `
             // If the count down is finished, write some text
-            if (distance < 0)clearInterval(x);
+            if (distance < 0){
+              div.innerHTML = `
+              <h1>${json.title}</h1>
+              <p>${json.intro}</p>
+              <h2>${json.chapter}</h2>
+              <p>${json.story}</p>`
+              div2.innerHTML = `
+              <h1>Credits</h1>
+              <p>${json.credits}</p>
+              `
+              clearInterval(x);
+            }
           }, 1000);
         } else {
-          div.innerHTML = `
-		      
-		
-		<h1>${json.title}</h1>
-		<p>${json.intro}</p>
-		<h2>${json.chapter}</h2>
-		<p>${json.story}</p>`
-          div2.innerHTML = `
-		      
-		
-		<h1>Credits</h1>
-		<p>${json.credits}</p>
-		      `
+          div.innerHTML = `     
+          <h1>${json.title}</h1>
+          <p>${json.intro}</p>
+          <h2>${json.chapter}</h2>
+          <p>${json.story}</p>`
+          div2.innerHTML = `	
+          <h1>Credits</h1>
+          <p>${json.credits}</p>
+          `
           if (json.comments.length === 0) {
             div4.innerHTML = `
-			      
-		
-		<p>No comments for this chapter</p>`
+            <p>No comments for this chapter</p>`
           } else {
             for (let i = 0; i < json.comments.length; i++) {
               div3.innerHTML += `
-				      
-		
-		<div class="comment mt-4 text-justify float-left">
-			<img src="${json.comments[i].image}" alt=" " class="rounded-circle" width="40" height="40">
-				<h4>${json.comments[i].name}</h4>
-				<span>- ${json.comments[i].date}</span>
-				<br>
-					<p>${json.comments[i].comment}</p>
-				</div>`
+              <div class="comment mt-4 text-justify float-left">
+                <img src="${json.comments[i].image}" alt=" " class="rounded-circle" width="40" height="40">
+                <h4>${json.comments[i].name}</h4>
+                <span>- ${json.comments[i].date}</span>
+                <br>
+                <p>${json.comments[i].comment}</p>
+                </div>`
             }
           }
         }
