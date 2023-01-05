@@ -122,8 +122,8 @@ module.exports = [
   {
     title: 'Star of Libby',
     intro: '',
-    credits: 'Author: Shinpi</br>Editor: Keita</br>Proofreaders: BUMAN, Abstraction, Keita, List3',
-    chapter: 'Chapter 13: Thank God For Sunday Mornings',
+    credits: '<b>Author:</b> <strong>Shinpi</strong></br><b>Editor:</b> <strong>Keita</strong></br><b>Proofreaders:</b> <strong>BUMAN, Abstraction, Keita, List3</strong>',
+    chapter: 'Chapter 13: Thank God For Sunday Morning',
     timer: 'Jan 5 2023 11:00:00',
     thumbnail: "https://i.imgur.com/lGLKiVd.png",
     comments: [],
