@@ -52,6 +52,32 @@ app.get("/novel/:chapter", (req, res) => {
 });
 app.get("/discord", (_, res) => res.redirect("https://discord.gg/j3YamACwPu"));
 
+//[{"username":"Shinpi", "icon":"https://i.imgur.com/lGLKiVd.png", "password":""}]
+
+function write(data) {
+  let out = JSON.parse(fs.readFileSync("comments.json", "utf8"));
+  out.comments.push(data);
+  fs.writeFileSync("comments.json", JSON.stringify(out));
+}
+/*
+app.post("/comment", async (req, res) => {
+  let html = req.body.comment.replace(/</g, "&lt;");
+  console.log(html)
+  let user = JSON.parse(process.env["profiles"]).find(v => v.password === html.password)
+  if (!user)
+    return res.send(
+      `Incorrect password!<script>setTimeout(function(){window.location="/read/1";},5000);</script>`
+    );
+
+  write({
+    chapter: html.chapter,
+    comment: html.comment,
+    username: user.username,
+    icon: user.icon,
+    date: html.date,
+  });
+});
+*/
 app.use((_, res) => res.status(404).sendFile(dir("error")));
 
 app.listen(process.env.PORT || 80, () => {
