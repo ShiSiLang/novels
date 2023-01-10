@@ -61,20 +61,19 @@ function write(data) {
 }
 /*
 app.post("/comment", async (req, res) => {
-  let html = req.body.comment.replace(/</g, "&lt;");
-  console.log(html)
-  let user = JSON.parse(process.env["profiles"]).find(v => v.password === html.password)
+  let html = req.body;
+  let user = JSON.parse(process.env["profiles"]).find(v => v.password === html.psw.replace(/</g, "&lt;"))
   if (!user)
     return res.send(
       `Incorrect password!<script>setTimeout(function(){window.location="/read/1";},5000);</script>`
     );
 
   write({
-    chapter: html.chapter,
-    comment: html.comment,
-    username: user.username,
+    chapter: html.chapter.replace(/</g, "&lt;"),
+    comment: html.comment.replace(/</g, "&lt;"),
+    username: user.uname,
     icon: user.icon,
-    date: html.date,
+    date: html.date.replace(/</g, "&lt;"),
   });
 });
 */

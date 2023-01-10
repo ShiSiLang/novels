@@ -1,386 +1,508 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="icon" href="https://i.imgur.com/lGLKiVd.png" />
-    <title>Star of Libby</title>
-    <meta property="og:title" content="Star of Libby" />
-    <meta property="og:site_name" content="Star of Libby" />
-    <meta property="og:description" content="$$change4$$" />
-    <meta property="og:image" content="$$thumbnail$$" />
-    <meta name="theme-color" content="#cbc3e3" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.1.1/css/all.css" />
-  </head>
-  <style>
-    body {
-      background-size: 400% 400%;
-      margin: 0;
-      background-color: #15202B;
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="icon" href="https://i.imgur.com/lGLKiVd.png" />
+  <title>Star of Libby</title>
+  <meta property="og:title" content="Star of Libby" />
+  <meta property="og:site_name" content="Star of Libby" />
+  <meta property="og:description" content="$$change4$$" />
+  <meta property="og:image" content="$$thumbnail$$" />
+  <meta name="theme-color" content="#cbc3e3" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.1.1/css/all.css" />
+</head>
+<style>
+  body {
+    background-size: 400% 400%;
+    margin: 0;
+    background-color: #15202B;
+  }
+
+  div {
+    animation: fadeInUp 0.9s;
+  }
+
+  @keyframes gradient {
+    0% {
+      background-position: 0% 50%;
     }
 
-    div {
-      animation: fadeInUp 0.9s;
+    50% {
+      background-position: 100% 50%;
     }
 
-    @keyframes gradient {
-      0% {
-        background-position: 0% 50%;
-      }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
 
-      50% {
-        background-position: 100% 50%;
-      }
-
-      100% {
-        background-position: 0% 50%;
-      }
+  @keyframes typewriter {
+    from {
+      width: 0;
     }
 
-    @keyframes typewriter {
-      from {
-        width: 0;
-      }
+    to {
+      width: 19.5em;
+    }
+  }
 
-      to {
-        width: 19.5em;
-      }
+  @keyframes blinkTextCursor {
+    from {
+      border-right-color: rgba(255, 255, 255, 0.75);
     }
 
-    @keyframes blinkTextCursor {
-      from {
-        border-right-color: rgba(255, 255, 255, 0.75);
-      }
+    to {
+      border-right-color: transparent;
+    }
+  }
 
-      to {
-        border-right-color: transparent;
-      }
+  @keyframes fadeInUp {
+    from {
+      transform: translate3d(0, 150px, 0);
     }
 
-    @keyframes fadeInUp {
-      from {
-        transform: translate3d(0, 150px, 0);
-      }
-
-      to {
-        transform: translate3d(0, 0, 0);
-        opacity: 1;
-      }
-    }
-
-    @keyframes fadeInDown {
-      from {
-        transform: translate3d(0, -150px, 0);
-      }
-
-      to {
-        transform: translate3d(0, 0, 0);
-        opacity: 1;
-      }
-    }
-
-    .topnav {
-      width: 100%;
-      background-color: #22303C;
-    }
-
-    .topnav img {
-      text-align: center;
-      border-radius: 50%;
-      transition-duration: 0.3s;
-      display: inline-block;
-      width: 55px;
-      height: 50;
-      position: absolute;
-      margin-bottom: 2px;
-      right: 0;
-      z-index: 0;
-    }
-
-    .topnav img:hover {
-      transform: scale(1.1);
-      border-radius: 40%;
-      box-shadow: 0px 0px 9px 4px #818589;
-      animation: glow 1.5s linear infinite alternate;
-    }
-
-    .topnav a {
-      display: inline-block;
-      border-radius: 30px;
-      padding: 19px 16px;
-      transition-duration: 0.2s;
-      font-family: 'Open Sans', Verdana, Geneva, Tahoma, sans-serif;
-      font-size: 1.0em;
-      font-weight: 650;
-      text-decoration: none;
-      /*text-transform: uppercase;*/
-      color: white;
-    }
-
-    .topnav a.active {
-      background-color: rgba(0, 0, 0, 0.2);
-    }
-
-    .topnav a:hover {
-      background-color: white;
-      color: #161919;
-    }
-
-    @keyframes glow {
-      to {
-        box-shadow: 0px 0px 30px 20px #535FED;
-      }
-    }
-
-    .footer {
-      bottom: 0;
-      width: 100%;
-      height: 80px;
-      /* Height of the footer */
-      background-image: linear-gradient(315deg, #192734 0, #22303C 74%);
-    }
-
-    .footer-text {
-      color: white;
-      padding: 1.5%;
-      display: inline-flex;
-      font-family: 'Open Sans', Verdana, Geneva, Tahoma, sans-serif;
-      font-size: 20px;
-    }
-
-    .footer-socials {
-      display: inline-flex;
-      float: right;
-      padding-right: 60px;
-      padding-top: 1%;
-    }
-
-    .footer-socials a {
-      color: white;
-      text-decoration: none;
-      border-radius: 30%;
-      background: #192734;
-      margin-left: 3px;
-      padding: 8px;
-    }
-
-    .text-side {
-      padding-bottom: 72px;
-    }
-
-    .text {
-      text-align: center;
-      padding-bottom: 72px;
-    }
-
-    .text h1 {
-      font-family: sans;
-      color: #FFFFFF;
-      font-size: 80px;
-    }
-
-    .text h2 {
-      font-family: sans;
-      color: #FFFFFF;
-      font-size: 55px;
-    }
-
-    .text p {
-      font-family: sans;
-      color: #FFFFFF;
-      font-size: 35px;
-    }
-
-    .flex {
-      display: flex;
-      justify-content: center;
-    }
-
-    button {
-      font-size: 16px;
-      font-family: 'Helvetica', 'Arial', sans-serif;
-      text-align: center;
-      text-decoration: none;
-      display: inline-block;
-      cursor: pointer;
-      background-color: #22303C;
-      margin-top: 80px;
-      margin-bottom: 100px;
-      margin-right: 40px;
-      margin-left: 40px;
-    }
-
-    .glow-on-hover {
-      font-family: "Roboto", sans-serif;
-      font-size: 1.5em;
-      margin-top: 100px;
-      margin-bottom: 60px;
-      width: 190px;
-      height: 50px;
-      border: none;
-      outline: none;
-      background-color: #22303C;
-      color: #FFFFFF;
-      cursor: pointer;
-      position: relative;
-      z-index: 0;
-      border-radius: 10px;
-    }
-
-    .glow-on-hover:before {
-      content: '';
-      background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
-      position: absolute;
-      top: -2px;
-      left: -2px;
-      background-size: 400%;
-      z-index: -1;
-      filter: blur(5px);
-      width: calc(100% + 4px);
-      height: calc(100% + 4px);
-      animation: glowing 20s linear infinite;
-      opacity: 0;
-      transition: opacity .3s ease-in-out;
-      border-radius: 10px;
-    }
-
-    .glow-on-hover:active {
-      color: #FFFFFF
-    }
-
-    .glow-on-hover:active:after {
-      background: transparent;
-    }
-
-    .glow-on-hover:hover:before {
+    to {
+      transform: translate3d(0, 0, 0);
       opacity: 1;
     }
+  }
 
-    .glow-on-hover:after {
-      z-index: -1;
-      content: '';
-      position: absolute;
+  @keyframes fadeInDown {
+    from {
+      transform: translate3d(0, -150px, 0);
+    }
+
+    to {
+      transform: translate3d(0, 0, 0);
+      opacity: 1;
+    }
+  }
+
+  .topnav {
+    width: 100%;
+    background-color: #22303C;
+  }
+
+  .topnav img {
+    text-align: center;
+    border-radius: 50%;
+    transition-duration: 0.3s;
+    display: inline-block;
+    width: 55px;
+    height: 50;
+    position: absolute;
+    margin-bottom: 2px;
+    right: 0;
+    z-index: 0;
+  }
+
+  .topnav img:hover {
+    transform: scale(1.1);
+    border-radius: 40%;
+    box-shadow: 0px 0px 9px 4px #818589;
+    animation: glow 1.5s linear infinite alternate;
+  }
+
+  .topnav a {
+    display: inline-block;
+    border-radius: 30px;
+    padding: 19px 16px;
+    transition-duration: 0.2s;
+    font-family: 'Open Sans', Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 1.0em;
+    font-weight: 650;
+    text-decoration: none;
+    /*text-transform: uppercase;*/
+    color: white;
+  }
+
+  .topnav a.active {
+    background-color: rgba(0, 0, 0, 0.2);
+  }
+
+  .topnav a:hover {
+    background-color: white;
+    color: #161919;
+  }
+
+  @keyframes glow {
+    to {
+      box-shadow: 0px 0px 30px 20px #535FED;
+    }
+  }
+
+  .footer {
+    bottom: 0;
+    width: 100%;
+    height: 80px;
+    /* Height of the footer */
+    background-image: linear-gradient(315deg, #192734 0, #22303C 74%);
+  }
+
+  .footer-text {
+    color: white;
+    padding: 1.5%;
+    display: inline-flex;
+    font-family: 'Open Sans', Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 20px;
+  }
+
+  .footer-socials {
+    display: inline-flex;
+    float: right;
+    padding-right: 60px;
+    padding-top: 1%;
+  }
+
+  .footer-socials a {
+    color: white;
+    text-decoration: none;
+    border-radius: 30%;
+    background: #192734;
+    margin-left: 3px;
+    padding: 8px;
+  }
+
+  .text-side {
+    padding-bottom: 72px;
+  }
+
+  .text {
+    text-align: center;
+    padding-bottom: 72px;
+  }
+
+  .text h1 {
+    font-family: sans;
+    color: #FFFFFF;
+    font-size: 80px;
+  }
+
+  .text h2 {
+    font-family: sans;
+    color: #FFFFFF;
+    font-size: 55px;
+  }
+
+  .text p {
+    font-family: sans;
+    color: #FFFFFF;
+    font-size: 35px;
+  }
+
+  .flex {
+    display: flex;
+    justify-content: center;
+  }
+
+  button {
+    font-size: 16px;
+    font-family: 'Helvetica', 'Arial', sans-serif;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+    background-color: #22303C;
+    margin-top: 80px;
+    margin-bottom: 100px;
+    margin-right: 40px;
+    margin-left: 40px;
+  }
+
+  .glow-on-hover {
+    font-family: "Roboto", sans-serif;
+    font-size: 1.5em;
+    margin-top: 100px;
+    margin-bottom: 60px;
+    width: 190px;
+    height: 50px;
+    border: none;
+    outline: none;
+    background-color: #22303C;
+    color: #FFFFFF;
+    cursor: pointer;
+    position: relative;
+    z-index: 0;
+    border-radius: 10px;
+  }
+
+  .glow-on-hover:before {
+    content: '';
+    background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    background-size: 400%;
+    z-index: -1;
+    filter: blur(5px);
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    animation: glowing 20s linear infinite;
+    opacity: 0;
+    transition: opacity .3s ease-in-out;
+    border-radius: 10px;
+  }
+
+  .glow-on-hover:active {
+    color: #FFFFFF
+  }
+
+  .glow-on-hover:active:after {
+    background: transparent;
+  }
+
+  .glow-on-hover:hover:before {
+    opacity: 1;
+  }
+
+  .glow-on-hover:after {
+    z-index: -1;
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #22303C;
+    left: 0;
+    top: 0;
+    border-radius: 10px;
+  }
+
+  @keyframes glowing {
+    0% {
+      background-position: 0 0;
+    }
+
+    50% {
+      background-position: 400% 0;
+    }
+
+    100% {
+      background-position: 0 0;
+    }
+  }
+
+  .comments {
+    margin-top: 5%;
+    margin-left: 20px;
+    margin-bottom: 100px;
+  }
+
+  .comment {
+    border: 1px solid #141d26;
+    background-color: #243447;
+    border-radius: 5px;
+    padding-left: 40px;
+    padding-right: 30px;
+    padding-top: 10px;
+    margin-bottom: 50px;
+  }
+
+  .comment h4,
+  .comment span,
+  .darker h4,
+  .darker span {
+    display: inline;
+  }
+
+  .comment p,
+  .comment span,
+  .darker p,
+  .darker span {
+    color: #ffffff;
+    font-family: 'Helvetica', 'Arial', sans-serif;
+  }
+
+  h1,
+  h4 {
+    color: #c51f5d;
+    font-weight: bold;
+  }
+
+  .cancelbtn {
+    width: auto;
+    padding: 10px 18px;
+    background-color: #f44336;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+  }
+
+  input[type=text],
+  input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+  }
+
+  .container {
+    padding: 16px;
+  }
+
+  span.psw {
+    float: right;
+    padding-top: 16px;
+  }
+
+  /* The Modal (background) */
+  .modal {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black w/ opacity */
+    padding-top: 60px;
+  }
+
+  /* Modal Content/Box */
+  .modal-content {
+    background-color: #fefefe;
+    margin: 5% auto 15% auto;
+    /* 5% from the top, 15% from the bottom and centered */
+    border: 1px solid #888;
+    width: 80%;
+    /* Could be more or less, depending on screen size */
+  }
+
+  /* The Close Button (x) */
+  .close {
+    position: absolute;
+    right: 25px;
+    top: 0;
+    color: #000;
+    font-size: 35px;
+    font-weight: bold;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+  }
+
+  .close:hover,
+  .close:focus {
+    color: red;
+    cursor: pointer;
+  }
+
+  .animate {
+    -webkit-animation: animatezoom 0.6s;
+    animation: animatezoom 0.6s
+  }
+
+  @-webkit-keyframes animatezoom {
+    from {
+      -webkit-transform: scale(0)
+    }
+
+    to {
+      -webkit-transform: scale(1)
+    }
+  }
+
+  @keyframes animatezoom {
+    from {
+      transform: scale(0)
+    }
+
+    to {
+      transform: scale(1)
+    }
+  }
+
+  /* Change styles for span and cancel button on extra small screens */
+  @media screen and (max-width: 300px) {
+    span.psw {
+      display: block;
+      float: none;
+    }
+
+    .cancelbtn {
       width: 100%;
-      height: 100%;
-      background-color: #22303C;
-      left: 0;
-      top: 0;
-      border-radius: 10px;
     }
-
-    @keyframes glowing {
-      0% {
-        background-position: 0 0;
-      }
-
-      50% {
-        background-position: 400% 0;
-      }
-
-      100% {
-        background-position: 0 0;
-      }
-    }
-
-    .comments {
-      margin-top: 5%;
-      margin-left: 20px;
-      margin-bottom: 100px;
-    }
-
-    .comment {
-      border: 1px solid #141d26;
-      background-color: #243447;
-      border-radius: 5px;
-      padding-left: 40px;
-      padding-right: 30px;
-      padding-top: 10px;
-      margin-bottom: 50px;
-    }
-
-    .comment h4,
-    .comment span,
-    .darker h4,
-    .darker span {
-      display: inline;
-    }
-
-    .comment p,
-    .comment span,
-    .darker p,
-    .darker span {
-      color: #ffffff;
-      font-family: 'Helvetica', 'Arial', sans-serif;
-    }
-
-    h1,
-    h4 {
-      color: #c51f5d;
-      font-weight: bold;
-    }
-  </style>
-  <script type="text/javascript">
-    async function changeDivContent() {
-      try {
-        let response = await fetch($$change$$);
-        let json = await response.json()
-        const div = document.getElementById("novel");
-        const div2 = document.getElementById("credits");
-        const div3 = document.getElementById("comments");
-        const div4 = document.getElementById("commentstitle");
-        if (json.story === `Coming Soon`) {
-          var countDownDate = new Date(json.timer).getTime();
-          var x = setInterval(function() {
-            // Get today's date and time
-            var now = new Date().getTime();
-            // Find the distance between now and the count down date
-            var distance = countDownDate - now;
-            // Time calculations for days, hours, minutes and seconds
-            var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-            // Display the result in the element with id="demo"
-            div.innerHTML = `
+  }
+</style>
+<script type="text/javascript">
+  async function changeDivContent() {
+    try {
+      let response = await fetch($$change$$);
+      let json = await response.json()
+      const div = document.getElementById("novel");
+      const div2 = document.getElementById("credits");
+      const div3 = document.getElementById("comments");
+      const div4 = document.getElementById("commentstitle");
+      if (json.story === `Coming Soon`) {
+        var countDownDate = new Date(json.timer).getTime();
+        var x = setInterval(function () {
+          // Get today's date and time
+          var now = new Date().getTime();
+          // Find the distance between now and the count down date
+          var distance = countDownDate - now;
+          // Time calculations for days, hours, minutes and seconds
+          var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+          var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+          var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+          var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+          // Display the result in the element with id="demo"
+          div.innerHTML = `
             <h1>${json.title}</h1>
             <p>${json.intro}</p>
             <h2>${json.chapter}</h2>
             <p>${days + "d " + hours + "h " + minutes + "m " + seconds + "s "}</p>`
-            div2.innerHTML = `
+          div2.innerHTML = `
             <h1>Credits</h1>
             <p>${json.credits}</p>
 			      `
-            // If the count down is finished, write some text
-            if (distance < 0){
-              div.innerHTML = `
+          // If the count down is finished, write some text
+          if (distance < 0) {
+            div.innerHTML = `
               <h1>${json.title}</h1>
               <p>${json.intro}</p>
               <h2>${json.chapter}</h2>
               <p>${json.story}</p>`
-              div2.innerHTML = `
+            div2.innerHTML = `
               <h1>Credits</h1>
               <p>${json.credits}</p>
               `
-              clearInterval(x);
-            }
-          }, 1000);
-        } else {
-          div.innerHTML = `     
+            clearInterval(x);
+          }
+        }, 1000);
+      } else {
+        div.innerHTML = `     
           <h1>${json.title}</h1>
           <p>${json.intro}</p>
           <h2>${json.chapter}</h2>
           <p>${json.story}</p>`
-          div2.innerHTML = `	
+        div2.innerHTML = `	
           <h1>Credits</h1>
           <p>${json.credits}</p>
           `
-          if (json.comments.length === 0) {
-            div4.innerHTML = `
+        if (json.comments.length === 0) {
+          div4.innerHTML = `
             <p>No comments for this chapter</p>`
-          } else {
-            for (let i = 0; i < json.comments.length; i++) {
-              div3.innerHTML += `
+        } else {
+          for (let i = 0; i < json.comments.length; i++) {
+            div3.innerHTML += `
               <div class="comment mt-4 text-justify float-left">
                 <img src="${json.comments[i].image}" alt=" " class="rounded-circle" width="40" height="40">
                 <h4>${json.comments[i].name}</h4>
@@ -388,65 +510,107 @@
                 <br>
                 <p>${json.comments[i].comment}</p>
                 </div>`
-            }
           }
         }
-      } catch (err) {
-        const div = document.getElementById("novel");
-        div.innerHTML += `
+      }
+    } catch (err) {
+      const div = document.getElementById("novel");
+      div.innerHTML += `
 		      
 				<h1>Chapter Not Found</h1>`
-      }
-    };
-  </script>
-  <body onload="changeDivContent()">
-    <div class="topnav">
-      <a href="/home">Home</a>
-      <a class="active" href="#">Star of Libby</a>
-      <a href="/fan">FanArt!</a>
-      <a href="https://cash.app/$shinpi0000" target="_blank">Donate</a>
-      <img src="https://i.imgur.com/lGLKiVd.png" alt="Shinpi" />
-    </div>
-    <div class="flex">
-      <button class="glow-on-hover" onclick="toggleText()">Toggle Text</button>
-    </div>
-    <div class="text" id="novel"></div>
-    <div class="flex">
-      <button class="glow-on-hover" onclick="window.location.href='/read/$$change3$$'">Last Chapter</button>
-      <button class="glow-on-hover" onclick="window.location.href='/read/$$change2$$'">Next Chapter</button>
-    </div>
-    <!--
+    }
+  };
+</script>
+
+<body onload="changeDivContent()">
+  <div class="topnav">
+    <a href="/home">Home</a>
+    <a class="active" href="#">Star of Libby</a>
+    <a href="/fan">FanArt!</a>
+    <a href="https://cash.app/$shinpi0000" target="_blank">Donate</a>
+    <img src="https://i.imgur.com/lGLKiVd.png" alt="Shinpi" />
+  </div>
+  <div class="flex">
+    <button class="glow-on-hover" onclick="toggleText()">Toggle Text</button>
+  </div>
+  <div class="text" id="novel"></div>
+  <div class="flex">
+    <button class="glow-on-hover" onclick="window.location.href='/read/$$change3$$'">Last Chapter</button>
+    <button class="glow-on-hover" onclick="window.location.href='/read/$$change2$$'">Next Chapter</button>
+  </div>
+  <!--
          -->
-    <div class="text" id="credits"></div>
-    <div class="text" id="commentstitle">
-      <h1>Comments</h1>
+  <div class="text" id="credits"></div>
+  <div class="text" id="commentstitle">
+    <h1>Comments</h1>
+  </div>
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-5 col-md-6 col-12 pb-4" id="comments"></div>
+      </div>
     </div>
-    <section>
+  </section>
+  <button class="glow-on-hover" onclick="document.getElementById('id01').style.display='block'"
+    style="width:auto;">Comment</button>
+
+  <div id="id01" class="modal">
+
+    <form class="modal-content animate" action="/comment" method="post">
       <div class="container">
-        <div class="row">
-          <div class="col-sm-5 col-md-6 col-12 pb-4" id="comments"></div>
-        </div>
+        <label for="uname"><b>Username</b></label>
+        <input type="text" placeholder="Enter Username" name="uname" required>
+
+        <label for="psw"><b>Password</b></label>
+        <input type="password" placeholder="Enter Password" name="psw" required>
+
+        <label for="chapter"><b>Chapter Number</b></label>
+        <input type="text" placeholder="Enter Chapter Number" name="chapter" required>
+
+        <label for="comment"><b>Comment</b></label>
+        <input type="text" placeholder="Enter Comment" name="comment" required>
+
+        <button type="submit">Login</button>
       </div>
-    </section>
-    <div class="footer">
-      <div class="footer-text">Copyright © 2022 Shinpi_Tekita</div>
-      <div class="footer-socials">
-        <a href="https://discord.gg/j3YamACwPu" target="_blank">
-          <i class="fab fa-discord"></i>
-        </a>
-        <a href="https://mobile.twitter.com/shinpitekita" target="_blank">
-          <i class="fab fa-twitter"></i>
+
+      <div class="container" style="background-color:#f1f1f1">
+        <button type="button" onclick="document.getElementById('id01').style.display='none'"
+          class="cancelbtn">Cancel</button>
       </div>
+    </form>
+  </div>
+
+  <div class="footer">
+    <div class="footer-text">Copyright © 2022 Shinpi_Tekita</div>
+    <div class="footer-socials">
+      <a href="https://discord.gg/j3YamACwPu" target="_blank">
+        <i class="fab fa-discord"></i>
+      </a>
+      <a href="https://mobile.twitter.com/shinpitekita" target="_blank">
+        <i class="fab fa-twitter"></i>
     </div>
-    <script>
-      function toggleText() {
-        var element = document.querySelector('.text');
-        if (element.style.textAlign === 'justify') {
-          element.style.textAlign = 'center';
-        } else {
-          element.style.textAlign = 'justify';
-        }
+  </div>
+  <script>
+    // Get the modal
+    var modal = document.getElementById('id01');
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
       }
-    </script>
-  </body>
+    }
+  </script>
+  <script>
+    function toggleText() {
+      var element = document.querySelector('.text');
+      if (element.style.textAlign === 'justify') {
+        element.style.textAlign = 'center';
+      } else {
+        element.style.textAlign = 'justify';
+      }
+    }
+  </script>
+</body>
+
 </html>
