@@ -1,5 +1,6 @@
 const express = require("express");
 const novel = require("./starOfLibby");
+const comments = require("./comments");
 const app = express();
 const fs = require("fs");
 const axios = require("axios");
@@ -48,7 +49,8 @@ app.get("/read/:chapter", async (req, res) => {
 });
 app.get("/novel/:chapter", (req, res) => {
   let chapter = Number(req.params.chapter);
-  res.send(novel[chapter]);
+  let commentsArray = JSON.parse(comments).comments;
+  res.send({ comments: commentsArray.filter(v => v.chapter === chapter), ...novel[chapter] });
 });
 app.get("/discord", (_, res) => res.redirect("https://discord.gg/j3YamACwPu"));
 
@@ -66,13 +68,16 @@ app.post("/comment", async (req, res) => {
     return res.send(
       `Incorrect password!<script>setTimeout(function(){window.location="/read/1";},3000);</script>`
     );
+  
+  let date = new Date();
+  let newdate = (date.getMonth() + 1) + '/' + date.getDate() + '/' +  date.getFullYear();
 
   write({
     chapter: html.chapter.replace(/</g, "&lt;"),
     comment: html.comment.replace(/</g, "&lt;"),
     username: user.username,
     icon: user.icon,
-    date: html.date.replace(/</g, "&lt;"),
+    date: newdate
   });
 });
 
