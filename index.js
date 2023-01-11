@@ -52,7 +52,7 @@ app.get("/novel/:chapter", (req, res) => {
 });
 app.get("/discord", (_, res) => res.redirect("https://discord.gg/j3YamACwPu"));
 
-//[{"username":"Shinpi", "icon":"https://i.imgur.com/lGLKiVd.png", "password":""}]
+//{"profiles":[{"username":"Shinpi","icon":"https://i.imgur.com/lGLKiVd.png","password":"Test"}]}
 
 function write(data) {
   let out = JSON.parse(fs.readFileSync("comments.json", "utf8"));
@@ -62,7 +62,8 @@ function write(data) {
 /*
 app.post("/comment", async (req, res) => {
   let html = req.body;
-  let user = JSON.parse(process.env["profiles"]).find(v => v.password === html.psw.replace(/</g, "&lt;"))
+  let profileArray = JSON.parse(process.env["profiles"]).profiles;
+  let user = profileArray.find(v => v.password === html.psw.replace(/</g, "&lt;"))
   if (!user)
     return res.send(
       `Incorrect password!<script>setTimeout(function(){window.location="/read/1";},5000);</script>`
