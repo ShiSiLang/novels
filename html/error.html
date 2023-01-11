@@ -1,49 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
-   <head>
-      <meta charset="utf-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <link
-         rel="icon"
-         type="icon"
-         href="https://i.imgur.com/lGLKiVd.png"
-         />
-      <title>Star of Libby - 404</title>
-   </head>
-   <style>
-      body {
+
+<head>
+   <meta charset="utf-8" />
+   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+   <link rel="icon" type="icon" href="https://i.imgur.com/lGLKiVd.png" />
+   <title>Star of Libby - 404</title>
+</head>
+<style>
+   body {
       background-size: 400% 400%;
       margin: 0;
       background-color: #15202B;
-      }
-      div {
+   }
+
+   div {
       animation: fadeInUp 0.9s;
-      }
-      @keyframes fadeInUp {
+   }
+
+   @keyframes fadeInUp {
       from {
-      transform: translate3d(0, 150px, 0);
+         transform: translate3d(0, 150px, 0);
       }
+
       to {
-      transform: translate3d(0, 0, 0);
-      opacity: 1;
+         transform: translate3d(0, 0, 0);
+         opacity: 1;
       }
-      }
-      @keyframes gradient {
+   }
+
+   @keyframes gradient {
       0% {
-      background-position: 0% 50%;
+         background-position: 0% 50%;
       }
+
       50% {
-      background-position: 100% 50%;
+         background-position: 100% 50%;
       }
+
       100% {
-      background-position: 0% 50%;
+         background-position: 0% 50%;
       }
-      }
-      .topnav {
+   }
+
+   .topnav {
       width: 100%;
       background-color: #22303C;
-      }
-      .topnav img {
+   }
+
+   .topnav img {
       text-align: center;
       border-radius: 50%;
       transition-duration: 0.3s;
@@ -54,14 +59,16 @@
       margin-bottom: 2px;
       right: 0;
       z-index: 0;
-      }
-      .topnav img:hover {
+   }
+
+   .topnav img:hover {
       transform: scale(1.1);
       border-radius: 40%;
       box-shadow: 0px 0px 9px 4px #818589;
       animation: glow 1.5s linear infinite alternate;
-      }
-      .topnav a {
+   }
+
+   .topnav a {
       display: inline-block;
       border-radius: 30px;
       padding: 19px 16px;
@@ -72,105 +79,118 @@
       text-decoration: none;
       /*text-transform: uppercase;*/
       color: white;
-      }
-      .topnav a.active {
-        background-color: rgba(0, 0, 0, 0.2);
-      }
-      .topnav a:hover {
-        background-color: white;
-        color: #161919;
-      }
-     @keyframes glow{
-       to {
+   }
+
+   .topnav a.active {
+      background-color: rgba(0, 0, 0, 0.2);
+   }
+
+   .topnav a:hover {
+      background-color: white;
+      color: #161919;
+   }
+
+   @keyframes glow {
+      to {
          box-shadow: 0px 0px 30px 20px #535FED;
-       }
-     }
-      .footer {
+      }
+   }
+
+   .footer {
       bottom: 0;
       width: 100%;
-      height: 80px; /* Height of the footer */
+      height: 80px;
+      /* Height of the footer */
       background-image: linear-gradient(315deg, #192734 0, #22303C 74%);
-      }
-      .footer-text {
+   }
+
+   .footer-text {
       color: white;
       padding: 1.5%;
       display: inline-flex;
       font-family: 'Open Sans', Verdana, Geneva, Tahoma, sans-serif;
       font-size: 20px;
-      }
-      .footer-socials {
+   }
+
+   .footer-socials {
       display: inline-flex;
       float: right;
       padding-right: 60px;
       padding-top: 1%;
-      }
-      .footer-socials a {
+   }
+
+   .footer-socials a {
       color: white;
       text-decoration: none;
       border-radius: 30%;
       background: #192734;
       margin-left: 3px;
       padding: 8px;
-      }
-      .text {
+   }
+
+   .text {
       padding-bottom: 72px;
-      }
-      .text h1 {
+   }
+
+   .text h1 {
       text-align: center;
       font-family: sans;
       color: #FFFFFF;
       font-size: 55px;
       text-transform: uppercase;
-      }
-      .text p {
+   }
+
+   .text p {
       text-align: center;
       font-family: sans;
       color: #FFFFFF;
       font-size: 35px;
-      }
-   </style>
-   <body onload="typeWriter()">
-      <div class="topnav">
-         <a class="active" href="/home">Home</a>
-         <img src="https://i.imgur.com/lGLKiVd.png" alt="Shinpi" />
-      </div>
-      <div class="text">
-         <h1 id="demo"></h1>
-         <p>THE PAGE YOU REQUESTED COULD NOT FOUND</hp>
-      </div>
-      <script>
-         var i = 0;
-         var txt = '(404) Not Found';
-         var speed = 50;
-         
-         function typeWriter() {
-           if (i < txt.length) {
-             document.getElementById("demo").innerHTML += txt.charAt(i);
-             i++;
-             setTimeout(typeWriter, speed);
-           }
+   }
+</style>
+
+<body onload="typeWriter()">
+   <div class="topnav">
+      <a class="active" href="/home">Home</a>
+      <img src="https://i.imgur.com/lGLKiVd.png" alt="Shinpi" />
+   </div>
+   <div class="text">
+      <h1 id="demo"></h1>
+      <p>THE PAGE YOU REQUESTED COULD NOT FOUND</hp>
+   </div>
+   <script>
+      var i = 0;
+      var txt = '(404) Not Found';
+      var speed = 50;
+
+      function typeWriter() {
+         if (i < txt.length) {
+            document.getElementById("demo").innerHTML += txt.charAt(i);
+            i++;
+            setTimeout(typeWriter, speed);
          }
-      </script>
-      <script>  
-         document.onkeydown = function(e) {
+      }
+   </script>
+   <script>
+      document.onkeydown = function (e) {
          const { keyCode: c } = e;
          if (e.ctrlKey) {
-         switch (c) {
-         case 83:
-         case 85:
-         case 65:
-         case 73:
-         case 123:
-         e.preventDefault();
-         break;
-         }
+            switch (c) {
+               case 83:
+               case 85:
+               case 65:
+               case 73:
+               case 123:
+                  e.preventDefault();
+                  break;
+            }
          } else {
-         if(c === 123) e.preventDefault()
+            if (c === 123) e.preventDefault()
          }
-         };
-         window.addEventListener("contextmenu", function(e) {
+      };
+      window.addEventListener("contextmenu", function (e) {
          e.preventDefault();
-         }, false);
-      </script> 
-   </body>
+      }, false);
+   </script> 
+</body>
+
 </html>
