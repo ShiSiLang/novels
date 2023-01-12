@@ -88,7 +88,7 @@ app.post("/comment", async (req, res) => {
 
   if (!isWhole(chapter) || !novel[Number(chapter)])
     return res.send(
-      `Not a valid chapter!<script>setTimeout(function(){window.location="/read/1";},3000);</script>`
+      `Not a valid chapter!<script>setTimeout(function(){window.location="/read/${Number(chapter)}";},3000);</script>`
     );
 
   let date = new Date();
@@ -106,7 +106,7 @@ app.post("/comment", async (req, res) => {
     `Comment sent to chapter ${html.chapter.replace(
       /</g,
       "&lt;"
-    )}<script>setTimeout(function(){window.location="/read/1";},3000);</script>`
+    )}<script>setTimeout(function(){window.location="/read/${Number(chapter)}";},3000);</script>`
   );
 });
 
