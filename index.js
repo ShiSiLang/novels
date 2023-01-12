@@ -60,14 +60,16 @@ app.get("/discord", (_, res) => res.redirect("https://discord.gg/j3YamACwPu"));
 function write(data) {
   let out = comments;
   out.push(data);
-  fs.writeFileSync("comments.js", `${out}`);
+  fs.writeFileSync("comments.js", out);
 }
 
 app.post("/comment", async (req, res) => {
   let html = req.body;
   let profileArray = JSON.parse(process.env["profiles"]).profiles;
   let user = profileArray.find(
-    (v) => v.password === html.psw.replace(/</g, "&lt;")
+    (v) =>
+      v.password === html.psw.replace(/</g, "&lt;") &&
+      v.username === html.uname.replace(/</g, "&lt;")
   );
   if (!user)
     return res.send(
@@ -80,11 +82,12 @@ app.post("/comment", async (req, res) => {
 
   write({
     chapter: html.chapter.replace(/</g, "&lt;"),
-    comment: html.comment.replace(/</g, "&lt;"),
-    username: user.username,
-    icon: user.icon,
-    date: newdate,
+    comment: `${html.comment.replace(/</g, "&lt;")}`,
+    username: `${user.username}`,
+    icon: `${user.icon}`,
+    date: `${newdate}`,
   });
+  res.send(comments);
 });
 
 app.use((_, res) => res.status(404).sendFile(dir("error")));
