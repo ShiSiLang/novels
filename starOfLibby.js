@@ -140,6 +140,6 @@ module.exports = [
     chapter: 'Chapter 15: ',
     timer: 'Jan 19 2023 11:00:00',
     thumbnail: "https://i.imgur.com/lGLKiVd.png",
-    story: ``
+    story: `Coming Soon`
   }
   ]
