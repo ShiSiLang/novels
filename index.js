@@ -53,7 +53,8 @@ app.get("/novel/:chapter", (req, res) => {
     comments: comments.filter((v) => v.chapter === chapter),
     ...novel[chapter],
   };
-  res.send(newObj);
+  let profileArray = JSON.parse(process.env["profiles"]).profiles;
+  res.send(profileArray);
 });
 app.get("/discord", (_, res) => res.redirect("https://discord.gg/j3YamACwPu"));
 
