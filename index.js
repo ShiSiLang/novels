@@ -60,7 +60,7 @@ app.get("/discord", (_, res) => res.redirect("https://discord.gg/j3YamACwPu"));
 function write(data) {
   let out = comments;
   out.push(data);
-  fs.writeFileSync("comments.js", out);
+  fs.writeFileSync("comments.js", `${out}`);
 }
 
 app.post("/comment", async (req, res) => {
