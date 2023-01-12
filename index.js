@@ -49,19 +49,19 @@ app.get("/read/:chapter", async (req, res) => {
 });
 app.get("/novel/:chapter", (req, res) => {
   let chapter = Number(req.params.chapter);
-  //let commentsArray = JSON.parse(comments)
+  let commentsArray = JSON.parse(comments)
   //let newObj = {
    // comments: commentsArray.filter((v) => v.chapter === chapter),
    // ...novel[chapter],
  // };
   //res.send(<script>alert(newObj);</script>);
-  res.send(JSON.stringify(comments));
+  res.send(commentsArray);
   //res.send(novel[chapter]);
 });
 app.get("/discord", (_, res) => res.redirect("https://discord.gg/j3YamACwPu"));
 
 function write(data) {
-  let out = JSON.parse(fs.readFileSync("comments.json", "utf8"));
+  let out = JSON.parse(comments);
   out.comments.push(data);
   fs.writeFileSync("comments.json", JSON.stringify(out));
 }
