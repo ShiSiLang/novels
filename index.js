@@ -49,11 +49,12 @@ app.get("/read/:chapter", async (req, res) => {
 });
 app.get("/novel/:chapter", (req, res) => {
   let chapter = Number(req.params.chapter);
-  let newObj = {
-    comments: comments.filter((v) => v.chapter === chapter),
-    ...novel[chapter],
-  };
-  res.send(newObj);
+  res.send(comments);
+  //let newObj = {
+   // comments: comments.filter((v) => v.chapter === chapter),
+   // ...novel[chapter],
+  //};
+  //res.send(newObj);
   //res.send(novel[chapter]);
 });
 app.get("/discord", (_, res) => res.redirect("https://discord.gg/j3YamACwPu"));
