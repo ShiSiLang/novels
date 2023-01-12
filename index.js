@@ -47,7 +47,7 @@ app.get("/read/:chapter", async (req, res) => {
   res.send(file);
 });
 
-function read(){
+function read() {
   return JSON.parse(fs.readFileSync("comments.json", "utf8")).comments;
 }
 
@@ -61,9 +61,9 @@ app.get("/novel/:chapter", (req, res) => {
 });
 app.get("/discord", (_, res) => res.redirect("https://discord.gg/j3YamACwPu"));
 
-function write(data){
+function write(data) {
   let out = JSON.parse(fs.readFileSync("comments.json", "utf8"));
-  out.comments.push(data)
+  out.comments.push(data);
   fs.writeFile("comments.json", JSON.stringify(out));
 }
 
@@ -85,6 +85,13 @@ app.post("/comment", async (req, res) => {
     date.getMonth() + 1 + "/" + date.getDate() + "/" + date.getFullYear();
 
   write({
+    chapter: html.chapter.replace(/</g, "&lt;"),
+    comment: html.comment.replace(/</g, "&lt;"),
+    username: user.username,
+    icon: user.icon,
+    date: newdate,
+  });
+  res.send({
     chapter: html.chapter.replace(/</g, "&lt;"),
     comment: html.comment.replace(/</g, "&lt;"),
     username: user.username,
