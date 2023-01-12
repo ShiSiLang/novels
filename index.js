@@ -50,8 +50,11 @@ app.get("/read/:chapter", async (req, res) => {
 app.get("/novel/:chapter", (req, res) => {
   let chapter = Number(req.params.chapter);
   let commentsArray = JSON.parse(comments).comments;
-  let newObj = { comments: commentsArray.filter(v => v.chapter === chapter), ...novel[chapter] };
-  res.send(<script>alert(newObj);</script>);
+  //let newObj = {
+   // comments: commentsArray.filter((v) => v.chapter === chapter),
+   // ...novel[chapter],
+ // };
+  //res.send(<script>alert(newObj);</script>);
   res.send(novel[chapter]);
 });
 app.get("/discord", (_, res) => res.redirect("https://discord.gg/j3YamACwPu"));
@@ -65,21 +68,24 @@ function write(data) {
 app.post("/comment", async (req, res) => {
   let html = req.body;
   let profileArray = JSON.parse(process.env["profiles"]).profiles;
-  let user = profileArray.find(v => v.password === html.psw.replace(/</g, "&lt;"))
+  let user = profileArray.find(
+    (v) => v.password === html.psw.replace(/</g, "&lt;")
+  );
   if (!user)
     return res.send(
       `Incorrect password!<script>setTimeout(function(){window.location="/read/1";},3000);</script>`
     );
-  
+
   let date = new Date();
-  let newdate = (date.getMonth() + 1) + '/' + date.getDate() + '/' +  date.getFullYear();
+  let newdate =
+    date.getMonth() + 1 + "/" + date.getDate() + "/" + date.getFullYear();
 
   write({
     chapter: html.chapter.replace(/</g, "&lt;"),
     comment: html.comment.replace(/</g, "&lt;"),
     username: user.username,
     icon: user.icon,
-    date: newdate
+    date: newdate,
   });
 });
 
