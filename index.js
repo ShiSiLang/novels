@@ -55,7 +55,6 @@ app.get("/novel/:chapter", (req, res) => {
    // ...novel[chapter],
  // };
   //res.send(<script>alert(newObj);</script>);
-  comments
   res.send(comments);
   //res.send(novel[chapter]);
 });
