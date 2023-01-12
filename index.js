@@ -80,6 +80,17 @@ app.post("/comment", async (req, res) => {
       `Incorrect password!<script>setTimeout(function(){window.location="/read/1";},3000);</script>`
     );
 
+  function isWhole(n) {
+    return /^\d+$/.test(n);
+  }
+
+  let chapter = html.chapter.replace(/</g, "&lt;");
+
+  if (!isWhole(chapter) || novel[+chapter])
+    return res.send(
+      `Not a valid chapter!<script>setTimeout(function(){window.location="/read/1";},3000);</script>`
+    );
+
   let date = new Date();
   let newdate =
     date.getMonth() + 1 + "/" + date.getDate() + "/" + date.getFullYear();
@@ -91,13 +102,12 @@ app.post("/comment", async (req, res) => {
     icon: user.icon,
     date: newdate,
   });
-  res.send({
-    chapter: html.chapter.replace(/</g, "&lt;"),
-    comment: html.comment.replace(/</g, "&lt;"),
-    username: user.username,
-    icon: user.icon,
-    date: newdate,
-  });
+  res.send(
+    `Comment sent to chapter ${html.chapter.replace(
+      /</g,
+      "&lt;"
+    )}<script>setTimeout(function(){window.location="/read/1";},3000);</script>`
+  );
 });
 
 app.use((_, res) => res.status(404).sendFile(dir("error")));
