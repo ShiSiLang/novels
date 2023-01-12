@@ -1,6 +1,6 @@
 const express = require("express");
 const novel = require("./starOfLibby");
-let comments = require("./comments");
+const comments = require("./comments");
 const app = express();
 const fs = require("fs");
 const axios = require("axios");
@@ -49,8 +49,7 @@ app.get("/read/:chapter", async (req, res) => {
 });
 app.get("/novel/:chapter", (req, res) => {
   let chapter = Number(req.params.chapter);
-  let Obj = JSON.stringify({ comments: [] })
-  let commentsArray = JSON.parse(Obj)
+  let commentsArray = JSON.parse(comments).comments
   //let newObj = {
    // comments: commentsArray.filter((v) => v.chapter === chapter),
    // ...novel[chapter],
