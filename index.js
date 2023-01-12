@@ -53,7 +53,8 @@ function read(){
 
 app.get("/novel/:chapter", (req, res) => {
   let chapter = Number(req.params.chapter);
-  res.send(read()[0], read().filter((v) => v.chapter === chapter));
+  res.send(read()[0]);
+  //, read().filter((v) => v.chapter === chapter)
   let newObj = {
     comments: read().filter((v) => v.chapter === chapter),
     ...novel[chapter],
