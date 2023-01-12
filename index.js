@@ -86,7 +86,7 @@ app.post("/comment", async (req, res) => {
 
   let chapter = html.chapter.replace(/</g, "&lt;");
 
-  if (!isWhole(chapter) || novel[+chapter])
+  if (!isWhole(+chapter) || novel[+chapter])
     return res.send(
       `Not a valid chapter!<script>setTimeout(function(){window.location="/read/1";},3000);</script>`
     );
