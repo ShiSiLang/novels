@@ -49,8 +49,8 @@ app.get("/read/:chapter", async (req, res) => {
 });
 app.get("/novel/:chapter", (req, res) => {
   let chapter = Number(req.params.chapter);
-  comments = JSON.stringify({ comments: [] })
-  let commentsArray = JSON.parse(comments)
+  let Obj = JSON.stringify({ comments: [] })
+  let commentsArray = JSON.parse(Obj)
   //let newObj = {
    // comments: commentsArray.filter((v) => v.chapter === chapter),
    // ...novel[chapter],
