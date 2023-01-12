@@ -55,7 +55,9 @@ app.get("/novel/:chapter", (req, res) => {
    // ...novel[chapter],
  // };
   //res.send(<script>alert(newObj);</script>);
-  res.send(novel[chapter]);
+  comments
+  res.send(comments);
+  //res.send(novel[chapter]);
 });
 app.get("/discord", (_, res) => res.redirect("https://discord.gg/j3YamACwPu"));
 
