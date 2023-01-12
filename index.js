@@ -64,7 +64,7 @@ app.get("/discord", (_, res) => res.redirect("https://discord.gg/j3YamACwPu"));
 function write(data) {
   let out = JSON.parse(fs.readFileSync("comments.json", "utf8"));
   out.comments.push(data);
-  fs.writeFile("comments.json", JSON.stringify(out));
+  fs.writeFileSync("comments.json", JSON.stringify(out));
 }
 
 app.post("/comment", async (req, res) => {
