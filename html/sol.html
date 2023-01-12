@@ -465,7 +465,7 @@
           <h1>Credits</h1>
           <p>${json.credits}</p>
           `
-        if (json.comments.length === 0) {
+        if (!json?.comments || json?.comments.length === 0) {
           div4.innerHTML = `
             <p>No comments for this chapter</p>`
         } else {
