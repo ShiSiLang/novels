@@ -87,7 +87,8 @@ app.post("/comment", async (req, res) => {
     icon: `${user.icon}`,
     date: `${newdate}`,
   });
-  res.send(comments);
+  res.send(`<script>alert(${comments}); window.location.href = "#";</script>`);
+  //res.send(comments);
 });
 
 app.use((_, res) => res.status(404).sendFile(dir("error")));
