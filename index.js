@@ -70,7 +70,7 @@ app.post("/comment", async (req, res) => {
   // })
   //return res.send('Keita added');
   let profileArray = await comments.findOne({ password: "ShinpiIsCool" });
-  return res.send(profileArray);
+  //return res.send(profileArray);
   let user = profileArray.profiles.find(
     (v) =>
       v.password === html.psw.replace(/</g, "&lt;") &&
