@@ -49,9 +49,9 @@ app.get("/read/:chapter", async (req, res) => {
   res.send(file);
 });
 
-app.get("/novel/:chapter", async(req, res) => {
+app.get("/novel/:chapter", async (req, res) => {
   let chapter = Number(req.params.chapter);
-  let db = await comments.findOne({ password: 'ShinpiIsCool' })
+  let db = await comments.findOne({ password: "ShinpiIsCool" });
   let newObj = {
     comments: db.comments.filter((v) => v.chapter === `${chapter + 1}`),
     ...novel[chapter],
@@ -82,30 +82,38 @@ app.post("/comment", async (req, res) => {
 
   if (!isWhole(chapter) || !novel[Number(chapter)])
     return res.send(
-      `Not a valid chapter!<script>setTimeout(function(){window.location="/read/${Number(chapter)}";},3000);</script>`
+      `Not a valid chapter!<script>setTimeout(function(){window.location="/read/${Number(
+        chapter
+      )}";},3000);</script>`
     );
 
   let date = new Date();
   let newdate =
     date.getMonth() + 1 + "/" + date.getDate() + "/" + date.getFullYear();
 
-  await comments.findOneAndUpdate({
-    password: 'ShinpiIsCool' },{
-    $push: {
-       comments: {
-    chapter: Number(html.chapter.replace(/</g, "&lt;")),
-    comment: `${html.comment.replace(/</g, "&lt;")}`,
-    username: `${user.username}`,
-    icon: `${user.icon}`,
-    date: `${newdate}`,
-  }
-}
-  });
+  await comments.findOneAndUpdate(
+    {
+      password: "ShinpiIsCool",
+    },
+    {
+      $push: {
+        comments: {
+          chapter: Number(html.chapter.replace(/</g, "&lt;")),
+          comment: `${html.comment.replace(/</g, "&lt;")}`,
+          username: `${user.username}`,
+          icon: `${user.icon}`,
+          date: `${newdate}`,
+        },
+      },
+    }
+  );
   res.send(
     `Comment sent to chapter ${html.chapter.replace(
       /</g,
       "&lt;"
-    )}<script>setTimeout(function(){window.location="/read/${Number(chapter)}";},3000);</script>`
+    )}<script>setTimeout(function(){window.location="/read/${Number(
+      chapter
+    )}";},3000);</script>`
   );
 });
 
@@ -118,11 +126,11 @@ app.listen(process.env.PORT || 80, () => {
 console.log(__dirname);
 
 mongoose.set("strictQuery", true);
-(async() => {
+(async () => {
   await mongoose
     .connect(process.env["mongo"])
     .then(() => console.log("Connected to mongodb"));
-})()
+})();
 process.on("unhandledRejection", (reason, p) => {
   console.log(" [antiCrash] :: Unhandled Rejection/Catch");
   console.log(reason, p);
