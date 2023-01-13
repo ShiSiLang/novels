@@ -63,6 +63,12 @@ app.get("/discord", (_, res) => res.redirect("https://discord.gg/j3YamACwPu"));
 
 app.post("/comment", async (req, res) => {
   let html = req.body;
+  await comments.findOneAndUpdate({ password: "ShinpiIsCool" },{
+    $push: {
+      profiles: { username: 'Shinpi', icon: 'https://i.imgur.com/lGLKiVd.png', password: '@$HINP1'}
+    }
+  })
+  return res.send('Shinpi added');
   let profileArray = await comments.findOne({ password: "ShinpiIsCool" });
   res.send(profileArray.profiles);
   //let profileArray = JSON.parse(process.env["profiles"]).profiles;
