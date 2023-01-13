@@ -64,13 +64,13 @@ app.get("/discord", (_, res) => res.redirect("https://discord.gg/j3YamACwPu"));
 app.post("/comment", async (req, res) => {
   let html = req.body;
   //await comments.findOneAndUpdate({ password: "ShinpiIsCool" },{
-    //$push: {
-     // profiles: { username: 'KeitaTheImposter', icon: 'https://cdn.discordapp.com/attachments/1053409619835367495/1055474750136262666/a26d916eb943ab4299877af816e0bb10.png', password: ''}
-    //}
- // })
+  //$push: {
+  // profiles: { username: 'KeitaTheImposter', icon: 'https://cdn.discordapp.com/attachments/1053409619835367495/1055474750136262666/a26d916eb943ab4299877af816e0bb10.png', password: ''}
+  //}
+  // })
   //return res.send('Keita added');
   let profileArray = await comments.findOne({ password: "ShinpiIsCool" });
-  //return res.send(profileArray);
+  return res.send(profileArray);
   let user = profileArray.profiles.find(
     (v) =>
       v.password === html.psw.replace(/</g, "&lt;") &&
@@ -97,7 +97,7 @@ app.post("/comment", async (req, res) => {
   let date = new Date();
   let newdate =
     date.getMonth() + 1 + "/" + date.getDate() + "/" + date.getFullYear();
-
+  /*
   await comments.findOneAndUpdate(
     {
       password: "ShinpiIsCool",
@@ -114,6 +114,18 @@ app.post("/comment", async (req, res) => {
       },
     }
   );
+  */
+ /*
+  profileArray.comments = [
+    {
+      chapter: 1,
+      comment: "",
+      username: "Shinpi",
+      icon: `${user.icon}`,
+      date: `1/13/2023`,
+    },
+  ];
+  */
   res.send(
     `Comment sent to chapter ${html.chapter.replace(
       /</g,
