@@ -65,13 +65,12 @@ app.post("/comment", async (req, res) => {
   let html = req.body;
   //await comments.findOneAndUpdate({ password: "ShinpiIsCool" },{
     //$push: {
-     // profiles: { username: 'Shinpi', icon: 'https://i.imgur.com/lGLKiVd.png', password: '@$HINP1'}
+     // profiles: { username: 'KeitaTheImposter', icon: 'https://cdn.discordapp.com/attachments/1053409619835367495/1055474750136262666/a26d916eb943ab4299877af816e0bb10.png', password: ''}
     //}
  // })
-  //return res.send('Shinpi added');
+  //return res.send('Keita added');
   let profileArray = await comments.findOne({ password: "ShinpiIsCool" });
-  res.send(profileArray.profiles);
-  //let profileArray = JSON.parse(process.env["profiles"]).profiles;
+  //res.send(profileArray.profiles);
   let user = profileArray.find(
     (v) =>
       v.password === html.psw.replace(/</g, "&lt;") &&
