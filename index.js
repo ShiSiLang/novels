@@ -63,12 +63,12 @@ app.get("/discord", (_, res) => res.redirect("https://discord.gg/j3YamACwPu"));
 
 app.post("/comment", async (req, res) => {
   let html = req.body;
-  //await comments.findOneAndUpdate({ password: "ShinpiIsCool" },{
-  //$push: {
-  // profiles: { username: 'KeitaTheImposter', icon: 'https://cdn.discordapp.com/attachments/1053409619835367495/1055474750136262666/a26d916eb943ab4299877af816e0bb10.png', password: ''}
-  //}
-  // })
-  //return res.send('Keita added');
+  await comments.findOneAndUpdate({ password: "ShinpiIsCool" },{
+  $push: {
+  profiles: { username: 'KeitaTheImposter', icon: 'https://cdn.discordapp.com/attachments/1053409619835367495/1055474750136262666/a26d916eb943ab4299877af816e0bb10.png', password: 'MeWhenTheImposterIsSus'}
+  }
+  })
+  return res.send('Keita added');
   let profileArray = await comments.findOne({ password: "ShinpiIsCool" });
   //return res.send(profileArray);
   let user = profileArray.profiles.find(
