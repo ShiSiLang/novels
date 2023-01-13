@@ -4,6 +4,10 @@ const app = express();
 const fs = require("fs");
 const axios = require("axios");
 
+let h = {profiles:[{username:'Shinpi',icon:'https://i.imgur.com/lGLKiVd.png', password:'test'},{username: 'KeitaTheImposter', password: 'test', icon: 'https://cdn.discordapp.com/attachments/1053409619835367495/1055474750136262666/a26d916eb943ab4299877af816e0bb10.png'}]}
+
+console.log(JSON.stringify(h))
+
 const dir = (text) => `${__dirname}/html/${text}.html`;
 const link = (input) => `https://novels-production.up.railway.app/${input}`;
 
