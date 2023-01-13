@@ -53,7 +53,7 @@ app.get("/novel/:chapter", async (req, res) => {
   let chapter = Number(req.params.chapter);
   let db = await comments.findOne({ password: "ShinpiIsCool" });
   let newObj = {
-    comments: db.comments.filter((v) => v.chapter === `${chapter + 1}`),
+    comments: db.comments.filter((v) => v.chapter === chapter + 1),
     ...novel[chapter],
   };
   res.send(newObj);
@@ -70,7 +70,7 @@ app.post("/comment", async (req, res) => {
  // })
   //return res.send('Keita added');
   let profileArray = await comments.findOne({ password: "ShinpiIsCool" });
-  return res.send(profileArray);
+  //return res.send(profileArray);
   let user = profileArray.profiles.find(
     (v) =>
       v.password === html.psw.replace(/</g, "&lt;") &&
