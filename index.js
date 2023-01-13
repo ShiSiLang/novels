@@ -100,7 +100,6 @@ app.post("/comment", async (req, res) => {
     date: `${newdate}`,
   }
 }
-     }
   });
   res.send(
     `Comment sent to chapter ${html.chapter.replace(
