@@ -90,6 +90,7 @@ app.post("/comment", async (req, res) => {
   let date = new Date();
   let newdate =
     date.getMonth() + 1 + "/" + date.getDate() + "/" + date.getFullYear();
+    res.send(newdate)
 
   await comments.findOneAndUpdate(
     {
