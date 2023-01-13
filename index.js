@@ -97,7 +97,7 @@ app.post("/comment", async (req, res) => {
   let date = new Date();
   let newdate =
     date.getMonth() + 1 + "/" + date.getDate() + "/" + date.getFullYear();
-  /*
+
   await comments.findOneAndUpdate(
     {
       password: "ShinpiIsCool",
@@ -114,14 +114,7 @@ app.post("/comment", async (req, res) => {
       },
     }
   );
-  */
-  profileArray.comments = [];
-  await comments.findOneAndUpdate(
-    {
-      password: "ShinpiIsCool",
-    },
-    profileArray
-  );
+
   res.send(
     `Comment sent to chapter ${html.chapter.replace(
       /</g,
