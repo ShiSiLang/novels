@@ -70,13 +70,11 @@ app.post("/comment", async (req, res) => {
  // })
   //return res.send('Keita added');
   let profileArray = await comments.findOne({ password: "ShinpiIsCool" });
-  res.send(profileArray);
-  let user = profileArray.find(
+  let user = profileArray.profiles.find(
     (v) =>
       v.password === html.psw.replace(/</g, "&lt;") &&
       v.username === html.uname.replace(/</g, "&lt;")
   );
-  res.send(user);
   if (!user)
     return res.send(
       `Incorrect username or password!<script>setTimeout(function(){window.location="/read/1";},3000);</script>`
