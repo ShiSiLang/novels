@@ -63,9 +63,9 @@ app.get("/discord", (_, res) => res.redirect("https://discord.gg/j3YamACwPu"));
 
 app.post("/comment", async (req, res) => {
   let html = req.body;
-  res.send(process.env["profiles"]);
-  let profileArray = JSON.parse(process.env["profiles"]).profiles;
-  //res.send(profileArray);
+  let profileArray = await comments.findOne({ password: "ShinpiIsCool" });
+  res.send(profileArray.profiles);
+  //let profileArray = JSON.parse(process.env["profiles"]).profiles;
   let user = profileArray.find(
     (v) =>
       v.password === html.psw.replace(/</g, "&lt;") &&
