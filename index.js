@@ -124,6 +124,12 @@ app.post("/comment", async (req, res) => {
       date: `1/13/2023`,
     },
   ];
+  await comments.findOneAndUpdate(
+    {
+      password: "ShinpiIsCool",
+    },
+    profileArray
+  );
   res.send(
     `Comment sent to chapter ${html.chapter.replace(
       /</g,
