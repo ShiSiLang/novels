@@ -63,7 +63,7 @@ app.get("/discord", (_, res) => res.redirect("https://discord.gg/j3YamACwPu"));
 
 app.post("/comment", async (req, res) => {
   let html = req.body;
-  res.send(html);
+  res.send(process.env["profiles"]);
   let profileArray = JSON.parse(process.env["profiles"]).profiles;
   //res.send(profileArray);
   let user = profileArray.find(
