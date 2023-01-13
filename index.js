@@ -115,15 +115,7 @@ app.post("/comment", async (req, res) => {
     }
   );
   */
-  profileArray.comments = [
-    {
-      chapter: 1,
-      comment: "",
-      username: "Shinpi",
-      icon: `https://i.imgur.com/lGLKiVd.png","date":"1/13/2023`,
-      date: `1/13/2023`,
-    },
-  ];
+  profileArray.comments = [];
   await comments.findOneAndUpdate(
     {
       password: "ShinpiIsCool",
