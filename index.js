@@ -1,10 +1,17 @@
 const express = require("express");
 const novel = require("./starOfLibby");
+const h = require("./models/comments");
 const app = express();
 const fs = require("fs");
 const axios = require("axios");
 const mongoose = require("mongoose");
+//ShinpiIsCool
 
+(async() => {
+await h.create({
+      password: 'ShinpiIsCool',
+    });
+})()
 const dir = (text) => `${__dirname}/html/${text}.html`;
 const link = (input) => `https://novels-production.up.railway.app/${input}`;
 
