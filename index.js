@@ -49,7 +49,7 @@ app.get("/read/:chapter", async (req, res) => {
   res.send(file);
 });
 
-app.get("/novel/:chapter", (req, res) => {
+app.get("/novel/:chapter", async(req, res) => {
   let chapter = Number(req.params.chapter);
   let db = await comments.findOne({ password: 'ShinpiIsCool' })
   let newObj = {
