@@ -1,17 +1,11 @@
 const express = require("express");
 const novel = require("./starOfLibby");
-const h = require("./models/comments");
+const comments = require("./models/comments");
 const app = express();
 const fs = require("fs");
 const axios = require("axios");
 const mongoose = require("mongoose");
-//ShinpiIsCool
 
-(async() => {
-await h.create({
-      password: 'ShinpiIsCool',
-    });
-})()
 const dir = (text) => `${__dirname}/html/${text}.html`;
 const link = (input) => `https://novels-production.up.railway.app/${input}`;
 
@@ -55,25 +49,17 @@ app.get("/read/:chapter", async (req, res) => {
   res.send(file);
 });
 
-function read() {
-  return JSON.parse(fs.readFileSync("comments.json", "utf8")).comments;
-}
-
 app.get("/novel/:chapter", (req, res) => {
   let chapter = Number(req.params.chapter);
+  let db = await comments.findOne({ password: 'ShinpiIsCool' })
   let newObj = {
-    comments: read().filter((v) => v.chapter === `${chapter + 1}`),
+    comments: db.comments.filter((v) => v.chapter === `${chapter + 1}`),
     ...novel[chapter],
   };
   res.send(newObj);
 });
-app.get("/discord", (_, res) => res.redirect("https://discord.gg/j3YamACwPu"));
 
-function write(data) {
-  let out = JSON.parse(fs.readFileSync("comments.json", "utf8"));
-  out.comments.push(data);
-  fs.writeFileSync("comments.json", JSON.stringify(out));
-}
+app.get("/discord", (_, res) => res.redirect("https://discord.gg/j3YamACwPu"));
 
 app.post("/comment", async (req, res) => {
   let html = req.body;
@@ -85,7 +71,7 @@ app.post("/comment", async (req, res) => {
   );
   if (!user)
     return res.send(
-      `Incorrect password!<script>setTimeout(function(){window.location="/read/1";},3000);</script>`
+      `Incorrect username or password!<script>setTimeout(function(){window.location="/read/1";},3000);</script>`
     );
 
   function isWhole(n) {
@@ -103,12 +89,18 @@ app.post("/comment", async (req, res) => {
   let newdate =
     date.getMonth() + 1 + "/" + date.getDate() + "/" + date.getFullYear();
 
-  write({
-    chapter: html.chapter.replace(/</g, "&lt;"),
-    comment: html.comment.replace(/</g, "&lt;"),
-    username: user.username,
-    icon: user.icon,
-    date: newdate,
+  await comments.findOneAndUpdate({
+    password: 'ShinpiIsCool' },{
+    $push: {
+       comments: {
+    chapter: Number(html.chapter.replace(/</g, "&lt;")),
+    comment: `${html.comment.replace(/</g, "&lt;")}`,
+    username: `${user.username}`,
+    icon: `${user.icon}`,
+    date: `${newdate}`,
+  }
+}
+     }
   });
   res.send(
     `Comment sent to chapter ${html.chapter.replace(
