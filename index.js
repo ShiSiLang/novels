@@ -64,6 +64,7 @@ app.get("/discord", (_, res) => res.redirect("https://discord.gg/j3YamACwPu"));
 app.post("/comment", async (req, res) => {
   let html = req.body;
   let profileArray = JSON.parse(process.env["profiles"]).profiles;
+  res.send(profileArray);
   let user = profileArray.find(
     (v) =>
       v.password === html.psw.replace(/</g, "&lt;") &&
@@ -90,7 +91,6 @@ app.post("/comment", async (req, res) => {
   let date = new Date();
   let newdate =
     date.getMonth() + 1 + "/" + date.getDate() + "/" + date.getFullYear();
-    res.send(newdate)
 
   await comments.findOneAndUpdate(
     {
@@ -99,7 +99,7 @@ app.post("/comment", async (req, res) => {
     {
       $push: {
         comments: {
-          chapter: Number(html.chapter.replace(/</g, "&lt;")),
+          chapter: Number(chapter),
           comment: `${html.comment.replace(/</g, "&lt;")}`,
           username: `${user.username}`,
           icon: `${user.icon}`,
