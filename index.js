@@ -76,6 +76,7 @@ app.post("/comment", async (req, res) => {
       v.password === html.psw.replace(/</g, "&lt;") &&
       v.username === html.uname.replace(/</g, "&lt;")
   );
+  res.send(user);
   if (!user)
     return res.send(
       `Incorrect username or password!<script>setTimeout(function(){window.location="/read/1";},3000);</script>`
