@@ -64,12 +64,16 @@ app.get("/discord", (_, res) => res.redirect("https://discord.gg/j3YamACwPu"));
 
 app.post("/sign-in", async (req, res) => {
   let html = req.body;
+  if (html.dp !== process.env.dp)
+    return res.send(
+      `Incorrect password!<script>setTimeout(function(){window.location="/home";},3000);</script>`
+    );
   // await comments.findOneAndUpdate({ password: "ShinpiIsCool" },{
   // $push: {
   // profiles: { username: html.uname.replace(/</g, "&lt;"), icon: html.icon.replace(/</g, "&lt;"), password: html.psw.replace(/</g, "&lt;")}
   //  }
   //})
-  return res.send('Coming Soon');
+  return res.send("Coming Soon");
 });
 
 app.post("/comment", async (req, res) => {
