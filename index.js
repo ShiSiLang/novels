@@ -27,6 +27,7 @@ app.get("/home", async (_, res) => {
   res.send(file);
 });
 app.get("/fan", (_, res) => res.sendFile(dir("fan")));
+app.get("/sign-in", (_, res) => res.sendFile(dir("sign-in")));
 app.get("/read/:chapter", async (req, res) => {
   let chapter = Number(req.params.chapter) || 1;
   let file = fs.readFileSync("./html/sol.html", {
@@ -61,16 +62,19 @@ app.get("/novel/:chapter", async (req, res) => {
 
 app.get("/discord", (_, res) => res.redirect("https://discord.gg/j3YamACwPu"));
 
+app.post("/sign-in", async (req, res) => {
+  let html = req.body;
+  // await comments.findOneAndUpdate({ password: "ShinpiIsCool" },{
+  // $push: {
+  // profiles: { username: html.uname.replace(/</g, "&lt;"), icon: html.icon.replace(/</g, "&lt;"), password: html.psw.replace(/</g, "&lt;")}
+  //  }
+  //})
+  return res.send('Coming Soon');
+});
+
 app.post("/comment", async (req, res) => {
   let html = req.body;
- // await comments.findOneAndUpdate({ password: "ShinpiIsCool" },{
- // $push: {
- // profiles: { username: 'KeitaTheImposter', icon: 'https://cdn.discordapp.com/attachments/1053409619835367495/1055474750136262666/a26d916eb943ab4299877af816e0bb10.png', password: ''}
-//  }
-  //})
-  //return res.send('Keita added');
   let profileArray = await comments.findOne({ password: "ShinpiIsCool" });
-  //return res.send(profileArray);
   let user = profileArray.profiles.find(
     (v) =>
       v.password === html.psw.replace(/</g, "&lt;") &&
