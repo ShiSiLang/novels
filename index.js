@@ -64,7 +64,7 @@ app.get("/discord", (_, res) => res.redirect("https://discord.gg/j3YamACwPu"));
 
 app.post("/sign-in", async (req, res) => {
   let html = req.body;
-  if (html.dp !== process.env.dp)
+  if (html.dp !== process.env.profiles)
     return res.send(
       `Incorrect password!<script>setTimeout(function(){window.location="/home";},3000);</script>`
     );
