@@ -75,22 +75,27 @@ app.post("/sign-in", async (req, res) => {
   }
 
   if (isImage(image) === false)
-    return res.send("Please make sure the icon is a valid URL.");
-/*
+    return res.send(
+      `Please make sure the icon is a valid URL.<script>setTimeout(function(){window.location="/home";},3000);</script>`
+    );
   await comments.findOneAndUpdate(
     { password: "ShinpiIsCool" },
     {
       $push: {
         profiles: {
           username: html.uname.replace(/</g, "&lt;"),
-          icon: html.icon.replace(/</g, "&lt;"),
+          icon: image,
           password: html.psw.replace(/</g, "&lt;"),
         },
       },
     }
   );
-  */
-  return res.send("Coming Soon");
+  return res.send(
+    `${html.uname.replace(
+      /</g,
+      "&lt;"
+    )} added!<script>setTimeout(function(){window.location="/sign-in";},3000);</script>`
+  );
 });
 
 app.post("/comment", async (req, res) => {
