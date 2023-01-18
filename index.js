@@ -68,11 +68,28 @@ app.post("/sign-in", async (req, res) => {
     return res.send(
       `Incorrect password!<script>setTimeout(function(){window.location="/home";},3000);</script>`
     );
-  // await comments.findOneAndUpdate({ password: "ShinpiIsCool" },{
-  // $push: {
-  // profiles: { username: html.uname.replace(/</g, "&lt;"), icon: html.icon.replace(/</g, "&lt;"), password: html.psw.replace(/</g, "&lt;")}
-  //  }
-  //})
+  let image = html.icon.replace(/</g, "&lt;");
+
+  function isImage(url) {
+    return /^https?:\/\/.+\.(jpg|jpeg|png|webp|avif|gif|svg)$/.test(url);
+  }
+
+  if (isImage(image) === false)
+    return res.send("Please make sure the icon is a valid URL.");
+/*
+  await comments.findOneAndUpdate(
+    { password: "ShinpiIsCool" },
+    {
+      $push: {
+        profiles: {
+          username: html.uname.replace(/</g, "&lt;"),
+          icon: html.icon.replace(/</g, "&lt;"),
+          password: html.psw.replace(/</g, "&lt;"),
+        },
+      },
+    }
+  );
+  */
   return res.send("Coming Soon");
 });
 
