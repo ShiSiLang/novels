@@ -184,7 +184,7 @@
     }
 
     ::selection {
-        color: #15202B;
+        color: white;
         background: #1DA1F2;
     }
 
@@ -304,7 +304,6 @@
 </body>
 
 <script>
-    // getting all required elements
     const searchWrapper = document.querySelector(".search-input");
     const inputBox = searchWrapper.querySelector("input");
     const suggBox = searchWrapper.querySelector(".autocom-box");
@@ -312,9 +311,8 @@
     let linkTag = searchWrapper.querySelector("a");
     let webLink;
 
-    // if user press any key and release
     inputBox.onkeyup = async (e) => {
-        let userData = e.target.value; //user enetered data
+        let userData = e.target.value;
         let emptyArray = [];
         if (userData) {
             icon.onclick = () => {
@@ -325,22 +323,19 @@
             let response = await fetch($$profiles$$);
             let json = await response.json()
             emptyArray = json.filter((data) => {
-                //filtering array value and user characters to lowercase and return only those words which are start with user enetered chars
                 return data.toLocaleLowerCase().startsWith(userData.toLocaleLowerCase());
             });
             emptyArray = emptyArray.map((data) => {
-                // passing return data inside li tag
                 return data = `<li>${data}</li>`;
             });
-            searchWrapper.classList.add("active"); //show autocomplete box
+            searchWrapper.classList.add("active");
             showSuggestions(emptyArray);
             let allList = suggBox.querySelectorAll("li");
             for (let i = 0; i < allList.length; i++) {
-                //adding onclick attribute in all li tag
                 allList[i].setAttribute("onclick", "select(this)");
             }
         } else {
-            searchWrapper.classList.remove("active"); //hide autocomplete box
+            searchWrapper.classList.remove("active");
         }
     }
 
