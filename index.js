@@ -118,7 +118,7 @@ app.get("/profile/:username", async (req, res) => {
   );
   if (!user)
     return res.send(
-      `Account not found!<script>setTimeout(function(){window.location="/profile/Shinpi";},3000);</script>`
+      `Account not found, try again!<script>setTimeout(function(){window.location="/profile/shinpi";},3000);</script>`
     );
   let file = fs.readFileSync("./html/profile.html", {
     encoding: "utf8",
