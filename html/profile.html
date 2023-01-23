@@ -14,11 +14,12 @@
     <meta name="theme-color" content="#cbc3e3" />
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.1.1/css/all.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <style>
     body {
-        /*background-size: 400% 400%;
-        margin: 0;*/
+        background-size: 400% 400%;
+        margin: 0;
         background-color: #15202B;
     }
 
@@ -134,98 +135,41 @@
         padding: 8px;
     }
 
-    .padding {
-        padding: 3rem !important;
-        margin-left: 200px
+    .card {
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        max-width: 300px;
+        margin: auto;
+        text-align: center;
+        font-family: arial;
     }
 
-    .card-img-top {
-        height: 300px;
+    .title {
+        color: grey;
+        font-size: 18px;
     }
 
-    .card-no-border .card {
-        border-color: #d7dfe3;
-        border-radius: 4px;
-        margin-bottom: 30px;
-        -webkit-box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.05);
-        box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.05)
+    button {
+        border: none;
+        outline: 0;
+        display: inline-block;
+        padding: 8px;
+        color: white;
+        background-color: #000;
+        text-align: center;
+        cursor: pointer;
+        width: 100%;
+        font-size: 18px;
     }
 
-    .card-body {
-        -ms-flex: 1 1 auto;
-        flex: 1 1 auto;
-        padding: 1.25rem
+    a {
+        text-decoration: none;
+        font-size: 22px;
+        color: black;
     }
 
-    .pro-img {
-        margin-top: -80px;
-        margin-bottom: 20px
-    }
-
-    .little-profile .pro-img img {
-        width: 128px;
-        height: 128px;
-        -webkit-box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-        box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-        border-radius: 100%
-    }
-
-    html body .m-b-0 {
-        margin-bottom: 0px
-    }
-
-    h3 {
-        line-height: 30px;
-        font-size: 21px
-    }
-
-    .btn-rounded.btn-md {
-        padding: 12px 35px;
-        font-size: 16px
-    }
-
-    html body .m-t-10 {
-        margin-top: 10px
-    }
-
-    .btn-primary,
-    .btn-primary.disabled {
-        background: #7460ee;
-        border: 1px solid #7460ee;
-        -webkit-box-shadow: 0 2px 2px 0 rgba(116, 96, 238, 0.14), 0 3px 1px -2px rgba(116, 96, 238, 0.2), 0 1px 5px 0 rgba(116, 96, 238, 0.12);
-        box-shadow: 0 2px 2px 0 rgba(116, 96, 238, 0.14), 0 3px 1px -2px rgba(116, 96, 238, 0.2), 0 1px 5px 0 rgba(116, 96, 238, 0.12);
-        -webkit-transition: 0.2s ease-in;
-        -o-transition: 0.2s ease-in;
-        transition: 0.2s ease-in
-    }
-
-    .btn-rounded {
-        border-radius: 60px;
-        padding: 7px 18px
-    }
-
-    .m-t-20 {
-        margin-top: 20px
-    }
-
-    .text-center {
-        text-align: center !important
-    }
-
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-        color: #455a64;
-        font-family: "Poppins", sans-serif;
-        font-weight: 400
-    }
-
-    p {
-        margin-top: 0;
-        margin-bottom: 1rem
+    button:hover,
+    a:hover {
+        opacity: 0.7;
     }
 </style>
 
@@ -238,55 +182,18 @@
         <img src="https://i.imgur.com/lGLKiVd.png" alt="Shinpi" />
     </div>
 
-    <section class="vh-100" style="background-color: #eee;">
-        <div class="container py-5 h-100">
-            <div class="row d-flex justify-content-center align-items-center h-100">
-                <div class="col-md-12 col-xl-4">
-
-                    <div class="card" style="border-radius: 15px;">
-                        <div class="card-body text-center">
-                            <div class="mt-3 mb-4">
-                                <img src="https: //i.imgur.com/wbrQJLp.png"
-                                    class="rounded-circle img-fluid" style="width: 100px;" />
-                            </div>
-                            <h4 class="mb-2">Julie L. Arsenault</h4>
-                            <p class="text-muted mb-4">@Programmer <span class="mx-2">|</span> <a
-                                    href="#!">mdbootstrap.com</a></p>
-                            <div class="mb-4 pb-2">
-                                <button type="button" class="btn btn-outline-primary btn-floating">
-                                    <i class="fab fa-facebook-f fa-lg"></i>
-                                </button>
-                                <button type="button" class="btn btn-outline-primary btn-floating">
-                                    <i class="fab fa-twitter fa-lg"></i>
-                                </button>
-                                <button type="button" class="btn btn-outline-primary btn-floating">
-                                    <i class="fab fa-skype fa-lg"></i>
-                                </button>
-                            </div>
-                            <button type="button" class="btn btn-primary btn-rounded btn-lg">
-                                Message now
-                            </button>
-                            <div class="d-flex justify-content-between text-center mt-5 mb-2">
-                                <div>
-                                    <p class="mb-2 h5">8471</p>
-                                    <p class="text-muted mb-0">Wallets Balance</p>
-                                </div>
-                                <div class="px-3">
-                                    <p class="mb-2 h5">8512</p>
-                                    <p class="text-muted mb-0">Income amounts</p>
-                                </div>
-                                <div>
-                                    <p class="mb-2 h5">4751</p>
-                                    <p class="text-muted mb-0">Total Transactions</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
+    <div class="card">
+        <img src="https: //i.imgur.com/wbrQJLp.png" alt="User Avatar" style="width:100%">
+        <h1>Username</h1>
+        <p class="title">Joined: </p>
+        <div style="margin: 24px 0;">
+            <a href="#"><i class="fa fa-dribbble"></i></a>
+            <a href="#"><i class="fa fa-twitter"></i></a>
+            <a href="#"><i class="fa fa-linkedin"></i></a>
+            <a href="#"><i class="fa fa-facebook"></i></a>
         </div>
-    </section>
+        <p><button>Edit Profile</button></p>
+    </div>
 
     <div class="footer">
         <div class="footer-text">Copyright © 2023 Shinpi_Tekita</div>
