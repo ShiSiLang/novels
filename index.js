@@ -98,6 +98,30 @@ app.post("/sign-in", async (req, res) => {
   );
 });
 
+app.get("/profile/:username", async (req, res) => {
+  let chapter = req.params.username.toLowerCase();
+  let file = fs.readFileSync("./html/profile.html", {
+    encoding: "utf8",
+  });
+  /*
+  file = file.replace(
+    "$$change$$",
+    `'https://novels-production.up.railway.app/novel/${Number(chapter) - 1}'`
+  );
+  file = file.replace("$$change2$$", `${Number(chapter) + 1}`);
+  file = file.replace("$$change3$$", `${Number(chapter) - 1}`);
+  file = file.replace(
+    "$$change4$$",
+    novel[chapter - 1]?.chapter || "Chapter Not Found."
+  );
+  file = file.replace(
+    "$$thumbnail$$",
+    novel[chapter - 1]?.thumbnail || "https://i.imgur.com/lGLKiVd.png"
+  );
+  */
+  res.send(file);
+});
+
 app.post("/comment", async (req, res) => {
   let html = req.body;
   let profileArray = await comments.findOne({ password: "ShinpiIsCool" });

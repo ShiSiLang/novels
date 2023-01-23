@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="icon" href="https://i.imgur.com/lGLKiVd.png" />
+    <title>Star of Libby</title>
+    <meta property="og:title" content="Home Page" />
+    <meta property="og:site_name" content="Star of Libby" />
+    <meta property="og:description"
+        content="Welcome to the main website of Star of Libby, here you can read all of the chapters for free." />
+    <meta property="og:image" content="https://i.imgur.com/lGLKiVd.png" />
+    <meta name="theme-color" content="#cbc3e3" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.1.1/css/all.css" />
+</head>
+<style>
+    body {
+        background-size: 400% 400%;
+        margin: 0;
+        background-color: #15202B;
+    }
+
+    div {
+        animation: fadeInUp 0.9s;
+    }
+
+    @keyframes fadeInUp {
+        from {
+            transform: translate3d(0, 150px, 0);
+        }
+
+        to {
+            transform: translate3d(0, 0, 0);
+            opacity: 1;
+        }
+    }
+
+    @keyframes gradient {
+        0% {
+            background-position: 0% 50%;
+        }
+
+        50% {
+            background-position: 100% 50%;
+        }
+
+        100% {
+            background-position: 0% 50%;
+        }
+    }
+
+    .flex {
+        display: flex;
+        justify-content: center;
+    }
+
+    .website-counter {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .topnav {
+        width: 100%;
+        background-color: #22303C;
+    }
+
+    .topnav img {
+        text-align: center;
+        border-radius: 50%;
+        transition-duration: 0.3s;
+        display: inline-block;
+        width: 55px;
+        height: 50;
+        position: absolute;
+        margin-bottom: 2px;
+        right: 0;
+        z-index: 0;
+    }
+
+    .topnav img:hover {
+        transform: scale(1.1);
+        border-radius: 40%;
+        box-shadow: 0px 0px 9px 4px #818589;
+        animation: glow 1.5s linear infinite alternate;
+    }
+
+    .topnav a {
+        display: inline-block;
+        border-radius: 30px;
+        padding: 19px 16px;
+        transition-duration: 0.2s;
+        font-family: 'Open Sans', Verdana, Geneva, Tahoma, sans-serif;
+        font-size: 1.0em;
+        font-weight: 650;
+        text-decoration: none;
+        /*text-transform: uppercase;*/
+        color: white;
+    }
+
+    .topnav a.active {
+        background-color: rgba(0, 0, 0, 0.2);
+    }
+
+    .topnav a:hover {
+        background-color: white;
+        color: #161919;
+    }
+
+    @keyframes glow {
+        to {
+            box-shadow: 0px 0px 30px 20px #535FED;
+        }
+    }
+
+    .footer {
+        bottom: 0;
+        width: 100%;
+        height: 80px;
+        /* Height of the footer */
+        background-image: linear-gradient(315deg, #192734 0, #22303C 74%);
+    }
+
+    .footer-text {
+        color: white;
+        padding: 1.5%;
+        display: inline-flex;
+        font-family: 'Open Sans', Verdana, Geneva, Tahoma, sans-serif;
+        font-size: 20px;
+    }
+
+    .footer-socials {
+        display: inline-flex;
+        float: right;
+        padding-right: 60px;
+        padding-top: 1%;
+    }
+
+    .footer-socials a {
+        color: white;
+        text-decoration: none;
+        border-radius: 30%;
+        background: #192734;
+        margin-left: 3px;
+        padding: 8px;
+    }
+
+    .text {
+        padding-bottom: 25px;
+    }
+
+    .text h1 {
+        text-align: center;
+        font-family: sans;
+        color: #FFFFFF;
+        font-size: 55px;
+    }
+
+    .text h2 {
+        text-align: center;
+        font-family: sans;
+        color: #FFFFFF;
+        font-size: 40px;
+    }
+
+    .text p {
+        text-align: center;
+        font-family: sans;
+        color: #FFFFFF;
+        font-size: 35px;
+    }
+
+    .card {
+        width: 350px;
+        background-color: #efefef;
+        border: none;
+        cursor: pointer;
+        transition: all 0.5s;
+    }
+
+    .image img {
+        transition: all 0.5s
+    }
+
+    .card:hover .image img {
+        transform: scale(1.5)
+    }
+
+    .btn {
+        height: 140px;
+        width: 140px;
+        border-radius: 50%
+    }
+
+    .name {
+        font-size: 22px;
+        font-weight: bold
+    }
+
+    .idd {
+        font-size: 14px;
+        font-weight: 600
+    }
+
+    .idd1 {
+        font-size: 12px
+    }
+
+    .number {
+        font-size: 22px;
+        font-weight: bold
+    }
+
+    .follow {
+        font-size: 12px;
+        font-weight: 500;
+        color: #444444
+    }
+
+    .btn1 {
+        height: 40px;
+        width: 150px;
+        border: none;
+        background-color: #000;
+        color: #aeaeae;
+        font-size: 15px
+    }
+
+    .text span {
+        font-size: 13px;
+        color: #545454;
+        font-weight: 500
+    }
+
+    .icons i {
+        font-size: 19px
+    }
+
+    hr .new1 {
+        border: 1px solid
+    }
+
+    .join {
+        font-size: 14px;
+        color: #a0a0a0;
+        font-weight: bold
+    }
+
+    .date {
+        background-color: #ccc
+    }
+</style>
+
+<body>
+    <div class="topnav">
+        <a class="active" href="#">Home</a>
+        <a href="/read/1">Star of Libby</a>
+        <a href="/fan">FanArt!</a>
+        <a href="https://cash.app/$shinpi0000" target="_blank">Donate</a>
+        <img src="https://i.imgur.com/lGLKiVd.png" alt="Shinpi" />
+    </div>
+    <div class="container mt-4 mb-4 p-3 d-flex justify-content-center">
+        <div class="card p-4">
+            <div class=" image d-flex flex-column justify-content-center align-items-center"> <button
+                    class="btn btn-secondary"> <img src="https://i.imgur.com/wvxPV9S.png" height="100"
+                        width="100" /></button> <span class="name mt-3">Eleanor Pena</span> <span
+                    class="idd">@eleanorpena</span>
+                <div class="d-flex flex-row justify-content-center align-items-center gap-2"> <span
+                        class="idd1">Oxc4c16a645_b21a</span> <span><i class="fa fa-copy"></i></span> </div>
+                <div class="d-flex flex-row justify-content-center align-items-center mt-3"> <span class="number">1069
+                        <span class="follow">Followers</span></span> </div>
+                <div class=" d-flex mt-2"> <button class="btn1 btn-dark">Edit Profile</button> </div>
+                <div class="text mt-3"> <span>Eleanor Pena is a creator of minimalistic x bold graphics and digital
+                        artwork.<br><br> Artist/ Creative Director by Day #NFT minting@ with FND night. </span> </div>
+                <div class="gap-3 mt-3 icons d-flex flex-row justify-content-center align-items-center"> <span><i
+                            class="fa fa-twitter"></i></span> <span><i class="fa fa-facebook-f"></i></span> <span><i
+                            class="fa fa-instagram"></i></span> <span><i class="fa fa-linkedin"></i></span> </div>
+                <div class=" px-2 rounded mt-4 date "> <span class="join">Joined May,2021</span> </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="footer-text">Copyright © 2023 Shinpi_Tekita</div>
+        <div class="footer-socials">
+            <a href="https://discord.gg/j3YamACwPu" target="_blank"><i class="fab fa-discord"></i></a>
+            <a href="https://mobile.twitter.com/shinpitekita" target="_blank"><i class="fab fa-twitter"></i></a>
+        </div>
+    </div>
+</body>
+
+</html>
