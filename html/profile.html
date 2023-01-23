@@ -13,6 +13,7 @@
     <meta property="og:image" content="https://i.imgur.com/lGLKiVd.png" />
     <meta name="theme-color" content="#cbc3e3" />
     <meta name="twitter:card" content="summary_large_image" />
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.1.1/css/all.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <style>
@@ -145,6 +146,10 @@
     }
 
     .title {
+        color: white;
+    }
+
+    .date {
         color: #ccc;
         font-size: 18px;
     }
@@ -155,7 +160,8 @@
         display: inline-block;
         padding: 8px;
         color: white;
-        background-color: #1DA1F2;;
+        background-color: #1DA1F2;
+        ;
         text-align: center;
         cursor: pointer;
         width: 100%;
@@ -185,8 +191,8 @@
 
     <div class="card">
         <img src="$$avatar$$" alt="User Avatar" style="width:100%">
-        <h1>$$username$$</h1>
-        <p class="title">Joined: $$date$$</p>
+        <h1 class="title">$$username$$</h1>
+        <p class="date">Joined: $$date$$</p>
         <div style="margin: 24px 0;">
             <a href="#"><i class="fa fa-discord"></i></a>
             <a href="#"><i class="fa fa-twitter"></i></a>
