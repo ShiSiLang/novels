@@ -269,11 +269,11 @@
     <div class="wrapper">
         <div class="search-input">
             <a href="" target="_blank" hidden></a>
-            <input type="text" placeholder="Type to search..">
+            <input type="text" placeholder="Search Profiles">
             <div class="autocom-box">
                 <!-- here list are inserted from javascript -->
             </div>
-            <div class="icon"><i class="fas fa-search"></i></div>
+            <div class="icon"><i class="fa fa-search"></i></div>
         </div>
     </div>
 
@@ -313,7 +313,7 @@
         let emptyArray = [];
         if (userData) {
             icon.onclick = () => {
-                webLink = `https://www.google.com/search?q=${userData}`;
+                webLink = `https://novels-production.up.railway.app/profiles/${userData}`;
                 linkTag.setAttribute("href", webLink);
                 linkTag.click();
             }
@@ -343,7 +343,7 @@
         let selectData = element.textContent;
         inputBox.value = selectData;
         icon.onclick = () => {
-            webLink = `https://www.google.com/search?q=${selectData}`;
+            webLink = `https://novels-production.up.railway.app/profile/${selectData}`;
             linkTag.setAttribute("href", webLink);
             linkTag.click();
         }
