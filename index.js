@@ -78,6 +78,11 @@ app.post("/sign-in", async (req, res) => {
     return res.send(
       `Please make sure the icon is a valid URL.<script>setTimeout(function(){window.location="/home";},3000);</script>`
     );
+
+  let date = new Date();
+  let newdate =
+    date.getMonth() + 1 + "/" + date.getDate() + "/" + date.getFullYear();
+
   await comments.findOneAndUpdate(
     { password: "ShinpiIsCool" },
     {
@@ -86,6 +91,7 @@ app.post("/sign-in", async (req, res) => {
           username: html.uname.replace(/</g, "&lt;"),
           icon: image,
           password: html.psw.replace(/</g, "&lt;"),
+          date: `${newdate}`,
         },
       },
     }
@@ -99,26 +105,21 @@ app.post("/sign-in", async (req, res) => {
 });
 
 app.get("/profile/:username", async (req, res) => {
-  let chapter = req.params.username.toLowerCase();
+  let username = req.params.username.toLowerCase();
+  let profileArray = await comments.findOne({ password: "ShinpiIsCool" });
+  let user = profileArray.profiles.find(
+    (v) => v.username === username.replace(/</g, "&lt;")
+  );
+  if (!user)
+    return res.send(
+      `Account not found!<script>setTimeout(function(){window.location="/profile/Shinpi";},3000);</script>`
+    );
   let file = fs.readFileSync("./html/profile.html", {
     encoding: "utf8",
   });
-  /*
-  file = file.replace(
-    "$$change$$",
-    `'https://novels-production.up.railway.app/novel/${Number(chapter) - 1}'`
-  );
-  file = file.replace("$$change2$$", `${Number(chapter) + 1}`);
-  file = file.replace("$$change3$$", `${Number(chapter) - 1}`);
-  file = file.replace(
-    "$$change4$$",
-    novel[chapter - 1]?.chapter || "Chapter Not Found."
-  );
-  file = file.replace(
-    "$$thumbnail$$",
-    novel[chapter - 1]?.thumbnail || "https://i.imgur.com/lGLKiVd.png"
-  );
-  */
+  file = file.replace("$$username$$", user.username);
+  file = file.replace("$$date$$", user?.date || "1/13/2023");
+  file = file.replace("$$avatar$$", user.icon);
   res.send(file);
 });
 
