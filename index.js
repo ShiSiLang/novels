@@ -104,6 +104,12 @@ app.post("/sign-in", async (req, res) => {
   );
 });
 
+app.get("/profiles", async (req, res) => {
+  let db = await comments.findOne({ password: "ShinpiIsCool" });
+  let newObj = db.profiles.map((v) => v.username);
+  res.send(newObj);
+});
+
 app.get("/profile/:username", async (req, res) => {
   let username = req.params.username.toLowerCase();
   let profileArray = await comments.findOne({ password: "ShinpiIsCool" });
@@ -120,6 +126,10 @@ app.get("/profile/:username", async (req, res) => {
   file = file.replace("$$username$$", user.username);
   file = file.replace("$$date$$", user?.date || "1/13/2023");
   file = file.replace("$$avatar$$", user.icon);
+  file = file.replace(
+    "$$profiles$$",
+    `'https://novels-production.up.railway.app/profiles'`
+  );
   res.send(file);
 });
 
