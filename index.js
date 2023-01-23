@@ -108,7 +108,7 @@ app.get("/profile/:username", async (req, res) => {
   let username = req.params.username.toLowerCase();
   let profileArray = await comments.findOne({ password: "ShinpiIsCool" });
   let user = profileArray.profiles.find(
-    (v) => v.username === username.replace(/</g, "&lt;")
+    (v) => v.username.toLowerCase() === username.replace(/</g, "&lt;")
   );
   if (!user)
     return res.send(
