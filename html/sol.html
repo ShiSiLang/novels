@@ -338,7 +338,8 @@
   }
 
   input[type=text],
-  input[type=password] {
+  input[type=password],
+  input[type=number] {
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
@@ -537,7 +538,7 @@
         <input type="password" placeholder="Enter Password" name="psw" required>
 
         <label for="chapter"><b>Chapter Number</b></label>
-        <input type="text" placeholder="Enter Chapter Number" name="chapter" onkeypress="return isNumber(event)"
+        <input type="number" placeholder="Enter Chapter Number" name="chapter" onkeypress="return isNumber(event)"
           required>
 
         <label for="comment"><b>Comment</b></label>
@@ -561,16 +562,6 @@
         <i class="fa fa-twitter"></i>
     </div>
   </div>
-  <script>
-    function isNumber(evt) {
-      evt = (evt) ? evt : window.event;
-      var charCode = (evt.which) ? evt.which : evt.keyCode;
-      if (charCode > 31 && (charCode < 48 || charCode > 57)) {
-        return false;
-      }
-      return true;
-    }
-  </script>
   <script>
     var modal = document.getElementById('id01');
     window.onclick = function (event) {
