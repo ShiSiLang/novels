@@ -236,34 +236,42 @@ app.post("/follow", async (req, res) => {
       `You cannot follow yourself!<script>setTimeout(function(){window.location="/profile/${user.username}";},3000);</script>`
     );
 
+  let user2 = profileArray.profiles.find((v) => v.username === html.follow);
+
   if (user.following.includes(html.follow)) {
     let objIndex = profileArray.profiles.findIndex(
       (v) =>
         v.password === html.psw.replace(/</g, "&lt;") &&
         v.username === html.uname.replace(/</g, "&lt;")
     );
-
-    if (objIndex > -1) {
-      profileArray.profiles[objIndex].following.splice(index, 1);
-    }
-
-    res.send(
-      `Successfully unfollowed ${html.follow}!<script>setTimeout(function(){window.location="/profile/${user.username}";},3000);</script>`
+    let objIndex2 = profileArray.profiles.findIndex(
+      (v) => v.username === html.follow
     );
+
+    if (objIndex > -1 && objIndex2 > -1) {
+      profileArray.profiles[objIndex].following.splice(index, 1);
+      profileArray.profiles[objIndex2].followers -= 1;
+      res.send(
+        `Successfully unfollowed ${html.follow}!<script>setTimeout(function(){window.location="/profile/${user2.username}";},3000);</script>`
+      );
+    }
   } else {
     let objIndex = profileArray.profiles.findIndex(
       (v) =>
         v.password === html.psw.replace(/</g, "&lt;") &&
         v.username === html.uname.replace(/</g, "&lt;")
     );
-
-    if (objIndex > -1) {
-      profileArray.profiles[objIndex].following.push(html.follow);
-    }
-
-    res.send(
-      `Successfully followed ${html.follow}!<script>setTimeout(function(){window.location="/profile/${user.username}";},3000);</script>`
+    let objIndex2 = profileArray.profiles.findIndex(
+      (v) => v.username === html.follow
     );
+
+    if (objIndex > -1 && objIndex2 > -1) {
+      profileArray.profiles[objIndex].following.push(html.follow);
+      profileArray.profiles[objIndex2].followers += 1;
+      res.send(
+        `Successfully followed ${html.follow}!<script>setTimeout(function(){window.location="/profile/${user2.username}";},3000);</script>`
+      );
+    }
   }
 });
 
