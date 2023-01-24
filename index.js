@@ -163,8 +163,6 @@ app.post("/edit", async (req, res) => {
     return /^https?:\/\/.+\.(jpg|jpeg|png|webp|avif|gif|svg)$/.test(url);
   }
 
-  return res.send(isImage(params.icon));
-
   if (isImage(params.icon) === false)
     return res.send(
       `Please make sure the icon is a valid URL.<script>setTimeout(function(){window.location="/profile/${user.username}";},4000);</script>`
@@ -176,7 +174,9 @@ app.post("/edit", async (req, res) => {
     );
   }
 
-  if (params.discord && isDiscord(params.discord) === false)
+  return res.send(isDiscord(params.discord);
+
+  if (params.discord !== null && isDiscord(params.discord) === false)
     return res.send(
       `Please make sure the discord link is a valid URL.<script>setTimeout(function(){window.location="/profile/${user.username}";},4000);</script>`
     );
@@ -187,7 +187,7 @@ app.post("/edit", async (req, res) => {
     );
   }
 
-  if (params.twitter && isTwitter(params.twitter) === false)
+  if (params.twitter !== null && isTwitter(params.twitter) === false)
     return res.send(
       `Please make sure the twitter link is a valid URL.<script>setTimeout(function(){window.location="/profile/${user.username}";},4000);</script>`
     );
