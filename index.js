@@ -251,6 +251,12 @@ app.post("/follow", async (req, res) => {
     if (objIndex > -1 && objIndex2 > -1) {
       profileArray.profiles[objIndex].following.splice(index, 1);
       profileArray.profiles[objIndex2].followers -= 1;
+      await comments.findOneAndUpdate(
+        {
+          password: "ShinpiIsCool",
+        },
+        profileArray
+      );
       res.send(
         `Successfully unfollowed ${html.follow}!<script>setTimeout(function(){window.location="/profile/${user2.username}";},3000);</script>`
       );
@@ -268,6 +274,12 @@ app.post("/follow", async (req, res) => {
     if (objIndex > -1 && objIndex2 > -1) {
       profileArray.profiles[objIndex].following.push(html.follow);
       profileArray.profiles[objIndex2].followers += 1;
+      await comments.findOneAndUpdate(
+        {
+          password: "ShinpiIsCool",
+        },
+        profileArray
+      );
       res.send(
         `Successfully followed ${html.follow}!<script>setTimeout(function(){window.location="/profile/${user2.username}";},3000);</script>`
       );
