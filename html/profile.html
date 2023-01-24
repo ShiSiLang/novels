@@ -387,7 +387,7 @@
             <a href="$$twitter$$"><i class="fa fa-twitter"></i></a>
         </div>
         <p><button onclick="document.getElementById('id01').style.display='block'">Edit Profile</button></p>
-        <p><button>Follow Profile</button></p>
+        <p><button onclick="document.getElementById('follow').style.display='block'">Follow Profile</button></p>
     </div>
 
     <div id="id01" class="modal">
@@ -413,6 +413,25 @@
                 <button type="submit" onclick="document.getElementById('id01').style.display='none'"
                     class="cancelbtn">Login &
                     Edit</button>
+            </div>
+        </form>
+    </div>
+
+    <div id="follow" class="modal">
+        <form class="modal-content animate" action="/follow" method="post">
+            <div class="container">
+                <label for="uname"><b>Username</b></label>
+                <input type="text" placeholder="Enter Username" name="uname" required>
+
+                <label for="psw"><b>Password</b></label>
+                <input type="password" placeholder="Enter Password" name="psw" required>
+                <input type ="hidden" name="follow" value="$$username$$" />
+            </div>
+
+            <div class="container" style="background-color:#22303C">
+                <button type="submit" onclick="document.getElementById('follow').style.display='none'"
+                    class="cancelbtn">Login &
+                    Follow</button>
             </div>
         </form>
     </div>

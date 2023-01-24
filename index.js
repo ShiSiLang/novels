@@ -93,6 +93,7 @@ app.post("/sign-in", async (req, res) => {
           password: html.psw.replace(/</g, "&lt;"),
           date: `${newdate}`,
           followers: 0,
+          following: [],
           discord: null,
           twitter: null,
         },
@@ -129,7 +130,10 @@ app.get("/profile/:username", async (req, res) => {
   file = file.replaceAll("$$username$$", user.username);
   file = file.replaceAll("$$avatar$$", user.icon);
   file = file.replaceAll("$$followers$$", user?.followers || 0);
-  file = file.replaceAll("$$comments$$", db.comments?.filter((v) => v.username === user.username).length || 0);
+  file = file.replaceAll(
+    "$$comments$$",
+    db.comments?.filter((v) => v.username === user.username).length || 0
+  );
   file = file.replace("$$discord$$", user?.discord || "#");
   file = file.replace("$$twitter$$", user?.twitter || "#");
   file = file.replaceAll("$$avatar$$", user.icon);
@@ -160,6 +164,7 @@ app.post("/edit", async (req, res) => {
     icon: html?.newicon || user.icon,
     date: user?.date || "1/13/2023",
     followers: user?.followers || 0,
+    following: user?.following || [],
     discord: html?.discord || user?.discord || null,
     twitter: html?.twitter || user?.twitter || null,
   };
@@ -211,6 +216,30 @@ app.post("/edit", async (req, res) => {
   res.send(
     `Profile successfully edited.<script>setTimeout(function(){window.location="/profile/${user.username}";},4000);</script>`
   );
+});
+
+app.post("/follow", async (req, res) => {
+  let html = req.body;
+  let profileArray = await comments.findOne({ password: "ShinpiIsCool" });
+  let user = profileArray.profiles.find(
+    (v) =>
+      v.password === html.psw.replace(/</g, "&lt;") &&
+      v.username === html.uname.replace(/</g, "&lt;")
+  );
+  if (!user)
+    return res.send(
+      `Incorrect username or password!<script>setTimeout(function(){window.location="/read/1";},3000);</script>`
+    );
+
+    return res.send(html)
+
+    let objIndex = profileArray.profiles.findIndex(
+      (v) =>
+        v.password === html.psw.replace(/</g, "&lt;") &&
+        v.username === html.uname.replace(/</g, "&lt;")
+    );
+  
+    profileArray.profiles[objIndex].following.push();
 });
 
 app.post("/comment", async (req, res) => {
