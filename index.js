@@ -174,7 +174,7 @@ app.post("/edit", async (req, res) => {
     );
   }
 
-  return res.send(isDiscord(params.discord);
+  return res.send(isDiscord(params.discord));
 
   if (params.discord !== null && isDiscord(params.discord) === false)
     return res.send(
