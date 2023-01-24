@@ -183,8 +183,6 @@ app.post("/edit", async (req, res) => {
     return /http(?:s)?:\/\/(?:www\.)?twitter\.com\/([a-zA-Z0-9_]+)/.test(url);
   }
 
-  return res.send(isTwitter(params.twitter));
-
   if (params.twitter !== null && isTwitter(params.twitter) === false)
     return res.send(
       `Please make sure the twitter link is a valid URL.<script>setTimeout(function(){window.location="/profile/${user.username}";},4000);</script>`
