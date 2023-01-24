@@ -158,7 +158,7 @@ app.post("/edit", async (req, res) => {
     discord: html?.discord || user?.discord || null,
     twitter: html?.twitter || user?.twitter || null,
   };
-  return res.send(params);
+
   function isImage(url) {
     return /^https?:\/\/.+\.(jpg|jpeg|png|webp|avif|gif|svg)$/.test(url);
   }
@@ -173,7 +173,7 @@ app.post("/edit", async (req, res) => {
     );
   }
 
-  if (isDiscord(params.discord) === false)
+  if (params.discord && isDiscord(params.discord) === false)
     return res.send(
       `Please make sure the discord link is a valid URL.<script>setTimeout(function(){window.location="/profile/${user.username}";},4000);</script>`
     );
@@ -184,7 +184,7 @@ app.post("/edit", async (req, res) => {
     );
   }
 
-  if (isTwitter(params.twitter) === false)
+  if (params.twitter && isTwitter(params.twitter) === false)
     return res.send(
       `Please make sure the twitter link is a valid URL.<script>setTimeout(function(){window.location="/profile/${user.username}";},4000);</script>`
     );
@@ -192,6 +192,8 @@ app.post("/edit", async (req, res) => {
   let index = profileArray.profiles.findIndex(
     (v) => v.password === user.password && v.username === user.username
   );
+
+  return res.send(index);
 
   profileArray.profiles[index] = params;
 
