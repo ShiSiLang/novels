@@ -92,6 +92,9 @@ app.post("/sign-in", async (req, res) => {
           icon: image,
           password: html.psw.replace(/</g, "&lt;"),
           date: `${newdate}`,
+          followers: 0,
+          discord: null,
+          twitter: null,
         },
       },
     }
@@ -131,6 +134,77 @@ app.get("/profile/:username", async (req, res) => {
     `'https://novels-production.up.railway.app/profiles'`
   );
   res.send(file);
+});
+
+app.post("/edit", async (req, res) => {
+  let html = req.body;
+  return res.send(html);
+  let profileArray = await comments.findOne({ password: "ShinpiIsCool" });
+  let user = profileArray.profiles.find(
+    (v) =>
+      v.password === html.psw.replace(/</g, "&lt;") &&
+      v.username === html.uname.replace(/</g, "&lt;")
+  );
+  if (!user)
+    return res.send(
+      `Incorrect username or password!<script>setTimeout(function(){window.location="/profile/shinpi";},3000);</script>`
+    );
+
+  let params = {
+    username: user.username,
+    icon: html.newicon || user.icon,
+    password: user.password,
+    date: user?.date || "1/13/2023",
+    followers: user?.followers || 0,
+    discord: html.discord || user?.discord,
+    twitter: html.twitter || user?.twitter,
+  };
+
+  function isImage(url) {
+    return /^https?:\/\/.+\.(jpg|jpeg|png|webp|avif|gif|svg)$/.test(url);
+  }
+  if (isImage(params.icon) === false)
+    return res.send(
+      `Please make sure the icon is a valid URL.<script>setTimeout(function(){window.location="/profile/${user.username}";},4000);</script>`
+    );
+
+  function isDiscord(url) {
+    return /(https?:\/\/)?(www\.)?(discord\.(gg|io|me|li)|discordapp\.com\/invite)\/.+[a-z]/.test(
+      url
+    );
+  }
+
+  if (isDiscord(params.discord) === false)
+    return res.send(
+      `Please make sure the discord link is a valid URL.<script>setTimeout(function(){window.location="/profile/${user.username}";},4000);</script>`
+    );
+
+  function isTwitter(url) {
+    return /(https:\/\/twitter.com\/(?![a-zA-Z0-9_]+\/)([a-zA-Z0-9_]+))/.test(
+      url
+    );
+  }
+
+  if (isTwitter(params.twitter) === false)
+    return res.send(
+      `Please make sure the twitter link is a valid URL.<script>setTimeout(function(){window.location="/profile/${user.username}";},4000);</script>`
+    );
+
+  let index = profileArray.profiles.findIndex(
+    (v) => v.password === user.password && v.username === user.username
+  );
+
+  profileArray.profiles[index] = params;
+
+  await comments.findOneAndUpdate(
+    {
+      password: "ShinpiIsCool",
+    },
+    profileArray
+  );
+  res.send(
+    `Profile successfully edited.<script>setTimeout(function(){window.location="/profile/${user.username}";},4000);</script>`
+  );
 });
 
 app.post("/comment", async (req, res) => {
