@@ -148,6 +148,11 @@
         color: white;
     }
 
+    .followers {
+        color: white;
+        font-size: 25px;
+    }
+
     .date {
         color: #ccc;
         font-size: 18px;
@@ -375,10 +380,11 @@
     <div class="card">
         <img src="$$avatar$$" alt="User Avatar" style="width:100%">
         <h1 class="title">$$username$$</h1>
+        <p class="followers">Followers: $$followers$$</p>
         <p class="date">Joined: $$date$$</p>
         <div style="margin: 24px 0;">
-            <a href="#"><i class="fa fa-discord"></i></a>
-            <a href="#"><i class="fa fa-twitter"></i></a>
+            <a href="$$discord$$"><i class="fa fa-discord"></i></a>
+            <a href="$$twitter$$"><i class="fa fa-twitter"></i></a>
         </div>
         <p><button onclick="document.getElementById('id01').style.display='block'">Edit Profile</button></p>
     </div>

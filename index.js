@@ -128,6 +128,10 @@ app.get("/profile/:username", async (req, res) => {
   });
   file = file.replaceAll("$$username$$", user.username);
   file = file.replaceAll("$$avatar$$", user.icon);
+  file = file.replaceAll("$$followers$$", user?.followers || 0);
+  file = file.replace("$$discord$$", user?.discord || "#");
+  file = file.replace("$$twitter$$", user?.twitter || "#");
+  file = file.replaceAll("$$avatar$$", user.icon);
   file = file.replace("$$date$$", user?.date || "1/13/2023");
   file = file.replace(
     "$$profiles$$",
