@@ -174,8 +174,6 @@ app.post("/edit", async (req, res) => {
     );
   }
 
-  return res.send(isDiscord(params.discord));
-
   if (params.discord !== null && isDiscord(params.discord) === false)
     return res.send(
       `Please make sure the discord link is a valid URL.<script>setTimeout(function(){window.location="/profile/${user.username}";},4000);</script>`
