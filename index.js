@@ -231,8 +231,6 @@ app.post("/follow", async (req, res) => {
       `Incorrect username or password!<script>setTimeout(function(){window.location="/profile/shinpi";},3000);</script>`
     );
 
-  return res.send(html);
-
   if (html.uname === html.follow)
     return res.send(
       `You cannot follow yourself!<script>setTimeout(function(){window.location="/profile/${user.username}";},3000);</script>`
