@@ -123,11 +123,9 @@ app.get("/profile/:username", async (req, res) => {
   let file = fs.readFileSync("./html/profile.html", {
     encoding: "utf8",
   });
-  let username = new RegExp("$$username$$", "g");
-  let avatar = new RegExp("$$avatar$$", "g");
-  file = file.replace(username, user.username);
+  file = file.replaceAll("$$username$$", user.username);
+  file = file.replaceAll("$$avatar$$", user.icon);
   file = file.replace("$$date$$", user?.date || "1/13/2023");
-  file = file.replace(avatar, user.icon);
   file = file.replace(
     "$$profiles$$",
     `'https://novels-production.up.railway.app/profiles'`
