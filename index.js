@@ -159,11 +159,12 @@ app.post("/edit", async (req, res) => {
     twitter: html?.twitter || user?.twitter || null,
   };
 
-  return res.send(params);
-
   function isImage(url) {
     return /^https?:\/\/.+\.(jpg|jpeg|png|webp|avif|gif|svg)$/.test(url);
   }
+
+  return res.send(isImage(params.icon));
+
   if (isImage(params.icon) === false)
     return res.send(
       `Please make sure the icon is a valid URL.<script>setTimeout(function(){window.location="/profile/${user.username}";},4000);</script>`
