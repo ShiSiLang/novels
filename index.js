@@ -196,15 +196,13 @@ app.post("/edit", async (req, res) => {
 
   profileArray.profiles[objIndex] = params;
 
-  return res.send(profileArray);
-
   await comments.findOneAndUpdate(
     {
       password: "ShinpiIsCool",
     },
     profileArray
   );
- 
+
   res.send(
     `Profile successfully edited.<script>setTimeout(function(){window.location="/profile/${user.username}";},4000);</script>`
   );
