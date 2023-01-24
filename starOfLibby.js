@@ -156,7 +156,7 @@ module.exports = [
     title: "<ins>Star of Libby</ins>",
     intro: "",
     credits:
-      "<ins>Author:</ins> <b>Shinpi</b></br><ins>Editor:</ins> <b>Keita</b></br><ins>Proofreaders:</ins> <b>BUMAN, Abstraction, Keita, List3</b>",
+      "<ins>Author:</ins> <b>Shinpi</b></br><ins>Editor:</ins> <b>Keita, List3</b></br><ins>Proofreaders:</ins> <b>BUMAN, Abstraction, Keita, List3, ThunderBlade</b>",
     chapter: "Chapter 16: ",
     timer: "Jan 26 2023 11:00:00",
     thumbnail: "https://i.imgur.com/lGLKiVd.png",
