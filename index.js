@@ -228,18 +228,45 @@ app.post("/follow", async (req, res) => {
   );
   if (!user)
     return res.send(
-      `Incorrect username or password!<script>setTimeout(function(){window.location="/read/1";},3000);</script>`
+      `Incorrect username or password!<script>setTimeout(function(){window.location="/profile/shinpi";},3000);</script>`
     );
 
   return res.send(html);
 
-  let objIndex = profileArray.profiles.findIndex(
-    (v) =>
-      v.password === html.psw.replace(/</g, "&lt;") &&
-      v.username === html.uname.replace(/</g, "&lt;")
-  );
+  if (html.uname === html.follow)
+    return res.send(
+      `You cannot follow yourself!<script>setTimeout(function(){window.location="/profile/${user.username}";},3000);</script>`
+    );
 
-  profileArray.profiles[objIndex].following.push('j');
+  if (user.following.includes(html.follow)) {
+    let objIndex = profileArray.profiles.findIndex(
+      (v) =>
+        v.password === html.psw.replace(/</g, "&lt;") &&
+        v.username === html.uname.replace(/</g, "&lt;")
+    );
+
+    if (objIndex > -1) {
+      profileArray.profiles[objIndex].following.splice(index, 1);
+    }
+
+    res.send(
+      `Successfully unfollowed ${html.follow}!<script>setTimeout(function(){window.location="/profile/${user.username}";},3000);</script>`
+    );
+  } else {
+    let objIndex = profileArray.profiles.findIndex(
+      (v) =>
+        v.password === html.psw.replace(/</g, "&lt;") &&
+        v.username === html.uname.replace(/</g, "&lt;")
+    );
+
+    if (objIndex > -1) {
+      profileArray.profiles[objIndex].following.push(html.follow);
+    }
+
+    res.send(
+      `Successfully followed ${html.follow}!<script>setTimeout(function(){window.location="/profile/${user.username}";},3000);</script>`
+    );
+  }
 });
 
 app.post("/comment", async (req, res) => {
