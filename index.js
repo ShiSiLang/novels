@@ -188,10 +188,8 @@ app.post("/edit", async (req, res) => {
       `Please make sure the twitter link is a valid URL.<script>setTimeout(function(){window.location="/profile/${user.username}";},4000);</script>`
     );
 
-  return res.send(profileArray.profiles);
-
-  let index = profileArray.profiles.findIndex((v) => {
-    v.password === user.password && v.username === user.username;
+  let index = profileArray.profiles.findIndex(function (v, i) {
+    return v.password === user.password && v.username === user.username;
   });
 
   return res.send(index);
