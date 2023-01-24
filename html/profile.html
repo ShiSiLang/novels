@@ -148,9 +148,8 @@
         color: white;
     }
 
-    .followers {
+    .other {
         color: white;
-        font-size: 25px;
     }
 
     .date {
@@ -380,13 +379,15 @@
     <div class="card">
         <img src="$$avatar$$" alt="User Avatar" style="width:100%">
         <h1 class="title">$$username$$</h1>
-        <p class="followers">Followers: $$followers$$</p>
+        <h2 class="other">Followers: $$followers$$</h2>
+        <h2 class="other">Comments: $$comments$$</h2>
         <p class="date">Joined: $$date$$</p>
         <div style="margin: 24px 0;">
             <a href="$$discord$$"><i class="fa fa-discord"></i></a>
             <a href="$$twitter$$"><i class="fa fa-twitter"></i></a>
         </div>
         <p><button onclick="document.getElementById('id01').style.display='block'">Edit Profile</button></p>
+        <p><button>Follow Profile</button></p>
     </div>
 
     <div id="id01" class="modal">

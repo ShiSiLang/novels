@@ -115,8 +115,8 @@ app.get("/profiles", async (req, res) => {
 
 app.get("/profile/:username", async (req, res) => {
   let username = req.params.username.toLowerCase();
-  let profileArray = await comments.findOne({ password: "ShinpiIsCool" });
-  let user = profileArray.profiles.find(
+  let db = await comments.findOne({ password: "ShinpiIsCool" });
+  let user = db.profiles.find(
     (v) => v.username.toLowerCase() === username.replace(/</g, "&lt;")
   );
   if (!user)
@@ -129,6 +129,7 @@ app.get("/profile/:username", async (req, res) => {
   file = file.replaceAll("$$username$$", user.username);
   file = file.replaceAll("$$avatar$$", user.icon);
   file = file.replaceAll("$$followers$$", user?.followers || 0);
+  file = file.replaceAll("$$comments$$", db.comments?.filter((v) => v.username === user.username).length || 0);
   file = file.replace("$$discord$$", user?.discord || "#");
   file = file.replace("$$twitter$$", user?.twitter || "#");
   file = file.replaceAll("$$avatar$$", user.icon);
