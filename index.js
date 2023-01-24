@@ -159,6 +159,8 @@ app.post("/edit", async (req, res) => {
     twitter: html?.twitter || user?.twitter || null,
   };
 
+  return res.send(params);
+
   function isImage(url) {
     return /^https?:\/\/.+\.(jpg|jpeg|png|webp|avif|gif|svg)$/.test(url);
   }
