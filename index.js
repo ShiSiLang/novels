@@ -178,8 +178,6 @@ app.post("/edit", async (req, res) => {
     return res.send(
       `Please make sure the discord link is a valid URL.<script>setTimeout(function(){window.location="/profile/${user.username}";},4000);</script>`
     );
-    
-    return res.send(isDiscord(params.discord));
 
   function isTwitter(url) {
     return /(https:\/\/twitter.com\/(?![a-zA-Z0-9_]+\/)([a-zA-Z0-9_]+))/.test(
@@ -187,10 +185,14 @@ app.post("/edit", async (req, res) => {
     );
   }
 
+  return res.send(isTwitter(params.twitter));
+
   if (params.twitter !== null && isTwitter(params.twitter) === false)
     return res.send(
       `Please make sure the twitter link is a valid URL.<script>setTimeout(function(){window.location="/profile/${user.username}";},4000);</script>`
     );
+
+  return res.send(isTwitter(params.twitter));
 
   let index = profileArray.profiles.findIndex(
     (v) => v.password === user.password && v.username === user.username
