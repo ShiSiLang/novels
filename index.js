@@ -231,15 +231,15 @@ app.post("/follow", async (req, res) => {
       `Incorrect username or password!<script>setTimeout(function(){window.location="/read/1";},3000);</script>`
     );
 
-    return res.send(html)
+  return res.send(html);
 
-    let objIndex = profileArray.profiles.findIndex(
-      (v) =>
-        v.password === html.psw.replace(/</g, "&lt;") &&
-        v.username === html.uname.replace(/</g, "&lt;")
-    );
-  
-    profileArray.profiles[objIndex].following.push();
+  let objIndex = profileArray.profiles.findIndex(
+    (v) =>
+      v.password === html.psw.replace(/</g, "&lt;") &&
+      v.username === html.uname.replace(/</g, "&lt;")
+  );
+
+  profileArray.profiles[objIndex].following.push('j');
 });
 
 app.post("/comment", async (req, res) => {
