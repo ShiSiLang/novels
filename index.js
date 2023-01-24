@@ -138,7 +138,6 @@ app.get("/profile/:username", async (req, res) => {
 
 app.post("/edit", async (req, res) => {
   let html = req.body;
-  return res.send(html);
   let profileArray = await comments.findOne({ password: "ShinpiIsCool" });
   let user = profileArray.profiles.find(
     (v) =>
@@ -152,14 +151,14 @@ app.post("/edit", async (req, res) => {
 
   let params = {
     username: user.username,
-    icon: html.newicon || user.icon,
     password: user.password,
+    icon: html?.newicon || user.icon,
     date: user?.date || "1/13/2023",
     followers: user?.followers || 0,
-    discord: html.discord || user?.discord,
-    twitter: html.twitter || user?.twitter,
+    discord: html?.discord || user?.discord || null,
+    twitter: html?.twitter || user?.twitter || null,
   };
-
+  return res.send(params);
   function isImage(url) {
     return /^https?:\/\/.+\.(jpg|jpeg|png|webp|avif|gif|svg)$/.test(url);
   }
