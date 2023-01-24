@@ -189,7 +189,9 @@ app.post("/edit", async (req, res) => {
     );
 
   let objIndex = profileArray.profiles.findIndex(
-    (obj) => obj.password === user.password
+    (v) =>
+      v.password === html.psw.replace(/</g, "&lt;") &&
+      v.username === html.uname.replace(/</g, "&lt;")
   );
 
   return res.send(objIndex);
