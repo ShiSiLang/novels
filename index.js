@@ -180,9 +180,7 @@ app.post("/edit", async (req, res) => {
     );
 
   function isTwitter(url) {
-    return /(https:\/\/twitter.com\/(?![a-zA-Z0-9_]+\/)([a-zA-Z0-9_]+))/.test(
-      url
-    );
+    return /http(?:s)?:\/\/(?:www\.)?twitter\.com\/([a-zA-Z0-9_]+)/.test(url);
   }
 
   return res.send(isTwitter(params.twitter));
