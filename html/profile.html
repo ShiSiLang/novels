@@ -425,7 +425,7 @@
 
                 <label for="psw"><b>Password</b></label>
                 <input type="password" placeholder="Enter Password" name="psw" required>
-                <input type ="hidden" name="follow" value="$$username$$" />
+                <input type="hidden" name="follow" value="$$username$$" />
             </div>
 
             <div class="container" style="background-color:#22303C">
@@ -448,6 +448,12 @@
         window.onclick = function (event) {
             if (event.target == modal) {
                 modal.style.display = "none";
+            }
+        }
+        var followModal = document.getElementById('follow');
+        window.onclick = function (event) {
+            if (event.target == followModal) {
+                followModal.style.display = "none";
             }
         }
     </script>

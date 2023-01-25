@@ -62,7 +62,7 @@ app.get("/novel/:chapter", async (req, res) => {
 
 app.get("/discord", (_, res) => res.redirect("https://discord.gg/j3YamACwPu"));
 
-app.post("/sign-in", async (req, res) => {
+app.post("/sign-up", async (req, res) => {
   let html = req.body;
   if (html.dp !== process.env.profiles)
     return res.send(
