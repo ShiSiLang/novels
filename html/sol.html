@@ -318,26 +318,31 @@
     font-family: 'Helvetica', 'Arial', sans-serif;
   }
 
-  a:visited {
+  .comment a:visited {
     color: pink;
     background-color: transparent;
     text-decoration: none;
   }
 
-  a:hover {
+  .comment a:hover {
     color: red;
     background-color: transparent;
     text-decoration: underline;
   }
 
-  a:active {
+  .comment a:active {
     color: yellow;
     background-color: transparent;
     text-decoration: underline;
   }
 
+  .comment a {
+    color: #c51f5d;
+    font-weight: bold;
+  }
+
   h1,
-  a {
+  h3 {
     color: #c51f5d;
     font-weight: bold;
   }
@@ -495,7 +500,7 @@
             div3.innerHTML += `
               <div class="comment mt-4 text-justify float-left">
                 <img src="${json.comments[i].icon}" alt=" " class="rounded-circle" width="40" height="40">
-                <a href="/profile/${json.comments[i].username}">${json.comments[i].username}</a>
+                <a class="comment" href="/profile/${json.comments[i].username}">${json.comments[i].username}</a>
                 <span>- ${json.comments[i].date}</span>
                 <br>
                 <p>${json.comments[i].comment}</p>
