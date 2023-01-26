@@ -445,16 +445,11 @@
     </div>
     <script>
         var modal = document.getElementById('id01');
+        var followModal = document.getElementById('follow');
         window.onclick = function (event) {
             if (event.target === modal) {
                 modal.style.display = "none";
-            }
-        }
-    </script>
-    <script>
-        var followModal = document.getElementById('follow');
-        window.onclick = function (event) {
-            if (event.target === followModal) {
+            } else if (event.target === followModal) {
                 followModal.style.display = "none";
             }
         }

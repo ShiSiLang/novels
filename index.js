@@ -28,6 +28,7 @@ app.get("/home", async (_, res) => {
 });
 app.get("/fan", (_, res) => res.sendFile(dir("fan")));
 app.get("/sign-in", (_, res) => res.sendFile(dir("sign-in")));
+
 app.get("/read/:chapter", async (req, res) => {
   let chapter = Number(req.params.chapter) || 1;
   let file = fs.readFileSync("./html/sol.html", {
@@ -43,6 +44,7 @@ app.get("/read/:chapter", async (req, res) => {
     "$$change4$$",
     novel[chapter - 1]?.chapter || "Chapter Not Found."
   );
+  file = file.replaceAll("$$chapter$$", Number(chapter));
   file = file.replace(
     "$$thumbnail$$",
     novel[chapter - 1]?.thumbnail || "https://i.imgur.com/lGLKiVd.png"
