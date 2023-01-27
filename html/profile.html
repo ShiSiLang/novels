@@ -273,7 +273,7 @@
         padding: 12px 20px;
         margin: 8px 0;
         display: inline-block;
-        border: 1px solid #ccc;
+        border: none;
         box-sizing: border-box;
         color: #535FED;
         font-family: 'Open Sans', Verdana, Geneva, Tahoma, sans-serif;
@@ -291,6 +291,10 @@
         background: transparent;
         outline: none;
         border: none;
+    }
+
+    input:-webkit-autofill {
+        -webkit-text-fill-color: yellow !important;
     }
 
     ::placeholder {
