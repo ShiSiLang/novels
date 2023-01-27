@@ -456,7 +456,7 @@
 
             <div class="container" style="background-color:#22303C">
                 <button type="submit" onclick="document.getElementById('follow').style.display='none'"
-                    class="cancelbtn" name="submited">Login &
+                    class="cancelbtn">Login &
                     Follow</button>
             </div>
         </form>
@@ -469,13 +469,6 @@
             <a href="https://mobile.twitter.com/shinpitekita" target="_blank"><i class="fa fa-twitter"></i></a>
         </div>
     </div>
-
-    <?php
-    if(isset($_POST['submited'])) { 
-        echo '<script>alert("Welcome to Geeks for Geeks")</script>';
-        //Code goes here, do checks/validation etc 
-    }
-    ?>
     <script>
         var modal = document.getElementById('id01');
         var followModal = document.getElementById('follow');
