@@ -27,7 +27,7 @@ app.get("/home", async (_, res) => {
   res.send(file);
 });
 app.get("/fan", (_, res) => res.sendFile(dir("fan")));
-app.get("/sign-in", (_, res) => res.sendFile(dir("sign-in")));
+app.get("/sign-up", (_, res) => res.sendFile(dir("sign-up")));
 
 app.get("/read/:chapter", async (req, res) => {
   let chapter = Number(req.params.chapter) || 1;
