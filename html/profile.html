@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="icon" href="https://i.imgur.com/lGLKiVd.png" />
-    <title>Star of Libby</title>
+    <title>$$username$$'s profile</title>
     <meta property="og:title" content="$$username$$" />
     <meta property="og:site_name" content="Star of Libby" />
     <meta property="og:description" content="View $$username$$'s profile." />
@@ -13,7 +13,7 @@
     <meta name="theme-color" content="#cbc3e3" />
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.1.1/css/all.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
 </head>
 <style>
     body {
@@ -394,7 +394,7 @@
     <div class="wrapper">
         <div class="search-input">
             <a href="" hidden></a>
-            <input type="text" placeholder="Search Profiles">
+            <input type="text" placeholder="Search Profiles" />
             <div class="autocom-box">
                 <!-- here list are inserted from javascript -->
             </div>
@@ -403,7 +403,7 @@
     </div>
 
     <div class="card">
-        <img src="$$avatar$$" alt="User Avatar" style="width:100%">
+        <img src="$$avatar$$" alt="User Avatar" style="width:100%" />
         <h1 class="title">$$username$$</h1>
         <h2 class="other">Followers: $$followers$$</h2>
         <h2 class="other">Comments: $$comments$$</h2>
@@ -412,34 +412,41 @@
             <a href="$$discord$$"><i class="fa fa-discord"></i></a>
             <a href="$$twitter$$"><i class="fa fa-twitter"></i></a>
         </div>
-        <p><button onclick="document.getElementById('id01').style.display='block'">Edit Profile</button></p>
-        <p><button onclick="document.getElementById('follow').style.display='block'">Follow Profile</button></p>
-        <p><button onclick="document.getElementById('test').style.display='block'">Test</button></p>
+        <p>
+            <button onclick="document.getElementById('id01').style.display='block'">
+                Edit Profile
+            </button>
+        </p>
+        <p>
+            <button onclick="document.getElementById('follow').style.display='block'">
+                Follow Profile
+            </button>
+        </p>
     </div>
 
     <div id="id01" class="modal">
         <form class="modal-content animate" action="/edit" method="post">
             <div class="container">
                 <label for="uname"><b>Username</b></label>
-                <input type="text" placeholder="Enter Username" name="uname" autocomplete="off" required>
+                <input type="text" placeholder="Enter Username" name="uname" autocomplete="off" required />
 
                 <label for="psw"><b>Password</b></label>
-                <input type="password" placeholder="Enter Password" name="psw" required>
+                <input type="password" placeholder="Enter Password" name="psw" required />
 
                 <label for="newicon"><b>Edit Avatar</b></label>
-                <input type="text" placeholder="Enter new avatar" name="newicon" autocomplete="off">
+                <input type="text" placeholder="Enter new avatar" name="newicon" autocomplete="off" />
 
                 <label for="discord"><b>Edit Discord Link</b></label>
-                <input type="text" placeholder="Enter new discord" name="discord" autocomplete="off">
+                <input type="text" placeholder="Enter new discord" name="discord" autocomplete="off" />
 
                 <label for="twitter"><b>Edit Twitter Link</b></label>
-                <input type="text" placeholder="Enter new twitter" name="twitter" autocomplete="off">
+                <input type="text" placeholder="Enter new twitter" name="twitter" autocomplete="off" />
             </div>
 
             <div class="container" style="background-color:#22303C">
-                <button type="submit" onclick="document.getElementById('id01').style.display='none'"
-                    class="cancelbtn">Login &
-                    Edit</button>
+                <button type="submit" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">
+                    Login & Edit
+                </button>
             </div>
         </form>
     </div>
@@ -448,17 +455,18 @@
         <form class="modal-content animate" action="/follow" method="post">
             <div class="container">
                 <label for="uname"><b>Username</b></label>
-                <input type="text" placeholder="Enter Username" name="uname" autocomplete="off" required>
+                <input type="text" placeholder="Enter Username" name="uname" autocomplete="off" required />
 
                 <label for="psw"><b>Password</b></label>
-                <input type="password" placeholder="Enter Password" name="psw" required>
+                <input type="password" placeholder="Enter Password" name="psw" required />
                 <input type="hidden" name="follow" value="$$username$$" />
             </div>
 
             <div class="container" style="background-color:#22303C">
                 <button type="submit" onclick="document.getElementById('follow').style.display='none'"
-                    class="cancelbtn">Login &
-                    Follow</button>
+                    class="cancelbtn">
+                    Login & Follow
+                </button>
             </div>
         </form>
     </div>
@@ -471,15 +479,15 @@
         </div>
     </div>
     <script>
-        var modal = document.getElementById('id01');
-        var followModal = document.getElementById('follow');
+        var modal = document.getElementById("id01");
+        var followModal = document.getElementById("follow");
         window.onclick = function (event) {
             if (event.target === modal) {
                 modal.style.display = "none";
             } else if (event.target === followModal) {
                 followModal.style.display = "none";
             }
-        }
+        };
     </script>
 </body>
 <script>
@@ -498,14 +506,16 @@
                 webLink = `https://novels-production.up.railway.app/profiles/${userData}`;
                 linkTag.setAttribute("href", webLink);
                 linkTag.click();
-            }
+            };
             let response = await fetch($$profiles$$);
-            let json = await response.json()
+            let json = await response.json();
             emptyArray = json.filter((data) => {
-                return data.toLocaleLowerCase().startsWith(userData.toLocaleLowerCase());
+                return data
+                    .toLocaleLowerCase()
+                    .startsWith(userData.toLocaleLowerCase());
             });
             emptyArray = emptyArray.map((data) => {
-                return data = `<li>${data}</li>`;
+                return (data = `<li>${data}</li>`);
             });
             searchWrapper.classList.add("active");
             showSuggestions(emptyArray);
@@ -516,7 +526,7 @@
         } else {
             searchWrapper.classList.remove("active");
         }
-    }
+    };
 
     function select(element) {
         let selectData = element.textContent;
@@ -525,7 +535,7 @@
             webLink = `https://novels-production.up.railway.app/profile/${selectData}`;
             linkTag.setAttribute("href", webLink);
             linkTag.click();
-        }
+        };
         searchWrapper.classList.remove("active");
     }
 
@@ -535,7 +545,7 @@
             userValue = inputBox.value;
             listData = `<li>${userValue}</li>`;
         } else {
-            listData = list.join('');
+            listData = list.join("");
         }
         suggBox.innerHTML = listData;
     }
