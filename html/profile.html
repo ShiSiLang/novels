@@ -253,6 +253,8 @@
         cursor: pointer;
     }
 
+    /*Modal*/
+
     .cancelbtn {
         width: auto;
         padding: 10px 18px;
@@ -310,26 +312,6 @@
         left: 0;
         right: 0;
     }
-
-    .autocomplete-items div {
-        padding: 10px;
-        cursor: pointer;
-        background-color: #fff;
-        border-bottom: 1px solid #d4d4d4;
-    }
-
-    .autocomplete-items div:hover {
-        /*when hovering an item:*/
-        background-color: #e9e9e9;
-    }
-
-    .autocomplete-active {
-        /*when navigating through the items using the arrow keys:*/
-        background-color: DodgerBlue !important;
-        color: #ffffff;
-    }
-
-    /*Modal*/
 
     ::placeholder {
         color: #535FED;
@@ -395,6 +377,8 @@
             width: 100%;
         }
     }
+
+    /*Modal End*/
 </style>
 
 <body>
@@ -435,19 +419,19 @@
         <form class="modal-content animate" action="/edit" method="post">
             <div class="container">
                 <label for="uname"><b>Username</b></label>
-                <input type="text" placeholder="Enter Username" name="uname" required>
+                <input type="text" placeholder="Enter Username" name="uname" autocomplete="off" required>
 
                 <label for="psw"><b>Password</b></label>
                 <input type="password" placeholder="Enter Password" name="psw" required>
 
                 <label for="newicon"><b>Edit Avatar</b></label>
-                <input type="text" placeholder="Enter new avatar" name="newicon">
+                <input type="text" placeholder="Enter new avatar" name="newicon" autocomplete="off">
 
                 <label for="discord"><b>Edit Discord Link</b></label>
-                <input type="text" placeholder="Enter new discord" name="discord">
+                <input type="text" placeholder="Enter new discord" name="discord" autocomplete="off">
 
                 <label for="twitter"><b>Edit Twitter Link</b></label>
-                <input type="text" placeholder="Enter new twitter" name="twitter">
+                <input type="text" placeholder="Enter new twitter" name="twitter" autocomplete="off">
             </div>
 
             <div class="container" style="background-color:#22303C">
@@ -462,7 +446,7 @@
         <form class="modal-content animate" action="/follow" method="post">
             <div class="container">
                 <label for="uname"><b>Username</b></label>
-                <input type="text" placeholder="Enter Username" name="uname" required>
+                <input type="text" placeholder="Enter Username" name="uname" autocomplete="off" required>
 
                 <label for="psw"><b>Password</b></label>
                 <input type="password" placeholder="Enter Password" name="psw" required>
