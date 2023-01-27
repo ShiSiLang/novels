@@ -347,6 +347,8 @@
     font-weight: bold;
   }
 
+  /*Modal*/
+
   .cancelbtn {
     width: auto;
     padding: 10px 18px;
@@ -360,20 +362,53 @@
     color: white;
   }
 
-  input[type=text],
-  input[type=password],
-  input[type=number] {
+  .container input[type=text],
+  .container input[type=password],
+  .container input[type=number] {
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
     display: inline-block;
-    border: 1px solid #ccc;
+    border: none;
     box-sizing: border-box;
+    color: #535FED;
     font-family: 'Open Sans', Verdana, Geneva, Tahoma, sans-serif;
   }
 
   .container {
     padding: 16px;
+  }
+
+  .container label {
+    font-family: 'Open Sans', Verdana, Geneva, Tahoma, sans-serif;
+  }
+
+  .container input {
+    background: transparent;
+    outline: none;
+    border: none;
+  }
+
+  .autocomplete {
+    /*the container must be positioned relative:*/
+    position: relative;
+    display: inline-block;
+  }
+
+  .autocomplete-items {
+    position: absolute;
+    border: 1px solid #d4d4d4;
+    border-bottom: none;
+    border-top: none;
+    z-index: 99;
+    /*position the autocomplete items to be the same width as the container:*/
+    top: 100%;
+    left: 0;
+    right: 0;
+  }
+
+  ::placeholder {
+    color: #535FED;
   }
 
   span.psw {
@@ -436,6 +471,8 @@
       width: 100%;
     }
   }
+
+  /*Modal End*/
 </style>
 <script type="text/javascript">
   async function changeDivContent() {
