@@ -443,6 +443,12 @@
         </form>
     </div>
 
+    <?php 
+    if (isset($_POST['submit'])){
+        echo "Now following ".$_POST['follow'];
+    }
+    ?>
+
     <div id="follow" class="modal">
         <form class="modal-content animate" action="/follow" method="post">
             <div class="container">
@@ -456,7 +462,7 @@
 
             <div class="container" style="background-color:#22303C">
                 <button type="submit" onclick="document.getElementById('follow').style.display='none'"
-                    class="cancelbtn">Login &
+                    class="cancelbtn" name="submit" value="Submit">Login &
                     Follow</button>
             </div>
         </form>
