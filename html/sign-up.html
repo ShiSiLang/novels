@@ -335,19 +335,53 @@
         color: white;
     }
 
-    input[type=text],
-    input[type=password] {
+    .container input[type=text],
+    .container input[type=password],
+    .container input[type=number] {
         width: 100%;
         padding: 12px 20px;
         margin: 8px 0;
         display: inline-block;
-        border: 1px solid #ccc;
+        border: none;
         box-sizing: border-box;
+        color: #535FED;
         font-family: 'Open Sans', Verdana, Geneva, Tahoma, sans-serif;
     }
 
     .container {
         padding: 16px;
+    }
+
+    .container label {
+        font-family: 'Open Sans', Verdana, Geneva, Tahoma, sans-serif;
+    }
+
+    .container input {
+        background: transparent;
+        outline: none;
+        border: none;
+    }
+
+    .autocomplete {
+        /*the container must be positioned relative:*/
+        position: relative;
+        display: inline-block;
+    }
+
+    .autocomplete-items {
+        position: absolute;
+        border: 1px solid #d4d4d4;
+        border-bottom: none;
+        border-top: none;
+        z-index: 99;
+        /*position the autocomplete items to be the same width as the container:*/
+        top: 100%;
+        left: 0;
+        right: 0;
+    }
+
+    ::placeholder {
+        color: #535FED;
     }
 
     span.psw {
@@ -356,7 +390,7 @@
     }
 
     .modal {
-        display: none;
+        display: block;
         position: fixed;
         z-index: 1;
         left: 0;
@@ -374,42 +408,6 @@
         border: 1px solid #15202B;
         width: 80%;
     }
-
-    .animate {
-        -webkit-animation: animatezoom 0.6s;
-        animation: animatezoom 0.6s
-    }
-
-    @-webkit-keyframes animatezoom {
-        from {
-            -webkit-transform: scale(0)
-        }
-
-        to {
-            -webkit-transform: scale(1)
-        }
-    }
-
-    @keyframes animatezoom {
-        from {
-            transform: scale(0)
-        }
-
-        to {
-            transform: scale(1)
-        }
-    }
-
-    @media screen and (max-width: 300px) {
-        span.psw {
-            display: block;
-            float: none;
-        }
-
-        .cancelbtn {
-            width: 100%;
-        }
-    }
 </style>
 
 <body>
@@ -422,11 +420,6 @@
     </div>
     <div class="text">
         <h1>Sign-Up</h1>
-    </div>
-
-    <div class="flex">
-        <button class="glow-on-hover" onclick="document.getElementById('id01').style.display='block'"
-            style="width:auto;">Add User</button>
     </div>
 
     <div id="id01" class="modal">
@@ -446,8 +439,7 @@
             </div>
 
             <div class="container" style="background-color:#22303C">
-                <button type="submit" onclick="document.getElementById('id01').style.display='none'"
-                    class="cancelbtn">Enter</button>
+                <button type="submit" class="cancelbtn">Enter</button>
             </div>
         </form>
     </div>

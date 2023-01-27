@@ -414,6 +414,7 @@
         </div>
         <p><button onclick="document.getElementById('id01').style.display='block'">Edit Profile</button></p>
         <p><button onclick="document.getElementById('follow').style.display='block'">Follow Profile</button></p>
+        <p><button onclick="document.getElementById('test').style.display='block'">Test</button></p>
     </div>
 
     <div id="id01" class="modal">
@@ -443,12 +444,6 @@
         </form>
     </div>
 
-    <?php 
-    if (isset($_POST['submit'])){
-        echo "Now following ".$_POST['follow'];
-    }
-    ?>
-
     <div id="follow" class="modal">
         <form class="modal-content animate" action="/follow" method="post">
             <div class="container">
@@ -462,11 +457,40 @@
 
             <div class="container" style="background-color:#22303C">
                 <button type="submit" onclick="document.getElementById('follow').style.display='none'"
-                    class="cancelbtn" name="submit" value="Submit">Login &
+                    class="cancelbtn">Login &
                     Follow</button>
             </div>
         </form>
     </div>
+
+    <?php 
+    pre_r($_POST);
+    if (isset($_POST['submit'])){
+        echo "Now following ".$_POST['follow'].'<br />';
+    }
+    ?>
+
+    <div id="test" class="modal">
+        <form class="modal-content animate" action="/test" method="POST">
+            <div class="container">
+                <label for="test"><b>jhnd</b></label>
+                <input type="text" placeholder="Enter huebdjh" name="test" autocomplete="off" required>
+            </div>
+
+            <div class="container" style="background-color:#22303C">
+                <button type="submit" onclick="document.getElementById('follow').style.display='none'" class="cancelbtn"
+                    name="submit" value="Submit">submit</button>
+            </div>
+        </form>
+    </div>
+
+    <?php 
+    function pre_r( $array ) {
+        echo '<pre>';
+        print_r($array);
+        echo '</pre>';
+    }
+    ?>
 
     <div class="footer">
         <div class="footer-text">Copyright © 2023 Shinpi_Tekita</div>
