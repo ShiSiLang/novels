@@ -586,17 +586,17 @@
       style="width:auto;">Comment</button>
   </div>
 
-  <div id="id01" class="modal">
-    <form class="modal-content animate" action="/comment" method="post">
+  <div class="modal">
+    <form class="modal-content animate" id="commentForm" method="post">
       <div class="container">
         <label for="uname"><b>Username</b></label>
-        <input type="text" placeholder="Enter Username" name="uname" required>
+        <input type="text" placeholder="Enter Username" id="uname" name="uname" required>
 
         <label for="psw"><b>Password</b></label>
-        <input type="password" placeholder="Enter Password" name="psw" required>
+        <input type="password" placeholder="Enter Password" id="psw" name="psw" required>
         <input type="hidden" name="chapter" value="$$chapter$$" />
         <label for="comment"><b>Comment</b></label>
-        <input type="text" placeholder="Enter Comment" name="comment" required>
+        <input type="text" placeholder="Enter Comment" id="comment" name="comment" required>
       </div>
 
       <div class="container" style="background-color:#22303C">
@@ -605,6 +605,17 @@
       </div>
     </form>
   </div>
+
+  <script>
+    const form = document.getElementById('commentForm')
+    form.addEventListener("submit", (e) => {
+      e.preventDefault()
+      let uname = document.getElementById('uname').value;
+      let psw = document.getElementById('psw').value;
+      let comment = document.getElementById('comment').value;
+      console.log(uname, psw, comment)
+    });
+  </script>
 
   <div class="footer">
     <div class="footer-text">Copyright © 2023 Shinpi_Tekita</div>

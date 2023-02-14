@@ -26,9 +26,11 @@ app.get("/home", async (_, res) => {
   file = file.replace("$$visits$$", `${fetched.data.value}`);
   res.send(file);
 });
-app.get("/fan", (_, res) => res.sendFile(dir("fan")));
 app.get("/sign-up", (_, res) => res.sendFile(dir("sign-up")));
 
+app.get("/explore", async (req, res) => {
+  res.sendFile(dir("explore"))
+});
 app.get("/read/:chapter", async (req, res) => {
   let chapter = Number(req.params.chapter) || 1;
   let file = fs.readFileSync("./html/sol.html", {
