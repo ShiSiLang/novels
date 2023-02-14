@@ -174,33 +174,61 @@
     font-size: 35px;
   }
 
-  .mySlides {
-    display: none
+  .container {
+    width: 500px;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    overflow: hidden;
+    border: 10px solid #ffffff;
+    border-radius: 8px;
+    box-shadow: -1px 5px 15px black;
   }
 
-  .slideshow-container {
-    position: relative;
-    background-color: #15202B;
+  /*Area of images*/
+  .wrapper {
+    width: 100%;
+    display: flex;
+    animation: slide 16s infinite;
   }
 
-  .container_img {
-    margin: 0 auto;
-    width: 830px;
-    height: 250px;
+  img {
+    width: 100%;
   }
 
-  .fade {
-    animation-name: fade;
-    animation-duration: 1.5s;
-  }
-
-  @keyframes fade {
-    from {
-      opacity: .4
+  /*Animation activated by keyframes*/
+  @keyframes slide {
+    0% {
+      transform: translateX(0);
     }
 
-    to {
-      opacity: 1
+    25% {
+      transform: translateX(0);
+    }
+
+    30% {
+      transform: translateX(-100%);
+    }
+
+    50% {
+      transform: translateX(-100%);
+    }
+
+    55% {
+      transform: translateX(-200%);
+    }
+
+    75% {
+      transform: translateX(-200%);
+    }
+
+    80% {
+      transform: translateX(-300%);
+    }
+
+    100% {
+      transform: translateX(-300%);
     }
   }
 </style>
@@ -213,18 +241,13 @@
     <img src="https://i.imgur.com/lGLKiVd.png" alt="Shinpi" />
   </div>
 
-  <div class="slideshow-container">
-    <div class="mySlides fade">
-      <img src="https://cdn.discordapp.com/attachments/947983765358129182/1074872483699761165/Z.png"
-        class="container_img" width="851" height="315">
-    </div>
-    <div class="mySlides fade">
+  <div class="container">
+    <!--Area of the images-->
+    <div class="wrapper">
+      <img src="https://cdn.discordapp.com/attachments/947983765358129182/1074872483699761165/Z.png">
       <img
-        src="https://thumbs.dreamstime.com/b/portrait-funny-cat-looking-out-box-portrait-funny-cat-looking-out-box-isolated-white-background-121112695.jpg"
-        class="container_img" width="851" height="315">
-    </div>
-    <div class="mySlides fade">
-      <img src="https://i.imgur.com/lGLKiVd.png" class="container_img" width="851" height="315">
+        src="https://thumbs.dreamstime.com/b/portrait-funny-cat-looking-out-box-portrait-funny-cat-looking-out-box-isolated-white-background-121112695.jpg">
+      <img src="https://i.imgur.com/lGLKiVd.png">
     </div>
   </div>
 
