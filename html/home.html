@@ -191,42 +191,18 @@
     /* display: none;*/
   }
 
-  .slide {
-    animation: slide 16s infinite;
+  .fade {
+    animation-name: fade;
+    animation-duration: 1.5s;
   }
 
-  /*Animation activated by keyframes*/
-  @keyframes slide {
-    0% {
-      transform: translateX(0);
+  @keyframes fade {
+    from {
+      opacity: .4
     }
 
-    25% {
-      transform: translateX(0);
-    }
-
-    30% {
-      transform: translateX(-100%);
-    }
-
-    50% {
-      transform: translateX(-100%);
-    }
-
-    55% {
-      transform: translateX(-200%);
-    }
-
-    75% {
-      transform: translateX(-200%);
-    }
-
-    80% {
-      transform: translateX(-300%);
-    }
-
-    100% {
-      transform: translateX(-300%);
+    to {
+      opacity: 1
     }
   }
 </style>
@@ -241,45 +217,31 @@
 
   <div class="slideshow-container">
     <!-- Full-width images with number and caption text -->
-    <div class="mySlides slide">
+    <div class="mySlides fade">
       <img src="https://cdn.discordapp.com/attachments/947983765358129182/1074872483699761165/Z.png" style="width:100%">
     </div>
-    <div class="mySlides slide">
+    <div class="mySlides fade">
       <img src="https://i.imgur.com/lGLKiVd.pngents/947983765358129182/1074872483699761165/Z.png" style="width:100%">
     </div>
-    <div class="mySlides slide">
+    <div class="mySlides fade">
       <img src="https://www.w3schools.com/howto/img_snow_wide.jpg" style="width:100%">
     </div>
   </div>
 
   <script>
-    let slideIndex = 1;
-    showSlides(slideIndex);
+    let slideIndex = 0;
+    showSlides();
 
-    // Next/previous controls
-    function plusSlides(n) {
-      showSlides(slideIndex += n);
-    }
-
-    // Thumbnail image controls
-    function currentSlide(n) {
-      showSlides(slideIndex = n);
-    }
-
-    function showSlides(n) {
+    function showSlides() {
       let i;
       let slides = document.getElementsByClassName("mySlides");
-      let dots = document.getElementsByClassName("dot");
-      if (n > slides.length) { slideIndex = 1 }
-      if (n < 1) { slideIndex = slides.length }
       for (i = 0; i < slides.length; i++) {
         slides[i].style.display = "none";
       }
-      for (i = 0; i < dots.length; i++) {
-        dots[i].className = dots[i].className.replace(" active", "");
-      }
+      slideIndex++;
+      if (slideIndex > slides.length) { slideIndex = 1 }
       slides[slideIndex - 1].style.display = "block";
-      dots[slideIndex - 1].className += " active";
+      setTimeout(showSlides, 2000); // Change image every 2 seconds
     }
   </script>
 
