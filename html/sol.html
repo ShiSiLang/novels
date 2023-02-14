@@ -614,6 +614,12 @@
       let psw = document.getElementById('psw').value;
       let comment = document.getElementById('comment').value;
       console.log(uname, psw, comment)
+      let postForm = e.target
+      let errors = false;
+      //do all of the error checking here, if there's an error, set errors to true
+      if (!errors) {
+        postForm.submit()
+      }
     });
   </script>
 
