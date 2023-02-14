@@ -606,29 +606,6 @@
     </form>
   </div>
 
-  <script type="text/javascript">
-    var frm = $('#id01');
-
-    frm.submit(function (e) {
-
-      e.preventDefault();
-
-      $.ajax({
-        type: "POST",
-        url: frm.attr('action'),
-        data: frm.serialize(),
-        success: function (data) {
-          alert('Submission was successful.');
-          alert(data);
-        },
-        error: function (data) {
-          alert('An error occurred.');
-          alert(data);
-        },
-      });
-    });
-  </script>
-
   <div class="footer">
     <div class="footer-text">Copyright © 2023 Shinpi_Tekita</div>
     <div class="footer-socials">
