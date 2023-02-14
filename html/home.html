@@ -5,11 +5,11 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="icon" type="icon" href="https://i.imgur.com/lGLKiVd.png" />
-  <title>Star of Libby</title>
+  <title>OrangeBall Media</title>
   <meta property="og:title" content="Home Page" />
-  <meta property="og:site_name" content="Star of Libby" />
+  <meta property="og:site_name" content="OrangeBall Media" />
   <meta property="og:description"
-    content="Welcome to the main website of Star of Libby, here you can read all of the chapters for free." />
+    content="Welcome to OrangeBall Media, here you can read all of our novels and manga!" />
   <meta property="og:image" content="https://i.imgur.com/lGLKiVd.png" />
   <meta name="theme-color" content="#cbc3e3" />
   <meta name="twitter:card" content="summary_large_image" />
@@ -174,24 +174,33 @@
     font-size: 35px;
   }
 
-.slideshow-container {
-  max-width: 1000px;
-  position: relative;
-  margin: auto;
-}
+  .slideshow-container {
+    max-width: 1000px;
+    position: relative;
+    margin: auto;
+    background-color: #15202B;
+    line-height: 57px;
+    border-radius: 50%;
+  }
 
   .mySlides {
-  display: none;
-}
-.fade {
-  animation-name: fade;
-  animation-duration: 1.5s;
-}
+    display: none;
+  }
 
-@keyframes fade {
-  from {opacity: .4}
-  to {opacity: 1}
-}
+  .fade {
+    animation-name: fade;
+    animation-duration: 1.5s;
+  }
+
+  @keyframes fade {
+    from {
+      opacity: .4
+    }
+
+    to {
+      opacity: 1
+    }
+  }
 </style>
 
 <body>
@@ -203,40 +212,37 @@
     <img src="https://i.imgur.com/lGLKiVd.png" alt="Shinpi" />
   </div>
 
-<div class="slideshow-container">
+  <div class="slideshow-container">
+    <div class="mySlides fade">
+      <img src="https://i.imgur.com/lGLKiVd.png" width="315" height="851">
+    </div>
 
-  <!-- Full-width images with number and caption text -->
-  <div class="mySlides fade">
-    <img src="https://i.imgur.com/lGLKiVd.png" width="100%" height="200"> 
+    <div class="mySlides fade">
+      <img
+        src="https://thumbs.dreamstime.com/b/portrait-funny-cat-looking-out-box-portrait-funny-cat-looking-out-box-isolated-white-background-121112695.jpg"
+        width="315" height="851">
+    </div>
+
+    <div class="mySlides fade">
+      <img src="https://i.imgur.com/lGLKiVd.png" width="315" height="851">
+    </div>
   </div>
-
-  <div class="mySlides fade">
-    <img src="https://thumbs.dreamstime.com/b/portrait-funny-cat-looking-out-box-portrait-funny-cat-looking-out-box-isolated-white-background-121112695.jpg" width="100%" height="200">
-  </div>
-
-  <div class="mySlides fade">
-    <img src="https://i.imgur.com/lGLKiVd.png" width="100%" height="200">    
-  </div>
-</div>
-
-  
 
   <script>
-
     let slideIndex = 0;
-showSlides();
+    showSlides();
 
-function showSlides() {
-  let i;
-  let slides = document.getElementsByClassName("mySlides");
-  for (i = 0; i < slides.length; i++) {
-    slides[i].style.display = "none";
-  }
-  slideIndex++;
-  if (slideIndex > slides.length) {slideIndex = 1}
-  slides[slideIndex-1].style.display = "block";
-  setTimeout(showSlides, 8000); // Change image every 2 seconds
-}
+    function showSlides() {
+      let i;
+      let slides = document.getElementsByClassName("mySlides");
+      for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+      }
+      slideIndex++;
+      if (slideIndex > slides.length) { slideIndex = 1 }
+      slides[slideIndex - 1].style.display = "block";
+      setTimeout(showSlides, 8000); // Change image every 2 seconds
+    }
 
   </script>
 
