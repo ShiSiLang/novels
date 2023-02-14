@@ -184,6 +184,104 @@
       opacity: 1
     }
   }
+
+  .lastest .calendar .list-inline {
+    margin: 0;
+  }
+
+  .lastest .calendar .list-inline-item {
+    font-size: 18px;
+    cursor: pointer;
+    transition: all .2s ease-in-out;
+  }
+
+  .lastest .calendar .list-inline-item.active,
+  .lastest .calendar .list-inline-item:hover {
+    border-bottom: 2px solid #ab201c;
+  }
+
+  .lastest .posts .card {
+    background-color: transparent;
+    transition: all .3s ease-in-out;
+    z-index: 1;
+    border: 0;
+  }
+
+  @media only screen and (min-width: 960px) {
+    .lastest .posts .card:hover {
+      z-index: 2;
+      transform: scale(1.3, 1.1);
+    }
+
+    .lastest .posts .card:hover .over {
+      display: block
+    }
+
+    .lastest .posts .card .card-img-top {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+    }
+  }
+
+  @media only screen and (max-width: 600px) {
+    .lastest .posts .card .card-img-top {
+      height: auto;
+    }
+  }
+
+  .lastest .posts .card .card-body {
+    padding: 5px;
+  }
+
+  .lastest .posts .card .card-text,
+  .lastest .posts .card .card-title {
+    margin: 0;
+  }
+
+  .lastest .posts .card .card-title a {
+    color: #faf9f9;
+  }
+
+  /* card details */
+
+  .lastest .posts .card .over {
+    position: absolute;
+    background-color: #fff;
+    bottom: 0;
+    left: 0;
+    height: 60%;
+    color: #070707;
+    display: none;
+    border-radius: 0 0 5px 5px;
+    font-size: 10px;
+  }
+
+  .lastest .posts .card .over .head {
+    background-color: #ab201c;
+    color: #faf9f9;
+  }
+
+  .lastest .posts .card .over .head h6 {
+    padding: 5px 10px;
+  }
+
+  .lastest .posts .card .over .about-list {
+    padding-left: 10px;
+  }
+
+  .lastest .posts .card .over .table td,
+  .lastest .posts .card .over .table th {
+    padding: 0;
+  }
+
+  .lastest .posts .card .over .reading {
+    font-size: 10px;
+    padding: 5px 10px;
+    color: #faf9f9;
+    background-color: #ab201c;
+    border-radius: 0;
+  }
 </style>
 
 <body>
@@ -205,6 +303,58 @@
     </div>
     <div class="mySlides fade">
       <img src="https://www.w3schools.com/howto/img_snow_wide.jpg" style="width:100%">
+    </div>
+  </div>
+
+  <div class="lastest container mt-4 mt-sm-5">
+    <div class="row">
+      <div class="col-lg-6">
+        <h2 class="font-weight-bolder float-left">Lastest Manga Updates</h2>
+      </div>
+    </div>
+
+    <div class="posts row">
+      <div class="col-lg-2 col-md-3 col-sm-4">
+        <div class="card mb-3">
+          <a href="details.html"><img src="https://i.imgur.com/lGLKiVd.png" class="card-img-top" alt=""></a>
+          <div class="over text-center">
+            <div class="head text-left">
+              <h6>Star of Libby: Tiger</h6>
+            </div>
+            <div class="about-list">
+              <table class="table table-borderless">
+                <tbody>
+                  <tr>
+                    <th scope="row">Genre:</th>
+                    <td>Action, Gore</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Artist:</th>
+                    <td>Orange Ball</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Update:</th>
+                    <td>Ch. 18</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p class="about text-muted">
+              This novel is about the struggles that Libby has to face in his life, sounds boring right? well, let me
+              tell you
+              that Libby is not alone he has been blessed with the powers of an angel. With his new powers, Libby sets
+              off to
+              defeat all evil and free his hometown from the hands of Aoi and his gang.
+            </p>
+            <a class="reading btn" href="details.html">Start reading CH. 1</a>
+          </div>
+          <div class="card-body">
+            <h5 class="card-title"><a href="details.html">Star of Libby: Tiger</a></h5>
+            <p class="card-text">CH. 2</p>
+            <p class="card-text"><small class="text-muted text-uppercase">Update 1 Hour ago</small></p>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
