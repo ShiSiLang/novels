@@ -174,45 +174,26 @@
     font-size: 35px;
   }
 
-  #slider {
+  * {
+    box-sizing: border-box
+  }
+
+  /* Slideshow container */
+  .slideshow-container {
+    max-width: 1000px;
     position: relative;
-    width: 500px;
-    height: 265px;
-    overflow: hidden;
-    box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+    margin: auto;
   }
 
-  #slider ul {
-    position: relative;
-    list-style: none;
-    height: 100%;
-    width: 10000%;
-    padding: 0;
-    margin: 0;
-    transition: all 750ms ease;
-    left: 0;
+  /* Hide the images by default */
+  .mySlides {
+    display: none;
   }
 
-  #slider ul li {
-    position: relative;
-    height: 100%;
-
-    float: left;
-  }
-
-  #slider ul li img {
-    width: 500px;
-    height: 265px;
-  }
-
-  /*
-  #img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
+  .slide {
     animation: slide 16s infinite;
   }
-*/
+
   /*Animation activated by keyframes*/
   @keyframes slide {
     0% {
@@ -257,42 +238,30 @@
     <img src="https://i.imgur.com/lGLKiVd.png" alt="Shinpi" />
   </div>
 
-  <div id="slider">
-    <ul id="slideWrap">
-      <li><img src="https://cdn.discordapp.com/attachments/947983765358129182/1074872483699761165/Z.png" alt=""></li>
-      <li><img
-          src="https://thumbs.dreamstime.com/b/portrait-funny-cat-looking-out-box-portrait-funny-cat-looking-out-box-isolated-white-background-121112695.jpg"
-          alt=""></li>
-      <li><img src="https://i.imgur.com/lGLKiVd.png" alt=""></li>
-    </ul>
+  <div class="slideshow-container">
+    <!-- Full-width images with number and caption text -->
+    <div class="mySlides slide">
+      <img src="https://cdn.discordapp.com/attachments/947983765358129182/1074872483699761165/Z.png" style="width:100%">
+    </div>
+    <div class="mySlides slide">
+      <img src="https://i.imgur.com/lGLKiVd.pngents/947983765358129182/1074872483699761165/Z.png" style="width:100%">
+    </div>
   </div>
-  <script>
-    var responsiveSlider = function () {
-      var slider = document.getElementById("slider");
-      var sliderWidth = slider.offsetWidth;
-      var slideList = document.getElementById("slideWrap");
-      var count = 1;
-      var items = slideList.querySelectorAll("li").length;
 
-      window.addEventListener('resize', function () {
-        sliderWidth = slider.offsetWidth;
-      });
-      var nextSlide = function () {
-        if (count < items) {
-          slideList.style.left = "-" + count * sliderWidth + "px";
-          count++;
-        }
-        else if (count = items) {
-          slideList.style.left = "0px";
-          count = 1;
-        }
-      };
-      setInterval(function () {
-        nextSlide()
-      }, 8000);
-    };
-    window.onload = function () {
-      responsiveSlider();
+  <script>
+    let slideIndex = 0;
+    showSlides();
+
+    function showSlides() {
+      let i;
+      let slides = document.getElementsByClassName("mySlides");
+      for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+      }
+      slideIndex++;
+      if (slideIndex > slides.length) { slideIndex = 1 }
+      slides[slideIndex - 1].style.display = "block";
+      setTimeout(showSlides, 2000);
     }
   </script>
 
