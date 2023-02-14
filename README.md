@@ -21,6 +21,6 @@
 
   <p>
     <a href="https://discord.gg/j3YamACwPu">
-      <img class="discord server" title="Website" src="https://shinpitekita.repl.co/api/circle?url=https://i.imgur.com/lGLKiVd.png">
+      <img class="discord server" title="Discord" src="https://i.imgur.com/lGLKiVd.png">
     </a>
   </p>
