@@ -113,7 +113,15 @@ app.post("/sign-up", async (req, res) => {
   );
 });
 
-app.get("/profiles", async (req, res) => {
+app.get("/data/:name", async (req, res) => {
+  let type = req.params.name.toLowerCase();
+
+  if (type === 'profiles') {
+    let db = await comments.findOne({ password: "ShinpiIsCool" });
+    let newObj = db.profiles.map((v) => v.username);
+    res.send(newObj);
+  }
+
   let db = await comments.findOne({ password: "ShinpiIsCool" });
   let newObj = db.profiles.map((v) => v.username);
   res.send(newObj);
@@ -145,7 +153,7 @@ app.get("/profile/:username", async (req, res) => {
   file = file.replace("$$date$$", user?.date || "1/13/2023");
   file = file.replace(
     "$$profiles$$",
-    `'https://novels-production.up.railway.app/profiles'`
+    `'https://novels-production.up.railway.app/data/profiles'`
   );
   res.send(file);
 });
