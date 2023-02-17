@@ -95,36 +95,54 @@
         }
     }
 
-    .footer {
-        bottom: 0;
-        width: 100%;
-        height: 80px;
-        /* Height of the footer */
+    footer {
+        width: 100vw;
+        height: auto;
         background-image: linear-gradient(315deg, #192734 0, #22303C 74%);
-    }
-
-    .footer-text {
-        color: white;
-        padding: 1.5%;
-        display: inline-flex;
         font-family: 'Open Sans', Verdana, Geneva, Tahoma, sans-serif;
-        font-size: 20px;
+        padding-top: 40px;
+        color: #fefefe;
     }
 
-    .footer-socials {
-        display: inline-flex;
-        float: right;
-        padding-right: 60px;
-        padding-top: 1%;
+    .footer-content {
+        align-items: center;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        text-align: center;
     }
 
-    .footer-socials a {
+    .footer-content h3 {
+        font-size: 1.8rem;
+        font-weight: 400;
+        text-transform: capitalize;
+        line-height: 3rem;
+    }
+
+    .socials {
+        list-style: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 1rem 0 3rem 0;
+    }
+
+    .socials li {
+        margin: 0 10px;
+    }
+
+    .socials a {
         color: white;
         text-decoration: none;
-        border-radius: 30%;
-        background: #192734;
-        margin-left: 3px;
-        padding: 8px;
+    }
+
+    .socials a i {
+        font-size: 1.1rem;
+        transition: color .4s ease;
+    }
+
+    .socials a:hover i {
+        color: aqua;
     }
 
     .card {
@@ -471,13 +489,15 @@
         </form>
     </div>
 
-    <div class="footer">
-        <div class="footer-text">Copyright © 2023 Shinpi_Tekita</div>
-        <div class="footer-socials">
-            <a href="https://discord.gg/j3YamACwPu" target="_blank"><i class="fa fa-discord"></i></a>
-            <a href="https://mobile.twitter.com/shinpitekita" target="_blank"><i class="fa fa-twitter"></i></a>
+    <footer>
+        <div class="footer-content">
+            <h3>Copyright © 2023 Orange_Ball</h3>
+            <ul class="socials">
+                <li><a href="https://discord.gg/j3YamACwPu"><i class="fa fa-discord"></i></a></li>
+                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+            </ul>
         </div>
-    </div>
+    </footer>
     <script>
         var modal = document.getElementById("id01");
         var followModal = document.getElementById("follow");
