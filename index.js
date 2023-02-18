@@ -32,6 +32,10 @@ app.get("/explore", async (req, res) => {
   res.sendFile(dir("explore"))
 });
 
+app.get("/explore/:book", async (req, res) => {
+  res.sendFile(dir("book"))
+});
+
 app.get("/read/:chapter", async (req, res) => {
   let chapter = Number(req.params.chapter) || 1;
   let file = fs.readFileSync("./html/sol.html", {
@@ -121,10 +125,6 @@ app.get("/data/:name", async (req, res) => {
     let newObj = db.profiles.map((v) => v.username);
     res.send(newObj);
   }
-
-  let db = await comments.findOne({ password: "ShinpiIsCool" });
-  let newObj = db.profiles.map((v) => v.username);
-  res.send(newObj);
 });
 
 app.get("/profile/:username", async (req, res) => {
