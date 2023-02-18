@@ -251,15 +251,19 @@
 
   .media-scroller {
     --gap: 16px;
+    --num-cols: 4;
+    --columns-height: 300px;
+
+    box-sizing: border-box;
+    padding: var(--gap);
     display: grid;
+    grid-template-columns: repeat(var(--num-cols), 1fr);
+    grid-auto-columns: var(--row-height);
     gap: var(--gap);
-    grid-auto-flow: column;
-    grid-auto-columns: 21%;
 
     overflow-x: auto;
     overscroll-behavior-inline: contain;
     overflow-y: hidden;
-    /* Hide vertical scrollbar */
   }
 
   .media-scroller img {
