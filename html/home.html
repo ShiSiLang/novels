@@ -258,6 +258,10 @@
 
     overflow-x: auto;
     overscroll-behavior-inline: contain;
+    overflow-y: hidden;
+    /* Hide vertical scrollbar */
+    overflow-x: hidden;
+    /* Hide horizontal scrollbar */
   }
 
   .media-element {
@@ -283,6 +287,10 @@
     cursor: pointer;
     opacity: 0.5;
     transition: 0.5s;
+  }
+
+  .media-element p {
+    position: absolute;
   }
 </style>
 
