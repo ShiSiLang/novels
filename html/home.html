@@ -316,6 +316,7 @@
       <a href="#">$$Log$$</a>
     </div>
   </div>
+
   <script>
     var dropdowns = document.getElementById("drop");
     function Dropdown() {
@@ -323,7 +324,7 @@
     }
 
     window.onclick = function (event) {
-      if (event.target !== dropdowns) {
+      if (event.target == dropdowns) {
         dropdowns.style.display = "none";
       }
     }
