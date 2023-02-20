@@ -327,12 +327,15 @@
     function Dropdown() {
       dropdowns.style.display = "block";
     }
+  </script>
 
+  <script>
+    var dropdowns = document.getElementById("drop");
     window.onclick = function (event) {
-      if (event.target == dropdowns) {
+      if (event.target === dropdowns) {
         dropdowns.style.display = "none";
       }
-    }
+    };
   </script>
 
   <div class="slideshow-container">
