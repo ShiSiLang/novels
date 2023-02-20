@@ -284,6 +284,31 @@
     opacity: 0.5;
     transition: 0.5s;
   }
+
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+  }
+
+  .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+
+  .dropdown-content a:hover {
+    background-color: #ddd;
+  }
 </style>
 
 <body>
@@ -291,8 +316,27 @@
     <a class="active" href="#">Home</a>
     <a href="/explore">Explore</a>
     <a href="https://cash.app/$PerezDeDios" target="_blank">Donate</a>
-    <img src="https://i.imgur.com/XjWCCeV.png" alt="Shinpi" />
+    <img src="https://i.imgur.com/XjWCCeV.png" alt="Shinpi" onclick="Dropdown()" />
+    <div class="dropdown">
+      <div class="dropdown-content" id="drop">
+        <a href="#">Link 1</a>
+        <a href="#">Link 2</a>
+        <a href="#">Link 3</a>
+      </div>
+    </div>
   </div>
+  <script>
+    var dropdowns = document.getElementById("drop");
+    function Dropdown() {
+      dropdowns.style.display = "block";
+    }
+
+    window.onclick = function (event) {
+      if (event.target == dropdowns) {
+        dropdowns.style.display = "none";
+      }
+    }
+  </script>
 
   <div class="slideshow-container">
     <!-- Full-width imagest -->
