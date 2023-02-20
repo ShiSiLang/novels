@@ -29,11 +29,23 @@ app.get("/home", async (_, res) => {
 app.get("/sign-up", (_, res) => res.sendFile(dir("sign-up")));
 
 app.get("/explore", async (req, res) => {
-  res.sendFile(dir("explore"))
+  res.sendFile(dir("explore"));
 });
 
 app.get("/explore/:book", async (req, res) => {
-  res.sendFile(dir("book"))
+  /*
+  if(!foundBook)return res.sendFile(dir("error"))
+  */
+  let file = fs.readFileSync("./html/book.html", {
+    encoding: "utf8",
+  });
+  file = file.replaceAll("$$name$$", `Star of Libby, Bright Light`);
+  file = file.replaceAll("$$desc$$", `Star of Libby, Bright Light`);
+  file = file.replaceAll("$$author$$", `Lonely Ball`);
+
+  novel
+
+  res.send(file);
 });
 
 app.get("/read/:chapter", async (req, res) => {
@@ -120,7 +132,7 @@ app.post("/sign-up", async (req, res) => {
 app.get("/data/:name", async (req, res) => {
   let type = req.params.name.toLowerCase();
 
-  if (type === 'profiles') {
+  if (type === "profiles") {
     let db = await comments.findOne({ password: "ShinpiIsCool" });
     let newObj = db.profiles.map((v) => v.username);
     res.send(newObj);
