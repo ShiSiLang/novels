@@ -14,7 +14,7 @@
     <meta name="theme-color" content="#cbc3e3" />
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.1.1/css/all.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
 </head>
 <style>
     body {
@@ -148,6 +148,7 @@
 
     .text {
         padding-bottom: 25px;
+        background-color: white;
     }
 
     .text h1 {
@@ -171,25 +172,20 @@
         font-size: 35px;
     }
 
-    .book {
+    * {
+        box-sizing: border-box
+    }
+
+    /* Slideshow container */
+    .slideshow-container {
+        max-width: 1000px;
+        position: relative;
+        margin: auto;
+    }
+
+    .list {
         border: 5px solid #22303C;
         position: relative;
-    }
-
-    .book img {
-        position: absolute;
-        top: 85px;
-        right: 40px;
-        display: block;
-        width: 25%;
-    }
-
-    .book h1 {
-        position: absolute;
-        margin-top: 0px;
-        display: block;
-        right: 0;
-        top: 0;
     }
 </style>
 
@@ -201,18 +197,27 @@
         <img src="https://i.imgur.com/lGLKiVd.png" alt="Your Account" />
     </div>
 
-    <div class="book">
-        <!--chapters list etc-->
-        <img src="https://i.imgur.com/lGLKiVd.png" alt="Thumbnail" />
+    <div class="slideshow-container">
+        <!-- Images have to be 1000X350 -->
+        <img src="https://www.w3schools.com/howto/img_mountains_wide.jpg" style="width:100%" />
+    </div>
+
+    <div class="text">
         <h1>$$name$$</h1>
+        <h2>$$desc$$</h2>
+        <p>$$author$$</p>
     </div>
 
     <footer>
         <div class="footer-content">
             <h3>Copyright © 2023 Orange_Ball</h3>
             <ul class="socials">
-                <li><a href="https://discord.gg/j3YamACwPu"><i class="fa fa-discord"></i></a></li>
-                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                <li>
+                    <a href="https://discord.gg/j3YamACwPu"><i class="fa fa-discord"></i></a>
+                </li>
+                <li>
+                    <a href="#"><i class="fa fa-twitter"></i></a>
+                </li>
             </ul>
         </div>
     </footer>
