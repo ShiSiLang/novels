@@ -71,16 +71,17 @@
   .dropdown-content {
     display: none;
     position: absolute;
-    background-color: #f1f1f1;
+    background-color: #22303C;
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-    z-index: 1;
+    z-index: auto;
   }
 
   .dropdown-content a {
-    color: black;
+    color: white;
     padding: 12px 16px;
     text-decoration: none;
+    font-family: 'Open Sans', Verdana, Geneva, Tahoma, sans-serif;
     display: block;
   }
 
@@ -321,7 +322,7 @@
     }
 
     window.onclick = function (event) {
-      if (event.target == dropdowns) {
+      if (event.target !== dropdowns) {
         dropdowns.style.display = "none";
       }
     }
