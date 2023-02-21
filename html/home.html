@@ -69,13 +69,15 @@
   }
 
   .dropdown {
-    position: relative;
     display: inline-block;
+  }
+
+  .dropdown-menu-right {
+    right: 50px;
   }
 
   .dropdown-content {
     display: none;
-    position: absolute;
     background-color: #22303C;
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
@@ -314,7 +316,7 @@
     <a href="/explore">Explore</a>
     <a href="https://cash.app/$PerezDeDios" target="_blank">Donate</a>
     <img src="https://i.imgur.com/XjWCCeV.png" alt="Shinpi" onclick="Dropdown()" />
-    <div class="dropdown">
+    <div class="dropdown dropdown-menu-right">
       <div class="dropdown-content" id="drop">
         <a href="#">My Account</a>
         <a href="#">$$Log$$</a>
