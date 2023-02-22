@@ -178,7 +178,7 @@ module.exports = [
     credits:
       "<ins>Author:</ins> <b>Shinpi</b></br><ins>Editor:</ins> <b>Keita, List3</b></br><ins>Proofreaders:</ins> <b>BUMAN, Abstraction, Keita, List3, ThunderBlade</b>",
     chapter: "Chapter 18: ",
-    timer: "Feb 23 2023 11:00:00",
+    timer: "Mar 2 2023 11:00:00",
     thumbnail: "https://i.imgur.com/lGLKiVd.png",
     story: `Coming Soon`,
   },
