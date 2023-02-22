@@ -39,7 +39,7 @@ app.get("/explore/:book", async (req, res) => {
   let file = fs.readFileSync("./html/book.html", {
     encoding: "utf8",
   });
-  file = file.replaceAll("$$name$$", `Star of Libby, Adios Hogar Mio`);
+  file = file.replaceAll("$$name$$", `Star of Libby, Adiós Hogar Mío`);
   file = file.replaceAll("$$desc$$", `What happens when a tiger owns a gang?`);
   file = file.replaceAll("$$author$$", `Lonely Ball`);
 
