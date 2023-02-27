@@ -13,15 +13,8 @@
   </br>
   @BadBoyPlays
   </p>
-  
   <p>
   <a href="https://discord.gg/j3YamACwPu" target="_blank"> 
     <img src="https://discord.com/api/guilds/760641617136320522/widget.png?style=banner2" alt="Discord Server">
   </a>
 </p>
-
-  <p>
-    <a href="https://discord.gg/j3YamACwPu">
-      <img title="Discord Server" src="https://img.shields.io/discord/760641617136320522?color=347deb&label=Discord%20Server&logo=Discord">
-    </a>
-  </p>
