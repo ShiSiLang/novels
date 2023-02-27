@@ -18,9 +18,5 @@
   </br>
   @BadBoyPlays
   </p>
-
-  <p>
-    <a href="https://discord.gg/j3YamACwPu">
-      <img class="discord server" title="Discord" src="https://i.imgur.com/lGLKiVd.png">
-    </a>
-  </p>
+  </div>
+[![Discord Server](https://img.shields.io/discord/760641617136320522?color=347deb&label=Discord%20Server&logo=Discord)](https://discord.gg/j3YamACwPu)
