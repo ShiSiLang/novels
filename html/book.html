@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="icon" href="https://i.imgur.com/XjWCCeV.png" />
@@ -12,10 +11,16 @@
     <meta property="og:image" content="https://i.imgur.com/XjWCCeV.png" />
     <meta name="theme-color" content="#cbc3e3" />
     <meta name="twitter:card" content="summary_large_image" />
-    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.1.1/css/all.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-</head>
-<style>
+    <link
+      rel="stylesheet"
+      href="https://site-assets.fontawesome.com/releases/v6.1.1/css/all.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+  </head>
+  <style>
     body {
         background-size: 400% 400%;
         margin: 0;
@@ -207,60 +212,67 @@
     .btn-group button:hover {
         background-color: #009dff;
     }
-</style>
+  </style>
+  <script type="text/javascript">
+    async function changeDivContent() {
+      try {
+        let response = await fetch($$novel$$);
+        let json = await response.json();
 
-<body>
+        const div = document.getElementById("chapters");
+        for (let i = 0; i < json.length; i++) {
+          div.innerHTML += `
+              <button onclick="window.location.href='/read/${i + 1}'">${
+            json[i].chapter
+          }</button>`;
+        }
+      } catch (err) {
+        const div = document.getElementById("nca");
+        div.innerHTML += `<h1>No chapters available</h1>`;
+      }
+    }
+  </script>
+
+  <body onload="changeDivContent()">
     <div class="topnav">
-        <a href="/home">Home</a>
-        <a class="active" href="#">Explore</a>
-        <a href="https://cash.app/$PerezDeDios" target="_blank">Donate</a>
-        <img src="https://i.imgur.com/lGLKiVd.png" alt="Your Account" />
+      <a href="/home">Home</a>
+      <a class="active" href="#">Explore</a>
+      <a href="https://cash.app/$PerezDeDios" target="_blank">Donate</a>
+      <img src="https://i.imgur.com/lGLKiVd.png" alt="Your Account" />
     </div>
 
     <div class="thumbnail">
-        <!-- Images have to be 1000X350 -->
-        <img src="https://www.w3schools.com/howto/img_mountains_wide.jpg" style="width:100%" />
+      <!-- Images have to be 1000X350 -->
+      <img
+        src="https://www.w3schools.com/howto/img_mountains_wide.jpg"
+        style="width:100%"
+      />
     </div>
 
     <div class="text">
-        <h1>$$name$$</h1>
-        <h2>$$desc$$</h2>
-        <p>Author: $$author$$</p>
+      <h1>$$name$$</h1>
+      <h2>$$desc$$</h2>
+      <p>Author: $$author$$</p>
     </div>
 
-    <div class="btn-group">
-        <button onclick="window.location.href='/read/1'">Chapter 1: Weary Traveler</button>
-        <button onclick="window.location.href='/read/2'">Chapter 2: Good Things</button>
-        <button onclick="window.location.href='/read/3'">Chapter 3: Murder In My Mind</button>
-        <button onclick="window.location.href='/read/4'">Chapter 4: Fishing Trip</button>
-        <button onclick="window.location.href='/read/5'">Chapter 5: Get Trough</button>
-        <button onclick="window.location.href='/read/6'">Chapter 6: Awakening</button>
-        <button onclick="window.location.href='/read/7'">Chapter 7: Physo</button>
-        <button onclick="window.location.href='/read/8'">Chapter 8: Dream On</button>
-        <button onclick="window.location.href='/read/9'">Chapter 9: Whatever It Takes</button>
-        <button onclick="window.location.href='/read/10'">Chapter 10: Play Date</button>
-        <button onclick="window.location.href='/read/11'">Chapter 11: Great Balls Of Fire</button>
-        <button onclick="window.location.href='/read/12'">Chapter 12: Mercy</button>
-        <button onclick="window.location.href='/read/13'">Chapter 13: Thank God For Sunday Morning</button>
-        <button onclick="window.location.href='/read/14'">Chapter 14: The Wonder of You.</button>
-        <button onclick="window.location.href='/read/15'">Chapter 15: Lord Give Me a Sign.</button>
-        <button onclick="window.location.href='/read/16'">Chapter 16: More Love, More Power.</button>
-        <button onclick="window.location.href='/read/17'">Chapter 17: Enemy.</button>
-    </div>
+    <div id="nca" class="text"></div>
+
+    <div id="chapters" class="btn-group"></div>
 
     <footer>
-        <div class="footer-content">
-            <h3>Copyright © 2023 Orange_Ball</h3>
-            <ul class="socials">
-                <li>
-                    <a href="https://discord.gg/j3YamACwPu"><i class="fa fa-discord"></i></a>
-                </li>
-                <li>
-                    <a href="#"><i class="fa fa-twitter"></i></a>
-                </li>
-            </ul>
-        </div>
+      <div class="footer-content">
+        <h3>Copyright © 2023 Orange_Ball</h3>
+        <ul class="socials">
+          <li>
+            <a href="https://discord.gg/j3YamACwPu"
+              ><i class="fa fa-discord"></i
+            ></a>
+          </li>
+          <li>
+            <a href="#"><i class="fa fa-twitter"></i></a>
+          </li>
+        </ul>
+      </div>
     </footer>
-</body>
-
+  </body>
 </html>

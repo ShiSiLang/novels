@@ -42,8 +42,7 @@ app.get("/explore/:book", async (req, res) => {
   file = file.replaceAll("$$name$$", `Star of Libby, Adiós Hogar Mío`);
   file = file.replaceAll("$$desc$$", `What happens when a tiger owns a gang?`);
   file = file.replaceAll("$$author$$", `Lonely Ball`);
-
-  novel;
+  file = file.replaceAll("$$novel$$", "'https://novels-production.up.railway.app/data/novel'");
 
   res.send(file);
 });
@@ -136,6 +135,9 @@ app.get("/data/:name", async (req, res) => {
     let db = await comments.findOne({ password: "ShinpiIsCool" });
     let newObj = db.profiles.map((v) => v.username);
     res.send(newObj);
+  }
+  if (type === "novel") {
+    res.send(novel);
   }
 });
 
