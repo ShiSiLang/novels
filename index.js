@@ -32,6 +32,14 @@ app.get("/explore", async (req, res) => {
   res.sendFile(dir("explore"));
 });
 
+/*
+Book Data:
+Name
+Desc
+Author
+chapters: Array
+*/
+
 app.get("/explore/:book", async (req, res) => {
   /*
   if(!foundBook)return res.sendFile(dir("error"))
