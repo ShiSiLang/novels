@@ -331,10 +331,7 @@ app.post("/comment", async (req, res) => {
       v.username === html.uname.replace(/</g, "&lt;")
   );
   if (!user)
-    res.status(400).json({
-      error:
-        `Incorrect username or password!<script>setTimeout(function(){window.location="/read/1";},3000);</script>`
-    });
+    res.status(400).json({ error: `Incorrect username or password!` });
   return;
   return res.send(
     `Incorrect username or password!<script>setTimeout(function(){window.location="/read/1";},3000);</script>`
