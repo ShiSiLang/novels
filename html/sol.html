@@ -489,6 +489,29 @@
   }
 
   /*Modal End*/
+
+  /* The alert message box */
+  .alert {
+    padding: 20px;
+    background-color: #f44336;
+    color: white;
+    display: none;
+  }
+
+  .closebtn {
+    margin-left: 15px;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+  .closebtn:hover {
+    color: black;
+  }
 </style>
 <script type="text/javascript">
   async function changeDivContent() {
@@ -605,11 +628,9 @@
       style="width:auto;">Comment</button>
   </div>
 
-  <div id="myModal" class="modal">
-    <div class="modal-content">
-      <span class="close">&times;</span>
-      <p>Log in to comment!</p>
-    </div>
+  <div id="error" class="alert">
+    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+    This is an alert box.
   </div>
 
   <div id="modal" class="modal">
@@ -633,23 +654,8 @@
   </div>
 
   <script>
-    var modal = document.getElementById("myModal");
-    var span = document.getElementsByClassName("close")[0];
-
-    span.onclick = function () {
-      modal.style.display = "none";
-    }
-
-    window.onclick = function (event) {
-      if (event.target == modal) {
-        modal.style.display = "none";
-      }
-    }
-  </script>
-
-  <script>
     const form = document.getElementById('commentForm')
-    var modal = document.getElementById("myModal");
+    const error = document.getElementById("error");
     form.addEventListener("submit", async (e) => {
       e.preventDefault()
       const data = Object.fromEntries(new FormData(form).entries());
@@ -670,7 +676,7 @@
         const errorData = await response.json();
         console.log(errorData)
         console.log(modal)
-        modal.style.display = "block";
+        error.style.display = "block";
       }
 
       /*
