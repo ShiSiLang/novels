@@ -333,14 +333,6 @@ app.post("/comment", async (req, res) => {
   );
   if (!user) return res.status(400).json({ error: `Incorrect username or password!` });
 
-  function isWhole(n) {
-    return /^\d+$/.test(n);
-  }
-
-  let chapter = Number(html.chapter.replace(/</g, "&lt;"));
-
-  if (!isWhole(chapter) || !novel[chapter]) return res.status(400).json({ error: `Not a valid chapter!` });
-
   let date = new Date();
   let newdate =
     date.getMonth() + 1 + "/" + date.getDate() + "/" + date.getFullYear();
@@ -352,7 +344,7 @@ app.post("/comment", async (req, res) => {
     {
       $push: {
         comments: {
-          chapter: Number(chapter),
+          chapter: Number(html.chapter),
           comment: `${html.comment.replace(/</g, "&lt;")}`,
           username: `${user.username}`,
           icon: `${user.icon}`,
