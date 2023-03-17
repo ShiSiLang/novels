@@ -691,7 +691,6 @@
     form.addEventListener("submit", async (e) => {
       e.preventDefault()
       const data = Object.fromEntries(new FormData(form).entries());
-      console.log(data)
       const response = await fetch('/comment', {
         method: 'POST',
         headers: {
@@ -700,15 +699,11 @@
         body: JSON.stringify({ data })
       });
 
-      console.log(response)
-
       if (response.ok) {
         // Display success message here
         success.style.display = "block";
       } else {
         const errorData = await response.json();
-        console.log(errorData)
-        console.log(error.innerText)
         error.innerHTML = `<span class="closebtn">&times;</span>
     ${errorData.error}.`
         error.style.display = "block";
