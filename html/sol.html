@@ -495,8 +495,6 @@
     padding: 20px;
     background-color: #f44336;
     color: white;
-    opacity: 1;
-    transition: opacity 0.6s;
     margin-bottom: 15px;
     display: none;
   }
@@ -645,7 +643,7 @@
 
   <div id="error" class="alert">
     <span class="closebtn">&times;</span>
-    Error.
+    <p>Error.</p>
   </div>
 
   <div id="success" class="alert success">
@@ -711,6 +709,7 @@
         const errorData = await response.json();
         console.log(errorData)
         console.log(error)
+        console.log(error.span)
         error.style.display = "block";
       }
 
