@@ -649,16 +649,32 @@
 
   <script>
     const form = document.getElementById('commentForm')
-    form.addEventListener("submit", (e) => {
-      //e.preventDefault()
-      /*
-      let postForm = e.target
-      if (JSON.parse(localStorage.getItem('user-info'))) {
-        postForm.submit()
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault()
+      const response = await fetch('/comment', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+      });
+
+      console.log(response)
+
+      if (response.ok) {
+        // Display success message here
       } else {
-        var modal = document.getElementById("myModal");
+        const errorData = await response.json();
+        const errorMessage = errorData.error;
         modal.style.display = "block";
       }
+
+      /*
+            if (JSON.parse(localStorage.getItem('user-info'))) {
+      
+            } else {
+              var modal = document.getElementById("myModal");
+              modal.style.display = "block";
+            }
       */
     });
   </script>
