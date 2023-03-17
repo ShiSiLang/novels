@@ -651,7 +651,7 @@
     const form = document.getElementById('commentForm')
     var modal = document.getElementById("myModal");
     form.addEventListener("submit", async (e) => {
-      e.preventDefault()
+      //e.preventDefault()
       const response = await fetch('/comment', {
         method: 'POST',
         headers: {
