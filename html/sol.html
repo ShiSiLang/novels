@@ -649,7 +649,7 @@
 
   <script>
     const form = document.getElementById('commentForm')
-    //let modal = document.getElementById("myModal");
+    const modal = document.getElementById("myModal");
     form.addEventListener("submit", async (e) => {
       e.preventDefault()
       const data = Object.fromEntries(new FormData(form).entries());
