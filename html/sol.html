@@ -579,13 +579,6 @@
     <img src="https://i.imgur.com/lGLKiVd.png" alt="Shinpi" />
   </div>
 
-  <div id="myModal" class="modal">
-    <div class="modal-content">
-      <span class="close">&times;</span>
-      <p>Log in to comment!</p>
-    </div>
-  </div>
-
   <div class="flex">
     <button class="glow-on-hover" onclick="toggleText()">Toggle Text</button>
   </div>
@@ -610,6 +603,13 @@
   <div class="flex">
     <button class="glow-on-hover" onclick="document.getElementById('modal').style.display='block'"
       style="width:auto;">Comment</button>
+  </div>
+
+  <div id="myModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <p>Log in to comment!</p>
+    </div>
   </div>
 
   <div id="modal" class="modal">
@@ -649,7 +649,7 @@
 
   <script>
     const form = document.getElementById('commentForm')
-    const modal = document.getElementById("myModal");
+    var modal = document.getElementById("myModal");
     form.addEventListener("submit", async (e) => {
       e.preventDefault()
       const data = Object.fromEntries(new FormData(form).entries());
@@ -659,7 +659,7 @@
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ data })
+        body: data
       });
 
       console.log(response)
