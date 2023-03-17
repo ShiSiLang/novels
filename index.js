@@ -331,12 +331,7 @@ app.post("/comment", async (req, res) => {
       v.password === html.psw.replace(/</g, "&lt;") &&
       v.username === html.uname.replace(/</g, "&lt;")
   );
-  if (!user)
-    res.status(400).json({ error: `Incorrect username or password!` });
-  return;
-  return res.send(
-    `Incorrect username or password!<script>setTimeout(function(){window.location="/read/1";},3000);</script>`
-  );
+  if (!user) return res.status(400).json({ error: `Incorrect username or password!` });
 
   function isWhole(n) {
     return /^\d+$/.test(n);
@@ -344,12 +339,7 @@ app.post("/comment", async (req, res) => {
 
   let chapter = html.chapter.replace(/</g, "&lt;");
 
-  if (!isWhole(chapter) || !novel[Number(chapter)])
-    return res.send(
-      `Not a valid chapter!<script>setTimeout(function(){window.location="/read/${Number(
-        chapter
-      )}";},3000);</script>`
-    );
+  if (!isWhole(chapter) || !novel[Number(chapter)]) return res.status(400).json({ error: `Not a valid chapter!` });
 
   let date = new Date();
   let newdate =
@@ -372,14 +362,7 @@ app.post("/comment", async (req, res) => {
     }
   );
 
-  res.send(
-    `Comment sent to chapter ${html.chapter.replace(
-      /</g,
-      "&lt;"
-    )}<script>setTimeout(function(){window.location="/read/${Number(
-      chapter
-    )}";},3000);</script>`
-  );
+  return res.status(200).json({ success: `Comment sent to chapter ${chapter}` });
 });
 
 app.use((_, res) => res.status(404).sendFile(dir("error")));

@@ -495,7 +495,22 @@
     padding: 20px;
     background-color: #f44336;
     color: white;
+    opacity: 1;
+    transition: opacity 0.6s;
+    margin-bottom: 15px;
     display: none;
+  }
+
+  .alert.success {
+    background-color: #04AA6D;
+  }
+
+  .alert.info {
+    background-color: #2196F3;
+  }
+
+  .alert.warning {
+    background-color: #ff9800;
   }
 
   .closebtn {
@@ -629,8 +644,13 @@
   </div>
 
   <div id="error" class="alert">
-    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-    This is an alert box.
+    <span class="closebtn">&times;</span>
+    Error.
+  </div>
+
+  <div id="success" class="alert success">
+    <span class="closebtn">&times;</span>
+    <strong>Success!</strong> Comment sent.
   </div>
 
   <div id="modal" class="modal">
@@ -654,8 +674,23 @@
   </div>
 
   <script>
+    var close = document.getElementsByClassName("closebtn");
+    var i;
+
+    for (i = 0; i < close.length; i++) {
+      close[i].onclick = function () {
+        var div = this.parentElement;
+        div.style.opacity = "0";
+        setTimeout(function () { div.style.display = "none"; }, 600);
+      }
+    }
+  </script>
+
+  <script>
     const form = document.getElementById('commentForm')
     const error = document.getElementById("error");
+    const success = document.getElementById("success");
+
     form.addEventListener("submit", async (e) => {
       e.preventDefault()
       const data = Object.fromEntries(new FormData(form).entries());
@@ -672,6 +707,7 @@
 
       if (response.ok) {
         // Display success message here
+        success.style.display = "block";
       } else {
         const errorData = await response.json();
         console.log(errorData)
