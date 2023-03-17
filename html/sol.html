@@ -643,7 +643,7 @@
 
   <div id="error" class="alert">
     <span class="closebtn">&times;</span>
-    <p>Error.</p>
+    Error.
   </div>
 
   <div id="success" class="alert success">
@@ -709,7 +709,7 @@
         const errorData = await response.json();
         console.log(errorData)
         console.log(error)
-        console.log(error.span)
+        console.log(error.innerHTML)
         error.style.display = "block";
       }
 
