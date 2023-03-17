@@ -339,7 +339,7 @@ app.post("/comment", async (req, res) => {
 
   let chapter = Number(html.chapter.replace(/</g, "&lt;"));
 
-  if (!isWhole(chapter) || !novel[Number(chapter)]) return res.status(400).json({ error: `Not a valid chapter!` });
+  if (!isWhole(chapter) || !novel[chapter]) return res.status(400).json({ error: `Not a valid chapter!` });
 
   let date = new Date();
   let newdate =
