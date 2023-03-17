@@ -324,6 +324,7 @@ app.post("/follow", async (req, res) => {
 
 app.post("/comment", async (req, res) => {
   let html = req.body;
+  console.log(html)
   let profileArray = await comments.findOne({ password: "ShinpiIsCool" });
   let user = profileArray.profiles.find(
     (v) =>
