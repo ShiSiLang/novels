@@ -652,11 +652,14 @@
     var modal = document.getElementById("myModal");
     form.addEventListener("submit", async (e) => {
       //e.preventDefault()
+      const data = Object.fromEntries(new FormData(form).entries());
+      console.log(data)
       const response = await fetch('/comment', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
+        body: JSON.stringify({ data })
       });
 
       console.log(response)
