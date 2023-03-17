@@ -708,8 +708,9 @@
       } else {
         const errorData = await response.json();
         console.log(errorData)
-        console.log(error)
-        console.log(error.innerHTML)
+        console.log(error.innerText)
+        error.innerHTML = `<span class="closebtn">&times;</span>
+    ${errorData.error}.`
         error.style.display = "block";
       }
 
