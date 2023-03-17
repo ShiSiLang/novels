@@ -649,7 +649,7 @@
 
   <script>
     const form = document.getElementById('commentForm')
-    let modal = document.getElementById("myModal");
+    //let modal = document.getElementById("myModal");
     form.addEventListener("submit", async (e) => {
       e.preventDefault()
       const data = Object.fromEntries(new FormData(form).entries());
@@ -676,7 +676,7 @@
             if (JSON.parse(localStorage.getItem('user-info'))) {
       
             } else {
-              var modal = document.getElementById("myModal");
+              
               modal.style.display = "block";
             }
       */
