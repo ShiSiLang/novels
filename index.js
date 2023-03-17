@@ -354,7 +354,7 @@ app.post("/comment", async (req, res) => {
     }
   );
 
-  return res.status(200).json({ success: `Comment sent to chapter ${chapter}` });
+  return res.status(200).json({ success: `Comment sent to chapter ${html.chapter}` });
 });
 
 app.use((_, res) => res.status(404).sendFile(dir("error")));
