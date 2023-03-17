@@ -337,7 +337,7 @@ app.post("/comment", async (req, res) => {
     return /^\d+$/.test(n);
   }
 
-  let chapter = html.chapter.replace(/</g, "&lt;");
+  let chapter = Number(html.chapter.replace(/</g, "&lt;"));
 
   if (!isWhole(chapter) || !novel[Number(chapter)]) return res.status(400).json({ error: `Not a valid chapter!` });
 
