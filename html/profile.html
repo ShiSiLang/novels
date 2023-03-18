@@ -477,24 +477,19 @@
     </div>
 
     <div id="id01" class="modal">
-        <form class="modal-content animate" target="_blank" action="/edit" method="post">
+        <form class="modal-content animate" action="/edit" method="post">
             <div class="container">
                 <label for="uname"><b>Username</b></label>
                 <input type="text" placeholder="Enter Username" name="uname" autocomplete="off" required />
-
                 <label for="psw"><b>Password</b></label>
                 <input type="password" placeholder="Enter Password" name="psw" required />
-
                 <label for="newicon"><b>Edit Avatar</b></label>
                 <input type="text" placeholder="Enter new avatar" name="newicon" autocomplete="off" />
-
                 <label for="discord"><b>Edit Discord Link</b></label>
                 <input type="text" placeholder="Enter new discord" name="discord" autocomplete="off" />
-
                 <label for="twitter"><b>Edit Twitter Link</b></label>
                 <input type="text" placeholder="Enter new twitter" name="twitter" autocomplete="off" />
             </div>
-
             <div class="container" style="background-color:#22303C">
                 <button type="submit" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">
                     Login & Edit
@@ -522,13 +517,13 @@
     </div>
 
     <div id="error" class="alert">
-        <span class="closebtn">&times;</span>
+        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
         Error.
     </div>
 
     <div id="success" class="alert success">
-        <span class="closebtn">&times;</span>
-        <strong>Success!</strong> Comment sent.
+        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+        <strong>Success!</strong> Yay.
     </div>
 
     <footer>
@@ -610,18 +605,6 @@
             listData = list.join("");
         }
         suggBox.innerHTML = listData;
-    }
-</script>
-
-<script>
-    var close = document.getElementsByClassName("closebtn");
-    var i;
-
-    for (i = 0; i < close.length; i++) {
-        close[i].onclick = function () {
-            var div = this.parentElement;
-            div.style.display = "none";
-        }
     }
 </script>
 
