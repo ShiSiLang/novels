@@ -254,22 +254,16 @@ app.post("/edit", async (req, res) => {
 });
 
 app.post("/follow", async (req, res) => {
-  let html = req.body;
+  let html = req.body.data;
   let profileArray = await comments.findOne({ password: "ShinpiIsCool" });
   let user = profileArray.profiles.find(
     (v) =>
       v.password === html.psw.replace(/</g, "&lt;") &&
       v.username === html.uname.replace(/</g, "&lt;")
   );
-  if (!user)
-    return res.send(
-      `Incorrect username or password!<script>setTimeout(function(){window.location="/profile/shinpi";},3000);</script>`
-    );
+  if (!user) return res.status(400).json({ error: `Incorrect username or password!` });
 
-  if (html.uname === html.follow)
-    return res.send(
-      `You cannot follow yourself!<script>setTimeout(function(){window.location="/profile/${user.username}";},3000);</script>`
-    );
+  if (html.uname === html.follow) return res.status(400).json({ error: `You cannot follow yourself!` });
 
   let user2 = profileArray.profiles.find((v) => v.username === html.follow);
 
@@ -292,9 +286,7 @@ app.post("/follow", async (req, res) => {
         },
         profileArray
       );
-      res.send(
-        `Successfully unfollowed ${html.follow}!<script>setTimeout(function(){window.location="/profile/${user2.username}";},3000);</script>`
-      );
+      return res.status(200).json({ success: `Successfully unfollowed ${html.follow}!` });
     }
   } else {
     let objIndex = profileArray.profiles.findIndex(
@@ -315,9 +307,7 @@ app.post("/follow", async (req, res) => {
         },
         profileArray
       );
-      res.send(
-        `Successfully followed ${html.follow}!<script>setTimeout(function(){window.location="/profile/${user2.username}";},3000);</script>`
-      );
+      return res.status(200).json({ success: `Successfully followed ${html.follow}!` });
     }
   }
 });

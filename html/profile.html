@@ -398,6 +398,41 @@
     }
 
     /*Modal End*/
+
+    .alert {
+        padding: 20px;
+        background-color: #f44336;
+        color: white;
+        margin-bottom: 15px;
+        display: none;
+    }
+
+    .alert.success {
+        background-color: #04AA6D;
+    }
+
+    .alert.info {
+        background-color: #2196F3;
+    }
+
+    .alert.warning {
+        background-color: #ff9800;
+    }
+
+    .closebtn {
+        margin-left: 15px;
+        color: white;
+        font-weight: bold;
+        float: right;
+        font-size: 22px;
+        line-height: 20px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .closebtn:hover {
+        color: black;
+    }
 </style>
 
 <body>
@@ -469,16 +504,14 @@
     </div>
 
     <div id="follow" class="modal">
-        <form class="modal-content animate" action="/follow" method="post">
+        <form class="modal-content animate" id="commentFormFollow" action="/follow" method="post">
             <div class="container">
                 <label for="uname"><b>Username</b></label>
                 <input type="text" placeholder="Enter Username" name="uname" autocomplete="off" required />
-
                 <label for="psw"><b>Password</b></label>
                 <input type="password" placeholder="Enter Password" name="psw" required />
                 <input type="hidden" name="follow" value="$$username$$" />
             </div>
-
             <div class="container" style="background-color:#22303C">
                 <button type="submit" onclick="document.getElementById('follow').style.display='none'"
                     class="cancelbtn">
@@ -486,6 +519,16 @@
                 </button>
             </div>
         </form>
+    </div>
+
+    <div id="error" class="alert">
+        <span class="closebtn">&times;</span>
+        Error.
+    </div>
+
+    <div id="success" class="alert success">
+        <span class="closebtn">&times;</span>
+        <strong>Success!</strong> Comment sent.
     </div>
 
     <footer>
@@ -568,6 +611,49 @@
         }
         suggBox.innerHTML = listData;
     }
+</script>
+
+<script>
+    var close = document.getElementsByClassName("closebtn");
+    var i;
+
+    for (i = 0; i < close.length; i++) {
+        close[i].onclick = function () {
+            var div = this.parentElement;
+            div.style.display = "none";
+        }
+    }
+</script>
+
+<script>
+    const form = document.getElementById('commentFormFollow')
+    const error = document.getElementById("error");
+    const success = document.getElementById("success");
+
+    form.addEventListener("submit", async (e) => {
+        e.preventDefault()
+        const data = Object.fromEntries(new FormData(form).entries());
+        const response = await fetch('/follow', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ data })
+        });
+
+        if (response.ok) {
+            // Display success message here
+            const successData = await response.json();
+            success.innerHTML = `<span class="closebtn">&times;</span>
+        <strong>Success!</strong> ${successData.success}`
+            success.style.display = "block";
+        } else {
+            const errorData = await response.json();
+            error.innerHTML = `<span class="closebtn">&times;</span>
+    ${errorData.error}`
+            error.style.display = "block";
+        }
+    });
 </script>
 
 </html>
