@@ -16,6 +16,7 @@ app.use(
   })
 );
 app.get("/", (_, res) => res.redirect(link("home")));
+
 app.get("/home", async (_, res) => {
   const fetched = await axios.get(
     `https://api.countapi.xyz/hit/star-of-libby.shinpitekita.repl.co/${process.env.count}`
@@ -28,9 +29,11 @@ app.get("/home", async (_, res) => {
 });
 app.get("/sign-up", (_, res) => res.sendFile(dir("sign-up")));
 
-app.get("/explore", async (req, res) => {
-  res.sendFile(dir("explore"));
-});
+app.get("/explore", async (req, res) => res.sendFile(dir("explore")));
+
+app.get("/discord", (_, res) => res.redirect("https://discord.gg/j3YamACwPu"));
+
+app.get("/publish", (_, res) => res.sendFile(dir("explore")));
 
 /*
 Book Data:
@@ -90,8 +93,6 @@ app.get("/novel/:chapter", async (req, res) => {
   };
   res.send(newObj);
 });
-
-app.get("/discord", (_, res) => res.redirect("https://discord.gg/j3YamACwPu"));
 
 app.post("/sign-up", async (req, res) => {
   let html = req.body;
