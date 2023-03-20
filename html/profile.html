@@ -13,7 +13,7 @@
     <meta name="theme-color" content="#cbc3e3" />
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.1.1/css/all.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
 </head>
 <style>
     body {
@@ -477,7 +477,7 @@
     </div>
 
     <div id="id01" class="modal">
-        <form class="modal-content animate" action="/edit" method="post">
+        <form class="modal-content animate" id="FormEdit" action="/edit" method="post">
             <div class="container">
                 <label for="uname"><b>Username</b></label>
                 <input type="text" placeholder="Enter Username" name="uname" autocomplete="off" required />
@@ -499,7 +499,7 @@
     </div>
 
     <div id="follow" class="modal">
-        <form class="modal-content animate" id="commentFormFollow" action="/follow" method="post">
+        <form class="modal-content animate" id="FormFollow" action="/follow" method="post">
             <div class="container">
                 <label for="uname"><b>Username</b></label>
                 <input type="text" placeholder="Enter Username" name="uname" autocomplete="off" required />
@@ -530,8 +530,12 @@
         <div class="footer-content">
             <h3>Copyright © 2023 Orange_Ball</h3>
             <ul class="socials">
-                <li><a href="https://discord.gg/j3YamACwPu"><i class="fa fa-discord"></i></a></li>
-                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                <li>
+                    <a href="https://discord.gg/j3YamACwPu"><i class="fa fa-discord"></i></a>
+                </li>
+                <li>
+                    <a href="#"><i class="fa fa-twitter"></i></a>
+                </li>
             </ul>
         </div>
     </footer>
@@ -609,32 +613,58 @@
 </script>
 
 <script>
-    const form = document.getElementById('commentFormFollow')
+    const form = document.getElementById("FormFollow");
+    const form2 = document.getElementById("FormEdit");
     const error = document.getElementById("error");
     const success = document.getElementById("success");
 
     form.addEventListener("submit", async (e) => {
-        e.preventDefault()
+        e.preventDefault();
         const data = Object.fromEntries(new FormData(form).entries());
-        const response = await fetch('/follow', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ data })
-        });
+        const data2 = Object.fromEntries(new FormData(form2).entries());
+        if (data) {
+            const response = await fetch("/follow", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ data }),
+            });
 
-        if (response.ok) {
-            // Display success message here
-            const successData = await response.json();
-            success.innerHTML = `<span class="closebtn">&times;</span>
-        <strong>Success!</strong> ${successData.success}`
-            success.style.display = "block";
-        } else {
-            const errorData = await response.json();
-            error.innerHTML = `<span class="closebtn">&times;</span>
-    ${errorData.error}`
-            error.style.display = "block";
+            if (response.ok) {
+                // Display success message here
+                const successData = await response.json();
+                success.innerHTML = `<span class="closebtn">&times;</span>
+        <strong>Success!</strong> ${successData.success}`;
+                success.style.display = "block";
+            } else {
+                const errorData = await response.json();
+                error.innerHTML = `<span class="closebtn">&times;</span>
+    ${errorData.error}`;
+                error.style.display = "block";
+            }
+        }
+        if (data2) {
+            const response = await fetch("/edit", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ data2 }),
+            });
+
+            if (response.ok) {
+                // Display success message here
+                const successData = await response.json();
+                success.innerHTML = `<span class="closebtn">&times;</span>
+        <strong>Success!</strong> ${successData.success}`;
+                success.style.display = "block";
+            } else {
+                const errorData = await response.json();
+                error.innerHTML = `<span class="closebtn">&times;</span>
+    ${errorData.error}`;
+                error.style.display = "block";
+            }
         }
     });
 </script>

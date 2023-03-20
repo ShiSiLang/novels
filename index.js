@@ -50,7 +50,10 @@ app.get("/explore/:book", async (req, res) => {
   file = file.replaceAll("$$name$$", `Star of Libby, Adiós Hogar Mío`);
   file = file.replaceAll("$$desc$$", `What happens when a tiger owns a gang?`);
   file = file.replaceAll("$$author$$", `Lonely Ball`);
-  file = file.replaceAll("$$novel$$", "'https://novels-production.up.railway.app/data/novel'");
+  file = file.replaceAll(
+    "$$novel$$",
+    "'https://novels-production.up.railway.app/data/novel'"
+  );
 
   res.send(file);
 });
@@ -93,9 +96,8 @@ app.get("/discord", (_, res) => res.redirect("https://discord.gg/j3YamACwPu"));
 app.post("/sign-up", async (req, res) => {
   let html = req.body;
   if (html.dp !== process.env.profiles)
-    return res.send(
-      `Incorrect password!<script>setTimeout(function(){window.location="/home";},3000);</script>`
-    );
+    return res.status(400).json({ error: `Incorrect password!` });
+
   let image = html.icon.replace(/</g, "&lt;");
 
   function isImage(url) {
@@ -103,9 +105,9 @@ app.post("/sign-up", async (req, res) => {
   }
 
   if (isImage(image) === false)
-    return res.send(
-      `Please make sure the icon is a valid URL.<script>setTimeout(function(){window.location="/home";},3000);</script>`
-    );
+    return res
+      .status(400)
+      .json({ error: `Please make sure the icon is a valid URL.` });
 
   let date = new Date();
   let newdate =
@@ -128,12 +130,10 @@ app.post("/sign-up", async (req, res) => {
       },
     }
   );
-  return res.send(
-    `${html.uname.replace(
-      /</g,
-      "&lt;"
-    )} added!<script>setTimeout(function(){window.location="/sign-in";},3000);</script>`
-  );
+
+  return res
+    .status(200)
+    .json({ success: `${html.uname.replace(/</g, "&lt;")} added!` });
 });
 
 app.get("/data/:name", async (req, res) => {
@@ -156,9 +156,8 @@ app.get("/profile/:username", async (req, res) => {
     (v) => v.username.toLowerCase() === username.replace(/</g, "&lt;")
   );
   if (!user)
-    return res.send(
-      `Account not found, try again!<script>setTimeout(function(){window.location="/profile/shinpi";},3000);</script>`
-    );
+    return res.status(400).json({ error: `Account not found, try again.` });
+
   let file = fs.readFileSync("./html/profile.html", {
     encoding: "utf8",
   });
@@ -181,7 +180,7 @@ app.get("/profile/:username", async (req, res) => {
 });
 
 app.post("/edit", async (req, res) => {
-  let html = req.body;
+  let html = req.body.data;
   let profileArray = await comments.findOne({ password: "ShinpiIsCool" });
   let user = profileArray.profiles.find(
     (v) =>
@@ -189,9 +188,7 @@ app.post("/edit", async (req, res) => {
       v.username === html.uname.replace(/</g, "&lt;")
   );
   if (!user)
-    return res.send(
-      `Incorrect username or password!<script>setTimeout(function(){window.location="/profile/shinpi";},3000);</script>`
-    );
+    return res.status(400).json({ error: `Incorrect username or password!` });
 
   let params = {
     username: user.username,
@@ -209,9 +206,9 @@ app.post("/edit", async (req, res) => {
   }
 
   if (isImage(params.icon) === false)
-    return res.send(
-      `Please make sure the icon is a valid URL.<script>setTimeout(function(){window.location="/profile/${user.username}";},4000);</script>`
-    );
+    return res
+      .status(400)
+      .json({ error: `Please make sure the icon is a valid URL.` });
 
   function isDiscord(url) {
     return /(https?:\/\/)?(www\.)?(discord\.(gg|io|me|li)|discordapp\.com\/invite)\/.+[a-z]/.test(
@@ -220,18 +217,18 @@ app.post("/edit", async (req, res) => {
   }
 
   if (params.discord !== null && isDiscord(params.discord) === false)
-    return res.send(
-      `Please make sure the discord link is a valid URL.<script>setTimeout(function(){window.location="/profile/${user.username}";},4000);</script>`
-    );
+    return res
+      .status(400)
+      .json({ error: `Please make sure the discord link is a valid URL.` });
 
   function isTwitter(url) {
     return /http(?:s)?:\/\/(?:www\.)?twitter\.com\/([a-zA-Z0-9_]+)/.test(url);
   }
 
   if (params.twitter !== null && isTwitter(params.twitter) === false)
-    return res.send(
-      `Please make sure the twitter link is a valid URL.<script>setTimeout(function(){window.location="/profile/${user.username}";},4000);</script>`
-    );
+    return res
+      .status(400)
+      .json({ error: `Please make sure the twitter link is a valid URL.` });
 
   let objIndex = profileArray.profiles.findIndex(
     (v) =>
@@ -248,9 +245,7 @@ app.post("/edit", async (req, res) => {
     profileArray
   );
 
-  res.send(
-    `Profile successfully edited.<script>setTimeout(function(){window.location="/profile/${user.username}";},4000);</script>`
-  );
+  return res.status(200).json({ success: `Profile successfully edited.` });
 });
 
 app.post("/follow", async (req, res) => {
@@ -261,9 +256,11 @@ app.post("/follow", async (req, res) => {
       v.password === html.psw.replace(/</g, "&lt;") &&
       v.username === html.uname.replace(/</g, "&lt;")
   );
-  if (!user) return res.status(400).json({ error: `Incorrect username or password!` });
+  if (!user)
+    return res.status(400).json({ error: `Incorrect username or password!` });
 
-  if (html.uname === html.follow) return res.status(400).json({ error: `You cannot follow yourself!` });
+  if (html.uname === html.follow)
+    return res.status(400).json({ error: `You cannot follow yourself!` });
 
   let user2 = profileArray.profiles.find((v) => v.username === html.follow);
 
@@ -286,7 +283,9 @@ app.post("/follow", async (req, res) => {
         },
         profileArray
       );
-      return res.status(200).json({ success: `Successfully unfollowed ${html.follow}!` });
+      return res
+        .status(200)
+        .json({ success: `Successfully unfollowed ${html.follow}!` });
     }
   } else {
     let objIndex = profileArray.profiles.findIndex(
@@ -307,7 +306,9 @@ app.post("/follow", async (req, res) => {
         },
         profileArray
       );
-      return res.status(200).json({ success: `Successfully followed ${html.follow}!` });
+      return res
+        .status(200)
+        .json({ success: `Successfully followed ${html.follow}!` });
     }
   }
 });
@@ -320,7 +321,8 @@ app.post("/comment", async (req, res) => {
       v.password === html.psw.replace(/</g, "&lt;") &&
       v.username === html.uname.replace(/</g, "&lt;")
   );
-  if (!user) return res.status(400).json({ error: `Incorrect username or password!` });
+  if (!user)
+    return res.status(400).json({ error: `Incorrect username or password!` });
 
   let date = new Date();
   let newdate =
@@ -343,7 +345,9 @@ app.post("/comment", async (req, res) => {
     }
   );
 
-  return res.status(200).json({ success: `Comment sent to chapter ${html.chapter}` });
+  return res
+    .status(200)
+    .json({ success: `Comment sent to chapter ${html.chapter}` });
 });
 
 app.use((_, res) => res.status(404).sendFile(dir("error")));
