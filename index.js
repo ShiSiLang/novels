@@ -112,7 +112,7 @@ app.get("/data/:type/:other", async (req, res) => {
 app.get("/profile/:username", async (req, res) => {
   let username = req.params.username.toLowerCase();
 
-  let userData = await profileShema.findOne((v) => v.username === username);
+  let userData = await profileShema.findOne({ username: username });
   console.log(userData);
 
   if (!userData) return res.sendFile(dir("error"));
