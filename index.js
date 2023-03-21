@@ -110,7 +110,7 @@ app.get("/data/:type/:other", async (req, res) => {
 }); //very important
 
 app.get("/profile/:username", async (req, res) => {
-  let username = req.params.username.toLowerCase();
+  let username = req.params.username;
 
   let userData = await profileShema.findOne({ username: username });
   console.log(userData);
