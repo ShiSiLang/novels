@@ -145,7 +145,7 @@ app.get("/profile/:username", async (req, res) => {
 
 app.post("/sign-up", async (req, res) => {
   let html = req.body.data;
-  if (html.dp !== process.env.profiles)
+  if (html.dp !== process.env.devPassword)
     return res.status(400).json({ error: `Incorrect password!` });
 
   let image = html.icon.replace(/</g, "&lt;");
