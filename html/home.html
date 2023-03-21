@@ -74,7 +74,7 @@
   }
 
   .dropdown-menu-right {
-    right: 50px;
+    right: 60px;
   }
 
   .dropdown-content {
@@ -84,10 +84,8 @@
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 1;
-    top: 55px;
-    /* Adjust this value to match the height of your topnav image */
+    top: 53px;
   }
-
 
   .dropdown-content a {
     color: white;
@@ -336,7 +334,8 @@
 
     var dropdowns = document.getElementById("drop");
     window.onclick = function (event) {
-      if (event.target === dropdowns) {
+      console.log(event)
+      if (event.target !== dropdowns) {
         dropdowns.style.display = "none";
       }
     };
