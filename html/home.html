@@ -329,16 +329,13 @@
 
   <script>
     function Dropdown() {
-      document.getElementById("drop").style.display = "block";
-    }
-
-    var dropdowns = document.getElementById("drop");
-    window.onclick = function (event) {
-      console.log(event)
-      if (event.target === dropdowns) {
-        dropdowns.style.display = "none";
+      let drop = document.getElementById("drop")
+      if (drop.style.display = "block") {
+        drop.style.display = "none";
+      } else {
+        drop.style.display = "block";
       }
-    };
+    }
   </script>
 
   <div class="slideshow-container">
