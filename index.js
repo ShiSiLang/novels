@@ -166,7 +166,7 @@ app.post("/sign-up", async (req, res) => {
   let data = await profileShema.find().sort({ username: 1 });
   console.log(data);
 
-  if (data.filter((v) => v.username === html.uname.replace(/</g, "&lt;")))
+  if (data.find((v) => v.username === html.uname.replace(/</g, "&lt;")))
     return res.status(400).json({ error: `That username is already taken.` });
 
   let newProfile = new profileShema({
