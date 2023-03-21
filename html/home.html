@@ -46,6 +46,8 @@
   .topnav {
     width: 100%;
     background-color: #22303C;
+    position: relative;
+    /* add position relative to the topnav container */
   }
 
   .topnav img {
@@ -54,11 +56,13 @@
     transition-duration: 0.3s;
     display: inline-block;
     width: 55px;
-    height: 50;
+    height: 50px;
+    /* add px unit to height */
     position: absolute;
     margin-bottom: 2px;
     right: 0;
-    z-index: 0;
+    z-index: 1;
+    /* increase z-index to allow the dropdown to appear on top */
   }
 
   .topnav img:hover {
@@ -70,11 +74,15 @@
 
   .dropdown {
     display: inline-block;
-    position: relative
+    position: absolute;
+    /* change position to absolute */
+    bottom: -100%;
+    /* push the dropdown below the image */
+    right: 0;
   }
 
   .dropdown-menu-right {
-    right: 50px;
+    right: 0;
   }
 
   .dropdown-content {
@@ -83,11 +91,11 @@
     background-color: #22303C;
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-    z-index: 1;
-    top: 55px;
-    /* Adjust this value to match the height of your topnav image */
+    z-index: 2;
+    /* increase z-index to allow the dropdown to appear on top */
+    bottom: calc(100% + 5px);
+    /* position the dropdown below the image */
   }
-
 
   .dropdown-content a {
     color: white;
@@ -316,11 +324,12 @@
 </style>
 
 <body>
+
   <div class="topnav">
     <a class="active" href="#">Home</a>
     <a href="/explore">Explore</a>
     <a href="https://cash.app/$PerezDeDios" target="_blank">Donate</a>
-    <img src="https://i.imgur.com/XjWCCeV.png" alt="Shinpi" onclick="Dropdown()" />
+    <img src="https://i.imgur.com/XjWCCeV.png" alt="Shinpi" />
     <div class="dropdown dropdown-menu-right">
       <div class="dropdown-content" id="drop">
         <a href="#">My Account</a>
@@ -330,9 +339,21 @@
   </div>
 
   <script>
-    var dropdowns = document.getElementById("drop");
     function Dropdown() {
-      dropdowns.style.display = "block";
+      document.getElementById("drop").classList.toggle("show");
+    }
+
+    // Close the dropdown menu if the user clicks outside of it
+    window.onclick = function (event) {
+      if (!event.target.matches('.topnav img')) {
+        var dropdowns = document.getElementsByClassName("dropdown-content");
+        for (var i = 0; i < dropdowns.length; i++) {
+          var openDropdown = dropdowns[i];
+          if (openDropdown.classList.contains('show')) {
+            openDropdown.classList.remove('show');
+          }
+        }
+      }
     }
   </script>
 
