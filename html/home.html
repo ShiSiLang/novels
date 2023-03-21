@@ -335,7 +335,7 @@
     var dropdowns = document.getElementById("drop");
     window.onclick = function (event) {
       console.log(event)
-      if (event.target !== dropdowns) {
+      if (event.target === dropdowns) {
         dropdowns.style.display = "none";
       }
     };
