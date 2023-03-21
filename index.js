@@ -180,7 +180,7 @@ app.post("/sign-up", async (req, res) => {
     author: false,
   }).save();
 
-  return res.status(200).json({ success: `${newProfile.username} added!` });
+  return res.status(200).json({ success: `${html.uname.replace(/</g, "&lt;")} added!` });
 });
 
 app.post("/edit", async (req, res) => {
