@@ -1,278 +1,268 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="icon" href="https://i.imgur.com/XjWCCeV.png" />
-    <title>LonelyBall Media</title>
-    <meta property="og:title" content="$$name$$" />
-    <meta property="og:site_name" content="LonelyBall Media" />
-    <meta property="og:description" content="$$desc$$" />
-    <meta property="og:image" content="https://i.imgur.com/XjWCCeV.png" />
-    <meta name="theme-color" content="#cbc3e3" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <link
-      rel="stylesheet"
-      href="https://site-assets.fontawesome.com/releases/v6.1.1/css/all.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-    />
-  </head>
-  <style>
-    body {
-        background-size: 400% 400%;
-        margin: 0;
-        background-color: #15202B;
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="icon" href="https://i.imgur.com/XjWCCeV.png" />
+  <title>LonelyBall Media</title>
+  <meta property="og:title" content="$$name$$" />
+  <meta property="og:site_name" content="LonelyBall Media" />
+  <meta property="og:description" content="$$desc$$" />
+  <meta property="og:image" content="https://i.imgur.com/XjWCCeV.png" />
+  <meta name="theme-color" content="#cbc3e3" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.1.1/css/all.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+</head>
+<style>
+  body {
+    background-size: 400% 400%;
+    margin: 0;
+    background-color: #15202B;
+  }
+
+  div {
+    animation: fadeInUp 0.9s;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      transform: translate3d(0, 150px, 0);
     }
 
-    div {
-        animation: fadeInUp 0.9s;
+    to {
+      transform: translate3d(0, 0, 0);
+      opacity: 1;
     }
+  }
 
-    @keyframes fadeInUp {
-        from {
-            transform: translate3d(0, 150px, 0);
-        }
+  .flex {
+    display: flex;
+    justify-content: center;
+  }
 
-        to {
-            transform: translate3d(0, 0, 0);
-            opacity: 1;
-        }
+  .topnav {
+    width: 100%;
+    background-color: #22303C;
+  }
+
+  .topnav img {
+    text-align: center;
+    border-radius: 50%;
+    transition-duration: 0.3s;
+    display: inline-block;
+    width: 55px;
+    height: 50;
+    position: absolute;
+    margin-bottom: 2px;
+    right: 0;
+    z-index: 0;
+  }
+
+  .topnav img:hover {
+    transform: scale(1.1);
+    border-radius: 40%;
+    box-shadow: 0px 0px 9px 4px #818589;
+    animation: glow 1.5s linear infinite alternate;
+  }
+
+  .topnav a {
+    display: inline-block;
+    border-radius: 30px;
+    padding: 19px 16px;
+    transition-duration: 0.2s;
+    font-family: 'Open Sans', Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 1.0em;
+    font-weight: 650;
+    text-decoration: none;
+    /*text-transform: uppercase;*/
+    color: white;
+  }
+
+  .topnav a.active {
+    background-color: rgba(0, 0, 0, 0.2);
+  }
+
+  .topnav a:hover {
+    background-color: white;
+    color: #161919;
+  }
+
+  @keyframes glow {
+    to {
+      box-shadow: 0px 0px 30px 20px #535FED;
     }
+  }
 
-    .flex {
-        display: flex;
-        justify-content: center;
-    }
+  footer {
+    width: 100vw;
+    height: auto;
+    background-image: linear-gradient(315deg, #192734 0, #22303C 74%);
+    font-family: 'Open Sans', Verdana, Geneva, Tahoma, sans-serif;
+    padding-top: 40px;
+    color: #fefefe;
+  }
 
-    .topnav {
-        width: 100%;
-        background-color: #22303C;
-    }
+  .footer-content {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+  }
 
-    .topnav img {
-        text-align: center;
-        border-radius: 50%;
-        transition-duration: 0.3s;
-        display: inline-block;
-        width: 55px;
-        height: 50;
-        position: absolute;
-        margin-bottom: 2px;
-        right: 0;
-        z-index: 0;
-    }
+  .footer-content h3 {
+    font-size: 1.8rem;
+    font-weight: 400;
+    text-transform: capitalize;
+    line-height: 3rem;
+  }
 
-    .topnav img:hover {
-        transform: scale(1.1);
-        border-radius: 40%;
-        box-shadow: 0px 0px 9px 4px #818589;
-        animation: glow 1.5s linear infinite alternate;
-    }
+  .socials {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1rem 0 3rem 0;
+  }
 
-    .topnav a {
-        display: inline-block;
-        border-radius: 30px;
-        padding: 19px 16px;
-        transition-duration: 0.2s;
-        font-family: 'Open Sans', Verdana, Geneva, Tahoma, sans-serif;
-        font-size: 1.0em;
-        font-weight: 650;
-        text-decoration: none;
-        /*text-transform: uppercase;*/
-        color: white;
-    }
+  .socials li {
+    margin: 0 10px;
+  }
 
-    .topnav a.active {
-        background-color: rgba(0, 0, 0, 0.2);
-    }
+  .socials a {
+    color: white;
+    text-decoration: none;
+  }
 
-    .topnav a:hover {
-        background-color: white;
-        color: #161919;
-    }
+  .socials a i {
+    font-size: 1.1rem;
+    transition: color .4s ease;
+  }
 
-    @keyframes glow {
-        to {
-            box-shadow: 0px 0px 30px 20px #535FED;
-        }
-    }
+  .socials a:hover i {
+    color: aqua;
+  }
 
-    footer {
-        width: 100vw;
-        height: auto;
-        background-image: linear-gradient(315deg, #192734 0, #22303C 74%);
-        font-family: 'Open Sans', Verdana, Geneva, Tahoma, sans-serif;
-        padding-top: 40px;
-        color: #fefefe;
-    }
+  .text {
+    padding-bottom: 25px;
+    background-image: linear-gradient(315deg, #192734 0, #22303C 74%);
+  }
 
-    .footer-content {
-        align-items: center;
-        display: flex;
-        justify-content: center;
-        flex-direction: column;
-        text-align: center;
-    }
+  .text h1 {
+    text-align: center;
+    font-family: 'Open Sans', Verdana, Geneva, Tahoma, sans-serif;
+    color: white;
+    font-size: 55px;
+  }
 
-    .footer-content h3 {
-        font-size: 1.8rem;
-        font-weight: 400;
-        text-transform: capitalize;
-        line-height: 3rem;
-    }
+  .text h2 {
+    text-align: center;
+    font-family: 'Open Sans', Verdana, Geneva, Tahoma, sans-serif;
+    color: white;
+    font-size: 40px;
+  }
 
-    .socials {
-        list-style: none;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin: 1rem 0 3rem 0;
-    }
+  .text p {
+    text-align: center;
+    font-family: 'Open Sans', Verdana, Geneva, Tahoma, sans-serif;
+    color: white;
+    font-size: 35px;
+  }
 
-    .socials li {
-        margin: 0 10px;
-    }
+  * {
+    box-sizing: border-box
+  }
 
-    .socials a {
-        color: white;
-        text-decoration: none;
-    }
+  .thumbnail {
+    max-width: 1000px;
+    position: relative;
+    margin: auto;
+  }
 
-    .socials a i {
-        font-size: 1.1rem;
-        transition: color .4s ease;
-    }
+  .btn-group button {
+    margin: 0 auto;
+    margin-bottom: 35px;
+    margin-top: 35px;
+    text-align: center;
+    background-color: #1DA1F2;
+    border: 1px solid #009dff;
+    color: white;
+    border-radius: 12px;
+    font-family: 'Open Sans', Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 16px;
+    font-weight: 650;
+    text-decoration: none;
+    padding: 10px 24px;
+    cursor: pointer;
+    width: 50%;
+    display: block;
+  }
 
-    .socials a:hover i {
-        color: aqua;
-    }
+  .btn-group button:not(:last-child) {
+    border-bottom: none;
+  }
 
-    .text {
-        padding-bottom: 25px;
-        background-image: linear-gradient(315deg, #192734 0, #22303C 74%);
-    }
+  .btn-group button:hover {
+    background-color: #009dff;
+  }
+</style>
+<script type="text/javascript">
+  async function changeDivContent() {
+    try {
+      let response = await fetch($$novel$$);
+      let json = await response.json();
 
-    .text h1 {
-        text-align: center;
-        font-family: 'Open Sans', Verdana, Geneva, Tahoma, sans-serif;
-        color: white;
-        font-size: 55px;
-    }
-
-    .text h2 {
-        text-align: center;
-        font-family: 'Open Sans', Verdana, Geneva, Tahoma, sans-serif;
-        color: white;
-        font-size: 40px;
-    }
-
-    .text p {
-        text-align: center;
-        font-family: 'Open Sans', Verdana, Geneva, Tahoma, sans-serif;
-        color: white;
-        font-size: 35px;
-    }
-
-    * {
-        box-sizing: border-box
-    }
-
-    .thumbnail {
-        max-width: 1000px;
-        position: relative;
-        margin: auto;
-    }
-
-    .btn-group button {
-        margin: 0 auto;
-        margin-bottom: 35px;
-        margin-top: 35px;
-        text-align: center;
-        background-color: #1DA1F2;
-        border: 1px solid #009dff;
-        color: white;
-        border-radius: 12px;
-        font-family: 'Open Sans', Verdana, Geneva, Tahoma, sans-serif;
-        font-size: 16px;
-        font-weight: 650;
-        text-decoration: none;
-        padding: 10px 24px;
-        cursor: pointer;
-        width: 50%;
-        display: block;
-    }
-
-    .btn-group button:not(:last-child) {
-        border-bottom: none;
-    }
-
-    .btn-group button:hover {
-        background-color: #009dff;
-    }
-  </style>
-  <script type="text/javascript">
-    async function changeDivContent() {
-      try {
-        let response = await fetch($$novel$$);
-        let json = await response.json();
-
-        const div = document.getElementById("chapters");
-        for (let i = 0; i < json.length; i++) {
-          div.innerHTML += `
-              <button onclick="window.location.href='/read/${i + 1}'">${
-            json[i].chapter
+      const div = document.getElementById("chapters");
+      for (let i = 0; i < json.length; i++) {
+        div.innerHTML += `
+              <button onclick="window.location.href='/read/${i + 1}'">${json[i].chapter
           }</button>`;
-        }
-      } catch (err) {
-        const div = document.getElementById("nca");
-        div.innerHTML += `<h1>No chapters available</h1>`;
       }
+    } catch (err) {
+      const div = document.getElementById("nca");
+      div.innerHTML += `<h1>No chapters available</h1>`;
     }
-  </script>
+  }
+</script>
 
-  <body onload="changeDivContent()">
-    <div class="topnav">
-      <a href="/home">Home</a>
-      <a class="active" href="#">Explore</a>
-      <a href="https://cash.app/$PerezDeDios" target="_blank">Donate</a>
-      <img src="https://i.imgur.com/lGLKiVd.png" alt="Your Account" />
+<body onload="changeDivContent()">
+  <div class="topnav">
+    <a href="/home">Home</a>
+    <a class="active" href="#">Explore</a>
+    <a href="https://cash.app/$PerezDeDios" target="_blank">Donate</a>
+    <img src="https://i.imgur.com/lGLKiVd.png" alt="Your Account" />
+  </div>
+
+  <div class="thumbnail">
+    <!-- Images have to be 1000X350 -->
+    <img src="$$icon$$" style="width:100%" />
+  </div>
+
+  <div class="text">
+    <h1>$$name$$</h1>
+    <h2>$$desc$$</h2>
+    <p>Author: $$author$$</p>
+  </div>
+
+  <div id="nca" class="text"></div>
+
+  <div id="chapters" class="btn-group"></div>
+
+  <footer>
+    <div class="footer-content">
+      <h3>Copyright © 2023 LonelyBall Media</h3>
+      <ul class="socials">
+        <li>
+          <a href="https://discord.gg/j3YamACwPu"><i class="fa fa-discord"></i></a>
+        </li>
+        <li>
+          <a href="https://twitter.com/LoneOrangeBall"><i class="fa fa-twitter"></i></a>
+        </li>
+      </ul>
     </div>
+  </footer>
+</body>
 
-    <div class="thumbnail">
-      <!-- Images have to be 1000X350 -->
-      <img
-        src="https://www.w3schools.com/howto/img_mountains_wide.jpg"
-        style="width:100%"
-      />
-    </div>
-
-    <div class="text">
-      <h1>$$name$$</h1>
-      <h2>$$desc$$</h2>
-      <p>Author: $$author$$</p>
-    </div>
-
-    <div id="nca" class="text"></div>
-
-    <div id="chapters" class="btn-group"></div>
-
-    <footer>
-      <div class="footer-content">
-        <h3>Copyright © 2023 Orange_Ball</h3>
-        <ul class="socials">
-          <li>
-            <a href="https://discord.gg/j3YamACwPu"
-              ><i class="fa fa-discord"></i
-            ></a>
-          </li>
-          <li>
-            <a href="#"><i class="fa fa-twitter"></i></a>
-          </li>
-        </ul>
-      </div>
-    </footer>
-  </body>
 </html>

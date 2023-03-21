@@ -13,7 +13,7 @@
     <meta name="theme-color" content="#cbc3e3" />
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.1.1/css/all.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
 </head>
 <style>
     body {
@@ -24,40 +24,6 @@
 
     div {
         animation: fadeInUp 0.9s;
-    }
-
-    @keyframes gradient {
-        0% {
-            background-position: 0% 50%;
-        }
-
-        50% {
-            background-position: 100% 50%;
-        }
-
-        100% {
-            background-position: 0% 50%;
-        }
-    }
-
-    @keyframes typewriter {
-        from {
-            width: 0;
-        }
-
-        to {
-            width: 19.5em;
-        }
-    }
-
-    @keyframes blinkTextCursor {
-        from {
-            border-right-color: rgba(255, 255, 255, 0.75);
-        }
-
-        to {
-            border-right-color: transparent;
-        }
     }
 
     @keyframes fadeInUp {
@@ -71,15 +37,9 @@
         }
     }
 
-    @keyframes fadeInDown {
-        from {
-            transform: translate3d(0, -150px, 0);
-        }
-
-        to {
-            transform: translate3d(0, 0, 0);
-            opacity: 1;
-        }
+    .flex {
+        display: flex;
+        justify-content: center;
     }
 
     .topnav {
@@ -185,29 +145,27 @@
         color: aqua;
     }
 
-    .text-side {
-        padding-bottom: 72px;
-    }
-
     .text {
-        text-align: center;
-        padding-bottom: 72px;
+        padding-bottom: 25px;
     }
 
     .text h1 {
-        font-family: sans;
-        color: #FFFFFF;
-        font-size: 80px;
-    }
-
-    .text h2 {
-        font-family: sans;
+        text-align: center;
+        font-family: 'Open Sans', Verdana, Geneva, Tahoma, sans-serif;
         color: #FFFFFF;
         font-size: 55px;
     }
 
+    .text h2 {
+        text-align: center;
+        font-family: 'Open Sans', Verdana, Geneva, Tahoma, sans-serif;
+        color: #FFFFFF;
+        font-size: 40px;
+    }
+
     .text p {
-        font-family: sans;
+        text-align: center;
+        font-family: 'Open Sans', Verdana, Geneva, Tahoma, sans-serif;
         color: #FFFFFF;
         font-size: 35px;
     }
@@ -303,42 +261,7 @@
         }
     }
 
-    .comments {
-        margin-top: 5%;
-        margin-left: 20px;
-        margin-bottom: 100px;
-    }
-
-    .comment {
-        border: 1px solid #141d26;
-        background-color: #243447;
-        border-radius: 5px;
-        padding-left: 40px;
-        padding-right: 30px;
-        padding-top: 10px;
-        margin-bottom: 50px;
-    }
-
-    .comment h4,
-    .comment span,
-    .darker h4,
-    .darker span {
-        display: inline;
-    }
-
-    .comment p,
-    .comment span,
-    .darker p,
-    .darker span {
-        color: #ffffff;
-        font-family: 'Helvetica', 'Arial', sans-serif;
-    }
-
-    h1,
-    h4 {
-        color: #c51f5d;
-        font-weight: bold;
-    }
+    /*Modal*/
 
     .cancelbtn {
         width: auto;
@@ -409,8 +332,7 @@
 
     .modal {
         display: block;
-        margin: auto;
-        /*position: absolute;*/
+        position: fixed;
         z-index: 1;
         left: 0;
         top: 0;
@@ -427,65 +349,171 @@
         border: 1px solid #15202B;
         width: 80%;
     }
+
+    .animate {
+        -webkit-animation: animatezoom 0.6s;
+        animation: animatezoom 0.6s
+    }
+
+    @-webkit-keyframes animatezoom {
+        from {
+            -webkit-transform: scale(0)
+        }
+
+        to {
+            -webkit-transform: scale(1)
+        }
+    }
+
+    @keyframes animatezoom {
+        from {
+            transform: scale(0)
+        }
+
+        to {
+            transform: scale(1)
+        }
+    }
+
+    @media screen and (max-width: 300px) {
+        span.psw {
+            display: block;
+            float: none;
+        }
+
+        .cancelbtn {
+            width: 100%;
+        }
+    }
+
+    /*Modal End*/
+
+    .alert {
+        padding: 20px;
+        background-color: #f44336;
+        color: white;
+        margin-bottom: 15px;
+        display: none;
+    }
+
+    .alert.success {
+        background-color: #04AA6D;
+    }
+
+    .alert.info {
+        background-color: #2196F3;
+    }
+
+    .alert.warning {
+        background-color: #ff9800;
+    }
+
+    .closebtn {
+        margin-left: 15px;
+        color: white;
+        font-weight: bold;
+        float: right;
+        font-size: 22px;
+        line-height: 20px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .closebtn:hover {
+        color: black;
+    }
 </style>
 
 <body>
     <div class="topnav">
-        <a href="/home">Home</a>
-        <a class="active" href="#">Star of Libby</a>
-        <a href="/fan">FanArt!</a>
-        <a href="https://cash.app/$shinpi0000" target="_blank">Donate</a>
-        <img src="https://i.imgur.com/lGLKiVd.png" alt="Shinpi" />
+        <a class="active" href="#">Home</a>
+        <a href="/explore">Explore</a>
+        <a href="https://cash.app/$PerezDeDios" target="_blank">Donate</a>
+        <img src="https://i.imgur.com/XjWCCeV.png" alt="Shinpi" onclick="Dropdown()" />
+        <div class="dropdown dropdown-menu-right">
+            <div class="dropdown-content" id="drop">
+                <a href="#">My Account</a>
+                <a href="#">$$Log$$</a>
+            </div>
+        </div>
     </div>
+
     <div class="text">
         <h1>Sign-Up</h1>
     </div>
 
     <div id="id01" class="modal">
-        <form class="modal-content animate" action="/sign-up" method="post">
+        <form class="modal-content animate" id="FormSignUp" action="/sign-up" method="post">
             <div class="container">
-                <label for="icon"><b>Icon URL</b></label>
-                <input type="text" placeholder="Enter Image URL" name="icon" required>
-
+                <label for="icon"><b>Avatar</b></label>
+                <input type="text" placeholder="Enter avatar url" name="icon" autocomplete="off" required />
                 <label for="uname"><b>Username</b></label>
-                <input type="text" placeholder="Enter Username" name="uname" required>
-
+                <input type="text" placeholder="Enter Username" name="uname" autocomplete="off" required />
                 <label for="psw"><b>Password</b></label>
-                <input type="password" placeholder="Enter Password" name="psw" required>
-
+                <input type="password" placeholder="Enter Password" name="psw" required />
                 <label for="dp"><b>Developer Password</b></label>
-                <input type="password" placeholder="Enter Developer Password" name="dp" required>
+                <input type="password" placeholder="Enter Developer Password" name="dp" required />
             </div>
-
             <div class="container" style="background-color:#22303C">
-                <button type="submit" class="cancelbtn">Enter</button>
+                <button type="submit" class="cancelbtn">Sign Up</button>
             </div>
         </form>
     </div>
 
-    <div class="text">
-        <h1>Credits</h1>
-        <p>
-            <ins>Author:</ins>
-            <b>Shinpi</b>
-            </br>
-            <ins>Editor:</ins>
-            <b>Keita</b>
-            </br>
-            <ins>Proofreaders:</ins>
-            <b>BUMAN, Abstraction, Keita, List3</b>
-        </p>
+    <div id="error" class="alert">
+        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+        Error.
+    </div>
+
+    <div id="success" class="alert success">
+        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+        <strong>Success!</strong> Yay.
     </div>
 
     <footer>
         <div class="footer-content">
-            <h3>Copyright © 2023 Orange_Ball</h3>
+            <h3>Copyright © 2023 LonelyBall Media</h3>
             <ul class="socials">
-                <li><a href="https://discord.gg/j3YamACwPu"><i class="fa fa-discord"></i></a></li>
-                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                <li>
+                    <a href="https://discord.gg/j3YamACwPu"><i class="fa fa-discord"></i></a>
+                </li>
+                <li>
+                    <a href="https://twitter.com/LoneOrangeBall"><i class="fa fa-twitter"></i></a>
+                </li>
             </ul>
         </div>
     </footer>
+
+    <script>
+        const form = document.getElementById("FormSignUp");
+        const error = document.getElementById("error");
+        const success = document.getElementById("success");
+
+        form.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const data = Object.fromEntries(new FormData(form).entries());
+            const response = await fetch("/sign-up", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ data }),
+            });
+
+            if (response.ok) {
+                // Display success message here
+                const successData = await response.json();
+                success.innerHTML = `<span class="closebtn">&times;</span>
+            <strong>Success!</strong> ${successData.success}`;
+                success.style.display = "block";
+            } else {
+                const errorData = await response.json();
+                error.innerHTML = `<span class="closebtn">&times;</span>
+        ${errorData.error}`;
+                error.style.display = "block";
+            }
+        });
+    </script>
 </body>
 
 </html>
