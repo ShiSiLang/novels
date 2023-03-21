@@ -186,6 +186,7 @@ app.post("/edit", async (req, res) => {
   let data = await profileShema.find().sort({ username: 1 });
   console.log(data);
   let html = req.body.data;
+  console.log(req.body)
   let user = data.find(
     (v) =>
       v.password === html.psw.replace(/</g, "&lt;") &&
