@@ -113,7 +113,6 @@ app.get("/profile/:username", async (req, res) => {
   let username = req.params.username;
 
   let userData = await profileShema.findOne({ username: username });
-  console.log(userData);
 
   if (!userData) return res.sendFile(dir("error"));
 
@@ -185,8 +184,8 @@ app.post("/sign-up", async (req, res) => {
 app.post("/edit", async (req, res) => {
   let data = await profileShema.find().sort({ username: 1 });
   console.log(data);
-  let html = req.body.data;
-  console.log(req.body)
+  let html = req.body;
+  
   let user = data.find(
     (v) =>
       v.password === html.psw.replace(/</g, "&lt;") &&
