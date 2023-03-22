@@ -21,6 +21,8 @@ app.get("/", (_, res) => res.redirect(link("home")));
 
 app.get("/home", async (_, res) => res.sendFile(dir("home")));
 
+app.get("/sign-in", (_, res) => res.sendFile(dir("sign-in")));
+
 app.get("/sign-up", (_, res) => res.sendFile(dir("sign-up")));
 
 app.get("/discord", (_, res) => res.redirect("https://discord.gg/j3YamACwPu"));
@@ -178,14 +180,36 @@ app.post("/sign-up", async (req, res) => {
     author: false,
   }).save();
 
-  return res.status(200).json({ success: `${html.uname.replace(/</g, "&lt;")} added!` });
+  return res
+    .status(200)
+    .json({ success: `${html.uname.replace(/</g, "&lt;")} added!` });
+});
+
+app.post("/sign-in", async (req, res) => {
+  let html = req.body.data;
+
+  let data = await profileShema.findOne({
+    username: html.uname.replace(/</g, "&lt;"),
+  });
+
+  if (!data)
+    return res
+      .status(400)
+      .json({ error: `Username or password is incorrect.` });
+
+  if (data.password !== html.psw.replace(/</g, "&lt;"))
+    return res
+      .status(400)
+      .json({ error: `Username or password is incorrect.` });
+
+  return res.status(200).json({ success: `Successfully logged you in.` });
 });
 
 app.post("/edit", async (req, res) => {
   let data = await profileShema.find().sort({ username: 1 });
   console.log(data);
   let html = req.body;
-  
+
   let user = data.find(
     (v) =>
       v.password === html.psw.replace(/</g, "&lt;") &&
@@ -240,10 +264,10 @@ app.post("/edit", async (req, res) => {
       v.username === html.uname.replace(/</g, "&lt;")
   );
 
-  console.log(objIndex)
+  console.log(objIndex);
 
   data[objIndex] = params;
-  console.log(data)
+  console.log(data);
   data.save();
 
   return res.status(200).json({ success: `Profile successfully edited.` });

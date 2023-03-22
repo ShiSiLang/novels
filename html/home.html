@@ -321,11 +321,27 @@
     <img src="https://i.imgur.com/XjWCCeV.png" alt="Shinpi" onclick="Dropdown()" />
     <div class="dropdown dropdown-menu-right">
       <div class="dropdown-content" id="drop">
-        <a href="#">My Account</a>
-        <a href="#">$$Log$$</a>
+        <a id="account" href="#">My Account</a>
+        <a id="loso" href="#">$$Log$$</a>
       </div>
     </div>
   </div>
+
+  <script>
+    if (typeof (Storage) !== "undefined") {
+      if (localStorage.loginUser) {
+        console.log(localStorage.loginUser)
+        document.getElementById("loso").innerHTML = "Sign out";
+        console.log(document.getElementById("account"));
+      } else {
+        document.getElementById("loso").innerHTML = "Sign in";
+        document.getElementById("loso").href = "/sign-in";
+      }
+    } else {
+      document.getElementById("loso").innerHTML = "<span>&empty;</span>";
+      document.getElementById("account").innerHTML = "<span>&empty;</span>";
+    }
+  </script>
 
   <script>
     function Dropdown() {

@@ -624,9 +624,9 @@
         const data = Object.fromEntries(new FormData(form).entries());
         const data2 = Object.fromEntries(new FormData(form2).entries());
 
-        console.log(data, data2)
+        console.log(data, data2);
 
-        console.log(e)
+        console.log(e);
         if (data) {
             const response = await fetch("/follow", {
                 method: "POST",
@@ -639,12 +639,12 @@
             if (response.ok) {
                 // Display success message here
                 const successData = await response.json();
-                success.innerHTML = `<span class="closebtn">&times;</span>
+                success.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
         <strong>Success!</strong> ${successData.success}`;
                 success.style.display = "block";
             } else {
                 const errorData = await response.json();
-                error.innerHTML = `<span class="closebtn">&times;</span>
+                error.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
     ${errorData.error}`;
                 error.style.display = "block";
             }
@@ -661,12 +661,12 @@
             if (response.ok) {
                 // Display success message here
                 const successData = await response.json();
-                success.innerHTML = `<span class="closebtn">&times;</span>
+                success.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
         <strong>Success!</strong> ${successData.success}`;
                 success.style.display = "block";
             } else {
                 const errorData = await response.json();
-                error.innerHTML = `<span class="closebtn">&times;</span>
+                error.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
     ${errorData.error}`;
                 error.style.display = "block";
             }
