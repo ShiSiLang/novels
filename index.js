@@ -240,7 +240,10 @@ app.post("/edit", async (req, res) => {
       v.username === html.uname.replace(/</g, "&lt;")
   );
 
+  console.log(objIndex)
+
   data[objIndex] = params;
+  console.log(data)
   data.save();
 
   return res.status(200).json({ success: `Profile successfully edited.` });

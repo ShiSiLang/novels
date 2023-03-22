@@ -623,6 +623,10 @@
         e.preventDefault();
         const data = Object.fromEntries(new FormData(form).entries());
         const data2 = Object.fromEntries(new FormData(form2).entries());
+
+        console.log(data, data2)
+
+        console.log(e)
         if (data) {
             const response = await fetch("/follow", {
                 method: "POST",
