@@ -17,5 +17,5 @@
   <a href="https://discord.gg/j3YamACwPu" target="_blank"> 
     <img src="https://discord.com/api/guilds/760641617136320522/widget.png?style=banner2" alt="Discord Server">
   </a>
-[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/H2H6JPJJV)
 </p>
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/H2H6JPJJV)
