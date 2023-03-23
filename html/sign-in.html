@@ -467,13 +467,15 @@
             });
 
             if (response.ok) {
-                // Display success message here
+                const successData = await response.json();
                 const loginUser = {
                     username: data.uname,
                     password: data.psw,
+                    icon: successData.userIcon,
+                    author: successData.userAuthor,
                 };
                 localStorage.setItem("loginUser", JSON.stringify(loginUser));
-                const successData = await response.json();
+
                 success.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
             <strong>Success!</strong> ${successData.success}`;
                 success.style.display = "block";

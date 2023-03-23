@@ -202,13 +202,22 @@ app.post("/sign-in", async (req, res) => {
       .status(400)
       .json({ error: `Username or password is incorrect.` });
 
-  return res.status(200).json({ success: `Successfully logged you in.` });
+  return res
+    .status(200)
+    .json({
+      success: `Successfully logged you in.`,
+      userIcon: data.icon,
+      userAuthor: data.author,
+    });
 });
 
 app.post("/edit", async (req, res) => {
   let html = req.body.data;
 
-  let data = await profileShema.findOne({ password: html.psw.replace(/</g, "&lt;"), username: html.uname.replace(/</g, "&lt;") });
+  let data = await profileShema.findOne({
+    password: html.psw.replace(/</g, "&lt;"),
+    username: html.uname.replace(/</g, "&lt;"),
+  });
 
   if (!data)
     return res.status(400).json({ error: `Incorrect username or password!` });
@@ -251,16 +260,19 @@ app.post("/edit", async (req, res) => {
   data.icon = params.icon;
   data.discord = params.discord;
   data.twitter = params.twitter;
-  data.save()
+  data.save();
 
   return res.status(200).json({ success: `Profile successfully edited.` });
 });
 
 app.post("/follow", async (req, res) => {
   let html = req.body;
-  console.log(html)
-  let user = await profileShema.findOne({ password: html.psw.replace(/</g, "&lt;"), username: html.uname.replace(/</g, "&lt;") });
-  console.log(user)
+  console.log(html);
+  let user = await profileShema.findOne({
+    password: html.psw.replace(/</g, "&lt;"),
+    username: html.uname.replace(/</g, "&lt;"),
+  });
+  console.log(user);
   if (!user)
     return res.status(400).json({ error: `Incorrect username or password!` });
 
@@ -277,7 +289,6 @@ app.post("/follow", async (req, res) => {
     return res
       .status(200)
       .json({ success: `Successfully unfollowed ${html.follow}!` });
-
   } else {
     user.following.push(html.follow);
     user2.followers += 1;

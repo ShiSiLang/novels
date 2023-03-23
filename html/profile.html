@@ -468,7 +468,7 @@
         <a href="/home">Home</a>
         <a href="/explore">Explore</a>
         <a href="https://cash.app/$PerezDeDios" target="_blank">Donate</a>
-        <img src="https://i.imgur.com/XjWCCeV.png" alt="Shinpi" onclick="Dropdown()" />
+        <img id="userIcon" src="https://i.imgur.com/XjWCCeV.png" alt="Shinpi" onclick="Dropdown()" />
         <div class="dropdown dropdown-menu-right">
             <div class="dropdown-content" id="drop">
                 <a id="account" href="#">My Account</a>
@@ -488,11 +488,12 @@
     </script>
 
     <script>
-        if (typeof (Storage) !== "undefined") {
+        if (typeof Storage !== "undefined") {
             if (localStorage.loginUser) {
                 document.getElementById("loso").innerHTML = "Sign out";
-                let data = JSON.parse(localStorage.loginUser)
+                let data = JSON.parse(localStorage.loginUser);
                 document.getElementById("account").href = `/profile/${data.username}`;
+                document.getElementById("userIcon").src = `${data.icon}`;
             } else {
                 document.getElementById("loso").innerHTML = "Sign in";
                 document.getElementById("loso").href = "/sign-in";
@@ -505,7 +506,7 @@
 
     <script>
         function Dropdown() {
-            let drop = document.getElementById("drop")
+            let drop = document.getElementById("drop");
             if (drop.style.display === "block") {
                 drop.style.display = "none";
             } else {
@@ -541,9 +542,7 @@
             </button>
         </p>
         <p>
-            <button id="fpb">
-                Follow Profile
-            </button>
+            <button id="fpb">Follow Profile</button>
         </p>
     </div>
 
@@ -592,11 +591,16 @@
     </footer>
 
     <script>
-        if (typeof (Storage) !== "undefined") {
+        if (typeof Storage !== "undefined") {
             if (localStorage.loginUser) {
-                let data = JSON.parse(localStorage.loginUser)
-                document.getElementById("inputusername").value = data.username;
-                document.getElementById("inputpass").value = data.password;
+                let data = JSON.parse(localStorage.loginUser);
+                if (data.username === "$$username$$") {
+                    document.getElementById("fpb").style.display = "none";
+                    document.getElementById("inputusername").value = data.username;
+                    document.getElementById("inputpass").value = data.password;
+                } else {
+                    document.getElementById("epb").style.display = "none";
+                }
             } else {
                 document.getElementById("epb").style.display = "none";
                 document.getElementById("fpb").style.display = "none";
@@ -608,10 +612,9 @@
     </script>
 
     <script>
-        const button = document.getElementById('fpb');
-        let data = JSON.parse(localStorage.loginUser)
-        button.addEventListener('click', async _ => {
-
+        const button = document.getElementById("fpb");
+        let data = JSON.parse(localStorage.loginUser);
+        button.addEventListener("click", async (_) => {
             const response = await fetch("/follow", {
                 method: "POST",
                 headers: {
@@ -620,7 +623,7 @@
                 body: JSON.stringify({
                     uname: data.username,
                     psw: data.password,
-                    follow: '$$username$$'
+                    follow: "$$username$$",
                 }),
             });
 
@@ -644,8 +647,8 @@ ${errorData.error}`;
         window.onclick = function (event) {
             if (event.target === modal) {
                 modal.style.display = "none";
-            };
-        }
+            }
+        };
     </script>
 </body>
 <script>
@@ -717,7 +720,7 @@ ${errorData.error}`;
     form.addEventListener("submit", async (e) => {
         e.preventDefault();
         const data = Object.fromEntries(new FormData(form).entries());
-        console.log(data)
+        console.log(data);
 
         const response = await fetch("/edit", {
             method: "POST",
