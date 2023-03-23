@@ -323,10 +323,18 @@
     <div class="dropdown dropdown-menu-right">
       <div class="dropdown-content" id="drop">
         <a id="account" href="#">My Account</a>
-        <a id="loso" href="#">$$Log$$</a>
+        <a id="loso" href="signout">$$Log$$</a>
       </div>
     </div>
   </div>
+
+  <script>
+    if (window.location.protocol === 'https:') {
+      if (href === "signout") {
+        alert("Signing you out!");
+      }
+    }
+  </script>
 
   <script>
     if (typeof (Storage) !== "undefined") {
