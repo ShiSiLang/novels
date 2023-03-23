@@ -555,11 +555,7 @@
         if (typeof (Storage) !== "undefined") {
             if (localStorage.loginUser) {
                 let data = JSON.parse(localStorage.loginUser)
-                console.log(data)
-                const formEdit = document.getElementById("FormEdit");
-                console.log(formEdit)
                 document.getElementById("inputusername").value = data.username;
-                console.log(document.getElementById("inputusername"))
                 document.getElementById("inputpass").value = data.password;
             } else {
                 document.getElementById("epb").style.display = "none";
