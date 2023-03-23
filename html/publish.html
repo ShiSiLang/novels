@@ -198,6 +198,224 @@
     color: #FFFFFF;
     font-size: 35px;
   }
+
+  .flex {
+    display: flex;
+    justify-content: center;
+  }
+
+  button {
+    font-size: 16px;
+    font-family: 'Helvetica', 'Arial', sans-serif;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+    background-color: #22303C;
+    margin-top: 60px;
+    margin-bottom: 60px;
+    margin-right: 40px;
+    margin-left: 40px;
+  }
+
+  .glow-on-hover {
+    font-family: "Roboto", sans-serif;
+    font-size: 1.5em;
+    margin-top: 60px;
+    margin-bottom: 60px;
+    width: 190px;
+    height: 50px;
+    border: none;
+    outline: none;
+    background-color: #22303C;
+    color: #FFFFFF;
+    cursor: pointer;
+    position: relative;
+    z-index: 0;
+    border-radius: 10px;
+  }
+
+  .glow-on-hover:before {
+    content: '';
+    background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    background-size: 400%;
+    z-index: -1;
+    filter: blur(5px);
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    animation: glowing 20s linear infinite;
+    opacity: 0;
+    transition: opacity .3s ease-in-out;
+    border-radius: 10px;
+  }
+
+  .glow-on-hover:active {
+    color: #FFFFFF
+  }
+
+  .glow-on-hover:active:after {
+    background: transparent;
+  }
+
+  .glow-on-hover:hover:before {
+    opacity: 1;
+  }
+
+  .glow-on-hover:after {
+    z-index: -1;
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #22303C;
+    left: 0;
+    top: 0;
+    border-radius: 10px;
+  }
+
+  @keyframes glowing {
+    0% {
+      background-position: 0 0;
+    }
+
+    50% {
+      background-position: 400% 0;
+    }
+
+    100% {
+      background-position: 0 0;
+    }
+  }
+
+  /*Modal*/
+
+  .cancelbtn {
+    width: auto;
+    padding: 10px 18px;
+    background-color: #1DA1F2;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    font-family: 'Open Sans', Verdana, Geneva, Tahoma, sans-serif;
+    color: white;
+  }
+
+  .container input[type=text],
+  .container input[type=password],
+  .container input[type=number] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: none;
+    box-sizing: border-box;
+    color: #535FED;
+    font-family: 'Open Sans', Verdana, Geneva, Tahoma, sans-serif;
+  }
+
+  .container {
+    padding: 16px;
+  }
+
+  .container label {
+    font-family: 'Open Sans', Verdana, Geneva, Tahoma, sans-serif;
+  }
+
+  .container input {
+    background: transparent;
+    outline: none;
+    border: none;
+  }
+
+  .autocomplete {
+    /*the container must be positioned relative:*/
+    position: relative;
+    display: inline-block;
+  }
+
+  .autocomplete-items {
+    position: absolute;
+    border: 1px solid #d4d4d4;
+    border-bottom: none;
+    border-top: none;
+    z-index: 99;
+    /*position the autocomplete items to be the same width as the container:*/
+    top: 100%;
+    left: 0;
+    right: 0;
+  }
+
+  ::placeholder {
+    color: #535FED;
+  }
+
+  span.psw {
+    float: right;
+    padding-top: 16px;
+  }
+
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    padding-top: 60px;
+  }
+
+  .modal-content {
+    background-color: #22303C;
+    color: white;
+    margin: 5% auto 15% auto;
+    border: 1px solid #15202B;
+    width: 80%;
+  }
+
+  .animate {
+    -webkit-animation: animatezoom 0.6s;
+    animation: animatezoom 0.6s
+  }
+
+  @-webkit-keyframes animatezoom {
+    from {
+      -webkit-transform: scale(0)
+    }
+
+    to {
+      -webkit-transform: scale(1)
+    }
+  }
+
+  @keyframes animatezoom {
+    from {
+      transform: scale(0)
+    }
+
+    to {
+      transform: scale(1)
+    }
+  }
+
+  @media screen and (max-width: 300px) {
+    span.psw {
+      display: block;
+      float: none;
+    }
+
+    .cancelbtn {
+      width: 100%;
+    }
+  }
+
+  /*Modal End*/
 </style>
 
 <body>
@@ -260,7 +478,97 @@
     </p>
   </div>
 
-  <!-- If user is logged in and has no author perms show info, else show a text editor with options-->
+  <div class="flex">
+    <button id="pbb" class="glow-on-hover" onclick="document.getElementById('pbmodal').style.display='block'">Publish
+      Book</button>
+    <button id="pcb" class="glow-on-hover" onclick="document.getElementById('pcmodal').style.display='block'">Publish
+      Chapter</button>
+  </div>
+
+  <div id="error" class="alert">
+    <span class="closebtn">&times;</span>
+    Error.
+  </div>
+
+  <div id="success" class="alert success">
+    <span class="closebtn">&times;</span>
+    <strong>Success!</strong> Comment sent.
+  </div>
+
+  <div id="pbmodal" class="modal">
+    <form class="modal-content animate" id="pbForm" action="/publish-book" method="post">
+      <div class="container">
+        <input id="inputusername" type="hidden" name="uname" value="NOTHING" />
+        <input id="inputpass" type="hidden" name="psw" value="NOTHING" />
+
+        <label for="name"><b>Book Name</b></label>
+        <input type="text" placeholder="Enter Book Name" name="name" autocomplete="off" required />
+
+        <label for="description"><b>Book Description</b></label>
+        <input type="text" placeholder="Enter Book Description" name="description" autocomplete="off" required />
+
+        <label for="icon"><b>Book Icon</b></label>
+        <input type="text" placeholder="Enter Book Icon" name="icon" autocomplete="off" required />
+      </div>
+      <div class="container" style="background-color:#22303C">
+        <button type="submit" onclick="document.getElementById('pbmodal').style.display='none'" class="cancelbtn">
+          Publish Book for review
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <div id="pcmodal" class="modal">
+    <form class="modal-content animate" id="pcForm" action="/publish-chapter" method="post">
+      <div class="container">
+        <input id="inputusername" type="hidden" name="uname" value="NOTHING" />
+        <input id="inputpass" type="hidden" name="psw" value="NOTHING" />
+
+        <label for="name"><b>Book Name</b></label>
+        <input type="text" placeholder="Enter Book Name To Find" name="name" autocomplete="on" required />
+
+        <label for="cname"><b>Chapter Name</b></label>
+        <input type="text" placeholder="Enter Chapter Name" name="cname" autocomplete="off" required />
+
+        <label for="into"><b>Chapter Intro</b></label>
+        <input type="text" placeholder="Enter Chapter Intro" name="into" autocomplete="off" />
+
+        <label for="credits"><b>Chapter Credits</b></label>
+        <input type="text" placeholder="Enter Chapter Credits" name="credits" autocomplete="off" />
+
+        <label for="thumbnail"><b>Chapter Thumbnail</b></label>
+        <input type="text" placeholder="Enter Chapter Thumbnail" name="thumbnail" autocomplete="off" required />
+
+        <input id="type" type="hidden" name="type" value="novel" />
+
+        <label for="content"><b>Chapter Content</b></label>
+        <textarea rows="10" cols="50" name="content" form="pcForm" required></textarea>
+      </div>
+      <div class="container" style="background-color:#22303C">
+        <button type="submit" onclick="document.getElementById('pbmodal').style.display='none'" class="cancelbtn">
+          Publish chapter for review
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    if (typeof Storage !== "undefined") {
+      if (localStorage.loginUser) {
+        let data = JSON.parse(localStorage.loginUser);
+        if (data.author === false) {
+          document.getElementById("pbb").style.display = "none";
+          document.getElementById("pcb").style.display = "none";
+        }
+      } else {
+        document.getElementById("pbb").style.display = "none";
+        document.getElementById("pcb").style.display = "none";
+      }
+    } else {
+      document.getElementById("pbb").style.display = "none";
+      document.getElementById("pcb").style.display = "none";
+    }
+  </script>
 
   <footer>
     <div class="footer-content">
