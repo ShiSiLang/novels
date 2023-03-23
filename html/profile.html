@@ -478,6 +478,16 @@
     </div>
 
     <script>
+        document.getElementById("loso").addEventListener("click", async (e) => {
+            if (e.target.innerText === "Sign out") {
+                alert("Signing you out!");
+                localStorage.removeItem("loginUser");
+                window.location.reload();
+            }
+        });
+    </script>
+
+    <script>
         if (typeof (Storage) !== "undefined") {
             if (localStorage.loginUser) {
                 document.getElementById("loso").innerHTML = "Sign out";

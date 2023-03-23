@@ -329,13 +329,11 @@
   </div>
 
   <script>
-    let element = document.getElementById("loso")
-
-
-    element.addEventListener("click", async (e) => {
+    document.getElementById("loso").addEventListener("click", async (e) => {
       if (e.target.innerText === "Sign out") {
         alert("Signing you out!");
         localStorage.removeItem("loginUser");
+        window.location.reload();
       }
     });
   </script>
