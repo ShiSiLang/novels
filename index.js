@@ -207,7 +207,6 @@ app.post("/sign-in", async (req, res) => {
 
 app.post("/edit", async (req, res) => {
   let data = await profileShema.find().sort({ username: 1 });
-  console.log(data);
   let html = req.body.data;
 
   let user = data.find(
@@ -253,12 +252,11 @@ app.post("/edit", async (req, res) => {
       .status(400)
       .json({ error: `Please make sure the twitter link is a valid URL.` });
 
-  data = await profileShema.findOneAndUpdate({ username: data.username }, {
-    icon: params.icon,
-    discord: params.discord,
-    twitter: params.twitter
-  })
-
+  data.icon = params.icon;
+  data.discord = params.discord;
+  data.twitter = params.twitter;
+  console.log(data);
+  data.save()
   console.log(data);
 
   return res.status(200).json({ success: `Profile successfully edited.` });
