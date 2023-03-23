@@ -303,7 +303,7 @@ app.post("/follow", async (req, res) => {
 app.post("/comment", async (req, res) => {
   return res
     .status(400)
-    .json({ error: `Commenting is disabled at the moment` });
+    .json({ error: `Commenting is disabled at the moment.` });
 
   let data = await profileShema.find().sort({ username: 1 });
   console.log(data);
