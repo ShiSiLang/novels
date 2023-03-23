@@ -540,17 +540,20 @@
         const button = document.getElementById('fpb');
         let data = JSON.parse(localStorage.loginUser)
         button.addEventListener('click', async _ => {
-            const response = await fetch('/follow', {
-                method: 'POST',
+
+            const response = await fetch("/follow", {
+                method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: {
+                body: JSON.stringify({
                     uname: data.username,
                     psw: data.password,
                     follow: '$$username$$'
-                }
+                }),
             });
+
+            console.log(response)
 
             if (response.ok) {
                 // Display success message here

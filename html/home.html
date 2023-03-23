@@ -333,7 +333,6 @@
       if (localStorage.loginUser) {
         document.getElementById("loso").innerHTML = "Sign out";
         let data = JSON.parse(localStorage.loginUser)
-        console.log(data)
         document.getElementById("account").href = `/profile/${data.username}`;
       } else {
         document.getElementById("loso").innerHTML = "Sign in";
