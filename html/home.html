@@ -329,11 +329,13 @@
   </div>
 
   <script>
-    if (window.location.protocol === 'https:') {
-      if (href === "signout") {
-        alert("Signing you out!");
+    document.getElementById("loso").on("click", "a", function () {
+      if (window.location.protocol === 'https:') {
+        if (document.getElementById("loso").href === "signout") {
+          alert("Signing you out!");
+        }
       }
-    }
+    });
   </script>
 
   <script>
