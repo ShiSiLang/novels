@@ -74,7 +74,9 @@
   }
 
   .dropdown-menu-right {
-    right: 50px;
+    float: right;
+    top: 57px;
+    right: 160px;
   }
 
   .dropdown-content {
@@ -206,26 +208,37 @@
     <img src="https://i.imgur.com/XjWCCeV.png" alt="Shinpi" onclick="Dropdown()" />
     <div class="dropdown dropdown-menu-right">
       <div class="dropdown-content" id="drop">
-        <a href="#">My Account</a>
-        <a href="#">$$Log$$</a>
+        <a id="account" href="#">My Account</a>
+        <a id="loso" href="#">$$Log$$</a>
       </div>
     </div>
   </div>
 
   <script>
-    var dropdowns = document.getElementById("drop");
-    function Dropdown() {
-      dropdowns.style.display = "block";
+    if (typeof (Storage) !== "undefined") {
+      if (localStorage.loginUser) {
+        document.getElementById("loso").innerHTML = "Sign out";
+        let data = JSON.parse(localStorage.loginUser)
+        document.getElementById("account").href = `/profile/${data.username}`;
+      } else {
+        document.getElementById("loso").innerHTML = "Sign in";
+        document.getElementById("loso").href = "/sign-in";
+      }
+    } else {
+      document.getElementById("loso").innerHTML = "<span>&empty;</span>";
+      document.getElementById("account").innerHTML = "<span>&empty;</span>";
     }
   </script>
 
   <script>
-    var dropdowns = document.getElementById("drop");
-    window.onclick = function (event) {
-      if (event.target === dropdowns) {
-        dropdowns.style.display = "none";
+    function Dropdown() {
+      let drop = document.getElementById("drop")
+      if (drop.style.display === "block") {
+        drop.style.display = "none";
+      } else {
+        drop.style.display = "block";
       }
-    };
+    }
   </script>
 
   <div class="text">

@@ -68,7 +68,35 @@
         animation: glow 1.5s linear infinite alternate;
     }
 
-    .topnav a {
+    .dropdown {
+        display: inline-block;
+        position: relative
+    }
+
+    .dropdown-menu-right {
+        float: right;
+        top: 57px;
+        right: 160px;
+    }
+
+    .dropdown-content {
+        position: absolute;
+        display: none;
+        background-color: #22303C;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+    }
+
+    .dropdown-content a {
+        color: white;
+        padding: 12px 16px;
+        text-decoration: none;
+        font-family: 'Open Sans', Verdana, Geneva, Tahoma, sans-serif;
+        display: block;
+    }
+
+    .topnav>a {
         display: inline-block;
         border-radius: 30px;
         padding: 19px 16px;
@@ -214,11 +242,44 @@
 
 <body>
     <div class="topnav">
-        <a href="/home">Home</a>
-        <a class="active" href="#">Explore</a>
+        <a class="active" href="#">Home</a>
+        <a href="/explore">Explore</a>
         <a href="https://cash.app/$PerezDeDios" target="_blank">Donate</a>
-        <img src="https://i.imgur.com/XjWCCeV.png" alt="Your Account" />
+        <img src="https://i.imgur.com/XjWCCeV.png" alt="Shinpi" onclick="Dropdown()" />
+        <div class="dropdown dropdown-menu-right">
+            <div class="dropdown-content" id="drop">
+                <a id="account" href="#">My Account</a>
+                <a id="loso" href="#">$$Log$$</a>
+            </div>
+        </div>
     </div>
+
+    <script>
+        if (typeof (Storage) !== "undefined") {
+            if (localStorage.loginUser) {
+                document.getElementById("loso").innerHTML = "Sign out";
+                let data = JSON.parse(localStorage.loginUser)
+                document.getElementById("account").href = `/profile/${data.username}`;
+            } else {
+                document.getElementById("loso").innerHTML = "Sign in";
+                document.getElementById("loso").href = "/sign-in";
+            }
+        } else {
+            document.getElementById("loso").innerHTML = "<span>&empty;</span>";
+            document.getElementById("account").innerHTML = "<span>&empty;</span>";
+        }
+    </script>
+
+    <script>
+        function Dropdown() {
+            let drop = document.getElementById("drop")
+            if (drop.style.display === "block") {
+                drop.style.display = "none";
+            } else {
+                drop.style.display = "block";
+            }
+        }
+    </script>
 
     <div class="text">
         <h1>Find your next favorite story.</h1>
