@@ -323,7 +323,7 @@
     <div class="dropdown dropdown-menu-right">
       <div class="dropdown-content" id="drop">
         <a id="account" href="#">My Account</a>
-        <a id="loso" href="#">$$Log$$</a>
+        <a id="loso" href="signout">$$Log$$</a>
       </div>
     </div>
   </div>
@@ -333,13 +333,12 @@
 
 
     element.addEventListener("click", async (e) => {
-      console.log(e)
+      e.preventDefault()
+      console.log(e.target.href)
 
-      /*if (window.location.protocol === 'https:') {
-        if (document.getElementById("loso").href === "signout") {
-          alert("Signing you out!");
-        }
-      }*/
+      if (e.target.href === "signout") {
+        alert("Signing you out!");
+      }
     });
   </script>
 
