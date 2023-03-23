@@ -454,6 +454,22 @@
         </div>
     </div>
 
+    <script>
+        if (typeof (Storage) !== "undefined") {
+            if (localStorage.loginUser) {
+                let data = JSON.parse(localStorage.loginUser)
+                document.getElementById("inputusername").value = data.username;
+                document.getElementById("inputpass").value = data.password;
+            } else {
+                document.getElementById("epb").style.display = "none";
+                document.getElementById("fpb").style.display = "none";
+            }
+        } else {
+            document.getElementById("epb").style.display = "none";
+            document.getElementById("fpb").style.display = "none";
+        }
+    </script>
+
     <div class="card">
         <img src="$$avatar$$" alt="User Avatar" style="width:100%" />
         <h1 class="title">$$username$$</h1>
@@ -465,24 +481,55 @@
             <a href="$$twitter$$"><i class="fa fa-twitter"></i></a>
         </div>
         <p>
-            <button onclick="document.getElementById('id01').style.display='block'">
+            <button id="epb" onclick="document.getElementById('id01').style.display='block'">
                 Edit Profile
             </button>
         </p>
         <p>
-            <button onclick="document.getElementById('follow').style.display='block'">
+            <button id="fpb">
                 Follow Profile
             </button>
         </p>
     </div>
 
+    <script>
+        const button = document.getElementById('fpb');
+        let data = JSON.parse(localStorage.loginUser)
+        button.addEventListener('click', async _ => {
+
+
+            const response = await fetch('/follow', {
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: {
+                    uname: data.username,
+                    psw: data.password,
+                    follow: $$username$$
+                }
+            });
+
+            if (response.ok) {
+                // Display success message here
+                const successData = await response.json();
+                success.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+        <strong>Success!</strong> ${successData.success}`;
+                success.style.display = "block";
+            } else {
+                const errorData = await response.json();
+                error.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+    ${errorData.error}`;
+                error.style.display = "block";
+            }
+        });
+    </script>
+
     <div id="id01" class="modal">
         <form class="modal-content animate" id="FormEdit" action="/edit" method="post">
             <div class="container">
-                <label for="uname"><b>Username</b></label>
-                <input type="text" placeholder="Enter Username" name="uname" autocomplete="off" required />
-                <label for="psw"><b>Password</b></label>
-                <input type="password" placeholder="Enter Password" name="psw" required />
+                <input id="inputusername" type="hidden" name="uname" value="NOTHING" />
+                <input id="inputpass" type="hidden" name="psw" value="NOTHING" />
                 <label for="newicon"><b>Edit Avatar</b></label>
                 <input type="text" placeholder="Enter new avatar" name="newicon" autocomplete="off" />
                 <label for="discord"><b>Edit Discord Link</b></label>
@@ -493,24 +540,6 @@
             <div class="container" style="background-color:#22303C">
                 <button type="submit" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">
                     Login & Edit
-                </button>
-            </div>
-        </form>
-    </div>
-
-    <div id="follow" class="modal">
-        <form class="modal-content animate" id="FormFollow" action="/follow" method="post">
-            <div class="container">
-                <label for="uname"><b>Username</b></label>
-                <input type="text" placeholder="Enter Username" name="uname" autocomplete="off" required />
-                <label for="psw"><b>Password</b></label>
-                <input type="password" placeholder="Enter Password" name="psw" required />
-                <input type="hidden" name="follow" value="$$username$$" />
-            </div>
-            <div class="container" style="background-color:#22303C">
-                <button type="submit" onclick="document.getElementById('follow').style.display='none'"
-                    class="cancelbtn">
-                    Login & Follow
                 </button>
             </div>
         </form>
@@ -542,14 +571,11 @@
 
     <script>
         var modal = document.getElementById("id01");
-        var followModal = document.getElementById("follow");
         window.onclick = function (event) {
             if (event.target === modal) {
                 modal.style.display = "none";
-            } else if (event.target === followModal) {
-                followModal.style.display = "none";
-            }
-        };
+            };
+        }
     </script>
 </body>
 <script>
@@ -614,41 +640,13 @@
 </script>
 
 <script>
-    const form = document.getElementById("FormFollow");
-    const form2 = document.getElementById("FormEdit");
+    const form = document.getElementById("FormEdit");
     const error = document.getElementById("error");
     const success = document.getElementById("success");
 
     form.addEventListener("submit", async (e) => {
         e.preventDefault();
-        const data2 = Object.fromEntries(new FormData(form).entries());
-        console.log(data2)
-
-        const response = await fetch("/follow", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ data2 }),
-        });
-
-        if (response.ok) {
-            // Display success message here
-            const successData = await response.json();
-            success.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-        <strong>Success!</strong> ${successData.success}`;
-            success.style.display = "block";
-        } else {
-            const errorData = await response.json();
-            error.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-    ${errorData.error}`;
-            error.style.display = "block";
-        }
-    });
-
-    form2.addEventListener("submit", async (e) => {
-        e.preventDefault();
-        const data = Object.fromEntries(new FormData(form2).entries());
+        const data = Object.fromEntries(new FormData(form).entries());
         console.log(data)
 
         const response = await fetch("/edit", {
