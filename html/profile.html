@@ -619,57 +619,56 @@
     const error = document.getElementById("error");
     const success = document.getElementById("success");
 
+    form2.addEventListener("submit", async (e) => {
+        const data2 = Object.fromEntries(new FormData(form2).entries());
+
+        const response = await fetch("/edit", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ data2 }),
+        });
+
+        if (response.ok) {
+            // Display success message here
+            const successData = await response.json();
+            success.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+        <strong>Success!</strong> ${successData.success}`;
+            success.style.display = "block";
+        } else {
+            const errorData = await response.json();
+            error.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+    ${errorData.error}`;
+            error.style.display = "block";
+        }
+
+    })
+
     form.addEventListener("submit", async (e) => {
         e.preventDefault();
         const data = Object.fromEntries(new FormData(form).entries());
-        const data2 = Object.fromEntries(new FormData(form2).entries());
-
-        console.log(data, data2);
 
         console.log(e);
-        if (data) {
-            const response = await fetch("/follow", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({ data }),
-            });
+        const response = await fetch("/follow", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ data }),
+        });
 
-            if (response.ok) {
-                // Display success message here
-                const successData = await response.json();
-                success.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+        if (response.ok) {
+            // Display success message here
+            const successData = await response.json();
+            success.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
         <strong>Success!</strong> ${successData.success}`;
-                success.style.display = "block";
-            } else {
-                const errorData = await response.json();
-                error.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+            success.style.display = "block";
+        } else {
+            const errorData = await response.json();
+            error.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
     ${errorData.error}`;
-                error.style.display = "block";
-            }
-        }
-        if (data2) {
-            const response = await fetch("/edit", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({ data2 }),
-            });
-
-            if (response.ok) {
-                // Display success message here
-                const successData = await response.json();
-                success.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-        <strong>Success!</strong> ${successData.success}`;
-                success.style.display = "block";
-            } else {
-                const errorData = await response.json();
-                error.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-    ${errorData.error}`;
-                error.style.display = "block";
-            }
+            error.style.display = "block";
         }
     });
 </script>
