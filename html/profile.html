@@ -454,25 +454,6 @@
         </div>
     </div>
 
-    <script>
-        if (typeof (Storage) !== "undefined") {
-            if (localStorage.loginUser) {
-                let data = JSON.parse(localStorage.loginUser)
-                console.log(data)
-                const formEdit = document.getElementById("FormEdit");
-                console.log(formEdit)
-                document.getElementById("inputusername").value = data.username;
-                document.getElementById("inputpass").value = data.password;
-            } else {
-                document.getElementById("epb").style.display = "none";
-                document.getElementById("fpb").style.display = "none";
-            }
-        } else {
-            document.getElementById("epb").style.display = "none";
-            document.getElementById("fpb").style.display = "none";
-        }
-    </script>
-
     <div class="card">
         <img src="$$avatar$$" alt="User Avatar" style="width:100%" />
         <h1 class="title">$$username$$</h1>
@@ -569,6 +550,25 @@
             </ul>
         </div>
     </footer>
+
+    <script>
+        if (typeof (Storage) !== "undefined") {
+            if (localStorage.loginUser) {
+                let data = JSON.parse(localStorage.loginUser)
+                console.log(data)
+                const formEdit = document.getElementById("FormEdit");
+                console.log(formEdit)
+                document.getElementById("inputusername").value = data.username;
+                document.getElementById("inputpass").value = data.password;
+            } else {
+                document.getElementById("epb").style.display = "none";
+                document.getElementById("fpb").style.display = "none";
+            }
+        } else {
+            document.getElementById("epb").style.display = "none";
+            document.getElementById("fpb").style.display = "none";
+        }
+    </script>
 
     <script>
         var modal = document.getElementById("id01");
