@@ -257,8 +257,8 @@ app.post("/edit", async (req, res) => {
 });
 
 app.post("/follow", async (req, res) => {
-  let html = req.body.data;
-
+  let html = req.body;
+  console.log(req.body)
   let user = await profileShema.findOne({ password: html.psw.replace(/</g, "&lt;"), username: html.uname.replace(/</g, "&lt;") });
   console.log(user)
   if (!user)
