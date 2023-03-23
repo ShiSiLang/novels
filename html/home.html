@@ -329,12 +329,17 @@
   </div>
 
   <script>
-    document.getElementById("loso").on("click", "a", function () {
-      if (window.location.protocol === 'https:') {
+    let element = document.getElementById("loso")
+
+
+    element.addEventListener("click", async (e) => {
+      console.log(e)
+
+      /*if (window.location.protocol === 'https:') {
         if (document.getElementById("loso").href === "signout") {
           alert("Signing you out!");
         }
-      }
+      }*/
     });
   </script>
 
