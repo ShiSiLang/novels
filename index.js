@@ -206,21 +206,17 @@ app.post("/sign-in", async (req, res) => {
 });
 
 app.post("/edit", async (req, res) => {
-  let data = await profileShema.find().sort({ username: 1 });
   let html = req.body.data;
 
-  let user = data.find(
-    (v) =>
-      v.password === html.psw.replace(/</g, "&lt;") &&
-      v.username === html.uname.replace(/</g, "&lt;")
-  );
-  if (!user)
+  let data = await profileShema.findOne({ password: html.psw.replace(/</g, "&lt;"), username: html.uname.replace(/</g, "&lt;") });
+
+  if (!data)
     return res.status(400).json({ error: `Incorrect username or password!` });
 
   let params = {
-    icon: html?.newicon || user.icon,
-    discord: html?.discord || user?.discord || null,
-    twitter: html?.twitter || user?.twitter || null,
+    icon: html?.newicon || data.icon,
+    discord: html?.discord || data?.discord || null,
+    twitter: html?.twitter || data?.twitter || null,
   };
 
   function isImage(url) {
