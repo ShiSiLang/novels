@@ -219,12 +219,7 @@ app.post("/edit", async (req, res) => {
     return res.status(400).json({ error: `Incorrect username or password!` });
 
   let params = {
-    username: user.username,
-    password: user.password,
     icon: html?.newicon || user.icon,
-    date: user?.date || "1/13/2023",
-    followers: user?.followers || 0,
-    following: user?.following || [],
     discord: html?.discord || user?.discord || null,
     twitter: html?.twitter || user?.twitter || null,
   };
@@ -258,17 +253,13 @@ app.post("/edit", async (req, res) => {
       .status(400)
       .json({ error: `Please make sure the twitter link is a valid URL.` });
 
-  let objIndex = data.findIndex(
-    (v) =>
-      v.password === html.psw.replace(/</g, "&lt;") &&
-      v.username === html.uname.replace(/</g, "&lt;")
-  );
+  data = await profileShema.findOneAndUpdate({ username: data.username }, {
+    icon: params.icon,
+    discord: params.discord,
+    twitter: params.twitter
+  })
 
-  console.log(objIndex);
-
-  data[objIndex] = params;
   console.log(data);
-  data = await profileShema.findOneAndUpdate({ username: data.username })
 
   return res.status(200).json({ success: `Profile successfully edited.` });
 });
