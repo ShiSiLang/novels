@@ -459,7 +459,9 @@
             if (localStorage.loginUser) {
                 let data = JSON.parse(localStorage.loginUser)
                 console.log(data)
-                console.log(document.getElementById("inputusername"))
+                const form = document.getElementById("FormEdit")
+                const inputData = new FormData(form)
+                console.log(inputData)
                 document.getElementById("inputusername").value = data.username;
                 document.getElementById("inputpass").value = data.password;
             } else {
