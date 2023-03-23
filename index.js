@@ -251,63 +251,41 @@ app.post("/edit", async (req, res) => {
   data.icon = params.icon;
   data.discord = params.discord;
   data.twitter = params.twitter;
-  console.log(data);
   data.save()
-  console.log(data);
 
   return res.status(200).json({ success: `Profile successfully edited.` });
 });
 
 app.post("/follow", async (req, res) => {
-  let data = await profileShema.find().sort({ username: 1 });
-  console.log(data);
   let html = req.body.data;
-  let user = data.find(
-    (v) =>
-      v.password === html.psw.replace(/</g, "&lt;") &&
-      v.username === html.uname.replace(/</g, "&lt;")
-  );
 
+  let user = await profileShema.findOne({ password: html.psw.replace(/</g, "&lt;"), username: html.uname.replace(/</g, "&lt;") });
+  console.log(user)
   if (!user)
     return res.status(400).json({ error: `Incorrect username or password!` });
 
-  if (html.uname === html.follow)
+  if (user.username === html.follow)
     return res.status(400).json({ error: `You cannot follow yourself!` });
 
-  let user2 = data.find((v) => v.username === html.follow);
+  let user2 = await profileShema.findOne({ username: html.follow });
 
   if (user.following.includes(html.follow)) {
-    let objIndex = data.findIndex(
-      (v) =>
-        v.password === html.psw.replace(/</g, "&lt;") &&
-        v.username === html.uname.replace(/</g, "&lt;")
-    );
-    let objIndex2 = data.findIndex((v) => v.username === html.follow);
+    user.following.splice(index, 1);
+    user2.followers -= 1;
+    user.save();
+    user2.save();
+    return res
+      .status(200)
+      .json({ success: `Successfully unfollowed ${html.follow}!` });
 
-    if (objIndex > -1 && objIndex2 > -1) {
-      data[objIndex].following.splice(index, 1);
-      data[objIndex2].followers -= 1;
-      data.save();
-      return res
-        .status(200)
-        .json({ success: `Successfully unfollowed ${html.follow}!` });
-    }
   } else {
-    let objIndex = data.findIndex(
-      (v) =>
-        v.password === html.psw.replace(/</g, "&lt;") &&
-        v.username === html.uname.replace(/</g, "&lt;")
-    );
-    let objIndex2 = data.findIndex((v) => v.username === html.follow);
-
-    if (objIndex > -1 && objIndex2 > -1) {
-      data[objIndex].following.push(html.follow);
-      data[objIndex2].followers += 1;
-      data.save();
-      return res
-        .status(200)
-        .json({ success: `Successfully followed ${html.follow}!` });
-    }
+    user.following.push(html.follow);
+    user2.followers += 1;
+    user.save();
+    user2.save();
+    return res
+      .status(200)
+      .json({ success: `Successfully followed ${html.follow}!` });
   }
 });
 
