@@ -268,7 +268,7 @@ app.post("/edit", async (req, res) => {
 
   data[objIndex] = params;
   console.log(data);
-  data.save();
+  data = await profileShema.findOneAndUpdate({ username: data.username })
 
   return res.status(200).json({ success: `Profile successfully edited.` });
 });
