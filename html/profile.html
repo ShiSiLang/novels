@@ -620,7 +620,9 @@
     const success = document.getElementById("success");
 
     form2.addEventListener("submit", async (e) => {
+        e.preventDefault();
         const data2 = Object.fromEntries(new FormData(form2).entries());
+        console.log(data2)
 
         const response = await fetch("/edit", {
             method: "POST",
@@ -648,8 +650,8 @@
     form.addEventListener("submit", async (e) => {
         e.preventDefault();
         const data = Object.fromEntries(new FormData(form).entries());
+        console.log(data)
 
-        console.log(e);
         const response = await fetch("/follow", {
             method: "POST",
             headers: {
