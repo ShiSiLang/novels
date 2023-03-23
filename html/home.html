@@ -331,9 +331,10 @@
   <script>
     if (typeof (Storage) !== "undefined") {
       if (localStorage.loginUser) {
-        console.log(localStorage.loginUser)
         document.getElementById("loso").innerHTML = "Sign out";
-        console.log(document.getElementById("account"));
+        let data = JSON.parse(localStorage.loginUser)
+        console.log(data)
+        document.getElementById("account").href = `/profile/${data.username}`;
       } else {
         document.getElementById("loso").innerHTML = "Sign in";
         document.getElementById("loso").href = "/sign-in";
