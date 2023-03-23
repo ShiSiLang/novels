@@ -476,37 +476,6 @@
         </p>
     </div>
 
-    <script>
-        const button = document.getElementById('fpb');
-        let data = JSON.parse(localStorage.loginUser)
-        button.addEventListener('click', async _ => {
-            const response = await fetch('/follow', {
-                method: 'POST',
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: {
-                    uname: data.username,
-                    psw: data.password,
-                    follow: '$$username$$'
-                }
-            });
-
-            if (response.ok) {
-                // Display success message here
-                const successData = await response.json();
-                success.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-        <strong>Success!</strong> ${successData.success}`;
-                success.style.display = "block";
-            } else {
-                const errorData = await response.json();
-                error.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-    ${errorData.error}`;
-                error.style.display = "block";
-            }
-        });
-    </script>
-
     <div id="id01" class="modal">
         <form class="modal-content animate" id="FormEdit" action="/edit" method="post">
             <div class="container">
@@ -565,6 +534,37 @@
             document.getElementById("epb").style.display = "none";
             document.getElementById("fpb").style.display = "none";
         }
+    </script>
+
+    <script>
+        const button = document.getElementById('fpb');
+        let data = JSON.parse(localStorage.loginUser)
+        button.addEventListener('click', async _ => {
+            const response = await fetch('/follow', {
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: {
+                    uname: data.username,
+                    psw: data.password,
+                    follow: '$$username$$'
+                }
+            });
+
+            if (response.ok) {
+                // Display success message here
+                const successData = await response.json();
+                success.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+    <strong>Success!</strong> ${successData.success}`;
+                success.style.display = "block";
+            } else {
+                const errorData = await response.json();
+                error.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+${errorData.error}`;
+                error.style.display = "block";
+            }
+        });
     </script>
 
     <script>
