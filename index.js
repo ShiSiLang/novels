@@ -208,7 +208,7 @@ app.post("/sign-in", async (req, res) => {
 app.post("/edit", async (req, res) => {
   let data = await profileShema.find().sort({ username: 1 });
   console.log(data);
-  let html = req.body;
+  let html = req.body.data;
 
   let user = data.find(
     (v) =>
