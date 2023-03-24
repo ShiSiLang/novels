@@ -16,26 +16,14 @@
   <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.1.1/css/all.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
+<link href='https://fonts.googleapis.com/css?family=Nunito' rel='stylesheet'>
 <style>
   body {
     background-size: 400% 400%;
     margin: 0;
-    background-color: #15202B;
-  }
-
-  div {
-    animation: fadeInUp 0.9s;
-  }
-
-  @keyframes fadeInUp {
-    from {
-      transform: translate3d(0, 150px, 0);
-    }
-
-    to {
-      transform: translate3d(0, 0, 0);
-      opacity: 1;
-    }
+    background-color: #ffcc99;
+    font-family: 'Nunito';
+    font-size: 22px;
   }
 
   .flex {
@@ -45,7 +33,7 @@
 
   .topnav {
     width: 100%;
-    background-color: #22303C;
+    background-color: #967bb6;
   }
 
   .topnav img {
@@ -64,8 +52,22 @@
   .topnav img:hover {
     transform: scale(1.1);
     border-radius: 40%;
-    box-shadow: 0px 0px 9px 4px #818589;
-    animation: glow 1.5s linear infinite alternate;
+    /*box-shadow: 0px 0px 10px #967bb6;*/
+    animation: fade-in-out 1s ease-in-out infinite;
+  }
+
+  @keyframes fade-in-out {
+    0% {
+      opacity: 1;
+    }
+
+    50% {
+      opacity: 0.5;
+    }
+
+    100% {
+      opacity: 1;
+    }
   }
 
   .dropdown {
@@ -82,9 +84,9 @@
   .dropdown-content {
     position: absolute;
     display: none;
-    background-color: #22303C;
+    background-color: #967bb6;
     min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 0px 10px #967bb6;
     z-index: 1;
   }
 
@@ -105,23 +107,16 @@
     font-size: 1.0em;
     font-weight: 650;
     text-decoration: none;
-    /*text-transform: uppercase;*/
     color: white;
   }
 
   .topnav a.active {
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: #5c4981;
   }
 
   .topnav a:hover {
     background-color: white;
-    color: #161919;
-  }
-
-  @keyframes glow {
-    to {
-      box-shadow: 0px 0px 30px 20px #535FED;
-    }
+    color: black;
   }
 
   footer {

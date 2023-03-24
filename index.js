@@ -203,13 +203,11 @@ app.post("/sign-in", async (req, res) => {
       .status(400)
       .json({ error: `Username or password is incorrect.` });
 
-  return res
-    .status(200)
-    .json({
-      success: `Successfully logged you in.`,
-      userIcon: data.icon,
-      userAuthor: data.author,
-    });
+  return res.status(200).json({
+    success: `Successfully logged you in.`,
+    userIcon: data.icon,
+    userAuthor: data.author,
+  });
 });
 
 app.post("/publish-book", async (req, res) => {
@@ -251,27 +249,24 @@ app.post("/publish-book", async (req, res) => {
         description: html.description.replace(/</g, "&lt;"),
         image: { url: html.icon.replace(/</g, "&lt;") },
         footer: { text: newID },
-      }
+      },
     ],
-    username: "New Book Post"
+    username: "New Book Post",
   };
-await axios({
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json',
-  },
-  data: JSON.stringify(params),
-  url: webhook_url,
-}).catch((err) => {
-  console.log(err)
-  return res
-    .status(400)
-    .json({ error: `An error has occured.` });
-});
-
-res.status(200).json({ success: `Successfully published for review!` });
-
+  await axios({
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    data: JSON.stringify(params),
+    url: webhook_url,
+  }).catch((err) => {
+    console.log(err);
+    return res.status(400).json({ error: `An error has occured.` });
   });
+
+  res.status(200).json({ success: `Successfully published for review!` });
+});
 
 app.post("/edit", async (req, res) => {
   let html = req.body.data;

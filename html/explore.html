@@ -14,30 +14,18 @@
     <meta name="theme-color" content="#cbc3e3" />
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.1.1/css/all.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
 </head>
+<link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" />
 <style>
     body {
         background-size: 400% 400%;
         margin: 0;
         background-color: #ffcc99;
-    }
-/*
-    div {
-        animation: fadeInUp 0.9s;
+        font-family: 'Nunito';
+        font-size: 22px;
     }
 
-    @keyframes fadeInUp {
-        from {
-            transform: translate3d(0, 150px, 0);
-        }
-
-        to {
-            transform: translate3d(0, 0, 0);
-            opacity: 1;
-        }
-    }
-*/
     .flex {
         display: flex;
         justify-content: center;
@@ -62,23 +50,25 @@
     }
 
     .topnav img:hover {
-  transform: scale(1.1);
-  border-radius: 40%;
-  /*box-shadow: 0px 0px 10px #967bb6;*/
-  animation: fade-in-out 1s ease-in-out infinite;
-}
+        transform: scale(1.1);
+        border-radius: 40%;
+        /*box-shadow: 0px 0px 10px #967bb6;*/
+        animation: fade-in-out 1s ease-in-out infinite;
+    }
 
-@keyframes fade-in-out {
-  0% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.5;
-  }
-  100% {
-    opacity: 1;
-  }
-}
+    @keyframes fade-in-out {
+        0% {
+            opacity: 1;
+        }
+
+        50% {
+            opacity: 0.5;
+        }
+
+        100% {
+            opacity: 1;
+        }
+    }
 
     .dropdown {
         display: inline-block;
@@ -96,7 +86,7 @@
         display: none;
         background-color: #967bb6;
         min-width: 160px;
-box-shadow: 0px 0px 10px #967bb6;
+        box-shadow: 0px 0px 10px #967bb6;
         z-index: 1;
     }
 
@@ -121,19 +111,18 @@ box-shadow: 0px 0px 10px #967bb6;
     }
 
     .topnav a.active {
-  background-color: #5c4981;
-}
+        background-color: #5c4981;
+    }
 
-.topnav a:hover {
-  background-color: white;
-  color: black;
-}
-
+    .topnav a:hover {
+        background-color: white;
+        color: black;
+    }
 
     footer {
         width: 100vw;
         height: auto;
-background-color: #967bb6;
+        background-color: #967bb6;
         font-family: 'Open Sans', Verdana, Geneva, Tahoma, sans-serif;
         padding-top: 40px;
         color: white;
@@ -184,25 +173,11 @@ background-color: #967bb6;
         padding-bottom: 25px;
     }
 
-    .text h1 {
+    .text h1,
+    h2,
+    p {
         text-align: center;
-        font-family: 'Open Sans', Verdana, Geneva, Tahoma, sans-serif;
         color: #FFFFFF;
-        font-size: 55px;
-    }
-
-    .text h2 {
-        text-align: center;
-        font-family: 'Open Sans', Verdana, Geneva, Tahoma, sans-serif;
-        color: #FFFFFF;
-        font-size: 40px;
-    }
-
-    .text p {
-        text-align: center;
-        font-family: 'Open Sans', Verdana, Geneva, Tahoma, sans-serif;
-        color: #FFFFFF;
-        font-size: 35px;
     }
 
     .image-grid {
@@ -289,7 +264,7 @@ background-color: #967bb6;
 
     <script>
         function Dropdown() {
-            let drop = document.getElementById("drop")
+            let drop = document.getElementById("drop");
             if (drop.style.display === "block") {
                 drop.style.display = "none";
             } else {
@@ -306,14 +281,14 @@ background-color: #967bb6;
 
     <div class="image-grid">
         <a class="image-grid-col-2 image-grid-row-2" href="/explore/1"><img src="https://i.imgur.com/lGLKiVd.png"
-                alt="Star of Libby, Adios Hogar Mio"></a>
-        <a href="#"><img src="https://i.imgur.com/XjWCCeV.png" alt="Test"></a>
-        <a href="#"><img src="https://i.imgur.com/XjWCCeV.png" alt="Test"></a>
-        <a href="#"><img src="https://i.imgur.com/XjWCCeV.png" alt="Test1"></a>
-        <a href="#"><img src="https://i.imgur.com/XjWCCeV.png" alt="Test"></a>
-        <a href="#"><img src="https://i.imgur.com/XjWCCeV.png" alt="Test"></a>
-        <a href="#"><img src="https://i.imgur.com/XjWCCeV.png" alt="Test"></a>
-        <a href="#"><img src="https://i.imgur.com/XjWCCeV.png" alt="Test"></a>
+                alt="Star of Libby, Adios Hogar Mio" /></a>
+        <a href="#"><img src="https://i.imgur.com/XjWCCeV.png" alt="Test" /></a>
+        <a href="#"><img src="https://i.imgur.com/XjWCCeV.png" alt="Test" /></a>
+        <a href="#"><img src="https://i.imgur.com/XjWCCeV.png" alt="Test1" /></a>
+        <a href="#"><img src="https://i.imgur.com/XjWCCeV.png" alt="Test" /></a>
+        <a href="#"><img src="https://i.imgur.com/XjWCCeV.png" alt="Test" /></a>
+        <a href="#"><img src="https://i.imgur.com/XjWCCeV.png" alt="Test" /></a>
+        <a href="#"><img src="https://i.imgur.com/XjWCCeV.png" alt="Test" /></a>
     </div>
 
     <footer>
