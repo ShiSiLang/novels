@@ -7,45 +7,24 @@
    <link rel="icon" type="icon" href="https://i.imgur.com/lGLKiVd.png" />
    <title>LonelyBall Media - 404</title>
 </head>
+<link href='https://fonts.googleapis.com/css?family=Nunito' rel='stylesheet'>
 <style>
    body {
       background-size: 400% 400%;
       margin: 0;
-      background-color: #15202B;
+      background-color: #ffcc99;
+      font-family: 'Nunito';
+      font-size: 22px;
    }
 
-   div {
-      animation: fadeInUp 0.9s;
-   }
-
-   @keyframes fadeInUp {
-      from {
-         transform: translate3d(0, 150px, 0);
-      }
-
-      to {
-         transform: translate3d(0, 0, 0);
-         opacity: 1;
-      }
-   }
-
-   @keyframes gradient {
-      0% {
-         background-position: 0% 50%;
-      }
-
-      50% {
-         background-position: 100% 50%;
-      }
-
-      100% {
-         background-position: 0% 50%;
-      }
+   .flex {
+      display: flex;
+      justify-content: center;
    }
 
    .topnav {
       width: 100%;
-      background-color: #22303C;
+      background-color: #967bb6;
    }
 
    .topnav img {
@@ -64,11 +43,52 @@
    .topnav img:hover {
       transform: scale(1.1);
       border-radius: 40%;
-      box-shadow: 0px 0px 9px 4px #818589;
-      animation: glow 1.5s linear infinite alternate;
+      animation: fade-in-out 1s ease-in-out infinite;
    }
 
-   .topnav a {
+   @keyframes fade-in-out {
+      0% {
+         opacity: 1;
+      }
+
+      50% {
+         opacity: 0.5;
+      }
+
+      100% {
+         opacity: 1;
+      }
+   }
+
+   .dropdown {
+      display: inline-block;
+      position: relative
+   }
+
+   .dropdown-menu-right {
+      float: right;
+      top: 57px;
+      right: 160px;
+   }
+
+   .dropdown-content {
+      position: absolute;
+      display: none;
+      background-color: #967bb6;
+      min-width: 160px;
+      box-shadow: 0px 0px 10px #967bb6;
+      z-index: 1;
+   }
+
+   .dropdown-content a {
+      color: white;
+      padding: 12px 16px;
+      text-decoration: none;
+      font-family: 'Open Sans', Verdana, Geneva, Tahoma, sans-serif;
+      display: block;
+   }
+
+   .topnav>a {
       display: inline-block;
       border-radius: 30px;
       padding: 19px 16px;
@@ -77,32 +97,25 @@
       font-size: 1.0em;
       font-weight: 650;
       text-decoration: none;
-      /*text-transform: uppercase;*/
       color: white;
    }
 
    .topnav a.active {
-      background-color: rgba(0, 0, 0, 0.2);
+      background-color: #5c4981;
    }
 
    .topnav a:hover {
       background-color: white;
-      color: #161919;
-   }
-
-   @keyframes glow {
-      to {
-         box-shadow: 0px 0px 30px 20px #535FED;
-      }
+      color: black;
    }
 
    footer {
       width: 100vw;
       height: auto;
-      background-image: linear-gradient(315deg, #192734 0, #22303C 74%);
+      background-color: #967bb6;
       font-family: 'Open Sans', Verdana, Geneva, Tahoma, sans-serif;
       padding-top: 40px;
-      color: #fefefe;
+      color: white;
    }
 
    .footer-content {
@@ -143,26 +156,18 @@
    }
 
    .socials a:hover i {
-      color: aqua;
+      color: #ffcc99;
    }
 
    .text {
-      padding-bottom: 72px;
+      padding-bottom: 25px;
    }
 
-   .text h1 {
+   .text h1,
+   h2,
+   p {
       text-align: center;
-      font-family: 'Open Sans', Verdana, Geneva, Tahoma, sans-serif;
       color: #FFFFFF;
-      font-size: 55px;
-      text-transform: uppercase;
-   }
-
-   .text p {
-      text-align: center;
-      font-family: 'Open Sans', Verdana, Geneva, Tahoma, sans-serif;
-      color: #FFFFFF;
-      font-size: 35px;
    }
 
    .center {
