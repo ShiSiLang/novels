@@ -120,7 +120,7 @@ let data = await reviewShema.findOne({ reviewID: ID })
 }
 if (type === "deny") {
 }
-)};
+});
 
 app.get("/profile/:username", async (req, res) => {
   let username = req.params.username;
