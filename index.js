@@ -242,7 +242,7 @@ app.post("/publish-book", async (req, res) => {
     reviewID: newID,
   }).save();
 
-  let webhook_url = "https://discord.com/api/webhooks/1088653437287280751/1jxXhkNJVeUSAsHbY3X9ejEJJPgQoUy8_EV75DYbswE_DT3QE4-0NQ_EbQ0UAJqlPJF3";
+  let webhook_url = "https://discord.com/api/webhooks/1088655989324124290/nbKUyet-PBoNnAtfMTc-T2GQcxizCuYPm1L2MdbG1skkngXaTDKSYFY_lb2XX2Rkyy8S";
   let params = {
     content: `New book has been submitted for review.`,
     embeds: [
@@ -256,7 +256,7 @@ app.post("/publish-book", async (req, res) => {
     username: "New Book Post"
   };
 
-  axios({
+  await axios({
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
