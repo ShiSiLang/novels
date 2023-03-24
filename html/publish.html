@@ -593,10 +593,10 @@
         let data = JSON.parse(localStorage.loginUser);
 
         if (data.author === true) {
-          document.getElementById("inputusername").innerHTML = data.username;
-          document.getElementById("inputpass").innerHTML = data.password;
-          document.getElementById("iusername").innerHTML = data.username;
-          document.getElementById("ipass").innerHTML = data.password;
+          document.getElementById("inputusername").value = data.username;
+          document.getElementById("inputpass").value = data.password;
+          document.getElementById("iusername").value = data.username;
+          document.getElementById("ipass").value = data.password;
         }
         if (data.author === false) {
           document.getElementById("pbb").style.display = "none";
