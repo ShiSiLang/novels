@@ -591,9 +591,7 @@
     if (typeof Storage !== "undefined") {
       if (localStorage.loginUser) {
         let data = JSON.parse(localStorage.loginUser);
-        console.log(data)
         if (data.author === true) {
-          console.log(document.getElementById("inputusername"))
           document.getElementById("inputusername").value = data.username;
           document.getElementById("inputpass").value = data.password;
           document.getElementById("iusername").value = data.username;

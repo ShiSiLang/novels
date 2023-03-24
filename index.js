@@ -257,15 +257,15 @@ app.post("/publish-book", async (req, res) => {
   };
 
   axios.post(webhook, payload).then((response) => {
-    res
+    return res
       .status(200)
       .json({ success: `${html.uname} added!` });
-  }).catch(err => {
-    res
+  }).catch((err) => {
+    console.log(err)
+    return res
       .status(400)
       .json({ error: `An error has occured.` });
   })
-
 });
 
 app.post("/edit", async (req, res) => {
