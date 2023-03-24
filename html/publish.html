@@ -533,8 +533,8 @@
   <div id="pbmodal" class="modal">
     <form class="modal-content animate" id="pbForm" action="/publish-book" method="post">
       <div class="container">
-        <input id="inputusername" type="hidden" name="uname" value="NOTHING" />
-        <input id="inputpass" type="hidden" name="psw" value="NOTHING" />
+        <input id="iusername" type="hidden" name="uname" value="NOTHING" />
+        <input id="ipass" type="hidden" name="psw" value="NOTHING" />
 
         <label for="name"><b>Book Name</b></label>
         <input type="text" placeholder="Enter Book Name" name="name" autocomplete="off" required />
@@ -591,21 +591,24 @@
     if (typeof Storage !== "undefined") {
       if (localStorage.loginUser) {
         let data = JSON.parse(localStorage.loginUser);
+
+        if (data.author === true) {
+          document.getElementById("inputusername").innerHTML = data.username;
+          document.getElementById("inputpass").innerHTML = data.password;
+          document.getElementById("iusername").innerHTML = data.username;
+          document.getElementById("ipass").innerHTML = data.password;
+        }
         if (data.author === false) {
           document.getElementById("pbb").style.display = "none";
           document.getElementById("pcb").style.display = "none";
         } else {
-          document.getElementById("inputusername").innerHTML = data.username;
-          document.getElementById("inputpass").innerHTML = data.password;
+          document.getElementById("pbb").style.display = "none";
+          document.getElementById("pcb").style.display = "none";
         }
       } else {
         document.getElementById("pbb").style.display = "none";
         document.getElementById("pcb").style.display = "none";
       }
-    } else {
-      document.getElementById("pbb").style.display = "none";
-      document.getElementById("pcb").style.display = "none";
-    }
   </script>
 
   <footer>
@@ -623,48 +626,48 @@
   </footer>
 
   <script>
-    const modal = document.getElementById("pbmodal");
-    const modal2 = document.getElementById("pcmodal");
-    window.onclick = function (event) {
-      if (event.target === modal) {
-        modal.style.display = "none";
-      } else if (event.target === modal2) {
-        modal2.style.display = "none";
-      }
-    };
+      const modal = document.getElementById("pbmodal");
+      const modal2 = document.getElementById("pcmodal");
+      window.onclick = function (event) {
+        if (event.target === modal) {
+          modal.style.display = "none";
+        } else if (event.target === modal2) {
+          modal2.style.display = "none";
+        }
+      };
   </script>
 
   <script>
-    const form = document.getElementById("pbForm");
-    const error = document.getElementById("error");
-    const success = document.getElementById("success");
+      const form = document.getElementById("pbForm");
+      const error = document.getElementById("error");
+      const success = document.getElementById("success");
 
-    form.addEventListener("submit", async (e) => {
-      e.preventDefault();
-      const data = Object.fromEntries(new FormData(form).entries());
-      console.log(data);
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const data = Object.fromEntries(new FormData(form).entries());
+        console.log(data);
 
-      const response = await fetch("/publish-book", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ data }),
-      });
+        const response = await fetch("/publish-book", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ data }),
+        });
 
-      if (response.ok) {
-        // Display success message here
-        const successData = await response.json();
-        success.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+        if (response.ok) {
+          // Display success message here
+          const successData = await response.json();
+          success.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
       <strong>Success!</strong> ${successData.success}`;
-        success.style.display = "block";
-      } else {
-        const errorData = await response.json();
-        error.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+          success.style.display = "block";
+        } else {
+          const errorData = await response.json();
+          error.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
   ${errorData.error}`;
-        error.style.display = "block";
-      }
-    });
+          error.style.display = "block";
+        }
+      });
   </script>
 
 </body>
