@@ -255,23 +255,23 @@ app.post("/publish-book", async (req, res) => {
     ],
     username: "New Book Post"
   };
-
-  await axios({
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: params,
-    url: webhook_url,
-  }).catch((err) => {
-    console.log(err)
-    return res
-      .status(400)
-      .json({ error: `An error has occured.` });
-  });
-
-  res.status(200).json({ success: `Successfully published for review!` });
+await axios({
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  data: JSON.stringify(params),
+  url: webhook_url,
+}).catch((err) => {
+  console.log(err)
+  return res
+    .status(400)
+    .json({ error: `An error has occured.` });
 });
+
+res.status(200).json({ success: `Successfully published for review!` });
+
+  });
 
 app.post("/edit", async (req, res) => {
   let html = req.body.data;
