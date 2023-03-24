@@ -190,7 +190,7 @@ app.post("/sign-in", async (req, res) => {
   let html = req.body.data;
 
   let data = await profileShema.findOne({
-    username: html.uname.replace(/</g, "&lt;"),
+    username: html.uname,
   });
 
   if (!data)
@@ -198,7 +198,7 @@ app.post("/sign-in", async (req, res) => {
       .status(400)
       .json({ error: `Username or password is incorrect.` });
 
-  if (data.password !== html.psw.replace(/</g, "&lt;"))
+  if (data.password !== html.psw)
     return res
       .status(400)
       .json({ error: `Username or password is incorrect.` });
@@ -232,14 +232,6 @@ app.post("/publish-book", async (req, res) => {
       .status(400)
       .json({ error: `Please make sure the icon is a valid URL.` });
 
-  let newID = Date.now();
-
-  let newReview = new reviewShema({
-    bookName: html.name.replace(/</g, "&lt;"),
-    bookAuthor: html.uname,
-    reviewID: newID,
-  }).save();
-
   let webhook_url = process.env.webhook;
   let params = {
     content: `New book has been submitted for review.`,
@@ -265,15 +257,27 @@ app.post("/publish-book", async (req, res) => {
     return res.status(400).json({ error: `An error has occured.` });
   });
 
-  res.status(200).json({ success: `Successfully published for review!` });
+  let newID = Date.now();
+
+  let newReview = new reviewShema({
+    bookName: html.name.replace(/</g, "&lt;"),
+    bookAuthor: html.uname,
+    reviewID: newID,
+  }).save();
+
+  res
+    .status(200)
+    .json({
+      success: `Successfully published for review! The Staff team will dm your results.`,
+    });
 });
 
 app.post("/edit", async (req, res) => {
   let html = req.body.data;
 
   let data = await profileShema.findOne({
-    password: html.psw.replace(/</g, "&lt;"),
-    username: html.uname.replace(/</g, "&lt;"),
+    password: html.psw,
+    username: html.uname,
   });
 
   if (!data)
@@ -324,10 +328,9 @@ app.post("/edit", async (req, res) => {
 
 app.post("/follow", async (req, res) => {
   let html = req.body;
-  console.log(html);
   let user = await profileShema.findOne({
-    password: html.psw.replace(/</g, "&lt;"),
-    username: html.uname.replace(/</g, "&lt;"),
+    password: html.psw,
+    username: html.uname,
   });
   console.log(user);
   if (!user)
@@ -362,20 +365,17 @@ app.post("/comment", async (req, res) => {
     .status(400)
     .json({ error: `Commenting is disabled at the moment.` });
 
-  let data = await profileShema.find().sort({ username: 1 });
-  console.log(data);
-
   let html = req.body.data; //bookName, index
   let bookData = await bookShema.findOne({ name: html.bookName });
 
   if (!bookData)
     return res.status(400).json({ error: `Something went wrong.` });
 
-  let user = data.find(
-    (v) =>
-      v.password === html.psw.replace(/</g, "&lt;") &&
-      v.username === html.uname.replace(/</g, "&lt;")
-  );
+  let user = await profileShema.findOne({
+    password: html.psw,
+    username: html.uname,
+  });
+
   if (!user)
     return res.status(400).json({ error: `Incorrect username or password!` });
 
