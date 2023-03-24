@@ -112,6 +112,16 @@ app.get("/data/:type/:other", async (req, res) => {
   }
 }); //very important
 
+app.get("/review/:type/:reviewID", async (req, res) => {
+  let type = req.params.type.toLowerCase();
+  let ID = req.params.reviewID;
+if (type === "accept") {
+let data = await reviewShema.findOne({ reviewID: ID })
+}
+if (type === "deny") {
+}
+)};
+
 app.get("/profile/:username", async (req, res) => {
   let username = req.params.username;
 
@@ -260,6 +270,8 @@ app.post("/publish-book", async (req, res) => {
   let newReview = new reviewShema({
     bookName: html.name.replace(/</g, "&lt;"),
     bookAuthor: html.uname,
+    bookDescription: html.description.replace(/</g, "&lt;"),
+    bookIcon: html.icon.replace(/</g, "&lt;"),
     reviewID: newID,
   }).save();
 
