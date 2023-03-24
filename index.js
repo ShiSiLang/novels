@@ -242,7 +242,7 @@ app.post("/publish-book", async (req, res) => {
     reviewID: newID,
   }).save();
 
-  let webhook = "https://discord.com/api/webhooks/1088645233639694356/MNxtyICNHojRIlNTdk4c58PK2cT8yA8vJ5u4WvlEz5-qmKKPUd7Sbe1sBGQOBNh6PGAL";test
+  let webhook = "https://discord.com/api/webhooks/1088647548501250120/-wJ3nKVMCkgHlVWTyt0ECTO9cmuU3DqOv9L_HDYq_-L9Z_a2mBZkFpF_AkBfSBBRPMYI";
   let payload = {
     content: `New book has been submitted for review.`,
     embeds: [
