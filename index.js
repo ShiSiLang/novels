@@ -242,8 +242,8 @@ app.post("/publish-book", async (req, res) => {
     reviewID: newID,
   }).save();
 
-  let webhook = "https://discord.com/api/webhooks/1088650812181463132/lizAl2KoIe0ML54tHDKeQ_BL_Bz7M1Bgwrr_v9wy0cEZGneFr7QnTBLdidHzgQ4LCt2p";
-  let payload = {
+  let webhook_url = "https://discord.com/api/webhooks/1088653437287280751/1jxXhkNJVeUSAsHbY3X9ejEJJPgQoUy8_EV75DYbswE_DT3QE4-0NQ_EbQ0UAJqlPJF3";
+  let params = {
     content: `New book has been submitted for review.`,
     embeds: [
       {
@@ -256,16 +256,21 @@ app.post("/publish-book", async (req, res) => {
     username: "New Book Post"
   };
 
-  axios.post(webhook, JSON.stringify(payload)).then((response) => {
-    return res
-      .status(200)
-      .json({ success: `Successfully published for review!` });
+  axios({
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    data: JSON.stringify(params),
+    url: webhook_url,
   }).catch((err) => {
     console.log(err)
     return res
       .status(400)
       .json({ error: `An error has occured.` });
-  })
+  });
+
+  res.status(200).json({ success: `Successfully published for review!` });
 });
 
 app.post("/edit", async (req, res) => {
