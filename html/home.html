@@ -6,14 +6,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="icon" type="icon" href="https://i.imgur.com/XjWCCeV.png" />
   <title>LonelyBall Media</title>
-  <meta property="og:title" content="$$name$$" />
+  <meta property="og:title" content="Home Page" />
   <meta property="og:site_name" content="LonelyBall Media" />
-  <meta property="og:description" content="$$desc$$" />
+  <meta property="og:description"
+    content="Welcome to LonelyBall Media, here you can read all of our novels and manga!" />
   <meta property="og:image" content="https://i.imgur.com/XjWCCeV.png" />
   <meta name="theme-color" content="#cbc3e3" />
   <meta name="twitter:card" content="summary_large_image" />
   <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.1.1/css/all.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <style>
   body {
@@ -175,27 +176,26 @@
 
   .text {
     padding-bottom: 25px;
-    background-image: linear-gradient(315deg, #192734 0, #22303C 74%);
   }
 
   .text h1 {
     text-align: center;
     font-family: 'Open Sans', Verdana, Geneva, Tahoma, sans-serif;
-    color: white;
+    color: #FFFFFF;
     font-size: 55px;
   }
 
   .text h2 {
     text-align: center;
     font-family: 'Open Sans', Verdana, Geneva, Tahoma, sans-serif;
-    color: white;
+    color: #FFFFFF;
     font-size: 40px;
   }
 
   .text p {
     text-align: center;
     font-family: 'Open Sans', Verdana, Geneva, Tahoma, sans-serif;
-    color: white;
+    color: #FFFFFF;
     font-size: 35px;
   }
 
@@ -203,61 +203,120 @@
     box-sizing: border-box
   }
 
-  .thumbnail {
+  /* Slideshow container */
+  .slideshow-container {
     max-width: 1000px;
     position: relative;
     margin: auto;
   }
 
-  .btn-group button {
-    margin: 0 auto;
-    margin-bottom: 35px;
-    margin-top: 35px;
-    text-align: center;
-    background-color: #1DA1F2;
-    border: 1px solid #009dff;
-    color: white;
-    border-radius: 12px;
-    font-family: 'Open Sans', Verdana, Geneva, Tahoma, sans-serif;
-    font-size: 16px;
-    font-weight: 650;
-    text-decoration: none;
-    padding: 10px 24px;
-    cursor: pointer;
-    width: 50%;
+  /* Hide the images by default */
+  .mySlides {
     display: block;
   }
 
-  .btn-group button:not(:last-child) {
-    border-bottom: none;
+  .fade {
+    animation-name: fade;
+    animation-duration: 1.5s;
   }
 
-  .btn-group button:hover {
-    background-color: #009dff;
+  .error-modal {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black w/ opacity */
   }
-</style>
-<script type="text/javascript">
-  async function changeDivContent() {
-    try {
-      let response = await fetch($$novel$$);
-      let json = await response.json();
 
-      const div = document.getElementById("chapters");
-      for (let i = 0; i < json.length; i++) {
-        div.innerHTML += `
-              <button onclick="window.location.href='/read/${i + 1}'">${json[i].chapter
-          }</button>`;
-      }
-    } catch (err) {
-      const div = document.getElementById("nca");
-      div.innerHTML += `<h1>No chapters available</h1>`;
+  /* Modal Content/Box */
+  .error-modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    /* Could be more or less, depending on screen size */
+  }
+
+  /* The Close Button */
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  @keyframes fade {
+    from {
+      opacity: .4
+    }
+
+    to {
+      opacity: 1
     }
   }
-</script>
 
-<body onload="changeDivContent()">
+  .media-scroller {
+    --gap: 16px;
+
+    box-sizing: border-box;
+    padding: var(--gap);
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 21%;
+    gap: var(--gap);
+
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+    overflow-y: hidden;
+  }
+
+  .media-scroller img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .snaps-inline {
+    scroll-snap-type: inline mandatory;
+    scroll-padding-inline: var(--gap);
+  }
+
+  .snaps-inline>* {
+    scroll-snap-align: start;
+  }
+
+  .media-scroller img:hover {
+    cursor: pointer;
+    opacity: 0.5;
+    transition: 0.5s;
+  }
+</style>
+
+<body>
   <div class="topnav">
-    <a href="/home">Home</a>
+    <a class="active" href="#">Home</a>
     <a href="/explore">Explore</a>
     <a href="https://cash.app/$PerezDeDios" target="_blank">Donate</a>
     <img id="userIcon" src="https://i.imgur.com/XjWCCeV.png" alt="Shinpi" onclick="Dropdown()" />
@@ -307,31 +366,72 @@
     }
   </script>
 
-  <div class="thumbnail">
+  <div class="slideshow-container">
+    <!-- Full-width imagest -->
     <!-- Images have to be 1000X350 -->
-    <img src="$$icon$$" style="width:100%" />
+    <div class="mySlides fade">
+      <img src="https://www.w3schools.com/howto/img_mountains_wide.jpg" style="width:100%">
+    </div>
+    <div class="mySlides fade">
+      <img src="https://www.w3schools.com/howto/img_lights_wide.jpg" style="width:100%">
+    </div>
+    <div class="mySlides fade">
+      <img src="https://www.w3schools.com/howto/img_snow_wide.jpg" style="width:100%">
+    </div>
+  </div>
+
+  <script>
+    let slideIndex = 0;
+    showSlides();
+
+    function showSlides() {
+      let i;
+      let slides = document.getElementsByClassName("mySlides");
+      for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+      }
+      slideIndex++;
+      if (slideIndex > slides.length) { slideIndex = 1 }
+      slides[slideIndex - 1].style.display = "block";
+      setTimeout(showSlides, 5000); // Change image every 5 seconds
+    }
+  </script>
+
+  <div class="text">
+    <h1>LATEST CHAPTERS</h1>
+  </div>
+
+  <div class="media-scroller snaps-inline">
+    <a href="/explore/1"><img src="https://i.imgur.com/lGLKiVd.png" alt="Star of Libby, Adios Hogar Mio"></a>
+    <a href="#"><img src="https://i.imgur.com/XjWCCeV.png" alt="Test"></a>
+    <a href="#"><img src="https://i.imgur.com/XjWCCeV.png" alt="Test"></a>
+    <a href="#"><img src="https://i.imgur.com/XjWCCeV.png" alt="Test1"></a>
+    <a href="#"><img src="https://i.imgur.com/XjWCCeV.png" alt="Test"></a>
+    <a href="#"><img src="https://i.imgur.com/XjWCCeV.png" alt="Test"></a>
+    <a href="#"><img src="https://i.imgur.com/XjWCCeV.png" alt="Test"></a>
+    <a href="#"><img src="https://i.imgur.com/XjWCCeV.png" alt="Test"></a>
   </div>
 
   <div class="text">
-    <h1>$$name$$</h1>
-    <h2>$$desc$$</h2>
-    <p>Author: $$author$$</p>
+    <h1>About</h1>
+    <p>
+      Welcome to LonelyBall Media, here you can read all of our novels and manga!
+    </p>
+    <h1>Updates | Socials</h1>
+    <p>
+      Get the latest updates by joining the official <a href="https://discord.gg/j3YamACwPu" target="_blank">Discord
+        Server</a>.
+      </br>
+      Follow Orange Ball's <a href="https://twitter.com/LoneOrangeBall" target="_blank">Twitter</a>.
+    </p>
   </div>
-
-  <div id="nca" class="text"></div>
-
-  <div id="chapters" class="btn-group"></div>
 
   <footer>
     <div class="footer-content">
       <h3>Copyright © 2023 LonelyBall Media</h3>
       <ul class="socials">
-        <li>
-          <a href="https://discord.gg/j3YamACwPu"><i class="fa fa-discord"></i></a>
-        </li>
-        <li>
-          <a href="https://twitter.com/LoneOrangeBall"><i class="fa fa-twitter"></i></a>
-        </li>
+        <li><a href="https://discord.gg/j3YamACwPu"><i class="fa fa-discord"></i></a></li>
+        <li><a href="https://twitter.com/LoneOrangeBall"><i class="fa fa-twitter"></i></a></li>
       </ul>
     </div>
   </footer>
