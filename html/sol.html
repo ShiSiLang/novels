@@ -20,72 +20,19 @@
   body {
     background-size: 400% 400%;
     margin: 0;
-    background-color: #15202B;
+    background-color: #ffcc99;
+    font-family: 'Nunito';
+    font-size: 22px;
   }
 
-  div {
-    animation: fadeInUp 0.9s;
-  }
-
-  @keyframes gradient {
-    0% {
-      background-position: 0% 50%;
-    }
-
-    50% {
-      background-position: 100% 50%;
-    }
-
-    100% {
-      background-position: 0% 50%;
-    }
-  }
-
-  @keyframes typewriter {
-    from {
-      width: 0;
-    }
-
-    to {
-      width: 19.5em;
-    }
-  }
-
-  @keyframes blinkTextCursor {
-    from {
-      border-right-color: rgba(255, 255, 255, 0.75);
-    }
-
-    to {
-      border-right-color: transparent;
-    }
-  }
-
-  @keyframes fadeInUp {
-    from {
-      transform: translate3d(0, 150px, 0);
-    }
-
-    to {
-      transform: translate3d(0, 0, 0);
-      opacity: 1;
-    }
-  }
-
-  @keyframes fadeInDown {
-    from {
-      transform: translate3d(0, -150px, 0);
-    }
-
-    to {
-      transform: translate3d(0, 0, 0);
-      opacity: 1;
-    }
+  .flex {
+    display: flex;
+    justify-content: center;
   }
 
   .topnav {
     width: 100%;
-    background-color: #22303C;
+    background-color: #967bb6;
   }
 
   .topnav img {
@@ -104,8 +51,21 @@
   .topnav img:hover {
     transform: scale(1.1);
     border-radius: 40%;
-    box-shadow: 0px 0px 9px 4px #818589;
-    animation: glow 1.5s linear infinite alternate;
+    animation: fade-in-out 1s ease-in-out infinite;
+  }
+
+  @keyframes fade-in-out {
+    0% {
+      opacity: 1;
+    }
+
+    50% {
+      opacity: 0.5;
+    }
+
+    100% {
+      opacity: 1;
+    }
   }
 
   .dropdown {
@@ -122,9 +82,9 @@
   .dropdown-content {
     position: absolute;
     display: none;
-    background-color: #22303C;
+    background-color: #967bb6;
     min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 0px 10px #967bb6;
     z-index: 1;
   }
 
@@ -132,7 +92,6 @@
     color: white;
     padding: 12px 16px;
     text-decoration: none;
-    font-family: 'Open Sans', Verdana, Geneva, Tahoma, sans-serif;
     display: block;
   }
 
@@ -141,36 +100,27 @@
     border-radius: 30px;
     padding: 19px 16px;
     transition-duration: 0.2s;
-    font-family: 'Open Sans', Verdana, Geneva, Tahoma, sans-serif;
     font-size: 1.0em;
     font-weight: 650;
     text-decoration: none;
-    /*text-transform: uppercase;*/
     color: white;
   }
 
   .topnav a.active {
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: #5c4981;
   }
 
   .topnav a:hover {
     background-color: white;
-    color: #161919;
-  }
-
-  @keyframes glow {
-    to {
-      box-shadow: 0px 0px 30px 20px #535FED;
-    }
+    color: black;
   }
 
   footer {
     width: 100vw;
     height: auto;
-    background-image: linear-gradient(315deg, #192734 0, #22303C 74%);
-    font-family: 'Open Sans', Verdana, Geneva, Tahoma, sans-serif;
+    background-color: #967bb6;
     padding-top: 40px;
-    color: #fefefe;
+    color: white;
   }
 
   .footer-content {
@@ -189,149 +139,55 @@
   }
 
   .socials {
-    list-style: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 1rem 0 3rem 0;
-  }
-
-  .socials li {
-    margin: 0 10px;
+    margin: 0 auto;
   }
 
   .socials a {
-    color: white;
-    text-decoration: none;
-  }
-
-  .socials a i {
-    font-size: 1.1rem;
     transition: color .4s ease;
+    text-decoration: none;
+    color: white;
   }
 
-  .socials a:hover i {
-    color: aqua;
-  }
-
-  .text-side {
-    padding: 75px;
+  .socials a:hover {
+    color: #ffcc99;
   }
 
   .text {
+    padding-bottom: 25px;
+  }
+
+  .text h1,
+  h2,
+  p {
     text-align: center;
-    padding-bottom: 40px;
-  }
-
-  .text h1 {
-    font-family: "Nunito", sans-serif;
     color: #FFFFFF;
-    font-size: 80px;
   }
 
-  .text h2 {
-    font-family: "Nunito", sans-serif;
-    color: #FFFFFF;
-    font-size: 50px;
-  }
-
-  .text p {
-    font-family: "Nunito", sans-serif;
-    padding: 35px;
-    color: #FFFFFF;
-    font-size: 40px;
-  }
-
-  .flex {
-    display: flex;
-    justify-content: center;
-  }
+  /*Buttons*/
 
   button {
-    font-size: 16px;
-    font-family: 'Helvetica', 'Arial', sans-serif;
     text-align: center;
+    font-weight: bold;
     text-decoration: none;
+    font-family: 'Nunito';
     display: inline-block;
+    border: 2px solid #5c4981;
+    border-radius: 16px;
+    box-shadow: 0px 0px 10px #967bb6;
+    background-color: #967bb6;
     cursor: pointer;
-    background-color: #22303C;
-    margin-top: 60px;
-    margin-bottom: 60px;
-    margin-right: 40px;
-    margin-left: 40px;
+    padding: 20px;
+    font-size: 30px;
+    color: white;
+    margin: auto;
   }
 
-  .glow-on-hover {
-    font-family: "Roboto", sans-serif;
-    font-size: 1.5em;
-    margin-top: 60px;
-    margin-bottom: 60px;
-    width: 190px;
-    height: 50px;
-    border: none;
-    outline: none;
-    background-color: #22303C;
-    color: #FFFFFF;
-    cursor: pointer;
-    position: relative;
-    z-index: 0;
-    border-radius: 10px;
+  button:hover {
+    background-color: #5c4981;
+    transition: 1s;
   }
 
-  .glow-on-hover:before {
-    content: '';
-    background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
-    position: absolute;
-    top: -2px;
-    left: -2px;
-    background-size: 400%;
-    z-index: -1;
-    filter: blur(5px);
-    width: calc(100% + 4px);
-    height: calc(100% + 4px);
-    animation: glowing 20s linear infinite;
-    opacity: 0;
-    transition: opacity .3s ease-in-out;
-    border-radius: 10px;
-  }
-
-  .glow-on-hover:active {
-    color: #FFFFFF
-  }
-
-  .glow-on-hover:active:after {
-    background: transparent;
-  }
-
-  .glow-on-hover:hover:before {
-    opacity: 1;
-  }
-
-  .glow-on-hover:after {
-    z-index: -1;
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background-color: #22303C;
-    left: 0;
-    top: 0;
-    border-radius: 10px;
-  }
-
-  @keyframes glowing {
-    0% {
-      background-position: 0 0;
-    }
-
-    50% {
-      background-position: 400% 0;
-    }
-
-    100% {
-      background-position: 0 0;
-    }
-  }
+  /*Buttons End*/
 
   .comments {
     margin: auto;
@@ -359,7 +215,6 @@
   .darker p,
   .darker span {
     color: #ffffff;
-    font-family: 'Helvetica', 'Arial', sans-serif;
   }
 
   .comment a:visited {
@@ -385,8 +240,8 @@
     font-weight: bold;
   }
 
-  h1,
-  h3 {
+  .comment h1,
+  .comment h3 {
     color: #c51f5d;
     font-weight: bold;
   }
