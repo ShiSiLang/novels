@@ -242,7 +242,7 @@ app.post("/publish-book", async (req, res) => {
     reviewID: newID,
   }).save();
 
-  let webhook_url = "https://discord.com/api/webhooks/1088658979439259709/8zec8w0Vb64fX_7dgpn7-laHXoCAyr3HWqRckUjKczQOhEClQZx3USHl-sikgh9yaKzL";
+  let webhook_url = process.env.webhook;
   let params = {
     content: `New book has been submitted for review.`,
     embeds: [
@@ -261,7 +261,7 @@ app.post("/publish-book", async (req, res) => {
     headers: {
       'Content-Type': 'application/json',
     },
-    data: JSON.stringify(params),
+    body: JSON.stringify(params),
     url: webhook_url,
   }).catch((err) => {
     console.log(err)
