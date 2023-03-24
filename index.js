@@ -6,6 +6,7 @@ const fs = require("fs");
 const axios = require("axios");
 const mongoose = require("mongoose");
 const profileShema = require("./models/profiles");
+const reviewShema = require("./models/review");
 const bookShema = require("./models/book");
 
 const dir = (text) => `${__dirname}/html/${text}.html`;
@@ -209,6 +210,62 @@ app.post("/sign-in", async (req, res) => {
       userIcon: data.icon,
       userAuthor: data.author,
     });
+});
+
+app.post("/publish-book", async (req, res) => {
+  let html = req.body.data;
+
+  let data = await profileShema.findOne({
+    password: html.psw,
+    username: html.uname,
+  });
+
+  if (!data)
+    return res.status(400).json({ error: `Incorrect username or password!` });
+
+  let image = html.icon.replace(/</g, "&lt;");
+
+  function isImage(url) {
+    return /^https?:\/\/.+\.(jpg|jpeg|png|webp|avif|gif|svg)$/.test(url);
+  }
+
+  if (isImage(image) === false)
+    return res
+      .status(400)
+      .json({ error: `Please make sure the icon is a valid URL.` });
+
+  let newID = Date.now();
+
+  let newReview = new reviewShema({
+    bookName: html.name.replace(/</g, "&lt;"),
+    bookAuthor: html.uname,
+    reviewID: newID,
+  }).save();
+
+  let webhook = "https://discord.com/api/webhooks/1088629317749198848/g6fbh_lEqmM8gU-Pst2735OFbIGmIjysb_xg1xzZt2lSTe__WCz3zJFvYd0MWVmTe9KA;"
+  let payload = {
+    content: `New book has been submitted for review.`,
+    embeds: [
+      {
+        title: html.name.replace(/</g, "&lt;"),
+        description: html.description.replace(/</g, "&lt;"),
+        image: { url: html.icon.replace(/</g, "&lt;") },
+        footer: { text: newID },
+      }
+    ],
+    username: "New Book Post"
+  };
+
+  axios.post(webhook, payload).then((response) => {
+    res
+      .status(200)
+      .json({ success: `${html.uname} added!` });
+  }).catch(err => {
+    res
+      .status(400)
+      .json({ error: `An error has occured.` });
+  })
+
 });
 
 app.post("/edit", async (req, res) => {
