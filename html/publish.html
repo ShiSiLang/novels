@@ -594,6 +594,9 @@
         if (data.author === false) {
           document.getElementById("pbb").style.display = "none";
           document.getElementById("pcb").style.display = "none";
+        } else {
+          document.getElementById("inputusername").innerHTML = data.username;
+          document.getElementById("inputpass").innerHTML = data.password;
         }
       } else {
         document.getElementById("pbb").style.display = "none";
@@ -631,38 +634,38 @@
     };
   </script>
 
-<script>
-  const form = document.getElementById("pbForm");
-  const error = document.getElementById("error");
-  const success = document.getElementById("success");
+  <script>
+    const form = document.getElementById("pbForm");
+    const error = document.getElementById("error");
+    const success = document.getElementById("success");
 
-  form.addEventListener("submit", async (e) => {
+    form.addEventListener("submit", async (e) => {
       e.preventDefault();
       const data = Object.fromEntries(new FormData(form).entries());
       console.log(data);
 
       const response = await fetch("/publish-book", {
-          method: "POST",
-          headers: {
-              "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ data }),
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ data }),
       });
 
       if (response.ok) {
-          // Display success message here
-          const successData = await response.json();
-          success.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+        // Display success message here
+        const successData = await response.json();
+        success.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
       <strong>Success!</strong> ${successData.success}`;
-          success.style.display = "block";
+        success.style.display = "block";
       } else {
-          const errorData = await response.json();
-          error.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+        const errorData = await response.json();
+        error.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
   ${errorData.error}`;
-          error.style.display = "block";
+        error.style.display = "block";
       }
-  });
-</script>
+    });
+  </script>
 
 </body>
 
