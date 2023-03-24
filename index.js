@@ -256,7 +256,7 @@ app.post("/publish-book", async (req, res) => {
     username: "New Book Post"
   };
 
-  axios.post(webhook, payload).then((response) => {
+  axios.post(webhook, JSON.stringify(payload)).then((response) => {
     return res
       .status(200)
       .json({ success: `${html.uname} added!` });
