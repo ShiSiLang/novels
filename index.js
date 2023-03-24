@@ -261,7 +261,7 @@ app.post("/publish-book", async (req, res) => {
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(params),
+    body: params,
     url: webhook_url,
   }).catch((err) => {
     console.log(err)
