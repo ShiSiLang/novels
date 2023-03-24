@@ -92,7 +92,6 @@
         color: white;
         padding: 12px 16px;
         text-decoration: none;
-        font-family: 'Open Sans', Verdana, Geneva, Tahoma, sans-serif;
         display: block;
     }
 
@@ -101,7 +100,6 @@
         border-radius: 30px;
         padding: 19px 16px;
         transition-duration: 0.2s;
-        font-family: 'Open Sans', Verdana, Geneva, Tahoma, sans-serif;
         font-size: 1.0em;
         font-weight: 650;
         text-decoration: none;
@@ -121,7 +119,6 @@
         width: 100vw;
         height: auto;
         background-color: #967bb6;
-        font-family: 'Open Sans', Verdana, Geneva, Tahoma, sans-serif;
         padding-top: 40px;
         color: white;
     }
@@ -142,28 +139,15 @@
     }
 
     .socials {
-        list-style: none;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin: 1rem 0 3rem 0;
-    }
-
-    .socials li {
-        margin: 0 10px;
+        margin: 0 auto;
     }
 
     .socials a {
-        color: white;
         text-decoration: none;
+        color: white;
     }
 
-    .socials a i {
-        font-size: 1.1rem;
-        transition: color .4s ease;
-    }
-
-    .socials a:hover i {
+    .socials a:hover {
         color: #ffcc99;
     }
 
@@ -178,30 +162,29 @@
         color: #FFFFFF;
     }
 
+    /*User Card Start*/
+
     .card {
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        box-shadow: 0px 0px 10px #967bb6;
         max-width: 550px;
         margin: auto;
+        margin-bottom: 50;
         text-align: center;
-        font-family: arial;
-        border: 1px solid #15202B;
-        background-color: #22303C;
+        border: 2px solid #5c4981;
+        background-color: #967bb6;
     }
 
-    .title {
-        color: white;
-        font-size: 60px;
+    button {
+        font-size: 16px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        cursor: pointer;
+        background-color: #967bb6;
+        margin: auto;
     }
 
-    .other {
-        color: white;
-    }
-
-    .date {
-        color: #ccc;
-        font-size: 20px;
-    }
-
+    /*
     button {
         border: none;
         outline: 0;
@@ -215,17 +198,10 @@
         width: 100%;
         font-size: 18px;
     }
+    
+    */
 
-    a {
-        text-decoration: none;
-        font-size: 22px;
-        color: white;
-    }
-
-    button:hover,
-    a:hover {
-        opacity: 0.7;
-    }
+    /*User Card End*/
 
     * {
         box-sizing: border-box;
@@ -537,7 +513,7 @@
         <h2 class="other">Followers: $$followers$$</h2>
         <h2 class="other">Comments: $$comments$$</h2>
         <p class="date">Joined: $$date$$</p>
-        <div style="margin: 24px 0;">
+        <div class="socials">
             <a href="$$discord$$"><i class="fa fa-discord"></i></a>
             <a href="$$twitter$$"><i class="fa fa-twitter"></i></a>
         </div>
@@ -584,14 +560,10 @@
     <footer>
         <div class="footer-content">
             <h3>Copyright © 2023 LonelyBall Media</h3>
-            <ul class="socials">
-                <li>
-                    <a href="https://discord.gg/j3YamACwPu"><i class="fa fa-discord"></i></a>
-                </li>
-                <li>
-                    <a href="https://twitter.com/LoneOrangeBall"><i class="fa fa-twitter"></i></a>
-                </li>
-            </ul>
+            <div class="socials">
+                <a href="https://discord.gg/j3YamACwPu"><i class="fa fa-discord"></i></a>
+                <a href="https://twitter.com/LoneOrangeBall"><i class="fa fa-twitter"></i></a>
+            </div>
         </div>
     </footer>
 
