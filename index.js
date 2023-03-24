@@ -231,7 +231,7 @@ app.post("/publish-book", async (req, res) => {
     return res
       .status(400)
       .json({ error: `Please make sure the icon is a valid URL.` });
-
+  let newID = Date.now();
   let webhook_url = process.env.webhook;
   let params = {
     content: `New book has been submitted for review.`,
@@ -256,8 +256,6 @@ app.post("/publish-book", async (req, res) => {
     console.log(err);
     return res.status(400).json({ error: `An error has occured.` });
   });
-
-  let newID = Date.now();
 
   let newReview = new reviewShema({
     bookName: html.name.replace(/</g, "&lt;"),
