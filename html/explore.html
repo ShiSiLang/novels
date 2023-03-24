@@ -22,7 +22,7 @@
         margin: 0;
         background-color: #ffcc99;
     }
-
+/*
     div {
         animation: fadeInUp 0.9s;
     }
@@ -37,7 +37,7 @@
             opacity: 1;
         }
     }
-
+*/
     .flex {
         display: flex;
         justify-content: center;
@@ -62,11 +62,23 @@
     }
 
     .topnav img:hover {
-        transform: scale(1.1);
-        border-radius: 40%;
-box-shadow: 0px 0px 10px #967bb6;
-        animation: glow 1.5s linear infinite alternate;
-    }
+  transform: scale(1.1);
+  border-radius: 40%;
+  /*box-shadow: 0px 0px 10px #967bb6;*/
+  animation: fade-in-out 1s ease-in-out infinite;
+}
+
+@keyframes fade-in-out {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
 
     .dropdown {
         display: inline-block;
@@ -109,18 +121,12 @@ box-shadow: 0px 0px 10px #967bb6;
     }
 
     .topnav a.active {
-  background-color: rgba(150, 123, 182, 0.2);
+  background-color: #5c4981;
 }
 
 .topnav a:hover {
   background-color: white;
-  color: #161919;
-}
-
-@keyframes glow {
-  to {
-    box-shadow: 0px 0px 30px 20px #535FED;
-  }
+  color: black;
 }
 
 
@@ -243,7 +249,7 @@ background-color: #967bb6;
 <body>
     <div class="topnav">
         <a href="/home">Home</a>
-        <a href="/explore">Explore</a>
+        <a class="active" href="/explore">Explore</a>
         <a href="https://cash.app/$PerezDeDios" target="_blank">Donate</a>
         <img id="userIcon" src="https://i.imgur.com/XjWCCeV.png" alt="Shinpi" onclick="Dropdown()" />
         <div class="dropdown dropdown-menu-right">
