@@ -259,7 +259,7 @@ app.post("/publish-book", async (req, res) => {
   axios.post(webhook, JSON.stringify(payload)).then((response) => {
     return res
       .status(200)
-      .json({ success: `${html.uname} added!` });
+      .json({ success: `Successfully published for review!` });
   }).catch((err) => {
     console.log(err)
     return res
