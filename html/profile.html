@@ -171,36 +171,40 @@
         margin: 0 auto;
         margin-bottom: 100px;
         text-align: center;
-        border: 2px solid #5c4981;
+        border: 3px solid #5c4981;
+        border-radius: 16px;
         background-color: #967bb6;
+        color: white;
     }
 
     button {
-        font-size: 16px;
         text-align: center;
+        font-weight: bold;
         text-decoration: none;
+        font-family: 'Nunito';
         display: inline-block;
-        cursor: pointer;
+        border: 2px solid #5c4981;
+        border-radius: 16px;
+        box-shadow: 0px 0px 10px #967bb6;
         background-color: #967bb6;
+        cursor: pointer;
+        padding: 20px;
+        font-size: 30px;
+        color: white;
         margin: auto;
     }
 
-    /*
-    button {
-        border: none;
-        outline: 0;
-        display: inline-block;
-        padding: 8px;
-        color: white;
-        background-color: #1DA1F2;
-        ;
-        text-align: center;
-        cursor: pointer;
-        width: 100%;
-        font-size: 18px;
+    button:hover {
+        background-color: #5c4981;
+        transition: 1s;
     }
-    
-    */
+
+
+    .cardButton {
+        width: 100%;
+        margin-bottom: 1px;
+        padding: 10px;
+    }
 
     /*User Card End*/
 
@@ -214,24 +218,24 @@
     }
 
     .wrapper .search-input {
-        background: white;
+        border-radius: 16px;
+        box-shadow: 0px 0px 10px #967bb6;
+        background-color: #967bb6;
+        border: 3px solid #5c4981;
         width: 100%;
-        border-radius: 5px;
         position: relative;
-        font-family: 'Open Sans', Verdana, Geneva, Tahoma, sans-serif;
-        box-shadow: 0px 1px 5px 3px rgba(0, 0, 0, 0.12);
     }
 
     .search-input input {
         height: 55px;
         width: 100%;
         outline: none;
+        border-radius: 16px;
+        box-shadow: 0px 0px 10px #967bb6;
+        background-color: #967bb6;
         border: none;
-        border-radius: 5px;
         padding: 0 60px 0 20px;
-        font-size: 18px;
-        font-family: 'Open Sans', Verdana, Geneva, Tahoma, sans-serif;
-        box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1);
+        font-size: 22px;
     }
 
     .search-input.active input {
@@ -278,7 +282,7 @@
         text-align: center;
         line-height: 55px;
         font-size: 20px;
-        color: #1DA1F2;
+        color: white;
         cursor: pointer;
     }
 
@@ -286,43 +290,43 @@
 
     .cancelbtn {
         width: auto;
-        padding: 10px 18px;
-        background-color: #1DA1F2;
+        background-color: #967bb6;
         padding: 14px 20px;
         margin: 8px 0;
-        border: none;
         cursor: pointer;
         width: 100%;
-        font-family: 'Open Sans', Verdana, Geneva, Tahoma, sans-serif;
         color: white;
-    }
-
-    .container input[type=text],
-    .container input[type=password],
-    .container input[type=number] {
-        width: 100%;
-        padding: 12px 20px;
-        margin: 8px 0;
-        display: inline-block;
-        border: none;
-        box-sizing: border-box;
-        color: #535FED;
-        font-family: 'Open Sans', Verdana, Geneva, Tahoma, sans-serif;
     }
 
     .container {
         padding: 16px;
+        background-color: #967bb6;
+        border-radius: 16px;
     }
 
     .container label {
-        font-family: 'Open Sans', Verdana, Geneva, Tahoma, sans-serif;
+        color: #ffcc99;
     }
 
+
     .container input {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        box-sizing: border-box;
         background: transparent;
-        outline: none;
         border: none;
+        color: #535FED;
+        outline: none;
     }
+
+    .container input:focus {
+        border: 3px solid #5c4981;
+        border-radius: 16px;
+        color: #535FED;
+    }
+
 
     .autocomplete {
         /*the container must be positioned relative:*/
@@ -332,23 +336,17 @@
 
     .autocomplete-items {
         position: absolute;
-        border: 1px solid #d4d4d4;
+        border: 1px solid #ffcc99;
         border-bottom: none;
         border-top: none;
         z-index: 99;
-        /*position the autocomplete items to be the same width as the container:*/
         top: 100%;
         left: 0;
         right: 0;
     }
 
     ::placeholder {
-        color: #535FED;
-    }
-
-    span.psw {
-        float: right;
-        padding-top: 16px;
+        color: #ffcc99;
     }
 
     .modal {
@@ -364,10 +362,12 @@
     }
 
     .modal-content {
-        background-color: #22303C;
         color: white;
         margin: 5% auto 15% auto;
-        border: 1px solid #15202B;
+        border-radius: 16px;
+        box-shadow: 0px 0px 10px #967bb6;
+        background-color: #967bb6;
+        border: 3px solid #5c4981;
         width: 80%;
     }
 
@@ -510,21 +510,21 @@
 
     <div class="card">
         <img src="$$avatar$$" alt="User Avatar" style="width:100%" />
-        <h1 class="title">$$username$$</h1>
-        <h2 class="other">Followers: $$followers$$</h2>
-        <h2 class="other">Comments: $$comments$$</h2>
+        <h1>$$username$$</h1>
+        <h2>Followers: $$followers$$</h2>
+        <h2>Comments: $$comments$$</h2>
         <p class="date">Joined: $$date$$</p>
         <div class="socials">
             <a href="$$discord$$"><i class="fa fa-discord"></i></a>
             <a href="$$twitter$$"><i class="fa fa-twitter"></i></a>
         </div>
         <p>
-            <button id="epb" onclick="document.getElementById('id01').style.display='block'">
+            <button class="cardButton" id="epb" onclick="document.getElementById('id01').style.display='block'">
                 Edit Profile
             </button>
         </p>
         <p>
-            <button id="fpb">Follow Profile</button>
+            <button class="cardButton" id="fpb">Follow Profile</button>
         </p>
     </div>
 
@@ -540,7 +540,7 @@
                 <label for="twitter"><b>Edit Twitter Link</b></label>
                 <input type="text" placeholder="Enter new twitter" name="twitter" autocomplete="off" />
             </div>
-            <div class="container" style="background-color:#22303C">
+            <div class="container">
                 <button type="submit" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">
                     Edit Profile
                 </button>
@@ -567,7 +567,7 @@
             </div>
         </div>
     </footer>
-
+    <!--
     <script>
         if (typeof Storage !== "undefined") {
             if (localStorage.loginUser) {
@@ -588,7 +588,7 @@
             document.getElementById("fpb").style.display = "none";
         }
     </script>
-
+-->
     <script>
         const button = document.getElementById("fpb");
         let data = JSON.parse(localStorage.loginUser);
