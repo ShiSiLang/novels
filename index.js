@@ -116,7 +116,10 @@ app.get("/review/:type/:reviewID", async (req, res) => {
   let type = req.params.type.toLowerCase();
   let ID = req.params.reviewID;
 if (type === "accept") {
-let data = await reviewShema.findOne({ reviewID: ID })
+let data = await reviewShema.findOne({ reviewID: ID });
+      if(!data)
+      return res.status(400).json({ error: `Please provide a book name` });
+
 }
 if (type === "deny") {
 }
