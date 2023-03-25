@@ -115,14 +115,35 @@ app.get("/data/:type/:other", async (req, res) => {
 app.get("/review/:type/:reviewID", async (req, res) => {
   let type = req.params.type.toLowerCase();
   let ID = req.params.reviewID;
-if (type === "accept") {
-let data = await reviewShema.findOne({ reviewID: ID });
-      if(!data)
-      return res.status(400).json({ error: `Please provide a book name` });
+  if (!ID) return res.status(400).json({ error: `Please provide a book name` });
+  if (type === "accept") {
+    let data = await reviewShema.findOne({ reviewID: ID });
+    if (!data) return res.status(400).json({ error: `Not found` });
 
-}
-if (type === "deny") {
-}
+    let newBook = new bookShema({
+      name: data.bookName,
+      author: data.bookAuthor,
+      description: data.bookDescription,
+      icon: data.bookIcon,
+    }).save();
+
+    await reviewShema.findOneAndDelete({ reviewID: ID });
+
+    res
+      .status(200)
+      .json({
+        success: `Successfully published the book!.`,
+      });
+  }
+  if (type === "deny") {
+    await reviewShema.findOneAndDelete({ reviewID: ID });
+
+    res
+      .status(200)
+      .json({
+        success: `Successfully denied the book!.`,
+      });
+  }
 });
 
 app.get("/profile/:username", async (req, res) => {
@@ -151,10 +172,6 @@ app.get("/profile/:username", async (req, res) => {
   file = file.replace("$$discord$$", userData.discord || "#");
   file = file.replace("$$twitter$$", userData.twitter || "#");
   file = file.replace("$$date$$", userData.date);
-  file = file.replace(
-    "$$profiles$$",
-    `'https://novels-production.up.railway.app/data/profiles'`
-  );
   res.send(file);
 });
 
