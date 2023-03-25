@@ -639,11 +639,11 @@ ${errorData.error}`;
         let emptyArray = [];
         if (userData) {
             icon.onclick = () => {
-                webLink = `https://novels-production.up.railway.app/profiles/${userData}`;
+                webLink = `https://novels-production.up.railway.app/profile/${userData}`;
                 linkTag.setAttribute("href", webLink);
                 linkTag.click();
             };
-            let response = await fetch($$profiles$$);
+            let response = await fetch("https://novels-production.up.railway.app/data/profiles");
             let json = await response.json();
             emptyArray = json.filter((data) => {
                 return data
