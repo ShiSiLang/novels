@@ -175,7 +175,7 @@ app.get("/review/:type/:type2/:reviewID", async (req, res) => {
           color: 65280
         },
       ],
-      username: (type2 === chapter ? `${data.cName}` : "New Book Post"),
+      username: (type2 === 'chapter' ? `${data.cName}` : "New Book Post"),
     };
 
     await reviewShema.findOneAndDelete({ reviewID: ID });
@@ -209,7 +209,7 @@ app.get("/review/:type/:type2/:reviewID", async (req, res) => {
           color: 16711680
         },
       ],
-      username: (type2 === chapter ? "New Chapter Post" : "New Book Post"),
+      username: (type2 === 'chapter' ? "New Chapter Post" : "New Book Post"),
     };
     await axios({
       method: "POST",
