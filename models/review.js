@@ -6,6 +6,7 @@ const reviewSchema = mongoose.Schema({
   bookDescription: String,
   bookIcon: String,
   type: String,
+  cType: String,
   cIntro: String,
   cName: String,
   cCredits: String,

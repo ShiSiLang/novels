@@ -153,7 +153,7 @@ app.get("/review/:type/:type2/:reviewID", async (req, res) => {
         intro: data.cIntro,
         credits: data.cCredits,
         thumbnail: data.bookIcon,
-        type: data.type,
+        type: data.cType,
         content: data.bookDescription,
         comments: []
       });
@@ -436,6 +436,7 @@ app.post("/publish-chapter", async (req, res) => {
     bookDescription: content,
     bookIcon: image,
     type: 'chapter',
+    cType: html.type,
     cIntro: html.intro.replaceAll("<script>", "&lt;"),
     cName: html.cname.replaceAll("<script>", "&lt;"),
     cCredits: html.credits.replaceAll("<script>", "&lt;"),

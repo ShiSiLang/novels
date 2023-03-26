@@ -615,9 +615,7 @@
         },
         body: JSON.stringify({ data }),
       });
-
-      console.log(response)
-
+      
       if (response.ok) {
         // Display success message here
         const successData = await response.json();
