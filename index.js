@@ -119,44 +119,67 @@ app.get("/data/:type/:other", async (req, res) => {
   }
 }); //very important
 
-app.get("/review/:type/:reviewID", async (req, res) => {
+app.get("/review/:type/:type2/:reviewID", async (req, res) => {
   let type = req.params.type.toLowerCase();
+  let type2 = req.params.type2.toLowerCase();
   let ID = req.params.reviewID;
   if (!ID) return res.status(400).json({ error: `Please provide a book name` });
+
   if (type === "accept" || type === "approve" || type === "allow") {
-    let data = await reviewShema.findOne({ reviewID: ID });
+    let data = await reviewShema.findOne({ type: type2, reviewID: ID });
     if (!data) return res.status(400).json({ error: `Not found` });
 
-    let newBook = new bookShema({
-      name: data.bookName,
-      author: data.bookAuthor,
-      description: data.bookDescription,
-      icon: data.bookIcon,
-    }).save();
-    let bookData = await newBook;
-    console.log(bookData)
-    let authorData = await profileShema.findOne({ username: bookData.author });
-    authorData.books.push(bookData.name)
-    console.log(authorData)
-    authorData.save();
-    await reviewShema.findOneAndDelete({ reviewID: ID });
+    let bookData;
+    if (type2 === 'book') {
+      let newBook = new bookShema({
+        name: data.bookName,
+        author: data.bookAuthor,
+        description: data.bookDescription,
+        icon: data.bookIcon,
+      }).save();
+
+      bookData = await newBook;
+      let authorData = await profileShema.findOne({ username: bookData.author });
+      authorData.books.push(bookData.name)
+      authorData.save();
+    } else {
+      bookData = await bookShema.findOne({
+        name: data.bookName,
+        author: data.bookAuthor,
+      })
+
+      bookData.chapters.push({
+        name: data.bookName,
+        intro: data.cIntro,
+        credits: data.cCredits,
+        thumbnail: data.bookIcon,
+        type: data.type,
+        content: data.bookDescription,
+        comments: []
+      });
+
+      bookData.save();
+    }
 
     res
       .status(200)
       .json({
-        success: `Successfully published the book!.`,
+        success: `Successfully published the ${type2}!.`,
       });
 
     let params = {
-      content: `Book accepted!.`,
+      content: `Book/Chapter accepted!.`,
       embeds: [
         {
           title: bookData.name,
           color: 65280
         },
       ],
-      username: "New Book Post",
+      username: (type2 === chapter ? `${data.cName}` : "New Book Post"),
     };
+
+    await reviewShema.findOneAndDelete({ reviewID: ID });
+
     await axios({
       method: "POST",
       headers: {
@@ -168,24 +191,25 @@ app.get("/review/:type/:reviewID", async (req, res) => {
       console.log(err);
     });
   }
+
   if (type === "deny") {
-    await reviewShema.findOneAndDelete({ reviewID: ID });
+    await reviewShema.findOneAndDelete({ type: type2, reviewID: ID });
 
     res
       .status(200)
       .json({
-        success: `Successfully denied the book!.`,
+        success: `Successfully denied the ${type2}!.`,
       });
 
     let params = {
-      content: `Book Denied!.`,
+      content: `Book/Chapter Denied!.`,
       embeds: [
         {
           title: bookData.name,
           color: 16711680
         },
       ],
-      username: "New Book Post",
+      username: (type2 === chapter ? "New Chapter Post" : "New Book Post"),
     };
     await axios({
       method: "POST",
@@ -346,6 +370,75 @@ app.post("/publish-book", async (req, res) => {
     bookAuthor: html.uname,
     bookDescription: html.description.replace(/</g, "&lt;"),
     bookIcon: html.icon.replace(/</g, "&lt;"),
+    type: 'book',
+    reviewID: newID,
+  }).save();
+
+  res
+    .status(200)
+    .json({
+      success: `Successfully published for review! The Staff team will dm your results.`,
+    });
+});
+
+app.post("/publish-chapter", async (req, res) => {
+  let html = req.body.data;
+
+  let data = await profileShema.findOne({
+    password: html.psw,
+    username: html.uname,
+  });
+
+  if (!data)
+    return res.status(400).json({ error: `Incorrect username or password!` });
+
+  let image = html.thumbnail.replace(/</g, "&lt;");
+
+  function isImage(url) {
+    return /^https?:\/\/.+\.(jpg|jpeg|png|webp|avif|gif|svg)$/.test(url);
+  }
+
+  if (isImage(image) === false)
+    return res
+      .status(400)
+      .json({ error: `Please make sure the icon is a valid URL.` });
+
+  let content = html.content.replaceAll("<script>", "&lt;");
+  let newID = Date.now();
+
+  let params = {
+    content: `New chapter has been submitted for review.`,
+    embeds: [
+      {
+        title: html.name.replace(/</g, "&lt;"),
+        description: trim(content, 4095),
+        image: { url: image },
+        footer: { text: newID },
+      },
+    ],
+    username: "New Chapter Post",
+  };
+  await axios({
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    data: JSON.stringify(params),
+    url: webhook_url,
+  }).catch((err) => {
+    console.log(err);
+    return res.status(400).json({ error: `An error has occured.` });
+  });
+
+  let newReview = new reviewShema({
+    bookName: html.name,
+    bookAuthor: html.uname,
+    bookDescription: content,
+    bookIcon: image,
+    type: 'chapter',
+    cIntro: html.intro.replaceAll("<script>", "&lt;"),
+    cName: html.cname.replaceAll("<script>", "&lt;"),
+    cCredits: html.credits.replaceAll("<script>", "&lt;"),
     reviewID: newID,
   }).save();
 
@@ -512,3 +605,9 @@ process.on("multipleResolves", (type, promise, reason) => {
   console.log(" [antiCrash] :: Multiple Resolves");
   console.log(type, promise, reason);
 });
+
+function trim(str, max) {
+  return str.length > max
+    ? `${str.slice(0, max - 3)}...`
+    : str;
+}

@@ -5,6 +5,10 @@ const reviewSchema = mongoose.Schema({
   bookAuthor: String,
   bookDescription: String,
   bookIcon: String,
+  type: String,
+  cIntro: String,
+  cName: String,
+  cCredits: String,
   reviewID: String,
 });
 
