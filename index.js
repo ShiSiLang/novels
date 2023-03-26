@@ -91,23 +91,20 @@ app.get("/novel/:chapter", async (req, res) => {
 
 app.get("/data/:type/:other", async (req, res) => {
   let type = req.params.type.toLowerCase();
-  console.log(type)
   if (type === "profiles") {
     let data = await profileShema.find().sort({ username: 1 });
     let newObj = data.map((v) => v.username);
     res.send(newObj);
   }
   if (type === "profilebooks") {
-    console.log('yes')
     let username = req.params.other;
     if (!username)
       return res.status(400).json({ error: `Please provide a username` });
     let data = await profileShema.findOne({ name: username });
-    console.log(data)
     if (!data)
       return res.status(400).json({ error: `Not found.` });
 
-    res.send(data);
+    res.send(data.books);
   }
   if (type === "books") {
     let data = await bookShema.find().sort({ name: 1 });
