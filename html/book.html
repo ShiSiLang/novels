@@ -206,10 +206,8 @@
       let json = await response.json();
 
       const div = document.getElementById("chapters");
-      for (let i = 0; i < json.length; i++) {
-        div.innerHTML += `
-              <button onclick="window.location.href='/read/${i + 1}'">${json[i].chapter
-          }</button>`;
+      for (let i = 0; i < json.chapters.length; i++) {
+        div.innerHTML += `<button onclick="window.location.href='/read/${json.name}/${i + 1}'">${json.chapters[i].name}</button>`;
       }
     } catch (err) {
       const div = document.getElementById("nca");

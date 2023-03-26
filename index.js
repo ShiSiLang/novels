@@ -115,6 +115,7 @@ app.get("/data/:type/:other", async (req, res) => {
     if (!bookName)
       return res.status(400).json({ error: `Please provide a book name` });
     let book = await bookShema.findOne({ name: bookName });
+    console.log(book)
     res.send(book);
   }
 }); //very important
@@ -149,7 +150,7 @@ app.get("/review/:type/:type2/:reviewID", async (req, res) => {
       })
 
       bookData.chapters.push({
-        name: data.bookName,
+        name: data.cName,
         intro: data.cIntro,
         credits: data.cCredits,
         thumbnail: data.bookIcon,
