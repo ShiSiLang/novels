@@ -262,12 +262,7 @@
   }
 
   .container select-items {
-    position: absolute;
-    background-color: DodgerBlue;
-    top: 100%;
-    left: 0;
-    right: 0;
-    z-index: 99;
+    background-color: #5c4981;
   }
 
   ::placeholder {
@@ -555,10 +550,8 @@
     async function updateSelect() {
       try {
         let data = JSON.parse(localStorage.loginUser);
-        console.log(data)
         let response = await fetch(`https://novels-production.up.railway.app/data/profileBooks/${data.username}`);
         let json = await response.json();
-        console.log(json)
 
         var options = json.map(v => {
           return {
@@ -566,7 +559,6 @@
             "value": v
           }
         });
-        console.log(options)
 
         var selectBox = document.getElementById('books');
 
