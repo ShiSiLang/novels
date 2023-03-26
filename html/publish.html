@@ -550,7 +550,7 @@
     };
   </script>
 
-  <script>
+  <script async>
     try {
       let data = JSON.parse(localStorage.loginUser);
       let response = await fetch(`https://novels-production.up.railway.app/data/profileBooks/${data.username}`);
