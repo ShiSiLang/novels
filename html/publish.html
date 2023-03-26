@@ -473,24 +473,28 @@
         <input id="inputpass" type="hidden" name="psw" value="NOTHING" />
 
         <label for="name"><b>Book Name</b></label>
-        <input type="text" placeholder="Enter Book Name To Find" name="name" autocomplete="on" required />
+        <select name="books" id="books" form="pcForm" required>
+          <option value="volvo">Volvo</option>
+          <option value="saab">Saab</option>
+          <option value="opel">Opel</option>
+          <option value="audi">Audi</option>
 
-        <label for="cname"><b>Chapter Name</b></label>
-        <input type="text" placeholder="Enter Chapter Name" name="cname" autocomplete="off" required />
+          <label for="cname"><b>Chapter Name</b></label>
+          <input type="text" placeholder="Enter Chapter Name" name="cname" autocomplete="off" required />
 
-        <label for="into"><b>Chapter Intro</b></label>
-        <input type="text" placeholder="Enter Chapter Intro" name="into" autocomplete="off" />
+          <label for="into"><b>Chapter Intro</b></label>
+          <input type="text" placeholder="Enter Chapter Intro" name="into" autocomplete="off" />
 
-        <label for="credits"><b>Chapter Credits</b></label>
-        <input type="text" placeholder="Enter Chapter Credits" name="credits" autocomplete="off" />
+          <label for="credits"><b>Chapter Credits</b></label>
+          <input type="text" placeholder="Enter Chapter Credits" name="credits" autocomplete="off" />
 
-        <label for="thumbnail"><b>Chapter Thumbnail</b></label>
-        <input type="text" placeholder="Enter Chapter Thumbnail" name="thumbnail" autocomplete="off" required />
+          <label for="thumbnail"><b>Chapter Thumbnail</b></label>
+          <input type="text" placeholder="Enter Chapter Thumbnail" name="thumbnail" autocomplete="off" required />
 
-        <input id="type" type="hidden" name="type" value="novel" />
+          <input id="type" type="hidden" name="type" value="novel" />
 
-        <label for="content"><b>Chapter Content</b></label>
-        <textarea rows="10" cols="50" name="content" form="pcForm" required></textarea>
+          <label for="content"><b>Chapter Content</b></label>
+          <textarea rows="10" cols="50" name="content" form="pcForm" required></textarea>
       </div>
       <div class="container">
         <button type="submit" onclick="document.getElementById('pbmodal').style.display='none'" class="submitbtn">

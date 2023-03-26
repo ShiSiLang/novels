@@ -97,12 +97,23 @@ app.get("/data/:type/:other", async (req, res) => {
     let newObj = data.map((v) => v.username);
     res.send(newObj);
   }
+  if (type === "profileBooks") {
+    let username = req.params.other;
+    if (!username)
+      return res.status(400).json({ error: `Please provide a username` });
+    let data = await bookShema.findOne({ name: username });
+
+    if (!data)
+      return res.status(400).json({ error: `Not found.` });
+
+    res.send(data.books);
+  }
   if (type === "books") {
     let data = await bookShema.find().sort({ name: 1 });
     res.send(data);
   }
   if (type === "book") {
-    let bookName = req.params.other.toLowerCase();
+    let bookName = req.params.other;
     if (!bookName)
       return res.status(400).json({ error: `Please provide a book name` });
     let book = await bookShema.findOne({ name: bookName });
