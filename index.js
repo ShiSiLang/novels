@@ -197,9 +197,9 @@ app.get("/review/:type/:reviewID", async (req, res) => {
 });
 
 app.get("/profile/:username", async (req, res) => {
-  let username = req.params.username;
-
-  let userData = await profileShema.findOne({ username: username });
+  let username = req.params.username.replace(/\s/g, '').toLowerCase();
+  let users = await profileShema.find().sort({ username: 1 });
+  let userData = users.find(v => v.username.replace(/\s/g, '').toLowerCase() === username);
 
   if (!userData) return res.sendFile(dir("error"));
 
@@ -210,7 +210,7 @@ app.get("/profile/:username", async (req, res) => {
   let data = await bookShema.find().sort({ name: 1 });
 
   let comments = data.filter(
-    (v) => v.chapters.comments.username === userData.username
+    (v) => v.chapters?.comments?.username === userData.username
   );
 
   console.log(comments);
