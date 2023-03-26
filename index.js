@@ -8,6 +8,7 @@ const mongoose = require("mongoose");
 const profileShema = require("./models/profiles");
 const reviewShema = require("./models/review");
 const bookShema = require("./models/book");
+let webhook_url = process.env.webhook;
 
 const dir = (text) => `${__dirname}/html/${text}.html`;
 const link = (input) => `https://novels-production.up.railway.app/${input}`;
@@ -309,7 +310,7 @@ app.post("/publish-book", async (req, res) => {
       .status(400)
       .json({ error: `Please make sure the icon is a valid URL.` });
   let newID = Date.now();
-  let webhook_url = process.env.webhook;
+
   let params = {
     content: `New book has been submitted for review.`,
     embeds: [
