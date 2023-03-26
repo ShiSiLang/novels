@@ -126,9 +126,12 @@ app.get("/review/:type/:reviewID", async (req, res) => {
       description: data.bookDescription,
       icon: data.bookIcon,
     }).save();
-    console.log(newBook)
-    let pushBook = await profileShema.findOneAndUpdate({ username: newBook.author }, { $push: { books: newBook.name }});
-    console.log(pushBook)
+    let bookData = await newBook;
+    console.log(bookData)
+    let authorData = await profileShema.findOne({ username: bookData.author });
+    authorData.books.push(bookData.name)
+    console.log(authorData)
+    authorData.save();
     await reviewShema.findOneAndDelete({ reviewID: ID });
 
     res
@@ -136,6 +139,27 @@ app.get("/review/:type/:reviewID", async (req, res) => {
       .json({
         success: `Successfully published the book!.`,
       });
+
+    let params = {
+      content: `Book accepted!.`,
+      embeds: [
+        {
+          title: bookData.name,
+          color: 65280
+        },
+      ],
+      username: "New Book Post",
+    };
+    await axios({
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      data: JSON.stringify(params),
+      url: webhook_url,
+    }).catch((err) => {
+      console.log(err);
+    });
   }
   if (type === "deny") {
     await reviewShema.findOneAndDelete({ reviewID: ID });
@@ -144,6 +168,27 @@ app.get("/review/:type/:reviewID", async (req, res) => {
       .status(200)
       .json({
         success: `Successfully denied the book!.`,
+      });
+
+      let params = {
+        content: `Book Denied!.`,
+        embeds: [
+          {
+            title: bookData.name,
+            color: 16711680
+          },
+        ],
+        username: "New Book Post",
+      };
+      await axios({
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        data: JSON.stringify(params),
+        url: webhook_url,
+      }).catch((err) => {
+        console.log(err);
       });
   }
 });
