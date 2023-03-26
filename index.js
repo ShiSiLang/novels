@@ -33,14 +33,21 @@ app.get("/publish", (_, res) => res.sendFile(dir("publish")));
 
 app.get("/explore", async (req, res) => {
   //get data
-  res.sendFile(dir("explore"));
+  let file = fs.readFileSync("./html/explore.html", {
+    encoding: "utf8",
+  });
+  file = file.replaceAll(
+    "$$books$$",
+    `'https://novels-production.up.railway.app/data/books'`
+  );
+
+  res.send(file);
 });
 
 app.get("/explore/:bookName", async (req, res) => {
   let bookName = req.params.bookName.replace(/\s/g, '').toLowerCase();
   let books = await bookShema.find().sort({ name: 1 });
   let book = books.find(v => v.name.replace(/\s/g, '').toLowerCase() === bookName);
-  console.log(books, book, bookName)
 
   if (!book) return res.sendFile(dir("error"));
 
