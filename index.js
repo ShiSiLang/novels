@@ -101,7 +101,7 @@ app.get("/data/:type/:other", async (req, res) => {
     let username = req.params.other;
     if (!username)
       return res.status(400).json({ error: `Please provide a username` });
-    let data = await bookShema.findOne({ name: username });
+    let data = await profileShema.findOne({ name: username });
 
     if (!data)
       return res.status(400).json({ error: `Not found.` });
