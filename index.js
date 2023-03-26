@@ -97,7 +97,7 @@ app.get("/data/:type/:other", async (req, res) => {
     let newObj = data.map((v) => v.username);
     res.send(newObj);
   }
-  if (type === "profileBooks") {
+  if (type === "profilebooks") {
     console.log('yes')
     let username = req.params.other;
     if (!username)
