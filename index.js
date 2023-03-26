@@ -102,11 +102,11 @@ app.get("/data/:type/:other", async (req, res) => {
     if (!username)
       return res.status(400).json({ error: `Please provide a username` });
     let data = await profileShema.findOne({ name: username });
-
+    console.log(data)
     if (!data)
       return res.status(400).json({ error: `Not found.` });
 
-    res.send(data.books);
+    res.send(data);
   }
   if (type === "books") {
     let data = await bookShema.find().sort({ name: 1 });
