@@ -410,7 +410,7 @@ app.post("/publish-chapter", async (req, res) => {
     content: `New chapter has been submitted for review.`,
     embeds: [
       {
-        title: html.name.replace(/</g, "&lt;"),
+        title: html.name,
         description: trim(content, 4095),
         image: { url: image },
         footer: { text: newID },
