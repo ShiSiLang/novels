@@ -203,6 +203,87 @@
             --row-heigth: 200px;
         }
     }
+
+    /*Search Bar*/
+    * {
+        box-sizing: border-box;
+    }
+
+    .wrapper {
+        max-width: 450px;
+        margin: 150px auto;
+    }
+
+    .wrapper .search-input {
+        border-radius: 16px;
+        box-shadow: 0px 0px 10px #967bb6;
+        background-color: #967bb6;
+        border: 3px solid #5c4981;
+        width: 100%;
+        position: relative;
+    }
+
+    .search-input input {
+        height: 55px;
+        width: 100%;
+        outline: none;
+        border-radius: 16px;
+        box-shadow: 0px 0px 10px #967bb6;
+        background-color: #967bb6;
+        border: none;
+        padding: 0 60px 0 20px;
+        font-size: 22px;
+    }
+
+    .search-input.active input {
+        border-radius: 5px 5px 0 0;
+    }
+
+    .search-input .autocom-box {
+        padding: 0;
+        opacity: 0;
+        pointer-events: none;
+        max-height: 280px;
+        overflow-y: auto;
+    }
+
+    .search-input.active .autocom-box {
+        padding: 10px 8px;
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    .autocom-box li {
+        list-style: none;
+        padding: 8px 12px;
+        display: none;
+        width: 100%;
+        cursor: default;
+        border-radius: 3px;
+    }
+
+    .search-input.active .autocom-box li {
+        display: block;
+    }
+
+    .autocom-box li:hover {
+        background: #d1dada;
+    }
+
+    .search-input .icon {
+        position: absolute;
+        right: 0px;
+        top: 0px;
+        height: 55px;
+        width: 55px;
+        text-align: center;
+        line-height: 55px;
+        font-size: 20px;
+        color: white;
+        cursor: pointer;
+    }
+
+    /*Search Bar End*/
 </style>
 <script type="text/javascript">
     async function changeDivContent() {
@@ -215,19 +296,10 @@
             for (i = 0; i < json.length; i++) {
 
                 if (i === 0) {
-                    imageGrid.innerHTML = ` 
-        <a class="image-grid-col-2 image-grid-row-2" href="/explore/${json[0].name}"><img src="${json[0].icon}"
-                alt="${json[0].name}" /></a>`
+                    imageGrid.innerHTML = ` <a class="image-grid-col-2 image-grid-row-2" href="/explore/${json[0].name}"><img src="${json[0].icon}" alt="${json[0].name}" /></a>`
                 }
 
-                imageGrid.innerHTML += ` 
-                <a href="#"><img src="https://i.imgur.com/XjWCCeV.png" alt="Test" /></a>
-        <a href="#"><img src="https://i.imgur.com/XjWCCeV.png" alt="Test" /></a>
-        <a href="#"><img src="https://i.imgur.com/XjWCCeV.png" alt="Test1" /></a>
-        <a href="#"><img src="https://i.imgur.com/XjWCCeV.png" alt="Test" /></a>
-        <a href="#"><img src="https://i.imgur.com/XjWCCeV.png" alt="Test" /></a>
-        <a href="#"><img src="https://i.imgur.com/XjWCCeV.png" alt="Test" /></a>
-        <a href="#"><img src="https://i.imgur.com/XjWCCeV.png" alt="Test" /></a>`
+                imageGrid.innerHTML += `<a href="/explore/${json[i].name}"><img src="${json[i].icon}" alt="${json[i].name}" /></a>`
             }
         } catch (err) {
             alert('Could not fetch data.')
@@ -291,24 +363,18 @@
         <h1>Find your next favorite story.</h1>
     </div>
 
-    <form autocomplete="off" action="/action_page.php">
-        <div class="autocomplete" style="width:300px;">
-            <input id="myInput" type="text" name="myCountry" placeholder="Country">
+    <div class="wrapper">
+        <div class="search-input">
+            <a href="" hidden></a>
+            <input type="text" placeholder="Search Books" />
+            <div class="autocom-box">
+                <!-- here list are inserted from javascript -->
+            </div>
+            <div class="icon"><i class="fa fa-search"></i></div>
         </div>
-        <input type="submit">
-    </form>
-
-    <div id="image-grid" class="image-grid">
-        <a class="image-grid-col-2 image-grid-row-2" href="/explore/1"><img src="https://i.imgur.com/lGLKiVd.png"
-                alt="Star of Libby, Adios Hogar Mio" /></a>
-        <a href="#"><img src="https://i.imgur.com/XjWCCeV.png" alt="Test" /></a>
-        <a href="#"><img src="https://i.imgur.com/XjWCCeV.png" alt="Test" /></a>
-        <a href="#"><img src="https://i.imgur.com/XjWCCeV.png" alt="Test1" /></a>
-        <a href="#"><img src="https://i.imgur.com/XjWCCeV.png" alt="Test" /></a>
-        <a href="#"><img src="https://i.imgur.com/XjWCCeV.png" alt="Test" /></a>
-        <a href="#"><img src="https://i.imgur.com/XjWCCeV.png" alt="Test" /></a>
-        <a href="#"><img src="https://i.imgur.com/XjWCCeV.png" alt="Test" /></a>
     </div>
+
+    <div id="image-grid" class="image-grid"></div>
 
     <footer>
         <div class="footer-content">
@@ -320,5 +386,65 @@
         </div>
     </footer>
 </body>
+<script>
+    const searchWrapper = document.querySelector(".search-input");
+    const inputBox = searchWrapper.querySelector("input");
+    const suggBox = searchWrapper.querySelector(".autocom-box");
+    const icon = searchWrapper.querySelector(".icon");
+    let linkTag = searchWrapper.querySelector("a");
+    let webLink;
+
+    inputBox.onkeyup = async (e) => {
+        let userData = e.target.value;
+        let emptyArray = [];
+        if (userData) {
+            icon.onclick = () => {
+                webLink = `https://novels-production.up.railway.app/explore/${userData}`;
+                linkTag.setAttribute("href", webLink);
+                linkTag.click();
+            };
+            let response = await fetch("https://novels-production.up.railway.app/data/books/null");
+            let json = await response.json();
+            emptyArray = json.filter((data) => {
+                return data
+                    .toLocaleLowerCase()
+                    .startsWith(userData.toLocaleLowerCase());
+            });
+            emptyArray = emptyArray.map((data) => {
+                return (data = `<li>${data}</li>`);
+            });
+            searchWrapper.classList.add("active");
+            showSuggestions(emptyArray);
+            let allList = suggBox.querySelectorAll("li");
+            for (let i = 0; i < allList.length; i++) {
+                allList[i].setAttribute("onclick", "select(this)");
+            }
+        } else {
+            searchWrapper.classList.remove("active");
+        }
+    };
+
+    function select(element) {
+        let selectData = element.textContent;
+        inputBox.value = selectData;
+        icon.onclick = () => {
+            webLink = `https://novels-production.up.railway.app/explore/${selectData}`;
+            linkTag.setAttribute("href", webLink);
+            linkTag.click();
+        };
+        searchWrapper.classList.remove("active");
+    }
+
+    function showSuggestions(list) {
+        let listData;
+        if (!list.length) {
+            userValue = inputBox.value;
+            listData = `<li>${userValue}</li>`;
+        } else {
+            listData = list.join("");
+        }
+        suggBox.innerHTML = listData;
+    }
+</script>
 
 </html>
