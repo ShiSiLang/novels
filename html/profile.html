@@ -698,7 +698,6 @@ ${errorData.error}`;
     form.addEventListener("submit", async (e) => {
         e.preventDefault();
         const data = Object.fromEntries(new FormData(form).entries());
-        console.log(data);
 
         const response = await fetch("/edit", {
             method: "POST",

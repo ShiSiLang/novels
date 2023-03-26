@@ -290,7 +290,6 @@
         try {
             let response = await fetch('https://novels-production.up.railway.app/data/books/null');
             let json = await response.json()
-            console.log(json)
             const imageGrid = document.getElementById("image-grid");
 
             for (i = 0; i < json.length; i++) {
