@@ -98,6 +98,7 @@ app.get("/data/:type/:other", async (req, res) => {
     res.send(newObj);
   }
   if (type === "profileBooks") {
+    console.log('yes')
     let username = req.params.other;
     if (!username)
       return res.status(400).json({ error: `Please provide a username` });
