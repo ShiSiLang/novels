@@ -574,6 +574,7 @@
 
   <script>
     const form = document.getElementById("pbForm");
+    const form2 = document.getElementById("pcForm");
     const error = document.getElementById("error");
     const success = document.getElementById("success");
 
@@ -588,6 +589,34 @@
         },
         body: JSON.stringify({ data }),
       });
+
+      if (response.ok) {
+        // Display success message here
+        const successData = await response.json();
+        success.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+      <strong>Success!</strong> ${successData.success}`;
+        success.style.display = "block";
+      } else {
+        const errorData = await response.json();
+        error.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+  ${errorData.error}`;
+        error.style.display = "block";
+      }
+    });
+
+    form2.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const data = Object.fromEntries(new FormData(form2).entries());
+
+      const response = await fetch("/publish-chapter", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ data }),
+      });
+
+      console.log(response)
 
       if (response.ok) {
         // Display success message here
