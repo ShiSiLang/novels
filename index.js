@@ -31,18 +31,8 @@ app.get("/discord", (_, res) => res.redirect("https://discord.gg/j3YamACwPu"));
 
 app.get("/publish", (_, res) => res.sendFile(dir("publish")));
 
-app.get("/explore", async (req, res) => {
-  //get data
-  let file = fs.readFileSync("./html/explore.html", {
-    encoding: "utf8",
-  });
-  file = file.replaceAll(
-    "$$books$$",
-    ``
-  );
+app.get("/explore", (_, res) => res.sendFile(dir("explore")));
 
-  res.send(file);
-});
 
 app.get("/explore/:bookName", async (req, res) => {
   let bookName = req.params.bookName.replace(/\s/g, '').toLowerCase();
@@ -104,7 +94,6 @@ app.get("/data/:type/:other", async (req, res) => {
 
   if (type === "profiles") {
     let data = await profileShema.find().sort({ username: 1 });
-    console.log(data);
     let newObj = data.map((v) => v.username);
     res.send(newObj);
   }
@@ -117,7 +106,6 @@ app.get("/data/:type/:other", async (req, res) => {
     if (!bookName)
       return res.status(400).json({ error: `Please provide a book name` });
     let book = await bookShema.findOne({ name: bookName });
-    console.log(book);
     res.send(book);
   }
 }); //very important
@@ -180,26 +168,26 @@ app.get("/review/:type/:reviewID", async (req, res) => {
         success: `Successfully denied the book!.`,
       });
 
-      let params = {
-        content: `Book Denied!.`,
-        embeds: [
-          {
-            title: bookData.name,
-            color: 16711680
-          },
-        ],
-        username: "New Book Post",
-      };
-      await axios({
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+    let params = {
+      content: `Book Denied!.`,
+      embeds: [
+        {
+          title: bookData.name,
+          color: 16711680
         },
-        data: JSON.stringify(params),
-        url: webhook_url,
-      }).catch((err) => {
-        console.log(err);
-      });
+      ],
+      username: "New Book Post",
+    };
+    await axios({
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      data: JSON.stringify(params),
+      url: webhook_url,
+    }).catch((err) => {
+      console.log(err);
+    });
   }
 });
 

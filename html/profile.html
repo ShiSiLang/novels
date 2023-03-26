@@ -643,7 +643,7 @@ ${errorData.error}`;
                 linkTag.setAttribute("href", webLink);
                 linkTag.click();
             };
-            let response = await fetch("https://novels-production.up.railway.app/data/profiles");
+            let response = await fetch("https://novels-production.up.railway.app/data/profiles/null");
             let json = await response.json();
             emptyArray = json.filter((data) => {
                 return data
