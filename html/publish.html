@@ -550,27 +550,30 @@
     };
   </script>
 
-  <script async>
-    try {
-      let data = JSON.parse(localStorage.loginUser);
-      let response = await fetch(`https://novels-production.up.railway.app/data/profileBooks/${data.username}`);
-      let json = await response.json();
-      console.log(json)
+  <script>
+    updateSelect()
+    async function updateSelect() {
+      try {
+        let data = JSON.parse(localStorage.loginUser);
+        let response = await fetch(`https://novels-production.up.railway.app/data/profileBooks/${data.username}`);
+        let json = await response.json();
+        console.log(json)
 
-      var options = json.map(v => {
-        return {
-          "text": v,
-          "value": v
+        var options = json.map(v => {
+          return {
+            "text": v,
+            "value": v
+          }
+        });
+
+        var selectBox = document.getElementById('books');
+
+        for (var i = 0, l = options.length; i < l; i++) {
+          var option = options[i];
+          selectBox.options.add(new Option(option.text, option.value, option.selected));
         }
-      });
-
-      var selectBox = document.getElementById('books');
-
-      for (var i = 0, l = options.length; i < l; i++) {
-        var option = options[i];
-        selectBox.options.add(new Option(option.text, option.value, option.selected));
-      }
-    } catch (err) { console.log(err) }
+      } catch (err) { console.log(err) }
+    }
   </script>
 
   <script>
