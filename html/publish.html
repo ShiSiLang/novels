@@ -249,23 +249,6 @@
     color: #ffcc99;
   }
 
-  .autocomplete {
-    /*the container must be positioned relative:*/
-    position: relative;
-    display: inline-block;
-  }
-
-  .autocomplete-items {
-    position: absolute;
-    border: 1px solid #ffcc99;
-    border-bottom: none;
-    border-top: none;
-    z-index: 99;
-    top: 100%;
-    left: 0;
-    right: 0;
-  }
-
   ::placeholder {
     color: #ffcc99;
   }
@@ -474,10 +457,6 @@
 
         <label for="name"><b>Book Name</b></label>
         <select name="books" id="books" form="pcForm" required>
-          <option value="volvo">Volvo</option>
-          <option value="saab">Saab</option>
-          <option value="opel">Opel</option>
-          <option value="audi">Audi</option>
 
           <label for="cname"><b>Chapter Name</b></label>
           <input type="text" placeholder="Enter Chapter Name" name="cname" autocomplete="off" required />
