@@ -38,7 +38,7 @@ app.get("/explore", async (req, res) => {
   });
   file = file.replaceAll(
     "$$books$$",
-    `'https://novels-production.up.railway.app/data/books'`
+    ``
   );
 
   res.send(file);

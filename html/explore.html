@@ -204,8 +204,38 @@
         }
     }
 </style>
+<script type="text/javascript">
+    async function changeDivContent() {
+        try {
+            let response = await fetch('https://novels-production.up.railway.app/data/books');
+            let json = await response.json()
+            console.log(json)
+            const imageGrid = document.getElementById("image-grid");
 
-<body>
+            for (i = 0; i < json.length; i++) {
+
+                if (i === 0) {
+                    imageGrid.innerHTML = ` 
+        <a class="image-grid-col-2 image-grid-row-2" href="/explore/${json[0].name}"><img src="${json[0].icon}"
+                alt="${json[0].name}" /></a>`
+                }
+
+                imageGrid.innerHTML += ` 
+                <a href="#"><img src="https://i.imgur.com/XjWCCeV.png" alt="Test" /></a>
+        <a href="#"><img src="https://i.imgur.com/XjWCCeV.png" alt="Test" /></a>
+        <a href="#"><img src="https://i.imgur.com/XjWCCeV.png" alt="Test1" /></a>
+        <a href="#"><img src="https://i.imgur.com/XjWCCeV.png" alt="Test" /></a>
+        <a href="#"><img src="https://i.imgur.com/XjWCCeV.png" alt="Test" /></a>
+        <a href="#"><img src="https://i.imgur.com/XjWCCeV.png" alt="Test" /></a>
+        <a href="#"><img src="https://i.imgur.com/XjWCCeV.png" alt="Test" /></a>`
+            }
+        } catch (err) {
+            alert('Could not fetch data.')
+        }
+    };
+</script>
+
+<body onload="changeDivContent()">
     <div class="topnav">
         <a href="/home">Home</a>
         <a class="active" href="/explore">Explore</a>
@@ -261,9 +291,14 @@
         <h1>Find your next favorite story.</h1>
     </div>
 
-    <!--Search bar goes here-->
+    <form autocomplete="off" action="/action_page.php">
+        <div class="autocomplete" style="width:300px;">
+            <input id="myInput" type="text" name="myCountry" placeholder="Country">
+        </div>
+        <input type="submit">
+    </form>
 
-    <div class="image-grid">
+    <div id="image-grid" class="image-grid">
         <a class="image-grid-col-2 image-grid-row-2" href="/explore/1"><img src="https://i.imgur.com/lGLKiVd.png"
                 alt="Star of Libby, Adios Hogar Mio" /></a>
         <a href="#"><img src="https://i.imgur.com/XjWCCeV.png" alt="Test" /></a>
