@@ -40,6 +40,7 @@ app.get("/explore/:bookName", async (req, res) => {
   let bookName = req.params.bookName.replace(/\s/g, '').toLowerCase();
   let books = await bookShema.find().sort({ name: 1 });
   let book = books.find(v => v.name.replace(/\s/g, '').toLowerCase() === bookName);
+  console.log(books, book, bookName)
 
   if (!book) return res.sendFile(dir("error"));
 
