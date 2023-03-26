@@ -126,7 +126,9 @@ app.get("/review/:type/:reviewID", async (req, res) => {
       description: data.bookDescription,
       icon: data.bookIcon,
     }).save();
-
+    console.log(newBook)
+    let pushBook = await profileShema.findOneAndUpdate({ username: newBook.author }, { $push: { books: newBook.name }});
+    console.log(pushBook)
     await reviewShema.findOneAndDelete({ reviewID: ID });
 
     res
