@@ -249,6 +249,18 @@
     color: #ffcc99;
   }
 
+  .container select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    box-sizing: border-box;
+    background: transparent;
+    border: none;
+    color: #ffcc99;
+    outline: none;
+  }
+
   ::placeholder {
     color: #ffcc99;
   }
@@ -456,7 +468,7 @@
         <input id="inputpass" type="hidden" name="psw" value="NOTHING" />
 
         <label for="name"><b>Book Name</b></label>
-        <select name="books" id="books" form="pcForm" required>
+        <select name="books" id="books" form="pcForm" required></select>
 
           <label for="cname"><b>Chapter Name</b></label>
           <input type="text" placeholder="Enter Chapter Name" name="cname" autocomplete="off" required />
