@@ -555,6 +555,7 @@
     async function updateSelect() {
       try {
         let data = JSON.parse(localStorage.loginUser);
+        console.log(data)
         let response = await fetch(`https://novels-production.up.railway.app/data/profileBooks/${data.username}`);
         let json = await response.json();
         console.log(json)
@@ -565,6 +566,7 @@
             "value": v
           }
         });
+        console.log(options)
 
         var selectBox = document.getElementById('books');
 
