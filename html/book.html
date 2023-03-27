@@ -164,7 +164,13 @@
   }
 
   .mid {
-    margin: 0 auto;
+  margin: 0 auto;
+  width: 100%; /* set the width to 100% of its parent container */
+  max-width: 1500px; /* set a maximum width of 1500px to prevent the div from becoming too wide */
+  height: auto; /* set the height to auto to allow the div to adjust its height based on the aspect ratio of the background image */
+  background-image: url('$$icon$$');
+  background-size: cover;
+  background-position: center;
   }
 
   * {
@@ -266,9 +272,7 @@
     }
   </script>
 
-  <div class="mid"
-    style="width: 1500px; height: 500px; background-image: url('$$icon$$'); background-size: cover; background-position: center;">
-  </div>
+  <div class="mid"></div>
 
   <div class="text">
     <h1>$$name$$</h1>
