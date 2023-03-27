@@ -168,15 +168,14 @@
   }
 
   .thumbnail {
+    max-width: 1000px;
+    max-height: 350px;
     position: relative;
     margin: auto;
   }
 
   .thumbnail img{
-    max-width: 1000px;
-    max-height: 350px;
-    position: relative;
-    margin: auto;
+    object-fit: cover;
   }
 
   .btn-group button {
@@ -276,9 +275,9 @@
 
   <div class="thumbnail">
     <!-- Images have to be 1000X350 -->
-    <img src="$$icon$$" />
+    <img src="$$icon$$" style="width:100%"/>
   </div>
-  <!--style="width:100%"-->
+
   <div class="text">
     <h1>$$name$$</h1>
     <h2>$$desc$$</h2>
