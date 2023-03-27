@@ -418,21 +418,22 @@
       const div2 = document.getElementById("credits");
       const div3 = document.getElementById("comments");
       const div4 = document.getElementById("commentstitle");
+      let index = Number('$$previous$$');
       div.innerHTML = `     
           <h1>${json.name}</h1>
-          <p>${json.chapters[$$previous$$].intro}</p>
-          <h2>${json.chapters[$$previous$$].name}</h2>
-          <p>${json.chapters[$$previous$$].content}</p>`
+          <p>${json.chapters[index].intro}</p>
+          <h2>${json.chapters[index].name}</h2>
+          <p>${json.chapters[index].content}</p>`
       div2.innerHTML = `	
           <h1>Credits</h1>
-          <p>${json.chapters[$$previous$$].credits}</p>
+          <p>${json.chapters[index].credits}</p>
           `
-      if (json.chapters[$$previous$$]?.comments.length === 0) {
+      if (json.chapters[index]?.comments.length === 0) {
         div4.innerHTML = `
             <p>No comments for this chapter</p>`
       } else {
-        for (let i = 0; i < json.chapters[$$previous$$].comments.length; i++) {
-          let chapter = json.chapters[$$previous$$]
+        for (let i = 0; i < json.chapters[index].comments.length; i++) {
+          let chapter = json.chapters[index]
           div3.innerHTML += `
               <div class="comment mt-4 text-justify float-left">
                 <img src="${chapter.comments[i].icon}" alt=" " class="rounded-circle" width="40" height="40">
