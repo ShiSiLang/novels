@@ -536,17 +536,18 @@
   </section>
 
   <div class="flex">
-    <button class="pnButtons" id="commentButton" onclick="document.getElementById('modal').style.display='block'"
-      style="width:auto;">Comment</button>
+    <button class="pnButtons" id="commentButton" style="width:auto;">Comment</button>
   </div>
 
   <script>
     document.getElementById("commentButton").addEventListener("click", async (e) => {
       if (!localStorage.loginUser) {
-        e.preventDefault()
+        e.preventDefault();
         error.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
   Sign-In to comment!`;
         error.style.display = "block";
+      }else{
+        document.getElementById('modal').style.display='block';
       }
     });
   </script>
