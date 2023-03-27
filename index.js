@@ -33,11 +33,12 @@ app.get("/publish", (_, res) => res.sendFile(dir("publish")));
 
 app.get("/explore", (_, res) => res.sendFile(dir("explore")));
 
-
 app.get("/explore/:bookName", async (req, res) => {
-  let bookName = req.params.bookName.replace(/\s/g, '').toLowerCase();
+  let bookName = req.params.bookName.replace(/\s/g, "").toLowerCase();
   let books = await bookShema.find().sort({ name: 1 });
-  let book = books.find(v => v.name.replace(/\s/g, '').toLowerCase() === bookName);
+  let book = books.find(
+    (v) => v.name.replace(/\s/g, "").toLowerCase() === bookName
+  );
 
   if (!book) return res.sendFile(dir("error"));
 
@@ -85,7 +86,6 @@ app.get("/read/:book/:chapter", async (req, res) => {
   res.send(file);
 });
 
-
 app.get("/data/:type/:other", async (req, res) => {
   let type = req.params.type.toLowerCase();
   if (type === "profiles") {
@@ -98,8 +98,7 @@ app.get("/data/:type/:other", async (req, res) => {
     if (!username)
       return res.status(400).json({ error: `Please provide a username` });
     let data = await profileShema.findOne({ username: username });
-    if (!data)
-      return res.status(400).json({ error: `Not found.` });
+    if (!data) return res.status(400).json({ error: `Not found.` });
 
     res.send(data.books);
   }
@@ -113,13 +112,23 @@ app.get("/data/:type/:other", async (req, res) => {
       return res.status(400).json({ error: `Please provide a book name` });
     let book = await bookShema.findOne({ name: bookName });
     if (!book) return res.status(400).json({ error: `Not Found` });
+
+    book.chapters.forEach((e) => {
+      e.comments.map((v) => v);
+    });
+
     res.send(book);
   }
 }); //very important
 
-app.get("/review/:type/:type2/:reviewID", async (req, res) => {
+app.get("/review/:type/:type2/:reviewID/:password", async (req, res) => {
   let type = req.params.type.toLowerCase();
   let type2 = req.params.type2.toLowerCase();
+  let pass = req.params.password;
+
+  if (pass !== process.env.devPassword)
+    return res.status(400).json({ error: `Incorrect password!` });
+
   let ID = req.params.reviewID;
   if (!ID) return res.status(400).json({ error: `Please provide a book name` });
 
@@ -128,7 +137,7 @@ app.get("/review/:type/:type2/:reviewID", async (req, res) => {
     if (!data) return res.status(400).json({ error: `Not found` });
 
     let bookData;
-    if (type2 === 'book') {
+    if (type2 === "book") {
       let newBook = new bookShema({
         name: data.bookName,
         author: data.bookAuthor,
@@ -137,14 +146,16 @@ app.get("/review/:type/:type2/:reviewID", async (req, res) => {
       }).save();
 
       bookData = await newBook;
-      let authorData = await profileShema.findOne({ username: bookData.author });
-      authorData.books.push(bookData.name)
+      let authorData = await profileShema.findOne({
+        username: bookData.author,
+      });
+      authorData.books.push(bookData.name);
       authorData.save();
     } else {
       bookData = await bookShema.findOne({
         name: data.bookName,
         author: data.bookAuthor,
-      })
+      });
 
       bookData.chapters.push({
         name: data.cName,
@@ -153,27 +164,25 @@ app.get("/review/:type/:type2/:reviewID", async (req, res) => {
         thumbnail: data.bookIcon,
         type: data.cType,
         content: data.bookDescription,
-        comments: []
+        comments: [],
       });
 
       bookData.save();
     }
 
-    res
-      .status(200)
-      .json({
-        success: `Successfully published the ${type2}!.`,
-      });
+    res.status(200).json({
+      success: `Successfully published the ${type2}!.`,
+    });
 
     let params = {
       content: `Book/Chapter accepted!.`,
       embeds: [
         {
           title: bookData.name,
-          color: 65280
+          color: 65280,
         },
       ],
-      username: (type2 === 'chapter' ? `${data.cName}` : "New Book Post"),
+      username: type2 === "chapter" ? `${data.cName}` : "New Book Post",
     };
 
     await reviewShema.findOneAndDelete({ reviewID: ID });
@@ -193,21 +202,19 @@ app.get("/review/:type/:type2/:reviewID", async (req, res) => {
   if (type === "deny") {
     await reviewShema.findOneAndDelete({ type: type2, reviewID: ID });
 
-    res
-      .status(200)
-      .json({
-        success: `Successfully denied the ${type2}!.`,
-      });
+    res.status(200).json({
+      success: `Successfully denied the ${type2}!.`,
+    });
 
     let params = {
       content: `Book/Chapter Denied!.`,
       embeds: [
         {
           title: bookData.name,
-          color: 16711680
+          color: 16711680,
         },
       ],
-      username: (type2 === 'chapter' ? "New Chapter Post" : "New Book Post"),
+      username: type2 === "chapter" ? "New Chapter Post" : "New Book Post",
     };
     await axios({
       method: "POST",
@@ -223,9 +230,11 @@ app.get("/review/:type/:type2/:reviewID", async (req, res) => {
 });
 
 app.get("/profile/:username", async (req, res) => {
-  let username = req.params.username.replace(/\s/g, '').toLowerCase();
+  let username = req.params.username.replace(/\s/g, "").toLowerCase();
   let users = await profileShema.find().sort({ username: 1 });
-  let userData = users.find(v => v.username.replace(/\s/g, '').toLowerCase() === username);
+  let userData = users.find(
+    (v) => v.username.replace(/\s/g, "").toLowerCase() === username
+  );
 
   if (!userData) return res.sendFile(dir("error"));
 
@@ -368,15 +377,13 @@ app.post("/publish-book", async (req, res) => {
     bookAuthor: html.uname,
     bookDescription: html.description.replace(/</g, "&lt;"),
     bookIcon: html.icon.replace(/</g, "&lt;"),
-    type: 'book',
+    type: "book",
     reviewID: newID,
   }).save();
 
-  res
-    .status(200)
-    .json({
-      success: `Successfully published for review! The Staff team will dm your results.`,
-    });
+  res.status(200).json({
+    success: `Successfully published for review! The Staff team will dm your results.`,
+  });
 });
 
 app.post("/publish-chapter", async (req, res) => {
@@ -433,7 +440,7 @@ app.post("/publish-chapter", async (req, res) => {
     bookAuthor: html.uname,
     bookDescription: content,
     bookIcon: image,
-    type: 'chapter',
+    type: "chapter",
     cType: html.type,
     cIntro: html.intro.replaceAll("<script>", "&lt;"),
     cName: html.cname.replaceAll("<script>", "&lt;"),
@@ -441,11 +448,9 @@ app.post("/publish-chapter", async (req, res) => {
     reviewID: newID,
   }).save();
 
-  res
-    .status(200)
-    .json({
-      success: `Successfully published for review! The Staff team will dm your results.`,
-    });
+  res.status(200).json({
+    success: `Successfully published for review! The Staff team will dm your results.`,
+  });
 });
 
 app.post("/edit", async (req, res) => {
@@ -536,13 +541,13 @@ app.post("/follow", async (req, res) => {
 });
 
 app.post("/comment", async (req, res) => {
-  return res
+  /*return res
     .status(400)
     .json({ error: `Commenting is disabled at the moment.` });
-
-  let html = req.body.data; //bookName, index
-  console.log(html)
-  let bookData = await bookShema.findOne({ name: html.bookName });
+*/
+  let html = req.body.data; //book, chapter, uname, psw, comment
+  console.log(html);
+  let bookData = await bookShema.findOne({ name: html.book });
 
   if (!bookData)
     return res.status(400).json({ error: `Something went wrong.` });
@@ -555,20 +560,24 @@ app.post("/comment", async (req, res) => {
   if (!user)
     return res.status(400).json({ error: `Incorrect username or password!` });
 
+  let chapterIndex = bookData.findIndex((v) => v.name === html.chapter);
+
+  console.log(chapterData);
+
+  if (chapterData === -1)
+    return res.status(400).json({ error: `Something went wrong.` });
+
   let date = new Date();
   let newdate =
     date.getMonth() + 1 + "/" + date.getDate() + "/" + date.getFullYear();
 
-  if (!bookData.chapters[html.index])
-    return res.status(400).json({ error: `Something went wrong.` });
-
-  bookData.chapters[html.index].push({
+  bookData.chapters[chapterIndex].push({
     comment: html.comment.replace(/</g, "&lt;"),
     username: user.username,
     date: newdate,
   });
 
-  console.log(bookData.chapters[html.index]);
+  console.log(bookData.chapters);
 
   bookData.save();
 
@@ -607,7 +616,5 @@ process.on("multipleResolves", (type, promise, reason) => {
 });
 
 function trim(str, max) {
-  return str.length > max
-    ? `${str.slice(0, max - 3)}...`
-    : str;
+  return str.length > max ? `${str.slice(0, max - 3)}...` : str;
 }

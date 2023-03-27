@@ -569,6 +569,8 @@
         <input id="inputusername" type="hidden" name="uname" value="NOTHING" />
         <input id="inputpass" type="hidden" name="psw" value="NOTHING" />
 
+        <input type="hidden" name="book" value="$$book$$" />
+
         <input type="hidden" name="chapter" value="$$chapter$$" />
 
         <label for="comment"><b>Comment</b></label>
@@ -616,6 +618,7 @@
     form.addEventListener("submit", async (e) => {
       e.preventDefault()
       const data = Object.fromEntries(new FormData(form).entries());
+      console.log(data)
       const response = await fetch('/comment', {
         method: 'POST',
         headers: {
