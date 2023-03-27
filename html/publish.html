@@ -435,13 +435,13 @@
   </div>
 
   <div id="error" class="alert">
-    <span class="closebtn">&times;</span>
+    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
     Error.
   </div>
 
   <div id="success" class="alert success">
-    <span class="closebtn">&times;</span>
-    <strong>Success!</strong> Comment sent.
+    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+    <strong>Success!</strong> Yay.
   </div>
 
   <div id="pbmodal" class="modal">
@@ -615,7 +615,7 @@
         },
         body: JSON.stringify({ data }),
       });
-      
+
       if (response.ok) {
         // Display success message here
         const successData = await response.json();

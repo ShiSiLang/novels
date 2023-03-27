@@ -56,38 +56,36 @@ app.get("/explore/:bookName", async (req, res) => {
   res.send(file);
 });
 
-app.get("/read/:chapter", async (req, res) => {
+app.get("/read/:book/:chapter", async (req, res) => {
   let chapter = Number(req.params.chapter) || 1;
-  let file = fs.readFileSync("./html/sol.html", {
+  let bookName = req.params.book;
+
+  if (!bookName) return res.status(400).json({ error: `Please provide a book name` });
+
+  let file = fs.readFileSync("./html/read.html", {
     encoding: "utf8",
   });
+
+  let book = await bookShema.findOne({ name: bookName });
+
+  if (!book) return res.status(400).json({ error: `Not Found` });
+
+
   file = file.replace(
-    "$$change$$",
-    `'https://novels-production.up.railway.app/novel/${Number(chapter) - 1}'`
+    "$$novel$$",
+    `'https://novels-production.up.railway.app/data/book/${book.name}'`
   );
-  file = file.replace("$$change2$$", `${Number(chapter) + 1}`);
-  file = file.replace("$$change3$$", `${Number(chapter) - 1}`);
-  file = file.replace(
-    "$$change4$$",
-    novel[chapter - 1]?.chapter || "Chapter Not Found."
-  );
-  file = file.replaceAll("$$chapter$$", Number(chapter));
+  file = file.replace("$$book$$", book.name);
+  file = file.replace("$$chapter$$", chapter);
+  file = file.replace("$$next$$", `${chapter + 1}`);
+  file = file.replace("$$previous$$", `${chapter - 1}`);
   file = file.replace(
     "$$thumbnail$$",
     novel[chapter - 1]?.thumbnail || "https://i.imgur.com/lGLKiVd.png"
   );
   res.send(file);
-}); //make sure to change this after publishing StarofLibby on the data
+});
 
-app.get("/novel/:chapter", async (req, res) => {
-  let chapter = Number(req.params.chapter);
-  let db = await comments.findOne({ password: "ShinpiIsCool" });
-  let newObj = {
-    comments: db.comments.filter((v) => v.chapter === chapter + 1),
-    ...novel[chapter],
-  };
-  res.send(newObj);
-}); //make sure to delete this after publishing StarofLibby on the data
 
 app.get("/data/:type/:other", async (req, res) => {
   let type = req.params.type.toLowerCase();
@@ -115,7 +113,7 @@ app.get("/data/:type/:other", async (req, res) => {
     if (!bookName)
       return res.status(400).json({ error: `Please provide a book name` });
     let book = await bookShema.findOne({ name: bookName });
-    console.log(book)
+    if (!book) return res.status(400).json({ error: `Not Found` });
     res.send(book);
   }
 }); //very important

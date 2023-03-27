@@ -4,18 +4,19 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="icon" type="icon" href="https://i.imgur.com/XjWCCeV.png" />
-  <title>Star of Libby</title>
-  <meta property="og:title" content="Star of Libby" />
-  <meta property="og:site_name" content="Star of Libby" />
-  <meta property="og:description" content="$$change4$$" />
+  <link rel="icon" type="icon" href="$$thumbnail$$" />
+  <title>$$book$$</title>
+  <meta property="og:title" content="$$book$$" />
+  <meta property="og:site_name" content="LonelyBall Media" />
+  <meta property="og:description"
+    content="Welcome to LonelyBall Media, here you can read all of our novels and manga!" />
   <meta property="og:image" content="$$thumbnail$$" />
   <meta name="theme-color" content="#cbc3e3" />
   <meta name="twitter:card" content="summary_large_image" />
   <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.1.1/css/all.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito">
 </head>
+<link href='https://fonts.googleapis.com/css?family=Nunito' rel='stylesheet'>
 <style>
   body {
     background-size: 400% 400%;
@@ -187,6 +188,11 @@
     transition: 1s;
   }
 
+  .pnButtons {
+    width: 70%;
+    margin: 25px 50px 25px 50px;
+  }
+
   /*Buttons End*/
 
   .comments {
@@ -247,7 +253,6 @@
   }
 
   /*Modal*/
-
   .submitbtn {
     width: auto;
     background-color: #967bb6;
@@ -268,7 +273,6 @@
     color: #ffcc99;
   }
 
-
   .container input {
     width: 100%;
     padding: 12px 20px;
@@ -277,32 +281,32 @@
     box-sizing: border-box;
     background: transparent;
     border: none;
-    color: #967bb6;
+    color: #ffcc99;
     outline: none;
   }
 
   .container input:focus {
     border: 3px solid #5c4981;
     border-radius: 16px;
-    color: #967bb6;
+    color: #ffcc99;
   }
 
-
-  .autocomplete {
-    /*the container must be positioned relative:*/
-    position: relative;
+  .container textarea {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
     display: inline-block;
+    box-sizing: border-box;
+    background: transparent;
+    border: none;
+    color: #ffcc99;
+    outline: none;
   }
 
-  .autocomplete-items {
-    position: absolute;
-    border: 1px solid #ffcc99;
-    border-bottom: none;
-    border-top: none;
-    z-index: 99;
-    top: 100%;
-    left: 0;
-    right: 0;
+  .container textarea:focus {
+    border: 3px solid #5c4981;
+    border-radius: 16px;
+    color: #ffcc99;
   }
 
   ::placeholder {
@@ -408,79 +412,40 @@
 <script type="text/javascript">
   async function changeDivContent() {
     try {
-      let response = await fetch($$change$$);
+      let response = await fetch($$novel$$);
       let json = await response.json()
       const div = document.getElementById("novel");
       const div2 = document.getElementById("credits");
       const div3 = document.getElementById("comments");
       const div4 = document.getElementById("commentstitle");
-      if (json.story === `Coming Soon`) {
-        var countDownDate = new Date(json.timer).getTime();
-        var x = setInterval(function () {
-          // Get today's date and time
-          var now = new Date().getTime();
-          // Find the distance between now and the count down date
-          var distance = countDownDate - now;
-          // Time calculations for days, hours, minutes and seconds
-          var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-          var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-          var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-          var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-          // Display the result in the element with id="demo"
-          div.innerHTML = `
-            <h1>${json.title}</h1>
-            <p>${json.intro}</p>
-            <h2>${json.chapter}</h2>
-            <p>${days + "d " + hours + "h " + minutes + "m " + seconds + "s "}</p>`
-          div2.innerHTML = `
-            <h1>Credits</h1>
-            <p>${json.credits}</p>
-			      `
-          // If the count down is finished, write some text
-          if (distance < 0) {
-            div.innerHTML = `
-              <h1>${json.title}</h1>
-              <p>${json.intro}</p>
-              <h2>${json.chapter}</h2>
-              <p>${json.story}</p>`
-            div2.innerHTML = `
-              <h1>Credits</h1>
-              <p>${json.credits}</p>
-              `
-            clearInterval(x);
-          }
-        }, 1000);
-      } else {
-        div.innerHTML = `     
-          <h1>${json.title}</h1>
-          <p>${json.intro}</p>
-          <h2>${json.chapter}</h2>
-          <p>${json.story}</p>`
-        div2.innerHTML = `	
+      div.innerHTML = `     
+          <h1>${json.name}</h1>
+          <p>${json.chapters[$$previous$$].intro}</p>
+          <h2>${json.chapters[$$previous$$].name}</h2>
+          <p>${json.chapters[$$previous$$].content}</p>`
+      div2.innerHTML = `	
           <h1>Credits</h1>
-          <p>${json.credits}</p>
+          <p>${json.chapters[$$previous$$].credits}</p>
           `
-        if (!json?.comments || json?.comments.length === 0) {
-          div4.innerHTML = `
+      if (json.chapters[$$previous$$]?.comments.length === 0) {
+        div4.innerHTML = `
             <p>No comments for this chapter</p>`
-        } else {
-          for (let i = 0; i < json.comments.length; i++) {
-            div3.innerHTML += `
+      } else {
+        for (let i = 0; i < json.chapters[$$previous$$].comments.length; i++) {
+          let chapter = json.chapters[$$previous$$]
+          div3.innerHTML += `
               <div class="comment mt-4 text-justify float-left">
-                <img src="${json.comments[i].icon}" alt=" " class="rounded-circle" width="40" height="40">
-                <a href="/profile/${json.comments[i].username}">${json.comments[i].username}</a>
-                <span>- ${json.comments[i].date}</span>
+                <img src="${chapter.comments[i].icon}" alt=" " class="rounded-circle" width="40" height="40">
+                <a href="/profile/${chapter.comments[i].username}">${chapter.comments[i].username}</a>
+                <span>- ${chapter.comments[i].date}</span>
                 <br>
-                <p>${json.comments[i].comment}</p>
+                <p>${chapter.comments[i].comment}</p>
                 </div>`
-          }
         }
       }
     } catch (err) {
       const div = document.getElementById("novel");
-      div.innerHTML += `
-		      
-				<h1>Chapter Not Found</h1>`
+      div.innerHTML += `<h1>Chapter Not Found</h1>`
     }
   };
 </script>
@@ -539,15 +504,14 @@
   </script>
 
   <div class="flex">
-    <button class="glow-on-hover" onclick="toggleText()">Toggle Text</button>
+    <button class="pnButtons" onclick="toggleText()">Toggle Text</button>
   </div>
   <div class="text" id="novel"></div>
   <div class="flex">
-    <button class="glow-on-hover" onclick="window.location.href='/read/$$change3$$'">Last Chapter</button>
-    <button class="glow-on-hover" onclick="window.location.href='/read/$$change2$$'">Next Chapter</button>
+    <button class="pnButtons" onclick="window.location.href='/read/$$previous$$'">Last Chapter</button>
+    <button class="gpnButtons" onclick="window.location.href='/read/$$next$$'">Next Chapter</button>
   </div>
-  <!--
-         -->
+
   <div class="text" id="credits"></div>
   <div class="text" id="commentstitle">
     <h1>Comments</h1>
@@ -560,18 +524,18 @@
     </div>
   </section>
   <div class="flex">
-    <button class="glow-on-hover" onclick="document.getElementById('modal').style.display='block'"
+    <button class="pnButtons" onclick="document.getElementById('modal').style.display='block'"
       style="width:auto;">Comment</button>
   </div>
 
   <div id="error" class="alert">
-    <span class="closebtn">&times;</span>
+    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
     Error.
   </div>
 
   <div id="success" class="alert success">
-    <span class="closebtn">&times;</span>
-    <strong>Success!</strong> Comment sent.
+    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+    <strong>Success!</strong> Yay.
   </div>
 
   <div id="modal" class="modal">
@@ -587,24 +551,12 @@
         <input type="text" placeholder="Enter Comment" id="comment" name="comment" required>
       </div>
 
-      <div class="container" style="background-color:#22303C">
+      <div class="container">
         <button type="submit" onclick="document.getElementById('modal').style.display='none'"
           class="submitbtn">Comment</button>
       </div>
     </form>
   </div>
-
-  <script>
-    var close = document.getElementsByClassName("closebtn");
-    var i;
-
-    for (i = 0; i < close.length; i++) {
-      close[i].onclick = function () {
-        var div = this.parentElement;
-        div.style.display = "none";
-      }
-    }
-  </script>
 
   <script>
     const form = document.getElementById('commentForm')
