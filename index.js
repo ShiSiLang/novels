@@ -60,7 +60,7 @@ app.get("/read/:book/:chapter", async (req, res) => {
   let chapter = Number(req.params.chapter) || 1;
   let bookName = req.params.book;
 
-  if (!bookName) return res.status(400).json({ error: `Please provide a book name` });
+  if (!bookName) return res.sendFile(dir("error"));
 
   let file = fs.readFileSync("./html/read.html", {
     encoding: "utf8",
@@ -68,17 +68,17 @@ app.get("/read/:book/:chapter", async (req, res) => {
 
   let book = await bookShema.findOne({ name: bookName });
 
-  if (!book) return res.status(400).json({ error: `Not Found` });
+  if (!book) return res.sendFile(dir("error"));
 
   file = file.replace(
     "$$novel$$",
     `'https://novels-production.up.railway.app/data/book/${book.name}'`
   );
-  file = file.replace("$$book$$", book.name);
-  file = file.replace("$$chapter$$", book.chapters[chapter - 1].name);
-  file = file.replace("$$next$$", `${chapter + 1}`);
-  file = file.replace("$$previous$$", `${chapter - 1}`);
-  file = file.replace(
+  file = file.replaceAll("$$book$$", book.name);
+  file = file.replaceAll("$$chapter$$", book.chapters[chapter - 1].name);
+  file = file.replaceAll("$$next$$", `${chapter + 1}`);
+  file = file.replaceAll("$$previous$$", `${chapter - 1}`);
+  file = file.replaceAll(
     "$$thumbnail$$",
     book.icon || "https://i.imgur.com/lGLKiVd.png"
   );
