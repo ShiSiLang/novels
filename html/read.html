@@ -154,14 +154,19 @@
   }
 
   .text {
+    text-align: center;
     padding-bottom: 25px;
+  }
+
+  .text-side {
+    padding: 75px;
   }
 
   .text h1,
   h2,
   p {
-    text-align: center;
     color: #FFFFFF;
+    font-size: 30px;
   }
 
   /*Buttons*/
@@ -608,7 +613,7 @@
   </footer>
 
   <script>
-    var modal = document.getElementById('id01');
+    var modal = document.getElementById('commentForm');
     window.onclick = function (event) {
       if (event.target == modal) {
         modal.style.display = "none";
