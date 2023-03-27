@@ -75,7 +75,7 @@ app.get("/read/:book/:chapter", async (req, res) => {
     `'https://novels-production.up.railway.app/data/book/${book.name}'`
   );
   file = file.replaceAll("$$book$$", book.name);
-  file = file.replaceAll("$$chapter$$", book.chapters[chapter - 1].name);
+  file = file.replaceAll("$$chapter$$", book.chapters[chapter - 1]?.name);
   file = file.replaceAll("$$next$$", `${chapter + 1}`);
   file = file.replaceAll("$$previous$$", `${chapter - 1}`);
   file = file.replaceAll(
