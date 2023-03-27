@@ -81,7 +81,7 @@ app.get("/read/:book/:chapter", async (req, res) => {
   file = file.replace("$$previous$$", `${chapter - 1}`);
   file = file.replace(
     "$$thumbnail$$",
-    novel[chapter - 1]?.thumbnail || "https://i.imgur.com/lGLKiVd.png"
+    book.icon || "https://i.imgur.com/lGLKiVd.png"
   );
   res.send(file);
 });
