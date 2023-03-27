@@ -508,23 +508,28 @@
   <div class="flex">
     <button class="pnButtons" onclick="toggleText()">Toggle Text</button>
   </div>
+
   <div class="text" id="novel"></div>
+
   <div class="flex">
     <button class="pnButtons" onclick="window.location.href='/read/$$previous$$'">Last Chapter</button>
-    <button class="gpnButtons" onclick="window.location.href='/read/$$next$$'">Next Chapter</button>
+    <button class="pnButtons" onclick="window.location.href='/read/$$next$$'">Next Chapter</button>
   </div>
 
   <div class="text" id="credits"></div>
+
   <div class="text" id="commentstitle">
     <h1>Comments</h1>
   </div>
+
   <section>
-    <div class="container">
+    <div class="comments">
       <div class="row">
         <div class="col-sm-5 col-md-6 col-12 pb-4" id="comments"></div>
       </div>
     </div>
   </section>
+
   <div class="flex">
     <button class="pnButtons" onclick="document.getElementById('modal').style.display='block'"
       style="width:auto;">Comment</button>
