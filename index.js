@@ -70,13 +70,12 @@ app.get("/read/:book/:chapter", async (req, res) => {
 
   if (!book) return res.status(400).json({ error: `Not Found` });
 
-
   file = file.replace(
     "$$novel$$",
     `'https://novels-production.up.railway.app/data/book/${book.name}'`
   );
   file = file.replace("$$book$$", book.name);
-  file = file.replace("$$chapter$$", chapter);
+  file = file.replace("$$chapter$$", book.chapters[chapter - 1].name);
   file = file.replace("$$next$$", `${chapter + 1}`);
   file = file.replace("$$previous$$", `${chapter - 1}`);
   file = file.replace(

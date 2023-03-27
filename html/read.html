@@ -536,9 +536,20 @@
   </section>
 
   <div class="flex">
-    <button class="pnButtons" onclick="document.getElementById('modal').style.display='block'"
+    <button class="pnButtons" id="commentButton" onclick="document.getElementById('modal').style.display='block'"
       style="width:auto;">Comment</button>
   </div>
+
+  <script>
+    document.getElementById("commentButton").addEventListener("click", async (e) => {
+      if (!localStorage.loginUser) {
+        e.preventDefault()
+        error.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+  Sign-In to comment!`;
+        error.style.display = "block";
+      }
+    });
+  </script>
 
   <div id="error" class="alert">
     <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
@@ -553,14 +564,14 @@
   <div id="modal" class="modal">
     <form class="modal-content animate" id="commentForm" method="post">
       <div class="container">
-        <label for="uname"><b>Username</b></label>
-        <input type="text" placeholder="Enter Username" id="uname" name="uname" required>
 
-        <label for="psw"><b>Password</b></label>
-        <input type="password" placeholder="Enter Password" id="psw" name="psw" required>
+        <input id="inputusername" type="hidden" name="uname" value="NOTHING" />
+        <input id="inputpass" type="hidden" name="psw" value="NOTHING" />
+
         <input type="hidden" name="chapter" value="$$chapter$$" />
+
         <label for="comment"><b>Comment</b></label>
-        <input type="text" placeholder="Enter Comment" id="comment" name="comment" required>
+        <textarea rows="3" cols="50" name="comment" form="commentForm" required></textarea>
       </div>
 
       <div class="container">
@@ -569,6 +580,22 @@
       </div>
     </form>
   </div>
+
+  <script>
+    if (typeof Storage !== "undefined") {
+      if (localStorage.loginUser) {
+        let data = JSON.parse(localStorage.loginUser);
+        document.getElementById("inputusername").value = data.username;
+        document.getElementById("inputpass").value = data.password;
+      } else {
+        document.getElementById("pbb").style.display = "none";
+        document.getElementById("pcb").style.display = "none";
+      }
+    } else {
+      document.getElementById("pbb").style.display = "none";
+      document.getElementById("pcb").style.display = "none";
+    }
+  </script>
 
   <script>
     const form = document.getElementById('commentForm')
@@ -588,11 +615,14 @@
 
       if (response.ok) {
         // Display success message here
+        const successData = await response.json();
+        success.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+      <strong>Success!</strong> ${successData.success}`;
         success.style.display = "block";
       } else {
         const errorData = await response.json();
-        error.innerHTML = `<span class="closebtn">&times;</span>
-    ${errorData.error}`
+        error.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+  ${errorData.error}`;
         error.style.display = "block";
       }
     });
@@ -613,7 +643,7 @@
   </footer>
 
   <script>
-    var modal = document.getElementById('commentForm');
+    var modal = document.getElementById('modal');
     window.onclick = function (event) {
       if (event.target == modal) {
         modal.style.display = "none";
