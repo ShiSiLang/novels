@@ -541,6 +541,7 @@ app.post("/comment", async (req, res) => {
     .json({ error: `Commenting is disabled at the moment.` });
 
   let html = req.body.data; //bookName, index
+  console.log(html)
   let bookData = await bookShema.findOne({ name: html.bookName });
 
   if (!bookData)
