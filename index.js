@@ -576,7 +576,7 @@ app.post("/comment", async (req, res) => {
 
   console.log(bookData.chapters[chapterIndex])
 
-  console.log("comments" bookData.chapters[chapterIndex].comments)
+  console.log("comments", bookData.chapters[chapterIndex].comments)
 
   let newComment = bookData.chapters[chapterIndex].comments.push({
     comment: html.comment.replace(/</g, "&lt;"),
