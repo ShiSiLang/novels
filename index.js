@@ -112,6 +112,8 @@ app.get("/data/:type/:other", async (req, res) => {
       return res.status(400).json({ error: `Please provide a book name` });
     let book = await bookShema.findOne({ name: bookName });
     if (!book) return res.status(400).json({ error: `Not Found` });
+    
+    console.log(book.chapters)
 
     for (i = 0; i < book.chapters.length; i++) {
       for (i2 = 0; i2 < book.chapters[i].comments.length; i2++) {
