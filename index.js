@@ -580,8 +580,6 @@ app.post("/comment", async (req, res) => {
     date: newdate,
   });
 
-  bookData.markModified("comments");
-
   console.log(bookData.chapters[chapterIndex])
 
   bookData.save();
