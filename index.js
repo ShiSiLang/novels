@@ -574,6 +574,8 @@ app.post("/comment", async (req, res) => {
   let newdate =
     date.getMonth() + 1 + "/" + date.getDate() + "/" + date.getFullYear();
 
+  console.log(bookData.chapters[chapterIndex])
+
   bookData = bookData.chapters[chapterIndex].comments.push({
     comment: html.comment.replace(/</g, "&lt;"),
     username: user.username,
