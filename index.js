@@ -113,19 +113,19 @@ app.get("/data/:type/:other", async (req, res) => {
     let book = await bookShema.findOne({ name: bookName });
     if (!book) return res.status(400).json({ error: `Not Found` });
 
-    let newObj = book.chapters.forEach((e) => {
-      Promise.all(e.comments.map(async (v) => {
+    for (i = 0; i < book.chapters.length; i++) {
+      for (i2 = 0; i2 < book.chapters[i].comments.length; i2++) {
+        let comment = book.chapters[i].comments[12]
         let userData = await profileShema.findOne({
-          username: v.username,
+          username: comment.username,
         });
-        v.icon = userData.icon;
-        return v;
-      }));
-    });
+        comment.icon = userData.icon;
+      }
+    }
 
-    console.log(newObj.chapters)
+    console.log(book.chapters)
 
-    res.send(newObj);
+    res.send(book);
   }
 }); //very important
 
