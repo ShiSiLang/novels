@@ -113,11 +113,11 @@ app.get("/data/:type/:other", async (req, res) => {
     let book = await bookShema.findOne({ name: bookName });
     if (!book) return res.status(400).json({ error: `Not Found` });
 
-    console.log(book.chapters)
+    console.log(book.chapters);
 
     for (i = 0; i < book.chapters.length; i++) {
       for (i2 = 0; i2 < book.chapters[i].comments.length; i2++) {
-        let comment = book.chapters[i].comments[12]
+        let comment = book.chapters[i].comments[12];
         let userData = await profileShema.findOne({
           username: comment.username,
         });
@@ -125,7 +125,7 @@ app.get("/data/:type/:other", async (req, res) => {
       }
     }
 
-    console.log(book.chapters)
+    console.log(book.chapters);
 
     res.send(book);
   }
@@ -418,7 +418,7 @@ app.post("/publish-chapter", async (req, res) => {
       .status(400)
       .json({ error: `Please make sure the icon is a valid URL.` });
 
-  let content = html.content.replaceAll("<script>", "&lt;");
+  let content = html.content.replace(/</g, "&lt;");
   let newID = Date.now();
 
   let params = {
@@ -452,9 +452,9 @@ app.post("/publish-chapter", async (req, res) => {
     bookIcon: image,
     type: "chapter",
     cType: html.type,
-    cIntro: html.intro.replaceAll("<script>", "&lt;"),
-    cName: html.cname.replaceAll("<script>", "&lt;"),
-    cCredits: html.credits.replaceAll("<script>", "&lt;"),
+    cIntro: html.intro.replace(/</g, "&lt;"),
+    cName: html.cname.replace(/</g, "&lt;"),
+    cCredits: html.credits.replace(/</g, "&lt;"),
     reviewID: newID,
   }).save();
 
@@ -565,7 +565,9 @@ app.post("/comment", async (req, res) => {
   if (!user)
     return res.status(400).json({ error: `Incorrect username or password!` });
 
-  let chapterIndex = bookData.chapters.findIndex((v) => v.name === html.chapter);
+  let chapterIndex = bookData.chapters.findIndex(
+    (v) => v.name === html.chapter
+  );
 
   if (chapterIndex === -1)
     return res.status(400).json({ error: `Something went wrong.` });
@@ -574,8 +576,6 @@ app.post("/comment", async (req, res) => {
   let newdate =
     date.getMonth() + 1 + "/" + date.getDate() + "/" + date.getFullYear();
 
-  console.log("beforeComments", bookData.chapters[chapterIndex].comments)
-
   bookData.chapters[chapterIndex].comments.push({
     comment: html.comment.replace(/</g, "&lt;"),
     username: user.username,
@@ -583,8 +583,6 @@ app.post("/comment", async (req, res) => {
   });
 
   bookData.markModified("chapters");
-  console.log("Newcomments", bookData.chapters[chapterIndex].comments)
-
   await bookData.save();
 
   return res.status(200).json({ success: `Comment Posted!` });
