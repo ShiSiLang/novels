@@ -432,11 +432,25 @@
       const div3 = document.getElementById("comments");
       const div4 = document.getElementById("commentstitle");
       let index = Number('$$previous$$');
+
+      let novelContent = json.chapters[index].content;
+
+      function formatString(content) {
+        let step1 = content.split(" ").join(" ").replaceAll("\n\n", "</br></br>");
+        let step2 = step1.replaceAll(/\*\*(.*?)\*\*/g, "<b>$1</b>");
+        let step3 = step2.replaceAll(/\*(.*?)\*/g, "<i>$1</i>");
+        return step3;
+      }
+
+      console.log(formatString(content))
+
+      novelContent = formatString(content);
+
       div.innerHTML = `     
           <h1><b>${json.name}</b></h1>
           <p>${json.chapters[index].intro}</p>
           <h2>${json.chapters[index].name}</h2>
-          <p>${json.chapters[index].content}</p>`
+          <p>${novelContent}</p>`
       div2.innerHTML = `	
           <h1>Credits</h1>
           <p>${json.chapters[index].credits}</p>
