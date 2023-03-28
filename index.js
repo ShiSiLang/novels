@@ -560,7 +560,7 @@ app.post("/comment", async (req, res) => {
   if (!user)
     return res.status(400).json({ error: `Incorrect username or password!` });
 
-  let chapterIndex = bookData.findIndex((v) => v.name === html.chapter);
+  let chapterIndex = bookData.chapters.findIndex((v) => v.name === html.chapter);
 
   console.log(chapterData);
 
@@ -571,7 +571,7 @@ app.post("/comment", async (req, res) => {
   let newdate =
     date.getMonth() + 1 + "/" + date.getDate() + "/" + date.getFullYear();
 
-  bookData.chapters[chapterIndex].push({
+  bookData.chapters[chapterIndex].comments.push({
     comment: html.comment.replace(/</g, "&lt;"),
     username: user.username,
     date: newdate,
