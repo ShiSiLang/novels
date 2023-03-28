@@ -156,14 +156,17 @@
   .text {
     text-align: center;
     padding-bottom: 25px;
-    background-color: #967bb6;
-    box-shadow: 0px 0px 10px #5c4981;
-    margin-left: 5px;
-    margin-right: 5px;
   }
 
   .text-side {
     padding: 75px;
+  }
+
+  .text-novel {
+    background-color: #967bb6;
+    box-shadow: 0px 0px 10px #5c4981;
+    margin-left: 5px;
+    margin-right: 5px;
   }
 
   .text h1,
@@ -430,10 +433,10 @@
       const div4 = document.getElementById("commentstitle");
       let index = Number('$$previous$$');
       div.innerHTML = `     
-          <h1>${json.name}</h1>
-          <p>${json.chapters[index].intro}</p>
-          <h2>${json.chapters[index].name}</h2>
-          <p>${json.chapters[index].content}</p>`
+          <h1 class="text-novel">${json.name}</h1>
+          <p class="text-novel">${json.chapters[index].intro}</p>
+          <h2 class="text-novel">${json.chapters[index].name}</h2>
+          <p class="text-novel">${json.chapters[index].content}</p>`
       div2.innerHTML = `	
           <h1>Credits</h1>
           <p>${json.chapters[index].credits}</p>
