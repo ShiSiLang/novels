@@ -576,7 +576,7 @@ app.post("/comment", async (req, res) => {
 
   console.log(bookData.chapters[chapterIndex])
 
-  console.log(bookData.chapters[chapterIndex].comments)
+  console.log("comments" bookData.chapters[chapterIndex].comments)
 
   let newComment = bookData.chapters[chapterIndex].comments.push({
     comment: html.comment.replace(/</g, "&lt;"),
@@ -584,11 +584,11 @@ app.post("/comment", async (req, res) => {
     date: newdate,
   });
 
-  console.log(newComment)
+  console.log("comment", newComment)
 
  // bookData.chapters[chapterIndex].comments = newComment;
 
-  console.log(bookData.chapters[chapterIndex].comments)
+  console.log("Newcomments", bookData.chapters[chapterIndex].comments)
 
   bookData.save();
 
