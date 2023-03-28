@@ -572,7 +572,7 @@ app.post("/comment", async (req, res) => {
 
   console.log(chapterIndex);
 
-  if (chapterData === -1)
+  if (chapterIndex === -1)
     return res.status(400).json({ error: `Something went wrong.` });
 
   let date = new Date();
