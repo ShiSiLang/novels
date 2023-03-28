@@ -119,7 +119,7 @@ app.get("/data/:type/:other", async (req, res) => {
         let userData = await profileShema.findOne({
           username: comment.username,
         });
-        comment.icon = userData.icon;
+         comment.icon = userData.icon;
       }
     }
 
@@ -578,6 +578,8 @@ app.post("/comment", async (req, res) => {
     username: user.username,
     date: newdate,
   });
+
+  console.log(bookData.chapters)
 
   bookData.save();
 
