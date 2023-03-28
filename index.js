@@ -114,13 +114,13 @@ app.get("/data/:type/:other", async (req, res) => {
     if (!book) return res.status(400).json({ error: `Not Found` });
 
     let newObj = book.chapters.forEach((e) => {
-      e.comments.map((v) => {
+      Promise.all(e.comments.map(async (v) => {
         let userData = await profileShema.findOne({
           username: v.username,
         });
         v.icon = userData.icon;
         return v;
-      });
+      }));
     });
 
     console.log(newObj)
