@@ -123,7 +123,7 @@ app.get("/data/:type/:other", async (req, res) => {
       }));
     });
 
-    console.log(newObj)
+    console.log(newObj.chapters)
 
     res.send(newObj);
   }
@@ -549,10 +549,6 @@ app.post("/follow", async (req, res) => {
 });
 
 app.post("/comment", async (req, res) => {
-  /*return res
-    .status(400)
-    .json({ error: `Commenting is disabled at the moment.` });
-*/
   let html = req.body.data; //book, chapter, uname, psw, comment
   console.log(html);
   let bookData = await bookShema.findOne({ name: html.book });
@@ -570,8 +566,6 @@ app.post("/comment", async (req, res) => {
 
   let chapterIndex = bookData.chapters.findIndex((v) => v.name === html.chapter);
 
-  console.log(chapterIndex);
-
   if (chapterIndex === -1)
     return res.status(400).json({ error: `Something went wrong.` });
 
@@ -584,8 +578,6 @@ app.post("/comment", async (req, res) => {
     username: user.username,
     date: newdate,
   });
-
-  console.log(bookData.chapters);
 
   bookData.save();
 
