@@ -550,7 +550,6 @@ app.post("/follow", async (req, res) => {
 
 app.post("/comment", async (req, res) => {
   let html = req.body.data; //book, chapter, uname, psw, comment
-  console.log(html);
   let bookData = await bookShema.findOne({ name: html.book });
 
   if (!bookData)
@@ -579,7 +578,7 @@ app.post("/comment", async (req, res) => {
     date: newdate,
   });
 
-  console.log(bookData.chapters)
+  console.log(bookData.chapters[chapterIndex])
 
   bookData.save();
 
