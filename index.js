@@ -581,8 +581,9 @@ app.post("/comment", async (req, res) => {
     username: user.username,
     date: newdate,
   });
+  
+  bookData.chapters[chapterIndex] = newComment;
 
-  console.log(newComment)
   console.log(bookData.chapters[chapterIndex])
 
   bookData.save();
