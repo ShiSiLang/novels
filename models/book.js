@@ -16,12 +16,12 @@ const bookSchema = mongoose.Schema({
   author: String,
   chapters: Array,
   followers: Array,// It will only store usernames
-  1: Number, //  the key is the weight of that star level
-  2: Number,
-  3: Number,
-  4: Number,
-  5: Number,
-  default: { 1: 1, 2: 1, 3: 1, 4: 1, 5: 1 },
+  r1: Number, //  the key is the weight of that star level
+  r2: Number,
+  r3: Number,
+  r4: Number,
+  r5: Number,
+  default: { r1: 1, r2: 1, r3: 1, r4: 1, r5: 1 },
 });
 
 module.exports = mongoose.model("book", bookSchema);

@@ -115,6 +115,13 @@ app.get("/data/:type/:other", async (req, res) => {
 
     console.log(book.chapters);
 
+    /*
+    rating
+    const total = (book.r1 + book.r2 + book.r3 + book.r4 + book.r5)
+    const WA = ((1 * book.r1) + (2 * book.r2) + (3 * book.r3) + (5 * book.r5))/(total)
+    console.log(Math.round(WA)) // 2
+    */
+
     for (i = 0; i < book.chapters.length; i++) {
       for (i2 = 0; i2 < book.chapters[i].comments.length; i2++) {
         let comment = book.chapters[i].comments[12];
