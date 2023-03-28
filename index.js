@@ -588,7 +588,7 @@ app.post("/comment", async (req, res) => {
 
   console.log("Newcomments", bookData.chapters[chapterIndex].comments)
 
-  bookData.save();
+  await bookData.save();
 
   return res.status(200).json({ success: `Comment Posted!` });
 });
