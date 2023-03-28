@@ -113,11 +113,19 @@ app.get("/data/:type/:other", async (req, res) => {
     let book = await bookShema.findOne({ name: bookName });
     if (!book) return res.status(400).json({ error: `Not Found` });
 
-    book.chapters.forEach((e) => {
-      e.comments.map((v) => v);
+    let newObj = book.chapters.forEach((e) => {
+      e.comments.map((v) => {
+        let userData = await profileShema.findOne({
+          username: v.username,
+        });
+        v.icon = userData.icon;
+        return v;
+      });
     });
 
-    res.send(book);
+    console.log(newObj)
+
+    res.send(newObj);
   }
 }); //very important
 
@@ -562,7 +570,7 @@ app.post("/comment", async (req, res) => {
 
   let chapterIndex = bookData.chapters.findIndex((v) => v.name === html.chapter);
 
-  console.log(chapterData);
+  console.log(chapterIndex);
 
   if (chapterData === -1)
     return res.status(400).json({ error: `Something went wrong.` });
