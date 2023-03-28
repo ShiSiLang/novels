@@ -112,7 +112,7 @@ app.get("/data/:type/:other", async (req, res) => {
       return res.status(400).json({ error: `Please provide a book name` });
     let book = await bookShema.findOne({ name: bookName });
     if (!book) return res.status(400).json({ error: `Not Found` });
-    
+
     console.log(book.chapters)
 
     for (i = 0; i < book.chapters.length; i++) {
@@ -121,7 +121,7 @@ app.get("/data/:type/:other", async (req, res) => {
         let userData = await profileShema.findOne({
           username: comment.username,
         });
-         comment.icon = userData.icon;
+        comment.icon = userData.icon;
       }
     }
 
@@ -574,7 +574,7 @@ app.post("/comment", async (req, res) => {
   let newdate =
     date.getMonth() + 1 + "/" + date.getDate() + "/" + date.getFullYear();
 
-  bookData.chapters[chapterIndex].comments.push({
+  bookData = bookData.chapters[chapterIndex].comments.push({
     comment: html.comment.replace(/</g, "&lt;"),
     username: user.username,
     date: newdate,
