@@ -21,7 +21,6 @@ const bookSchema = mongoose.Schema({
   r3: Number,
   r4: Number,
   r5: Number,
-  default: { r1: 1, r2: 1, r3: 1, r4: 1, r5: 1 },
 });
 
 module.exports = mongoose.model("book", bookSchema);
