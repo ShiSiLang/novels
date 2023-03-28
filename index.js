@@ -574,8 +574,6 @@ app.post("/comment", async (req, res) => {
   let newdate =
     date.getMonth() + 1 + "/" + date.getDate() + "/" + date.getFullYear();
 
-  console.log(bookData.chapters[chapterIndex])
-
   console.log("beforeComments", bookData.chapters[chapterIndex].comments)
 
   bookData.chapters[chapterIndex].comments.push({
@@ -584,8 +582,7 @@ app.post("/comment", async (req, res) => {
     date: newdate,
   });
 
-  // bookData.chapters[chapterIndex].comments = newComment;
-
+  bookData.markModified("comments");
   console.log("Newcomments", bookData.chapters[chapterIndex].comments)
 
   await bookData.save();
