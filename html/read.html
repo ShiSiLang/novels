@@ -438,7 +438,7 @@
       function formatString(content) {
         let step1 = content.split(" ").join(" ").replaceAll("\n\n", "</br></br>");
         let step2 = step1.replaceAll(/\*\*(.*?)\*\*/g, "<b>$1</b>");
-        let step3 = step2.replaceAll(/\*(.*?)\*/g, "<i>$1</i>");
+        let step3 = step2.replaceAll(/\*(.*?)\*/g, "<em>$1</em>");
         return step3;
       }
 
