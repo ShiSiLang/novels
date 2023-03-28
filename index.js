@@ -576,12 +576,13 @@ app.post("/comment", async (req, res) => {
 
   console.log(bookData.chapters[chapterIndex])
 
-  bookData = bookData.chapters[chapterIndex].comments.push({
+  let newComment = bookData.chapters[chapterIndex].comments.push({
     comment: html.comment.replace(/</g, "&lt;"),
     username: user.username,
     date: newdate,
   });
 
+  console.log(newComment)
   console.log(bookData.chapters[chapterIndex])
 
   bookData.save();
