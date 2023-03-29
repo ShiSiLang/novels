@@ -293,6 +293,7 @@ const upload = multer({
 
 app.post("/sign-up", upload.single('icon'), async (req, res) => {
   const html = req.body;
+console.log(html)
   if (html.dp !== process.env.devPassword)
     return res.status(400).json({ error: `Incorrect password!` });
 
