@@ -285,6 +285,7 @@ app.get("/profile/:username", async (req, res) => {
 
 app.post("/sign-up", async (req, res) => {
   let html = req.body.data;
+return console.log(html)
   if (html.dp !== process.env.devPassword)
     return res.status(400).json({ error: `Incorrect password!` });
 
