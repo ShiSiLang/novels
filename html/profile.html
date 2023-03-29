@@ -582,9 +582,7 @@
                 let json = await response.json();
                 let bookjson = await books.json();
 
-                console.log(books)
-
-                let newArray = books.filter(v => response.includes(v.name))
+                let newArray = bookjson.filter(v => json.includes(v.name))
                 const myBooks = document.getElementById("myBooks");
 
                 for (i = 0; i < newArray.length; i++) {
