@@ -106,7 +106,7 @@ app.get("/data/:type/:other", async (req, res) => {
 
     res.send(data.books);
   }
-  if (type === latest) {
+  if (type === 'latest') {
     res.send(latestChapters);
   }
   if (type === "books") {
