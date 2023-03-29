@@ -1,6 +1,5 @@
 const express = require("express");
 const novel = require("./starOfLibby");
-const comments = require("./models/comments");
 const app = express();
 const fs = require("fs");
 const axios = require("axios");
