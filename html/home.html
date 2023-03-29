@@ -318,10 +318,36 @@
     <h1>LATEST CHAPTERS</h1>
   </div>
 
-  <div class="media-scroller snaps-inline">
-    <a href="https://novels-production.up.railway.app/read/Star%20of%20Libby,%20adi%C3%B3s%20hogar%20m%C3%ADo./1"><img
-        src="https://i.imgur.com/XjWCCeV.png" alt="Star of Libby, Adios Hogar Mio"></a>
-  </div>
+  <div id="myBooks" class="media-scroller snaps-inline"></div>
+
+  <script>
+    lastest()
+    async function lastest() {
+      try {
+        let books = await fetch('https://novels-production.up.railway.app/data/books/null');
+        let latest = await fetch('https://novels-production.up.railway.app/data/latest/null');
+        let json = await books.json();
+        let latestson = await latest.json();
+
+        let newArray = books.filter((v) => {
+          return v.chapters.map((e) => {
+            return latestson.includes(e?.name);
+          });
+        });
+
+        console.log(newArray)
+
+        const myBooks = document.getElementById("myBooks");
+
+        for (i = 0; i < newArray.length; i++) {
+          myBooks.innerHTML += `<a href="https://novels-production.up.railway.app/explore/${newArray[i].name}"><img src="${newArray[i].icon}" alt="${newArray[i].name}"></a>`
+        }
+      } catch (err) {
+        console.log(err)
+        alert('Could not fetch data.')
+      }
+    };
+  </script>
 
   <div class="text">
     <h1>About</h1>

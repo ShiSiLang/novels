@@ -8,6 +8,7 @@ const profileShema = require("./models/profiles");
 const reviewShema = require("./models/review");
 const bookShema = require("./models/book");
 let webhook_url = process.env.webhook;
+let latestChapters = [];
 
 const dir = (text) => `${__dirname}/html/${text}.html`;
 const link = (input) => `https://novels-production.up.railway.app/${input}`;
@@ -76,7 +77,10 @@ app.get("/read/:book/:chapter", async (req, res) => {
   );
   file = file.replaceAll("$$book$$", book.name);
   file = file.replaceAll("$$chapter$$", book.chapters[chapter - 1]?.name);
-  file = file.replaceAll("$$bookDescription$$", book.chapters[chapter - 1]?.description);
+  file = file.replaceAll(
+    "$$bookDescription$$",
+    book.chapters[chapter - 1]?.description
+  );
   file = file.replaceAll("$$next$$", `${chapter + 1}`);
   file = file.replaceAll("$$previous$$", `${chapter - 1}`);
   file = file.replaceAll(
@@ -101,6 +105,9 @@ app.get("/data/:type/:other", async (req, res) => {
     if (!data) return res.status(400).json({ error: `Not found.` });
 
     res.send(data.books);
+  }
+  if (type === latest) {
+    res.send(latestChapters);
   }
   if (type === "books") {
     let data = await bookShema.find().sort({ name: 1 });
@@ -181,6 +188,9 @@ app.get("/review/:type/:type2/:reviewID/:password", async (req, res) => {
       });
 
       bookData.save();
+
+      if (latestChapters.length >= 25) latestChapters.pop();
+      latestChapters.push(data.cName);
     }
 
     res.status(200).json({
@@ -257,13 +267,11 @@ app.get("/profile/:username", async (req, res) => {
 
   let data = await bookShema.find().sort({ name: 1 });
 
-  let comments = data.filter(
-    (v) => {
-      return v.chapters.map(e => {
-        return e?.comments?.username === userData.username;
-      })
-    }
-  );
+  let comments = data.filter((v) => {
+    return v.chapters.map((e) => {
+      return e?.comments?.username === userData.username;
+    });
+  });
 
   file = file.replaceAll("$$username$$", userData.username);
   file = file.replaceAll("$$avatar$$", userData.icon);
@@ -537,7 +545,7 @@ app.post("/follow", async (req, res) => {
   let user2 = await profileShema.findOne({ username: html.follow });
 
   if (user.following.includes(html.follow)) {
-    let index = user.following.findIndex(v => v === html.follow);
+    let index = user.following.findIndex((v) => v === html.follow);
     user.following.splice(index, 1);
     user2.followers -= 1;
     user.save();
