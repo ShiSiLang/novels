@@ -257,7 +257,11 @@ app.get("/profile/:username", async (req, res) => {
   let data = await bookShema.find().sort({ name: 1 });
 
   let comments = data.filter(
-    (v) => v.chapters?.comments?.username === userData.username
+    (v) => {
+      console.log(v)
+      return v.chapters?.comments?.username === userData.username;
+
+    }
   );
 
   console.log(comments);
