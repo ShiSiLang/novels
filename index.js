@@ -260,7 +260,6 @@ app.get("/profile/:username", async (req, res) => {
   let comments = data.filter(
     (v) => {
       return v.chapters.map(e => {
-        console.log(e)
         return e?.comments?.username === userData.username;
       })
     }
