@@ -334,7 +334,7 @@
         let newArray = json.filter((v) => {
           return v.chapters.map((e) => {
             console.log(e)
-            return latestson.includes(e.name);
+            if (latestson.includes(e.name)) return e;
           });
         });
 
