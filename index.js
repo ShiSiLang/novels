@@ -292,7 +292,7 @@ const upload = multer({
 }); // create a Multer instance and specify the upload directory and size limit
 
 app.post("/sign-up", upload.single('icon'), async (req, res) => {
-  const html = req.body;
+  const html = req.body.data;
 console.log(html)
   if (html.dp !== process.env.devPassword)
     return res.status(400).json({ error: `Incorrect password!` });
