@@ -106,7 +106,7 @@ app.get("/data/:type/:other", async (req, res) => {
 
     res.send(data.books);
   }
-  if (type === 'latest') {
+  if (type === "latest") {
     res.send(latestChapters);
   }
   if (type === "books") {
@@ -285,7 +285,7 @@ app.get("/profile/:username", async (req, res) => {
 
 app.post("/sign-up", async (req, res) => {
   let html = req.body.data;
-return console.log(html)
+  return console.log(html)
   if (html.dp !== process.env.devPassword)
     return res.status(400).json({ error: `Incorrect password!` });
 
