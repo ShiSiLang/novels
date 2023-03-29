@@ -329,8 +329,6 @@
         let json = await books.json();
         let latestson = await latest.json();
 
-        console.log(latestson)
-
         let newArray = json.map((e) => {
           return e.chapters.filter(v => latestson.includes(v.name))
         });
@@ -339,8 +337,10 @@
 
         const myBooks = document.getElementById("myBooks");
 
-        for (i = 0; i < newArray.length; i++) {
-          myBooks.innerHTML += `<a href="https://novels-production.up.railway.app/explore/${newArray[newArray.length - 1].name}"><img src="${newArray[i].icon}" alt="${newArray[i].name}"></a>`
+        if (newArray.legnth !== 0) {
+          for (i = 0; i < newArray.length; i++) {
+            myBooks.innerHTML += `<a href="https://novels-production.up.railway.app/explore/${newArray[i].name}"><img src="${newArray[i].icon}" alt="${newArray[i].name}"></a>`
+          }
         }
       } catch (err) {
         console.log(err)
