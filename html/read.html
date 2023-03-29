@@ -403,7 +403,6 @@
     try {
       let response = await fetch($$novel$$);
       let json = await response.json();
-      console.log(json)
       const div = document.getElementById("novel");
       const div2 = document.getElementById("credits");
       const div3 = document.getElementById("comments");
@@ -617,7 +616,6 @@
     form.addEventListener("submit", async (e) => {
       e.preventDefault()
       const data = Object.fromEntries(new FormData(form).entries());
-      console.log(data)
       const response = await fetch('/comment', {
         method: 'POST',
         headers: {
