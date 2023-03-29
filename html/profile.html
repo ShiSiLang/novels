@@ -571,18 +571,10 @@
         <h1>My Books</h1>
     </div>
 
-    <div id="myBooks" class="media-scroller snaps-inline">
-        <a href="/explore/1"><img src="https://i.imgur.com/lGLKiVd.png" alt="Star of Libby, Adios Hogar Mio"></a>
-        <a href="#"><img src="https://i.imgur.com/XjWCCeV.png" alt="Test"></a>
-        <a href="#"><img src="https://i.imgur.com/XjWCCeV.png" alt="Test"></a>
-        <a href="#"><img src="https://i.imgur.com/XjWCCeV.png" alt="Test1"></a>
-        <a href="#"><img src="https://i.imgur.com/XjWCCeV.png" alt="Test"></a>
-        <a href="#"><img src="https://i.imgur.com/XjWCCeV.png" alt="Test"></a>
-        <a href="#"><img src="https://i.imgur.com/XjWCCeV.png" alt="Test"></a>
-        <a href="#"><img src="https://i.imgur.com/XjWCCeV.png" alt="Test"></a>
-    </div>
+    <div id="myBooks" class="media-scroller snaps-inline"></div>
 
     <script>
+        myBooks()
         async function myBooks() {
             try {
                 let response = await fetch('https://novels-production.up.railway.app/data/profilebooks/$$username$$');
