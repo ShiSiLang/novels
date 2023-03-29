@@ -298,7 +298,7 @@ console.log(html)
     return res.status(400).json({ error: `Incorrect password!` });
 
   const image = req.file; // get the uploaded file from the request
-
+console.log(image)
   function isImage(filename) {
     const extension = filename.split('.').pop().toLowerCase(); // get the file extension
     return ['jpg', 'jpeg', 'png', 'gif'].includes(extension); // check if the extension is valid
