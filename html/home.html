@@ -337,11 +337,10 @@
 
         const myBooks = document.getElementById("myBooks");
 
-        if (newArray.length !== 0) {
-          console.log('h')
-          for (i = 0; i < newArray.length; i++) {
-            myBooks.innerHTML += `<a href="https://novels-production.up.railway.app/explore/${newArray[i].name}"><img src="${newArray[i].icon}" alt="${newArray[i].name}"></a>`
-          }
+        if (newArray.length === 0) return;
+        console.log('h')
+        for (i = 0; i < newArray.length; i++) {
+          myBooks.innerHTML += `<a href="https://novels-production.up.railway.app/explore/${newArray[i].name}"><img src="${newArray[i].icon}" alt="${newArray[i].name}"></a>`
         }
       } catch (err) {
         console.log(err)
