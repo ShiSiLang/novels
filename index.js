@@ -535,6 +535,7 @@ app.post("/follow", async (req, res) => {
   let user2 = await profileShema.findOne({ username: html.follow });
 
   if (user.following.includes(html.follow)) {
+    let index = user.following.findIndex(v => v === html.follow);
     user.following.splice(index, 1);
     user2.followers -= 1;
     user.save();

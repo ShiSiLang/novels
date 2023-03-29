@@ -403,6 +403,15 @@
     try {
       let response = await fetch($$novel$$);
       let json = await response.json();
+
+      if (json.chapters[json.chapters.length - 2] === undefined) {
+        const previousButton = document.getElementById("previousButton");
+        previousButton.style.display = "none";
+      }
+      if (json.chapters[json.chapters.length + 1] === undefined) {
+        const nextButton = document.getElementById("nextButton");
+        nextButton.style.display = "none";
+      }
       const div = document.getElementById("novel");
       const div2 = document.getElementById("credits");
       const div3 = document.getElementById("comments");
@@ -515,8 +524,10 @@
   <div class="text text-novel" id="novel"></div>
 
   <div class="flex">
-    <button class="pnButtons" onclick="window.location.href='/read/$$book$$/$$previous$$'">Last Chapter</button>
-    <button class="pnButtons" onclick="window.location.href='/read/$$book$$/$$next$$'">Next Chapter</button>
+    <button id="previousButton" class="pnButtons" onclick="window.location.href='/read/$$book$$/$$previous$$'">Last
+      Chapter</button>
+    <button id="nextButton" class="pnButtons" onclick="window.location.href='/read/$$book$$/$$next$$'">Next
+      Chapter</button>
   </div>
 
   <div class="text" id="credits"></div>
