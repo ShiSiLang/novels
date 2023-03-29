@@ -76,6 +76,7 @@ app.get("/read/:book/:chapter", async (req, res) => {
   );
   file = file.replaceAll("$$book$$", book.name);
   file = file.replaceAll("$$chapter$$", book.chapters[chapter - 1]?.name);
+  file = file.replaceAll("$$bookDescription$$", book.chapters[chapter - 1]?.description);
   file = file.replaceAll("$$next$$", `${chapter + 1}`);
   file = file.replaceAll("$$previous$$", `${chapter - 1}`);
   file = file.replaceAll(
@@ -258,9 +259,10 @@ app.get("/profile/:username", async (req, res) => {
 
   let comments = data.filter(
     (v) => {
-      console.log(v.chapters)
-      return v.chapters?.comments?.username === userData.username;
-
+      return v.chapters.map(e => {
+        console.log(e)
+        return e?.comments?.username === userData.username;
+      })
     }
   );
 
