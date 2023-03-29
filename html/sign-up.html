@@ -212,6 +212,17 @@
         color: #ffcc99;
     }
 
+    .container file {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        box-sizing: border-box;
+        background: transparent;
+        border: none;
+        outline: none;
+    }
+
 
     .container input {
         width: 100%;
@@ -363,10 +374,7 @@
         <form class="modal-content animate" id="FormSignUp" action="/sign-up" method="post">
             <div class="container">
                 <label for="icon"><b>Avatar</b></label>
-
-                <!--<input type="file" id="img" name="img" accept="image/*">-->
-
-                <input type="text" placeholder="Enter avatar url" name="icon" autocomplete="off" required />
+                <input type="file" id="icon" name="icon" accept="image/*" required>
                 <label for="uname"><b>Username</b></label>
                 <input type="text" placeholder="Enter Username" name="uname" autocomplete="off" required />
                 <label for="psw"><b>Password</b></label>
