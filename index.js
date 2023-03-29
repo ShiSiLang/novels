@@ -283,47 +283,68 @@ app.get("/profile/:username", async (req, res) => {
   res.send(file);
 });
 
-app.post("/sign-up", async (req, res) => {
-  let html = req.body.data;
-  return console.log(html)
+const multer = require('multer');
+const upload = multer({ 
+  dest: 'uploads/',
+  limits: {
+    fileSize: 1024 * 1024 * 2, // limit to 2 MB
+  },
+}); // create a Multer instance and specify the upload directory and size limit
+
+app.post("/sign-up", upload.single('icon'), async (req, res) => {
+  const html = req.body;
   if (html.dp !== process.env.devPassword)
     return res.status(400).json({ error: `Incorrect password!` });
 
-  let image = html.icon.replace(/</g, "&lt;");
+  const image = req.file; // get the uploaded file from the request
 
-  function isImage(url) {
-    return /^https?:\/\/.+\.(jpg|jpeg|png|webp|avif|gif|svg)$/.test(url);
+  function isImage(filename) {
+    const extension = filename.split('.').pop().toLowerCase(); // get the file extension
+    return ['jpg', 'jpeg', 'png', 'gif'].includes(extension); // check if the extension is valid
   }
 
-  if (isImage(image) === false)
+  if (!isImage(image.originalname))
     return res
       .status(400)
-      .json({ error: `Please make sure the icon is a valid URL.` });
+      .json({ error: `Please make sure the icon is a valid image file.` });
+  
+  if (image.size > 1024 * 1024 * 2) // check if the file size is greater than 2 MB
+    return res
+      .status(400)
+      .json({ error: `Please make sure the icon size is within 2 MB.` });
 
-  let date = new Date();
-  let newdate =
-    date.getMonth() + 1 + "/" + date.getDate() + "/" + date.getFullYear();
+  // read the file data into a buffer
+  const buffer = fs.readFileSync(image.path);
 
-  let data = await profileShema.find().sort({ username: 1 });
-
-  if (data.find((v) => v.username === html.uname.replace(/</g, "&lt;")))
-    return res.status(400).json({ error: `That username is already taken.` });
-
-  let newProfile = new profileShema({
-    username: html.uname.replace(/</g, "&lt;"),
-    password: html.psw.replace(/</g, "&lt;"),
-    icon: image,
-    date: `${newdate}`,
+  // create a new document in MongoDB
+  const newProfile = new profileShema({
+    username: html.uname,
+    password: html.psw,
+    icon: {
+      data: buffer,
+      contentType: image.mimetype
+    },
+    date: new Date(),
     followers: 0,
     discord: null,
     twitter: null,
-    author: false,
-  }).save();
+    author: false
+  });
 
-  return res
-    .status(200)
-    .json({ success: `${html.uname.replace(/</g, "&lt;")} added!` });
+  try {
+    // save the new document to MongoDB
+    const result = await newProfile.save();
+    return res
+      .status(200)
+      .json({ success: `${html.uname} added!` });
+  } catch (err) {
+    console.error(err);
+    return res
+      .status(500)
+      .json({ error: `An error occurred while saving the profile.` });
+  }
 });
+
 
 app.post("/sign-in", async (req, res) => {
   let html = req.body.data;
