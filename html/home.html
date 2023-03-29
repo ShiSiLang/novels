@@ -329,6 +329,8 @@
         let json = await books.json();
         let latestson = await latest.json();
 
+        console.log(latestson)
+
         let newArray = json.filter((v) => {
           return v.chapters.map((e) => {
             return latestson.includes(e?.name);
