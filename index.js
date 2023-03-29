@@ -113,8 +113,6 @@ app.get("/data/:type/:other", async (req, res) => {
     let book = await bookShema.findOne({ name: bookName });
     if (!book) return res.status(400).json({ error: `Not Found` });
 
-    console.log(book.chapters);
-
     /*
     rating
     const total = (book.r1 + book.r2 + book.r3 + book.r4 + book.r5)
@@ -123,8 +121,10 @@ app.get("/data/:type/:other", async (req, res) => {
     */
 
     for (i = 0; i < book.chapters.length; i++) {
+      console.log(book.chapters[i]);
       for (i2 = 0; i2 < book.chapters[i].comments.length; i2++) {
         let comment = book.chapters[i].comments[12];
+        console.log(comment);
         let userData = await profileShema.findOne({
           username: comment.username,
         });
@@ -132,7 +132,7 @@ app.get("/data/:type/:other", async (req, res) => {
       }
     }
 
-    console.log(book.chapters);
+    console.log(book.chapters[0]);
 
     res.send(book);
   }
