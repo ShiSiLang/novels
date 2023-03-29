@@ -167,11 +167,34 @@
     margin: 0 auto;
   }
 
+  button {
+    text-align: center;
+    font-weight: bold;
+    text-decoration: none;
+    font-family: 'Nunito';
+    display: inline-block;
+    border: 2px solid #5c4981;
+    border-radius: 16px;
+    box-shadow: 0px 0px 10px #967bb6;
+    background-color: #967bb6;
+    cursor: pointer;
+    padding: 20px;
+    font-size: 30px;
+    color: white;
+    margin: auto;
+  }
+
+  button:hover {
+    background-color: #5c4981;
+    transition: 1s;
+  }
+
+
   * {
     box-sizing: border-box
   }
 
-  .btn-group button {
+  .btn-group>button {
     margin: 0 auto;
     margin-bottom: 35px;
     margin-top: 35px;
@@ -275,6 +298,56 @@
     <h2>$$desc$$</h2>
     <p>Author: $$author$$</p>
   </div>
+
+  <button id="fb">Follow Book</button>
+
+  <div id="error" class="alert">
+    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+    Error.
+  </div>
+
+  <div id="success" class="alert success">
+    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+    <strong>Success!</strong> Yay.
+  </div>
+
+  <script>
+    const button = document.getElementById("fb");
+    let data = JSON.parse(localStorage.loginUser);
+    button.addEventListener("click", async (_) => {
+      if (!data) {
+        e.preventDefault();
+        error.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+  Sign-In to follow!`;
+        error.style.display = "block";
+      } else {
+        const response = await fetch("/follow-book", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            uname: data.username,
+            psw: data.password,
+            follow: "$$name$$",
+          }),
+        });
+
+        if (response.ok) {
+          // Display success message here
+          const successData = await response.json();
+          success.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+<strong>Success!</strong> ${successData.success}`;
+          success.style.display = "block";
+        } else {
+          const errorData = await response.json();
+          error.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+${errorData.error}`;
+          error.style.display = "block";
+        }
+      }
+    });
+  </script>
 
   <div id="nca" class="text"></div>
 
