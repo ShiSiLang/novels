@@ -333,7 +333,8 @@
 
         let newArray = json.filter((v) => {
           return v.chapters.map((e) => {
-            return latestson.includes(e?.name);
+            consol.log(e)
+            return latestson.includes(e.name);
           });
         });
 
@@ -342,7 +343,7 @@
         const myBooks = document.getElementById("myBooks");
 
         for (i = 0; i < newArray.length; i++) {
-          myBooks.innerHTML += `<a href="https://novels-production.up.railway.app/explore/${newArray[i].name}"><img src="${newArray[i].icon}" alt="${newArray[i].name}"></a>`
+          myBooks.innerHTML += `<a href="https://novels-production.up.railway.app/explore/${newArray[newArray.length - 1].name}"><img src="${newArray[i].icon}" alt="${newArray[i].name}"></a>`
         }
       } catch (err) {
         console.log(err)
