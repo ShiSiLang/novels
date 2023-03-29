@@ -332,10 +332,11 @@
         console.log(latestson)
 
         let newArray = json.filter((v) => {
-          return v.chapters.map((e) => {
-            console.log(e)
+          let mapped = v.chapters.map((e) => {
             if (latestson.includes(e.name)) return e;
           });
+          console.log(mapped)
+          return mapped;
         });
 
         console.log(newArray)
