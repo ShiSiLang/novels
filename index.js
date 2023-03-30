@@ -288,7 +288,7 @@ app.get("/profile/:username", async (req, res) => {
 app.post("/sign-up", upload.single("icon"), async (req, res) => {
   let html = req.body.data;
   console.log(html);
-  console.log(req);
+console.log(req.file)
   if (html.dp !== process.env.devPassword)
     return res.status(400).json({ error: `Incorrect password!` });
 
@@ -296,7 +296,7 @@ app.post("/sign-up", upload.single("icon"), async (req, res) => {
     return res.status(400).json({ error: `Please upload an image.` });
 
   let image = req.file;
-  console.log(image);
+  
   let date = new Date();
   let newdate =
     date.getMonth() + 1 + "/" + date.getDate() + "/" + date.getFullYear();
