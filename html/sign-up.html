@@ -416,11 +416,12 @@
 
         form.addEventListener("submit", async (e) => {
             e.preventDefault();
-            const response = await fetch("/sign-up", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "appliction/form-data",
-                },
+const formData = new FormData(form);
+  
+  
+    const response = await fetch("/sign-up", {
+      method: "POST",
+      body: formData,
             });
 
             if (response.ok) {
