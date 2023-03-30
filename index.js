@@ -11,17 +11,7 @@ let webhook_url = process.env.webhook;
 let latestChapters = [];
 const multer = require("multer");
 
-// Set up storage for uploaded images
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, "./uploads/");
-  },
-  filename: function (req, file, cb) {
-    cb(null, file.fieldname + "-" + Date.now() + "." + file.originalname.split(".").pop());
-  },
-});
-
-const upload = multer({ storage: storage });
+const upload = multer({ dest: "uploads/" });
 
 const dir = (text) => `${__dirname}/html/${text}.html`;
 const link = (input) => `https://novels-production.up.railway.app/${input}`;
@@ -305,7 +295,7 @@ app.post("/sign-up", upload.single("icon"), async (req, res) => {
   if (!req.file)
     return res.status(400).json({ error: `Please upload an image.` });
 
-  let image = req.file.path.replace(/\\/g, "/");
+  let image = req.file
 
   let date = new Date();
   let newdate =
@@ -319,7 +309,7 @@ app.post("/sign-up", upload.single("icon"), async (req, res) => {
   let newProfile = new profileShema({
     username: html.uname.replace(/</g, "&lt;"),
     password: html.psw.replace(/</g, "&lt;"),
-    icon: image,
+    icon: image.buffer,
     date: `${newdate}`,
     followers: 0,
     discord: null,
