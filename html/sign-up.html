@@ -421,7 +421,9 @@ const formData = new FormData(form);
   
     const response = await fetch("/sign-up", {
       method: "POST",
-      body: formData,
+headers: {
+  "Content-Type": "multipart/form-data",
+},      body: formData,
             });
 
             if (response.ok) {
