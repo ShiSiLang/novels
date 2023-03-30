@@ -297,7 +297,12 @@ console.log(html)
   if (html.dp !== process.env.devPassword)
     return res.status(400).json({ error: `Incorrect password!` });
 
-  const image = req.file; // get the uploaded file from the request
+if (!req.file) {
+  return res.status(400).json({ error: `Please upload an icon.` });
+}
+
+const image = req.file;
+
 console.log(image)
   function isImage(filename) {
     const extension = filename.split('.').pop().toLowerCase(); // get the file extension
