@@ -284,12 +284,38 @@ app.get("/profile/:username", async (req, res) => {
 });
 
 const multer = require('multer');
-const upload = multer({ 
-  dest: 'uploads/',
-  limits: {
-    fileSize: 1024 * 1024 * 2, // limit to 2 MB
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'uploads/');
   },
-}); // create a Multer instance and specify the upload directory and size limit
+  filename: function (req, file, cb) {
+    cb(
+      null,
+      file.fieldname + '-' + Date.now() + path.extname(file.originalname)
+    );
+  },
+});
+
+const upload = multer({
+  storage: storage,
+  limits: {
+    fileSize: 1024 * 1024 * 2, // limit image size to 2MB
+  },
+  fileFilter: function (req, file, cb) {
+    const filetypes = /jpeg|jpg|png|gif/;
+    const extname = filetypes.test(
+      path.extname(file.originalname).toLowerCase()
+    );
+    const mimetype = filetypes.test(file.mimetype);
+
+    if (mimetype && extname) {
+      return cb(null, true);
+    } else {
+      cb('Error: Images Only!');
+    }
+  },
+});
 
 app.post("/sign-up", upload.single('icon'), async (req, res) => {
   const html = req.body.data;
@@ -301,26 +327,10 @@ if (!req.file) {
   return res.status(400).json({ error: `Please upload an icon.` });
 }
 
-const image = req.file;
-
-console.log(image)
-  function isImage(filename) {
-    const extension = filename.split('.').pop().toLowerCase(); // get the file extension
-    return ['jpg', 'jpeg', 'png', 'gif'].includes(extension); // check if the extension is valid
-  }
-
-  if (!isImage(image.originalname))
-    return res
-      .status(400)
-      .json({ error: `Please make sure the icon is a valid image file.` });
-  
-  if (image.size > 1024 * 1024 * 2) // check if the file size is greater than 2 MB
-    return res
-      .status(400)
-      .json({ error: `Please make sure the icon size is within 2 MB.` });
-
-  // read the file data into a buffer
-  const buffer = fs.readFileSync(image.path);
+const buffer = fs.readFileSync(req.file.path);
+let date = new Date();
+  let newdate =
+    date.getMonth() + 1 + "/" + date.getDate() + "/" + date.getFullYear();
 
   // create a new document in MongoDB
   const newProfile = new profileShema({
@@ -330,7 +340,7 @@ console.log(image)
       data: buffer,
       contentType: image.mimetype
     },
-    date: new Date(),
+    date: newdate,
     followers: 0,
     discord: null,
     twitter: null,
@@ -640,9 +650,10 @@ console.log(__dirname);
 
 mongoose.set("strictQuery", true);
 (async () => {
-  await mongoose
-    .connect(process.env["mongo"])
-    .then(() => console.log("Connected to mongodb"));
+  await mongoose.connect(process.env["mongo"], {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  }).then(() => console.log("Connected to mongodb"));
 })();
 process.on("unhandledRejection", (reason, p) => {
   console.log(" [antiCrash] :: Unhandled Rejection/Catch");
