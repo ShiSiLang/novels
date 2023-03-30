@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const profileSchema = mongoose.Schema({
   username: String,
   password: String,
-  icon: { type: String, required: true },
+  icon: { type: Buffer, required: true },
   date: String,
   followers: Number,
   following: Array,
