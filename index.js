@@ -283,84 +283,47 @@ app.get("/profile/:username", async (req, res) => {
   res.send(file);
 });
 
-const multer = require('multer');
-
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, 'uploads/');
-  },
-  filename: function (req, file, cb) {
-    cb(
-      null,
-      file.fieldname + '-' + Date.now() + path.extname(file.originalname)
-    );
-  },
-});
-
-const upload = multer({
-  storage: storage,
-  limits: {
-    fileSize: 1024 * 1024 * 2, // limit image size to 2MB
-  },
-  fileFilter: function (req, file, cb) {
-    const filetypes = /jpeg|jpg|png|gif/;
-    const extname = filetypes.test(
-      path.extname(file.originalname).toLowerCase()
-    );
-    const mimetype = filetypes.test(file.mimetype);
-
-    if (mimetype && extname) {
-      return cb(null, true);
-    } else {
-      cb('Error: Images Only!');
-    }
-  },
-});
-
-app.post("/sign-up", upload.single('icon'), async (req, res) => {
-  const html = req.body.data;
-console.log(html)
+app.post("/sign-up", async (req, res) => {
+  let html = req.body.data;
+  return console.log(html)
   if (html.dp !== process.env.devPassword)
     return res.status(400).json({ error: `Incorrect password!` });
 
-if (!req.file) {
-  return res.status(400).json({ error: `Please upload an icon.` });
-}
+  let image = html.icon.replace(/</g, "&lt;");
 
-const buffer = fs.readFileSync(req.file.path);
-let date = new Date();
+  function isImage(url) {
+    return /^https?:\/\/.+\.(jpg|jpeg|png|webp|avif|gif|svg)$/.test(url);
+  }
+
+  if (isImage(image) === false)
+    return res
+      .status(400)
+      .json({ error: `Please make sure the icon is a valid URL.` });
+
+  let date = new Date();
   let newdate =
     date.getMonth() + 1 + "/" + date.getDate() + "/" + date.getFullYear();
 
-  // create a new document in MongoDB
-  const newProfile = new profileShema({
-    username: html.uname,
-    password: html.psw,
-    icon: {
-      data: buffer,
-      contentType: image.mimetype
-    },
-    date: newdate,
+  let data = await profileShema.find().sort({ username: 1 });
+
+  if (data.find((v) => v.username === html.uname.replace(/</g, "&lt;")))
+    return res.status(400).json({ error: `That username is already taken.` });
+
+  let newProfile = new profileShema({
+    username: html.uname.replace(/</g, "&lt;"),
+    password: html.psw.replace(/</g, "&lt;"),
+    icon: image,
+    date: `${newdate}`,
     followers: 0,
     discord: null,
     twitter: null,
-    author: false
-  });
+    author: false,
+  }).save();
 
-  try {
-    // save the new document to MongoDB
-    const result = await newProfile.save();
-    return res
-      .status(200)
-      .json({ success: `${html.uname} added!` });
-  } catch (err) {
-    console.error(err);
-    return res
-      .status(500)
-      .json({ error: `An error occurred while saving the profile.` });
-  }
+  return res
+    .status(200)
+    .json({ success: `${html.uname.replace(/</g, "&lt;")} added!` });
 });
-
 
 app.post("/sign-in", async (req, res) => {
   let html = req.body.data;
@@ -650,10 +613,9 @@ console.log(__dirname);
 
 mongoose.set("strictQuery", true);
 (async () => {
-  await mongoose.connect(process.env["mongo"], {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  }).then(() => console.log("Connected to mongodb"));
+  await mongoose
+    .connect(process.env["mongo"])
+    .then(() => console.log("Connected to mongodb"));
 })();
 process.on("unhandledRejection", (reason, p) => {
   console.log(" [antiCrash] :: Unhandled Rejection/Catch");
