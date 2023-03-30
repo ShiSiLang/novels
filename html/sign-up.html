@@ -417,7 +417,7 @@
         form.addEventListener("submit", async (e) => {
             e.preventDefault();
 const formData = new FormData(form);
-  
+  console.log(formData)
   
     const response = await fetch("/sign-up", {
       method: "POST",
