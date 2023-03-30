@@ -9,7 +9,7 @@ const reviewShema = require("./models/review");
 const bookShema = require("./models/book");
 let webhook_url = process.env.webhook;
 let latestChapters = [];
-const multer = require('multer');
+const multer = require("multer");
 const upload = multer({ storage: multer.memoryStorage() });
 
 const dir = (text) => `${__dirname}/html/${text}.html`;
@@ -288,14 +288,15 @@ app.get("/profile/:username", async (req, res) => {
 app.post("/sign-up", upload.single("icon"), async (req, res) => {
   let html = req.body.data;
   console.log(html);
+  console.log(req);
   if (html.dp !== process.env.devPassword)
     return res.status(400).json({ error: `Incorrect password!` });
 
   if (!req.file)
     return res.status(400).json({ error: `Please upload an image.` });
 
-  let image = req.file
-console.log(image)
+  let image = req.file;
+  console.log(image);
   let date = new Date();
   let newdate =
     date.getMonth() + 1 + "/" + date.getDate() + "/" + date.getFullYear();
@@ -561,6 +562,33 @@ app.post("/follow", async (req, res) => {
   }
 });
 
+app.post("/follow-book", async (req, res) => {
+  let html = req.body;
+  let user = await profileShema.findOne({
+    password: html.psw,
+    username: html.uname,
+  });
+  if (!user)
+    return res.status(400).json({ error: `Incorrect username or password!` });
+
+  let book = await bookShema.findOne({ name: html.follow });
+
+  if (book.following.includes(user.username)) {
+    let index = book.following.findIndex((v) => v === user.username);
+    book.following.splice(index, 1);
+    book.save();
+    return res
+      .status(200)
+      .json({ success: `Successfully unfollowed ${html.follow}!` });
+  } else {
+    book.following.push(user.username);
+    book.save();
+    return res
+      .status(200)
+      .json({ success: `Successfully followed ${html.follow}!` });
+  }
+});
+
 app.post("/comment", async (req, res) => {
   let html = req.body.data; //book, chapter, uname, psw, comment
   let bookData = await bookShema.findOne({ name: html.book });
@@ -609,10 +637,12 @@ console.log(__dirname);
 
 mongoose.set("strictQuery", true);
 (async () => {
-  await mongoose.connect(process.env["mongo"], {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  }).then(() => console.log("Connected to mongodb"));
+  await mongoose
+    .connect(process.env["mongo"], {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    })
+    .then(() => console.log("Connected to mongodb"));
 })();
 process.on("unhandledRejection", (reason, p) => {
   console.log(" [antiCrash] :: Unhandled Rejection/Catch");
