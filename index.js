@@ -9,6 +9,19 @@ const reviewShema = require("./models/review");
 const bookShema = require("./models/book");
 let webhook_url = process.env.webhook;
 let latestChapters = [];
+const multer = require("multer");
+
+// Set up storage for uploaded images
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "./uploads/");
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.fieldname + "-" + Date.now() + "." + file.originalname.split(".").pop());
+  },
+});
+
+const upload = multer({ storage: storage });
 
 const dir = (text) => `${__dirname}/html/${text}.html`;
 const link = (input) => `https://novels-production.up.railway.app/${input}`;
@@ -283,22 +296,16 @@ app.get("/profile/:username", async (req, res) => {
   res.send(file);
 });
 
-app.post("/sign-up", async (req, res) => {
+app.post("/sign-up", upload.single("icon"), async (req, res) => {
   let html = req.body.data;
-  return console.log(html)
+
   if (html.dp !== process.env.devPassword)
     return res.status(400).json({ error: `Incorrect password!` });
 
-  let image = html.icon.replace(/</g, "&lt;");
+  if (!req.file)
+    return res.status(400).json({ error: `Please upload an image.` });
 
-  function isImage(url) {
-    return /^https?:\/\/.+\.(jpg|jpeg|png|webp|avif|gif|svg)$/.test(url);
-  }
-
-  if (isImage(image) === false)
-    return res
-      .status(400)
-      .json({ error: `Please make sure the icon is a valid URL.` });
+  let image = req.file.path.replace(/\\/g, "/");
 
   let date = new Date();
   let newdate =
@@ -613,9 +620,10 @@ console.log(__dirname);
 
 mongoose.set("strictQuery", true);
 (async () => {
-  await mongoose
-    .connect(process.env["mongo"])
-    .then(() => console.log("Connected to mongodb"));
+  await mongoose.connect(process.env["mongo"], {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  }).then(() => console.log("Connected to mongodb"));
 })();
 process.on("unhandledRejection", (reason, p) => {
   console.log(" [antiCrash] :: Unhandled Rejection/Catch");
