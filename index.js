@@ -10,7 +10,18 @@ const bookShema = require("./models/book");
 let webhook_url = process.env.webhook;
 let latestChapters = [];
 const multer = require("multer");
-const upload = multer({ storage: multer.memoryStorage() });
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "assets");
+  },
+  filename: function (req, file, cb) {
+    let ext = file.mimetype.split("/")[1];
+    cb(null, file.fieldname + "-" + Date.now() + "." + ext);
+  },
+});
+
+const upload = multer({ storage: storage, limits: {fileSize: 5*1024*1024} });
 
 const dir = (text) => `${__dirname}/html/${text}.html`;
 const link = (input) => `https://novels-production.up.railway.app/${input}`;
