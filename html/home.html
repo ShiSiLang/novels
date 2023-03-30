@@ -332,15 +332,11 @@
         let newArray = json.map((e) => {
           return e.chapters.filter(v => latestson.includes(v.name))
         });
+        const myBooks = document.getElementById("myBooks");
 
         console.log(newArray[0])
 
-        const myBooks = document.getElementById("myBooks");
-
-        console.log(newArray[0].length)
-
         if (newArray[0].length !== 0) {
-          console.log('h')
           for (i = 0; i < newArray[0].length; i++) {
             myBooks.innerHTML += `<a href="https://novels-production.up.railway.app/explore/${newArray[i].name}"><img src="${newArray[i].icon}" alt="${newArray[i].name}"></a>`
           }
