@@ -12,13 +12,10 @@ let latestChapters = [];
 const multer = require("multer");
 
 const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, "assets");
-  },
-  filename: function (req, file, cb) {
-    let ext = file.mimetype.split("/")[1];
-    cb(null, file.fieldname + "-" + Date.now() + "." + ext);
-  },
+  destination: './uploads/',
+  filename: function(req, file, cb){
+    cb(null,file.fieldname + '-' + Date.now() + path.extname(file.originalname));
+  }
 });
 
 const upload = multer({ storage: storage, limits: {fileSize: 5*1024*1024} });
