@@ -25,7 +25,7 @@ const upload = multer({ storage: storage, limits: { fileSize: 5*1024*1024 } });
 
 const storage = multer.memoryStorage();
 
-const upload = multer({ storage: storage, limits: { fileSize: 5*1024*1024 } });
+const upload = multer({ storage: storage, limits: { fileSize: 5 * 1024 * 1024 } });
 
 const dir = (text) => `${__dirname}/html/${text}.html`;
 const link = (input) => `https://novels-production.up.railway.app/${input}`;
@@ -150,7 +150,8 @@ app.get("/data/:type/:other", async (req, res) => {
         let userData = await profileShema.findOne({
           username: comment.username,
         });
-        comment.icon = userData.icon;
+        const iconLink = `data:image/png;base64,${userData.icon.toString('base64')}`;
+        comment.icon = iconLink;
       }
     }
 
@@ -278,16 +279,7 @@ app.get("/profile/:username", async (req, res) => {
 
   if (!userData) return res.sendFile(dir("error"));
 
-  console.log(userData.icon)
-
-  //let iconBuffer = Buffer.from(userData.icon, 'base64')
-
   const iconLink = `data:image/png;base64,${userData.icon.toString('base64')}`;
-  console.log(iconLink)
-  //console.log(iconBuffer)
-
-  //res.setHeader("Content-Type", "image/png")
-  //return res.send(userData.icon)
 
   let file = fs.readFileSync("./html/profile.html", {
     encoding: "utf8",
@@ -313,17 +305,14 @@ app.get("/profile/:username", async (req, res) => {
 
 app.post("/sign-up", upload.single("icon"), async (req, res) => {
   let html = req.body;
-  console.log(html);
-console.log(req.file)
-  if (html.dp !== process.env.devPassword)
-    return res.status(400).json({ error: `Incorrect password!` });
+  if (html.psw !== html.dp)
+    return res.status(400).json({ error: `Passwords do not match!` });
 
   if (!req.file)
     return res.status(400).json({ error: `Please upload an image.` });
 
   let image = req.file;
-  //let buffer = fs.readFileSync(image.path);
-  
+
   let date = new Date();
   let newdate =
     date.getMonth() + 1 + "/" + date.getDate() + "/" + date.getFullYear();
@@ -366,9 +355,12 @@ app.post("/sign-in", async (req, res) => {
       .status(400)
       .json({ error: `Username or password is incorrect.` });
 
+  const iconLink = `data:image/png;base64,${data.icon.toString('base64')}`;
+
+
   return res.status(200).json({
     success: `Successfully logged you in.`,
-    userIcon: data.icon,
+    userIcon: iconLink,
     userAuthor: data.author,
   });
 });
