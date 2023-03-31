@@ -284,6 +284,7 @@ app.get("/profile/:username", async (req, res) => {
   let iconBuffer = Buffer.from(userData.icon, 'base64')
   console.log(iconBuffer)
   let iconMimeType = userData.icon.contentType;
+  console.log(iconMimeType)
   let iconUrl = `data:${iconMimeType};base64,${iconData}`;
 
   return res.render('profile', { iconUrl: iconUrl });
