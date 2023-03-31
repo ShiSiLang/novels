@@ -295,7 +295,7 @@ app.get("/profile/:username", async (req, res) => {
 });
 
 app.post("/sign-up", upload.single("icon"), async (req, res) => {
-  let html = req.body.data;
+  let html = req.body;
   console.log(html);
 console.log(req.file)
   if (html.dp !== process.env.devPassword)
