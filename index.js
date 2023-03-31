@@ -493,8 +493,10 @@ app.post("/publish-chapter", async (req, res) => {
   });
 });
 
-app.post("/edit", async (req, res) => {
-  let html = req.body.data;
+app.post("/edit", upload.single("icon"), async (req, res) => {
+  let html = req.body;
+
+  let image = req.file;
 
   let data = await profileShema.findOne({
     password: html.psw,
@@ -505,19 +507,10 @@ app.post("/edit", async (req, res) => {
     return res.status(400).json({ error: `Incorrect username or password!` });
 
   let params = {
-    icon: html?.newicon || data.icon,
+    icon: image?.buffer || data.icon,
     discord: html?.discord || data?.discord || null,
     twitter: html?.twitter || data?.twitter || null,
   };
-
-  function isImage(url) {
-    return /^https?:\/\/.+\.(jpg|jpeg|png|webp|avif|gif|svg)$/.test(url);
-  }
-
-  if (isImage(params.icon) === false)
-    return res
-      .status(400)
-      .json({ error: `Please make sure the icon is a valid URL.` });
 
   function isDiscord(url) {
     return /(https?:\/\/)?(www\.)?(discord\.(gg|io|me|li)|discordapp\.com\/invite)\/.+[a-z]/.test(

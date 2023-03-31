@@ -596,12 +596,12 @@
     </script>
 
     <div id="id01" class="modal">
-        <form class="modal-content animate" id="FormEdit" action="/edit" method="post">
+        <form class="modal-content animate" id="FormEdit" action="/edit" method="post" enctype="multipart/form-data">
             <div class="container">
                 <input id="inputusername" type="hidden" name="uname" value="NOTHING" />
                 <input id="inputpass" type="hidden" name="psw" value="NOTHING" />
-                <label for="newicon"><b>Edit Avatar</b></label>
-                <input type="text" placeholder="Enter new avatar" name="newicon" autocomplete="off" />
+                <label for="icon"><b>Edit Avatar</b></label>
+                <input type="file" id="icon" name="icon" accept=".jpg, .jpeg, .png"/>
                 <label for="discord"><b>Edit Discord Link</b></label>
                 <input type="text" placeholder="Enter new discord" name="discord" autocomplete="off" />
                 <label for="twitter"><b>Edit Twitter Link</b></label>
@@ -614,6 +614,7 @@
             </div>
         </form>
     </div>
+
 
     <div id="error" class="alert">
         <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
@@ -764,14 +765,12 @@ ${errorData.error}`;
 
     form.addEventListener("submit", async (e) => {
         e.preventDefault();
-        const data = Object.fromEntries(new FormData(form).entries());
+
+        const formData = new FormData(form);
 
         const response = await fetch("/edit", {
             method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ data }),
+            body: formData,
         });
 
         if (response.ok) {
