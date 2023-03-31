@@ -12,12 +12,18 @@ let webhook_url = process.env.webhook;
 let latestChapters = [];
 const multer = require("multer");
 
+/*
 const storage = multer.diskStorage({
   destination: './uploads/',
   filename: function(req, file, cb){
     cb(null,file.fieldname + '-' + Date.now() + path.extname(file.originalname));
   }
 });
+
+const upload = multer({ storage: storage, limits: { fileSize: 5*1024*1024 } });
+*/
+
+const storage = multer.memoryStorage();
 
 const upload = multer({ storage: storage, limits: { fileSize: 5*1024*1024 } });
 
@@ -305,7 +311,7 @@ console.log(req.file)
     return res.status(400).json({ error: `Please upload an image.` });
 
   let image = req.file;
-  let buffer = fs.readFileSync(image.path);
+  //let buffer = fs.readFileSync(image.path);
   
   let date = new Date();
   let newdate =
@@ -319,7 +325,7 @@ console.log(req.file)
   let newProfile = new profileShema({
     username: html.uname.replace(/</g, "&lt;"),
     password: html.psw.replace(/</g, "&lt;"),
-    icon: buffer,
+    icon: image.buffer,
     date: newdate,
     followers: 0,
     discord: null,
