@@ -318,7 +318,7 @@ console.log(req.file)
   let newProfile = new profileShema({
     username: html.uname.replace(/</g, "&lt;"),
     password: html.psw.replace(/</g, "&lt;"),
-    icon: image.buffer,
+    icon: image,
     date: `${newdate}`,
     followers: 0,
     discord: null,
