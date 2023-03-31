@@ -278,6 +278,12 @@ app.get("/profile/:username", async (req, res) => {
 
   if (!userData) return res.sendFile(dir("error"));
 
+  let iconData = profile.icon.data.toString('base64');
+  let iconMimeType = profile.icon.contentType;
+  let iconUrl = `data:${iconMimeType};base64,${iconData}`;
+
+  return res.render('profile', { iconUrl: iconUrl });
+
   let file = fs.readFileSync("./html/profile.html", {
     encoding: "utf8",
   });
