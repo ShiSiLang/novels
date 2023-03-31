@@ -305,6 +305,7 @@ console.log(req.file)
     return res.status(400).json({ error: `Please upload an image.` });
 
   let image = req.file;
+  let buffer = fs.readFileSync(image.path);
   
   let date = new Date();
   let newdate =
@@ -318,7 +319,7 @@ console.log(req.file)
   let newProfile = new profileShema({
     username: html.uname.replace(/</g, "&lt;"),
     password: html.psw.replace(/</g, "&lt;"),
-    icon: image,
+    icon: buffer,
     date: newdate,
     followers: 0,
     discord: null,
