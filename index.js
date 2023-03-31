@@ -319,7 +319,7 @@ console.log(req.file)
     username: html.uname.replace(/</g, "&lt;"),
     password: html.psw.replace(/</g, "&lt;"),
     icon: image,
-    date: `${newdate}`,
+    date: newdate,
     followers: 0,
     discord: null,
     twitter: null,
