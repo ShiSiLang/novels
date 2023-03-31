@@ -279,13 +279,12 @@ app.get("/profile/:username", async (req, res) => {
   if (!userData) return res.sendFile(dir("error"));
 
   console.log(userData.icon)
-  console.log(userData.icon.data)
 
   let iconBuffer = Buffer.from(userData.icon, 'base64')
   console.log(iconBuffer)
 
   res.setHeader("Content-Type", "image/png")
-  return res.send(user.icon)
+  return res.send(userData.icon)
 
   let file = fs.readFileSync("./html/profile.html", {
     encoding: "utf8",
