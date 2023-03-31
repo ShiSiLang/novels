@@ -280,11 +280,14 @@ app.get("/profile/:username", async (req, res) => {
 
   console.log(userData.icon)
 
-  let iconBuffer = Buffer.from(userData.icon, 'base64')
-  console.log(iconBuffer)
+  //let iconBuffer = Buffer.from(userData.icon, 'base64')
 
-  res.setHeader("Content-Type", "image/png")
-  return res.send(userData.icon)
+  const iconLink = `data:image/png;base64,${userData.icon.toString('base64')}`;
+  console.log(iconLink)
+  //console.log(iconBuffer)
+
+  //res.setHeader("Content-Type", "image/png")
+  //return res.send(userData.icon)
 
   let file = fs.readFileSync("./html/profile.html", {
     encoding: "utf8",
@@ -299,7 +302,7 @@ app.get("/profile/:username", async (req, res) => {
   });
 
   file = file.replaceAll("$$username$$", userData.username);
-  file = file.replaceAll("$$avatar$$", userData.icon);
+  file = file.replaceAll("$$avatar$$", iconLink);
   file = file.replaceAll("$$followers$$", userData.followers);
   file = file.replaceAll("$$comments$$", comments.length);
   file = file.replace("$$discord$$", userData.discord || "#");
