@@ -7,25 +7,18 @@ const mongoose = require("mongoose");
 const profileShema = require("./models/profiles");
 const reviewShema = require("./models/review");
 const bookShema = require("./models/book");
-const path = require('path');
+const system = require("./models/system");
+const path = require("path");
 let webhook_url = process.env.webhook;
 let latestChapters = [];
 const multer = require("multer");
 
-/*
-const storage = multer.diskStorage({
-  destination: './uploads/',
-  filename: function(req, file, cb){
-    cb(null,file.fieldname + '-' + Date.now() + path.extname(file.originalname));
-  }
-});
-
-const upload = multer({ storage: storage, limits: { fileSize: 5*1024*1024 } });
-*/
-
 const storage = multer.memoryStorage();
 
-const upload = multer({ storage: storage, limits: { fileSize: 5 * 1024 * 1024 } });
+const upload = multer({
+  storage: storage,
+  limits: { fileSize: 5 * 1024 * 1024 },
+});
 
 const dir = (text) => `${__dirname}/html/${text}.html`;
 const link = (input) => `https://novels-production.up.railway.app/${input}`;
@@ -150,7 +143,9 @@ app.get("/data/:type/:other", async (req, res) => {
         let userData = await profileShema.findOne({
           username: comment.username,
         });
-        const iconLink = `data:image/png;base64,${userData.icon.toString('base64')}`;
+        const iconLink = `data:image/png;base64,${userData.icon.toString(
+          "base64"
+        )}`;
         comment.icon = iconLink;
       }
     }
@@ -206,6 +201,10 @@ app.get("/review/:type/:type2/:reviewID/:password", async (req, res) => {
       });
 
       bookData.save();
+
+      let getSystem = await system.find();
+
+      console.log(getSystem);
 
       if (latestChapters.length >= 25) latestChapters.pop();
       latestChapters.push(data.cName);
@@ -279,7 +278,7 @@ app.get("/profile/:username", async (req, res) => {
 
   if (!userData) return res.sendFile(dir("error"));
 
-  const iconLink = `data:image/png;base64,${userData.icon.toString('base64')}`;
+  const iconLink = `data:image/png;base64,${userData.icon.toString("base64")}`;
 
   let file = fs.readFileSync("./html/profile.html", {
     encoding: "utf8",
@@ -355,8 +354,7 @@ app.post("/sign-in", async (req, res) => {
       .status(400)
       .json({ error: `Username or password is incorrect.` });
 
-  const iconLink = `data:image/png;base64,${data.icon.toString('base64')}`;
-
+  const iconLink = `data:image/png;base64,${data.icon.toString("base64")}`;
 
   return res.status(200).json({
     success: `Successfully logged you in.`,
