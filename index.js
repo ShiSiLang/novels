@@ -585,15 +585,15 @@ app.post("/follow-book", async (req, res) => {
 
   let book = await bookShema.findOne({ name: html.follow });
 
-  if (book.following.includes(user.username)) {
-    let index = book.following.findIndex((v) => v === user.username);
-    book.following.splice(index, 1);
+  if (book.followers.includes(user.username)) {
+    let index = book.followers.findIndex((v) => v === user.username);
+    book.followers.splice(index, 1);
     book.save();
     return res
       .status(200)
       .json({ success: `Successfully unfollowed ${html.follow}!` });
   } else {
-    book.following.push(user.username);
+    book.followers.push(user.username);
     book.save();
     return res
       .status(200)
