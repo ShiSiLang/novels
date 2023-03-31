@@ -18,7 +18,7 @@ const storage = multer.diskStorage({
   }
 });
 
-const upload = multer({ storage: storage, limits: {fileSize: 5*1024*1024} });
+const upload = multer({ storage: storage, limits: { fileSize: 5*1024*1024 } });
 
 const dir = (text) => `${__dirname}/html/${text}.html`;
 const link = (input) => `https://novels-production.up.railway.app/${input}`;
