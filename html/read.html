@@ -423,7 +423,8 @@
         let step1 = content.split(" ").join(" ").replaceAll("\n\n", "</br></br>");
         let step2 = step1.replaceAll(/\*\*(.*?)\*\*/g, "<b>$1</b>");
         let step3 = step2.replaceAll(/\*(.*?)\*/g, "<em>$1</em>");
-        return step3;
+        let step4 = step3.replaceAll(/\_(.*?)\_/g, "<ins>$1</ins>");
+        return step4;
       }
 
       console.log(formatString(novelContent))
@@ -432,12 +433,12 @@
 
       div.innerHTML = `     
           <h1><b>${json.name}</b></h1>
-          <p>${json.chapters[index].intro}</p>
+          <p>${formatString(json.chapters[index].intro)}</p>
           <h2>${json.chapters[index].name}</h2>
           <p>${novelContent}</p>`
       div2.innerHTML = `	
           <h1>Credits</h1>
-          <p>${json.chapters[index].credits}</p>
+          <p>${formatString(json.chapters[index].credits)}</p>
           `
       if (json.chapters[index]?.comments.length === 0) {
         div4.innerHTML = `
