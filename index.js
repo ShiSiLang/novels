@@ -289,7 +289,7 @@ app.get("/profile/:username", async (req, res) => {
   let data = await bookShema.find().sort({ name: 1 });
 
   let comments = data.filter((v) => {
-    return v.chapters.map((e) => {
+    return v.chapters.filter(e => e.chapters.length !== 0).map((e) => {
       return e?.comments?.username === userData.username;
     });
   });
