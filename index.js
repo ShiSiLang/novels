@@ -117,7 +117,10 @@ app.get("/data/:type/:other", async (req, res) => {
     res.send(data.books);
   }
   if (type === "latest") {
-    res.send(latestChapters);
+    let getSystem = await system.find({ id: "6427a45e2d7d901440fc43cf" });
+
+    console.log(getSystem);
+    res.send(getSystem.latestChapters);
   }
   if (type === "books") {
     let data = await bookShema.find().sort({ name: 1 });
@@ -202,14 +205,12 @@ app.get("/review/:type/:type2/:reviewID/:password", async (req, res) => {
 
       bookData.save();
 
-      let getSystem = await system.find();
+      let getSystem = await system.find({ id: "6427a45e2d7d901440fc43cf" });
 
       console.log(getSystem);
-      console.log(getSystem[0]);
-      console.log(getSystem[0].id)
 
-      if (latestChapters.length >= 25) latestChapters.pop();
-      latestChapters.push(data.cName);
+      if (getSystem.latestChapters.length >= 25) latestChapters.pop();
+      getSystem.latestChapters.push(data.cName);
     }
 
     res.status(200).json({
