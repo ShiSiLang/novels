@@ -73,7 +73,7 @@ app.get("/read/:bookName/:chapter", async (req, res) => {
   );
 
   if (!book) return res.sendFile(dir("error"));
-
+console.log(book)
   let file = fs.readFileSync("./html/read.html", {
     encoding: "utf8",
   });
