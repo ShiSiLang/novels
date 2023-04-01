@@ -430,6 +430,7 @@ app.post("/publish-book", async (req, res) => {
 
 app.post("/publish-chapter", async (req, res) => {
   let html = req.body.data;
+  console.log(html)
 
   let data = await profileShema.findOne({
     password: html.psw,
