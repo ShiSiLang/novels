@@ -294,6 +294,8 @@ app.get("/profile/:username", async (req, res) => {
     });
   });
 
+  console.log(comments)
+
   file = file.replaceAll("$$username$$", userData.username);
   file = file.replaceAll("$$avatar$$", iconLink);
   file = file.replaceAll("$$followers$$", userData.followers);
