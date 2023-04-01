@@ -73,7 +73,7 @@ app.get("/read/:bookName/:chapter", async (req, res) => {
   );
 
   if (!book) return res.sendFile(dir("error"));
-console.log(book)
+
   let file = fs.readFileSync("./html/read.html", {
     encoding: "utf8",
   });
@@ -84,10 +84,7 @@ console.log(book)
   );
   file = file.replaceAll("$$book$$", book.name);
   file = file.replaceAll("$$chapter$$", book.chapters[chapter - 1]?.name);
-  file = file.replaceAll(
-    "$$bookDescription$$",
-    book.chapters[chapter - 1]?.description
-  );
+  file = file.replaceAll("$$bookDescription$$", book.description);
   file = file.replaceAll("$$next$$", `${chapter + 1}`);
   file = file.replaceAll("$$previous$$", `${chapter - 1}`);
   file = file.replaceAll(
