@@ -205,6 +205,8 @@ app.get("/review/:type/:type2/:reviewID/:password", async (req, res) => {
       let getSystem = await system.find();
 
       console.log(getSystem);
+      console.log(getSystem[0]);
+      console.log(getSystem[0].id)
 
       if (latestChapters.length >= 25) latestChapters.pop();
       latestChapters.push(data.cName);
