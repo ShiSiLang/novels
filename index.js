@@ -1,5 +1,4 @@
 const express = require("express");
-const novel = require("./starOfLibby");
 const app = express();
 const fs = require("fs");
 const axios = require("axios");
@@ -8,9 +7,7 @@ const profileShema = require("./models/profiles");
 const reviewShema = require("./models/review");
 const bookShema = require("./models/book");
 const system = require("./models/system");
-const path = require("path");
 let webhook_url = process.env.webhook;
-let latestChapters = [];
 const multer = require("multer");
 
 const storage = multer.memoryStorage();
@@ -67,19 +64,19 @@ app.get("/explore/:bookName", async (req, res) => {
   res.send(file);
 });
 
-app.get("/read/:book/:chapter", async (req, res) => {
+app.get("/read/:bookName/:chapter", async (req, res) => {
   let chapter = Number(req.params.chapter) || 1;
-  let bookName = req.params.book;
+  let bookName = req.params.bookName.replace(/\s/g, "").toLowerCase();
+  let books = await bookShema.find().sort({ name: 1 });
+  let book = books.find(
+    (v) => v.name.replace(/\s/g, "").toLowerCase() === bookName
+  );
 
-  if (!bookName) return res.sendFile(dir("error"));
+  if (!book) return res.sendFile(dir("error"));
 
   let file = fs.readFileSync("./html/read.html", {
     encoding: "utf8",
   });
-
-  let book = await bookShema.findOne({ name: bookName });
-
-  if (!book) return res.sendFile(dir("error"));
 
   file = file.replace(
     "$$novel$$",
