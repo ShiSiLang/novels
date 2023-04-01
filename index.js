@@ -289,20 +289,18 @@ app.get("/profile/:username", async (req, res) => {
   let data = await bookShema.find().sort({ name: 1 });
 
   let comments = data.filter((v) => {
-  return v.chapters.filter((e) => {
-    return e.comments.filter((c) => {
-      return c.username === userData.username;
+    return v.chapters.filter((e) => {
+      return e.comments.filter((c) => {
+        return c.username === userData.username;
+      }).length > 0;
     }).length > 0;
-  }).length > 0;
-}).flatMap((v) => {
-  return v.chapters.flatMap((e) => {
-    return e.comments.filter((c) => {
-      return c.username === userData.username;
+  }).flatMap((v) => {
+    return v.chapters.flatMap((e) => {
+      return e.comments.filter((c) => {
+        return c.username === userData.username;
+      });
     });
   });
-});
-
-console.log(comments);
 
   file = file.replaceAll("$$username$$", userData.username);
   file = file.replaceAll("$$avatar$$", iconLink);
