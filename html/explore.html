@@ -294,9 +294,9 @@
 
             for (i = 0; i < json.length; i++) {
                 if (i === 0) {
-                    imageGrid.innerHTML = ` <a class="image-grid-col-2 image-grid-row-2" href="/explore/${json[0].name}"><img src="${json[0].icon}" alt="${json[0].name}" /></a>`
+                    imageGrid.innerHTML = ` <a class="image-grid-col-2 image-grid-row-2" href="/explore/${json[0].name.replace(/\s/g, "")}"><img src="${json[0].icon}" alt="${json[0].name}" /></a>`
                 } else {
-                    imageGrid.innerHTML += `<a href="/explore/${json[i].name}"><img src="${json[i].icon}" alt="${json[i].name}" /></a>`
+                    imageGrid.innerHTML += `<a href="/explore/${json[i].name.replace(/\s/g, "")}"><img src="${json[i].icon}" alt="${json[i].name}" /></a>`
                 }
             }
         } catch (err) {
