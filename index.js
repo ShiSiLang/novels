@@ -118,8 +118,6 @@ app.get("/data/:type/:other", async (req, res) => {
   }
   if (type === "latest") {
     let getSystem = await system.find({ id: "6427a45e2d7d901440fc43cf" });
-
-    console.log(getSystem);
     res.send(getSystem.latestChapters);
   }
   if (type === "books") {
@@ -206,8 +204,6 @@ app.get("/review/:type/:type2/:reviewID/:password", async (req, res) => {
       bookData.save();
 
       let getSystem = await system.find({ id: "6427a45e2d7d901440fc43cf" });
-
-      console.log(getSystem);
 
       if (getSystem.latestChapters.length >= 25) latestChapters.pop();
       getSystem.latestChapters.push(data.cName);
@@ -437,7 +433,7 @@ app.post("/publish-book", async (req, res) => {
 
 app.post("/publish-chapter", async (req, res) => {
   let html = req.body.data;
-  console.log(html)
+  //console.log(html)
 
   let data = await profileShema.findOne({
     password: html.psw,
