@@ -598,14 +598,17 @@
   </script>
 
   <script>
-    var ddl = document.getElementById("ebooks");
-    var selectedValue = ddl.options[ddl.selectedIndex].value;
+    updateEdit()
+    async function updateEdit() {
+      var ddl = document.getElementById("ebooks");
+      var selectedValue = ddl.options[ddl.selectedIndex].value;
 
-    let response = await fetch(`https://novels-production.up.railway.app/data/profileBooks/${selectedValue}`);
-    let json = await response.json();
-    console.log(json)
-    if (selectedValue) {
-      alert("This is a test.");
+      let response = await fetch(`https://novels-production.up.railway.app/data/profileBooks/${selectedValue}`);
+      let json = await response.json();
+      console.log(json)
+      if (selectedValue) {
+        alert("This is a test.");
+      }
     }
   </script>
 
