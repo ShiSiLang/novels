@@ -15,7 +15,8 @@ const bookSchema = mongoose.Schema({
   icon: String,
   author: String,
   chapters: Array,
-  followers: Array,// It will only store usernames
+  followers: Array, // It will only store usernames
+  views: Number,
   r1: Number, //  the key is the weight of that star level
   r2: Number,
   r3: Number,
