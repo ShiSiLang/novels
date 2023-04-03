@@ -384,8 +384,7 @@
                 <input type="password" placeholder="Enter Password Again" name="dp" required />
             </div>
             <div class="container">
-                <button id="submit" type="submit" class="submitbtn"
-                    onSubmit="document.getElementById('submit').disabled=true;">Sign Up</button>
+                <button id="submit" type="submit" class="submitbtn">Sign Up</button>
             </div>
         </form>
     </div>
@@ -417,6 +416,9 @@
 
         form.addEventListener("submit", async (e) => {
             e.preventDefault();
+            document.getElementById('submit').disabled = true;
+            document.getElementById('id01').disabled = true;
+
             const formData = new FormData(form);
 
             const response = await fetch("/sign-up", {

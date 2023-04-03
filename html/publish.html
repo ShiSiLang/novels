@@ -433,6 +433,10 @@
     <button id="pcb" class="publishButtons" onclick="document.getElementById('pcmodal').style.display='block'">Publish
       Chapter</button>
   </div>
+  <div class="flex">
+    <button id="ec" class="publishButtons" onclick="document.getElementById('ecmodal').style.display='block'">Edit
+      Chapter</button>
+  </div>
 
   <div id="error" class="alert">
     <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
@@ -502,6 +506,41 @@
     </form>
   </div>
 
+  <div id="ecmodal" class="modal">
+    <form class="modal-content animate" id="ecForm" action="/publish-chapter" method="post">
+      <div class="container">
+        <input id="inputusername2" type="hidden" name="uname" value="NOTHING" />
+        <input id="inputpass2" type="hidden" name="psw" value="NOTHING" />
+
+        <label for="name"><b>Book Name</b></label>
+        <select name="name" id="books" form="ecForm" required></select>
+
+        <label for="cname"><b>Chapter Name</b></label>
+        <select name="name" id="chapters" form="ecForm" required></select>
+
+        <label for="intro"><b>Chapter Intro</b></label>
+        <textarea rows="3" cols="50" name="intro" form="ecForm" required></textarea>
+
+        <label for="credits"><b>Chapter Credits</b></label>
+        <textarea rows="3" cols="50" name="credits" form="ecForm" required></textarea>
+
+        <label for="thumbnail"><b>Chapter Thumbnail</b></label>
+        <input type="text" placeholder="Edit Chapter Thumbnail" name="thumbnail" autocomplete="off" required />
+
+        <input id="type" type="hidden" name="type" value="novel" />
+
+        <label for="content"><b>Chapter Content</b></label>
+        <textarea rows="15" cols="100" name="content" form="ecForm" required></textarea>
+        <p>For italicized text use *text* for bold use **text**</p>
+      </div>
+      <div class="container">
+        <button type="submit" onclick="document.getElementById('ecmodal').style.display='none'" class="submitbtn">
+          Edit Chapter
+        </button>
+      </div>
+    </form>
+  </div>
+
   <script>
     if (typeof Storage !== "undefined") {
       if (localStorage.loginUser) {
@@ -509,20 +548,25 @@
         if (data.author === true) {
           document.getElementById("inputusername").value = data.username;
           document.getElementById("inputpass").value = data.password;
+          document.getElementById("inputusername2").value = data.username;
+          document.getElementById("inputpass2").value = data.password;
           document.getElementById("iusername").value = data.username;
           document.getElementById("ipass").value = data.password;
         }
         if (data.author === false) {
           document.getElementById("pbb").style.display = "none";
           document.getElementById("pcb").style.display = "none";
+          document.getElementById("ecb").style.display = "none";
         }
       } else {
         document.getElementById("pbb").style.display = "none";
         document.getElementById("pcb").style.display = "none";
+        document.getElementById("ecb").style.display = "none";
       }
     } else {
       document.getElementById("pbb").style.display = "none";
       document.getElementById("pcb").style.display = "none";
+      document.getElementById("ecb").style.display = "none";
     }
   </script>
 
