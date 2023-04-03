@@ -512,11 +512,11 @@
         <input id="inputusername2" type="hidden" name="uname" value="NOTHING" />
         <input id="inputpass2" type="hidden" name="psw" value="NOTHING" />
 
-        <label for="name"><b>Book Name</b></label>
-        <select name="name" id="books" form="ecForm" required></select>
+        <label for="ebooks"><b>Book Name</b></label>
+        <select name="ebooks" id="ebooks" form="ecForm" required></select>
 
-        <label for="cname"><b>Chapter Name</b></label>
-        <select name="name" id="chapters" form="ecForm" required></select>
+        <label for="echapters"><b>Chapter Name</b></label>
+        <select name="echapters" id="echapters" form="ecForm" required></select>
 
         <label for="intro"><b>Chapter Intro</b></label>
         <textarea rows="3" cols="50" name="intro" form="ecForm" required></textarea>
@@ -570,6 +570,14 @@
     }
   </script>
 
+  <script>
+    var card = document.getElementByName("ebooks")[0].value;
+    if (card.value == selectcard) {
+      alert("Please select a card type");
+    }
+
+  </script>
+
   <footer>
     <div class="footer-content">
       <h3>Copyright © 2023 LonelyBall Media</h3>
@@ -608,10 +616,12 @@
         });
 
         var selectBox = document.getElementById('books');
+        var selectBox2 = document.getElementById('ebooks');
 
         for (var i = 0, l = options.length; i < l; i++) {
           var option = options[i];
           selectBox.options.add(new Option(option.text, option.value, option.selected));
+          selectBox2.options.add(new Option(option.text, option.value, option.selected));
         }
       } catch (err) { console.log(err) }
     }
