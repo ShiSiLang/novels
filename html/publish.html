@@ -571,36 +571,6 @@
   </script>
 
   <script>
-    var card = document.getElementByName("ebooks")[0].value;
-    if (card.value == selectcard) {
-      alert("Please select a card type");
-    }
-
-  </script>
-
-  <footer>
-    <div class="footer-content">
-      <h3>Copyright © 2023 LonelyBall Media</h3>
-      <div class="socials">
-        <a href="https://discord.gg/j3YamACwPu"><i class="fa fa-discord"></i></a>
-        <a href="https://twitter.com/LoneOrangeBall"><i class="fa fa-twitter"></i></a>
-      </div>
-    </div>
-  </footer>
-
-  <script>
-    const modal = document.getElementById("pbmodal");
-    const modal2 = document.getElementById("pcmodal");
-    window.onclick = function (event) {
-      if (event.target === modal) {
-        modal.style.display = "none";
-      } else if (event.target === modal2) {
-        modal2.style.display = "none";
-      }
-    };
-  </script>
-
-  <script>
     updateSelect()
     async function updateSelect() {
       try {
@@ -625,6 +595,40 @@
         }
       } catch (err) { console.log(err) }
     }
+  </script>
+
+  <script>
+    var ddl = document.getElementById("ebooks");
+    var selectedValue = ddl.options[ddl.selectedIndex].value;
+
+    let response = await fetch(`https://novels-production.up.railway.app/data/profileBooks/${selectedValue}`);
+    let json = await response.json();
+    console.log(json)
+    if (selectedValue) {
+      alert("This is a test.");
+    }
+  </script>
+
+  <footer>
+    <div class="footer-content">
+      <h3>Copyright © 2023 LonelyBall Media</h3>
+      <div class="socials">
+        <a href="https://discord.gg/j3YamACwPu"><i class="fa fa-discord"></i></a>
+        <a href="https://twitter.com/LoneOrangeBall"><i class="fa fa-twitter"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const modal = document.getElementById("pbmodal");
+    const modal2 = document.getElementById("pcmodal");
+    window.onclick = function (event) {
+      if (event.target === modal) {
+        modal.style.display = "none";
+      } else if (event.target === modal2) {
+        modal2.style.display = "none";
+      }
+    };
   </script>
 
   <script>
