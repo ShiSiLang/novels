@@ -598,18 +598,21 @@
     }
 
     async function updateEdit() {
-      var ddl = document.getElementById("ebooks");
-      console.log(ddl.options)
-      var selectedValue = ddl.options[ddl.selectedIndex].value;
-      console.log(ddl.options)
+      let ddl = document.querySelector("ebooks")
 
-      let response = await fetch(`https://novels-production.up.railway.app/data/profileBooks/${selectedValue}`);
-      let json = await response.json();
-      console.log(json)
-      if (selectedValue) {
-        alert("This is a test.");
+      console.log(ddl)
+
+      ddl.addEventListener("change", e => {
+        console.log(e.target.value)
+        let response = await fetch(`https://novels-production.up.railway.app/data/profileBooks/${e.target.value}`);
+        let json = await response.json();
+        console.log(json)
+        if (json) {
+          alert("This is a test.");
+        }
       }
-    }
+      });
+    }    
   </script>
 
   <footer>
