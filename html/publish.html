@@ -598,20 +598,27 @@
   </script>
 
   <script>
-    let ddl = document.getElementById("ebooks").options
-    console.log(document.getElementById("ebooks").value)
-    console.log(ddl);
-    /*
-        ddl.addEventListener("change", async (e) => {
-          console.log(e.target.value)
-          let response = await fetch(`https://novels-production.up.railway.app/data/profileBooks/${e.target.value}`);
+
+var select = document.getElementById("ebooks");
+
+select.addEventListener("change", async function() {
+  if (select.selectedIndex !== -1) {
+    // An option has been selected
+    var selectedOption = select.options[select.selectedIndex];
+    console.log("Selected option:", selectedOption.value);
+
+let response = await fetch(`https://novels-production.up.railway.app/data/profileBooks/${selectedOption.value}`);
           let json = await response.json();
           console.log(json)
           if (json) {
             alert("This is a test.");
           }
         });
-        */
+  } else {
+    // No option has been selected
+    console.log("Please select an option");
+  }
+});
   </script>
 
   <footer>
