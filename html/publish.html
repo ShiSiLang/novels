@@ -572,6 +572,7 @@
 
   <script>
     updateSelect()
+    updateEdit()
     async function updateSelect() {
       try {
         let data = JSON.parse(localStorage.loginUser);
@@ -595,10 +596,7 @@
         }
       } catch (err) { console.log(err) }
     }
-  </script>
 
-  <script>
-    updateEdit()
     async function updateEdit() {
       var ddl = document.getElementById("ebooks");
       console.log(ddl.options)
