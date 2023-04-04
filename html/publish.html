@@ -598,20 +598,20 @@
   </script>
 
   <script>
-    let ddl = document.getElementById("ebooks").value
-
+    let ddl = document.getElementById("ebooks").options
+    console.log(document.getElementById("ebooks").value)
     console.log(ddl);
-/*
-    ddl.addEventListener("change", async (e) => {
-      console.log(e.target.value)
-      let response = await fetch(`https://novels-production.up.railway.app/data/profileBooks/${e.target.value}`);
-      let json = await response.json();
-      console.log(json)
-      if (json) {
-        alert("This is a test.");
-      }
-    });
-    */
+    /*
+        ddl.addEventListener("change", async (e) => {
+          console.log(e.target.value)
+          let response = await fetch(`https://novels-production.up.railway.app/data/profileBooks/${e.target.value}`);
+          let json = await response.json();
+          console.log(json)
+          if (json) {
+            alert("This is a test.");
+          }
+        });
+        */
   </script>
 
   <footer>
