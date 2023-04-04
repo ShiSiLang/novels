@@ -56,7 +56,7 @@ app.get("/explore/:bookName", async (req, res) => {
   file = file.replaceAll("$$desc$$", book.description);
   file = file.replaceAll("$$author$$", book.author);
   file = file.replaceAll("$$icon$$", book.icon);
-  file = file.replaceAll("$$views$$", book?.views || 0);
+  file = file.replaceAll("$$Views$$", book?.views || 0);
   file = file.replaceAll(
     "$$novel$$",
     `'https://novels-production.up.railway.app/data/book/${book.name}'`
