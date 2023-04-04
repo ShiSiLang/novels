@@ -602,6 +602,7 @@
     async function updateEdit() {
       var ddl = document.getElementById("ebooks");
       var selectedValue = ddl.options[ddl.selectedIndex].value;
+      console.log(ddl.options)
 
       let response = await fetch(`https://novels-production.up.railway.app/data/profileBooks/${selectedValue}`);
       let json = await response.json();
