@@ -153,16 +153,7 @@
         color: #ffcc99;
     }
 
-    .text {
-        padding-bottom: 25px;
-    }
 
-    .text h1,
-    h2,
-    p {
-        text-align: center;
-        color: #FFFFFF;
-    }
 
     /*Buttons*/
 
@@ -188,139 +179,97 @@
         transition: 1s;
     }
 
+    button:disabled {
+        cursor: not-allowed;
+        pointer-events: all !important;
+    }
+
+    .signupbtn {
+        cursor: pointer;
+        padding: 14px 20px;
+        background-color: #967bb6;
+        color: white;
+        float: left;
+        width: 100%;
+    }
+
     /*Buttons End*/
 
-    /*Modal*/
+    /* modal*/
+    * {
+        box-sizing: border-box
+    }
 
-    .submitbtn {
-        width: auto;
-        background-color: #967bb6;
-        padding: 14px 20px;
-        margin: 8px 0;
-        cursor: pointer;
+    /* Full-width input fields */
+
+    label {
+        color: white
+    }
+
+    input[type=file] {
         width: 100%;
-        color: white;
+        padding: 15px;
+        margin: 5px 0 22px 0;
     }
 
-    .container {
-        padding: 16px;
-        background-color: #967bb6;
-        border-radius: 16px;
-    }
-
-    .container label {
-        color: #ffcc99;
-    }
-
-    .container file {
+    input[type=text],
+    input[type=password] {
         width: 100%;
-        padding: 12px 20px;
-        margin: 8px 0;
+        padding: 15px;
+        margin: 5px 0 22px 0;
         display: inline-block;
-        box-sizing: border-box;
-        background: transparent;
         border: none;
-        outline: none;
+        background: transparent;
     }
 
-
-    .container input {
-        width: 100%;
-        padding: 12px 20px;
-        margin: 8px 0;
-        display: inline-block;
-        box-sizing: border-box;
-        background: transparent;
-        border: none;
-        color: #ffcc99;
-        outline: none;
-    }
-
-    .container input:focus {
+    input[type=text]:focus,
+    input[type=password]:focus {
         border: 3px solid #5c4981;
         border-radius: 16px;
-        color: #ffcc99;
-    }
-
-
-    .autocomplete {
-        /*the container must be positioned relative:*/
-        position: relative;
-        display: inline-block;
-    }
-
-    .autocomplete-items {
-        position: absolute;
-        border: 1px solid #ffcc99;
-        border-bottom: none;
-        border-top: none;
-        z-index: 99;
-        top: 100%;
-        left: 0;
-        right: 0;
+        color: black;
+        outline: none;
     }
 
     ::placeholder {
-        color: #ffcc99;
+        color: black;
     }
 
-    .modal {
-        z-index: 1;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        overflow: auto;
-        padding-top: 60px;
+    hr {
+        border: 1px solid #f1f1f1;
+        margin-bottom: 25px;
     }
 
-    .modal-content {
-        color: white;
-        margin: 5% auto 15% auto;
-        border-radius: 16px;
-        box-shadow: 0px 0px 10px #967bb6;
+    /* Add padding to container elements */
+    .container {
         background-color: #967bb6;
-        border: 3px solid #5c4981;
-        width: 80%;
+        border-radius: 16px;
+        padding: 16px;
+        margin: 20px;
     }
 
-    .animate {
-        -webkit-animation: animatezoom 0.6s;
-        animation: animatezoom 0.6s
+    .container h1,
+    p {
+        color: white
     }
 
-    @-webkit-keyframes animatezoom {
-        from {
-            -webkit-transform: scale(0)
-        }
 
-        to {
-            -webkit-transform: scale(1)
-        }
+    /* Clear floats */
+    .clearfix::after {
+        content: "";
+        clear: both;
+        display: table;
     }
 
-    @keyframes animatezoom {
-        from {
-            transform: scale(0)
-        }
-
-        to {
-            transform: scale(1)
-        }
-    }
-
+    /* Change styles for cancel button and signup button on extra small screens */
     @media screen and (max-width: 300px) {
-        span.psw {
-            display: block;
-            float: none;
-        }
 
-        .submitbtn {
+        .cancelbtn,
+        .signupbtn {
             width: 100%;
         }
     }
 
-    /*Modal End*/
+    /*new modal end*/
 
     .alert {
         padding: 20px;
@@ -366,28 +315,29 @@
         <img src="https://i.imgur.com/XjWCCeV.png" alt="LonelyBall Media" />
     </div>
 
-    <div class="text">
-        <h1>Sign-Up</h1>
-    </div>
+    <form id="FormSignUp" action="/sign-up" method="post" enctype="multipart/form-data">
+        <div class="container">
+            <h1>Sign Up</h1>
+            <p>Please fill in this form to create an account.</p>
+            <hr>
 
-    <div id="id01" class="modal">
-        <form class="modal-content animate" id="FormSignUp" action="/sign-up" method="post"
-            enctype="multipart/form-data">
-            <div class="container">
-                <label for="icon"><b>Avatar</b></label>
-                <input type="file" id="icon" name="icon" accept=".jpg, .jpeg, .png" required />
-                <label for="uname"><b>Username</b></label>
-                <input type="text" placeholder="Enter Username" name="uname" autocomplete="off" required />
-                <label for="psw"><b>Password</b></label>
-                <input type="password" placeholder="Enter Password" name="psw" required />
-                <label for="dp"><b>Password</b></label>
-                <input type="password" placeholder="Enter Password Again" name="dp" required />
+            <label for="icon"><b>Avatar</b></label>
+            <input type="file" id="icon" name="icon" accept=".jpg, .jpeg, .png" required />
+
+            <label for="uname"><b>Username</b></label>
+            <input type="text" placeholder="Enter Username" name="uname" autocomplete="off" required />
+            <label for="psw"><b>Password</b></label>
+            <input type="password" placeholder="Enter Password" name="psw" required />
+            <label for="dp"><b>Repeat Password</b></label>
+            <input type="password" placeholder="Repeat Password" name="dp" required />
+
+            <p>By creating an account you agree to our <a href="#" style="color:white">Terms of Service</a>.</p>
+
+            <div class="clearfix">
+                <button id="signupbtn" type="submit" class="signupbtn">Sign Up</button>
             </div>
-            <div class="container">
-                <button id="submit" type="submit" class="submitbtn">Sign Up</button>
-            </div>
-        </form>
-    </div>
+        </div>
+    </form>
 
     <div id="error" class="alert">
         <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
@@ -416,8 +366,8 @@
 
         form.addEventListener("submit", async (e) => {
             e.preventDefault();
-            document.getElementById('submit').disabled = true;
-            document.getElementById('id01').disabled = true;
+            document.getElementById('signupbtn').disabled = true;
+            form.disabled = true;
 
             const formData = new FormData(form);
 
