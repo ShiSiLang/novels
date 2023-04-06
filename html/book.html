@@ -250,33 +250,8 @@
     margin-top: 10px;
     display: flex;
     align-items: center;
-    background: none;
-    border: none;
-    color: #333;
     font-size: 16px;
     cursor: pointer;
-  }
-
-  .favorite-button:focus {
-    outline: none;
-  }
-
-  .heart-empty {
-    margin-right: 5px;
-  }
-
-  .heart-full {
-    display: none;
-    margin-right: 5px;
-    color: red;
-  }
-
-  .favorite-button.active .heart-empty {
-    display: none;
-  }
-
-  .favorite-button.active .heart-full {
-    display: inline-block;
   }
 
   .favtext {
@@ -442,8 +417,8 @@
   </div>
 
   <button class="favorite-button">
-    <span class="heart-full">❤️</span>
-    <span class="favtext">Add to favorites</span>
+    <span class="glyphicon">&#xe143;</span>
+    <p class="favtext">Add to favorites</p>
   </button>
 
   <button class="favorite-button">
