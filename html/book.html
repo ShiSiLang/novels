@@ -183,19 +183,25 @@
 
 
   .text-inline {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
     text-align: left;
     color: #fff;
+    margin-left: 10px;
   }
 
   .fieldName {
-    font-size: 24px;
+    text-decoration: underline;
+    font-size: 40px;
     font-weight: bold;
     margin-bottom: 10px;
   }
 
   .fieldValue {
     font-size: 18px;
-    margin-bottom: 20px;
+    margin-bottom: 35px;
+    margin-left: -1200px;
   }
 
   .rounded-box {
@@ -439,7 +445,7 @@
       <p class="description">$$desc$$</p>
     </div>
     <div class="text-inline">
-      <p class="fieldName">Author</p>
+      <h1 class="fieldName">Author</h1>
       <p class="fieldValue">$$author$$</p>
     </div>
   </div>
