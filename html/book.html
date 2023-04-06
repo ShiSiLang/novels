@@ -187,7 +187,6 @@
   width: 100%;
 }
 
-
 .content {
   display: flex;
   justify-content: space-between;
@@ -209,7 +208,7 @@ color: black;
 
 .author {
   font-weight: bold;
-  text-align: right;
+  text-align: left;
 color: white;
 }
 
@@ -250,6 +249,43 @@ color: white;
     background-color: #5c4981;
     transition: 1s;
   }
+
+.favorite-button {
+  display: flex;
+  align-items: center;
+  background: none;
+  border: none;
+  color: #333;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.favorite-button:focus {
+  outline: none;
+}
+
+.heart-empty {
+  margin-right: 5px;
+}
+
+.heart-full {
+  display: none;
+  margin-right: 5px;
+  color: red;
+}
+
+.favorite-button.active .heart-empty {
+  display: none;
+}
+
+.favorite-button.active .heart-full {
+  display: inline-block;
+}
+
+.favtext {
+  margin-left: 5px;
+}
+
 
 
   * {
@@ -421,6 +457,11 @@ color: white;
   </div>
 </div>
 
+<button class="favorite-button">
+  <span class="heart-empty">❤️</span>
+  <span class="heart-full">❤️</span>
+  <span class="text">Add to favorites</span>
+</button>
 
   <button class="flex" id="fb">Follow Book</button>
 
