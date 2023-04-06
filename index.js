@@ -52,11 +52,26 @@ app.get("/explore/:bookName", async (req, res) => {
   let file = fs.readFileSync("./html/book.html", {
     encoding: "utf8",
   });
+
+  if (!book?.views) {
+    let date = new Date();
+    let newdate =
+      date.getMonth() + 1 + "/" + date.getDate() + "/" + date.getFullYear();
+    book.views = 0;
+    book.updated = newdate;
+    book.published = newdate;
+    book.status = "Ongoing";
+    await book.save();
+  }
   file = file.replaceAll("$$name$$", book.name);
   file = file.replaceAll("$$desc$$", book.description);
   file = file.replaceAll("$$author$$", book.author);
   file = file.replaceAll("$$icon$$", book.icon);
-  file = file.replaceAll("$$Views$$", book?.views || 0);
+  file = file.replaceAll("$$views$$", book.views);
+  file = file.replaceAll("$$status$$", book.status);
+  file = file.replaceAll("$$favorites$$", book.followers.length);
+  file = file.replaceAll("$$published$$", book.published);
+  file = file.replaceAll("$$updated$$", book.updated);
   file = file.replaceAll(
     "$$novel$$",
     `'https://novels-production.up.railway.app/data/book/${book.name}'`
@@ -92,6 +107,8 @@ app.get("/read/:bookName/:chapter", async (req, res) => {
     "$$thumbnail$$",
     book.icon || "https://i.imgur.com/lGLKiVd.png"
   );
+  book.views += 1;
+  await book.save();
   res.send(file);
 });
 
@@ -125,13 +142,6 @@ app.get("/data/:type/:other", async (req, res) => {
       return res.status(400).json({ error: `Please provide a book name` });
     let book = await bookShema.findOne({ name: bookName });
     if (!book) return res.status(400).json({ error: `Not Found` });
-
-    /*
-    rating
-    const total = (book.r1 + book.r2 + book.r3 + book.r4 + book.r5)
-    const WA = ((1 * book.r1) + (2 * book.r2) + (3 * book.r3) + (5 * book.r5))/(total)
-    console.log(Math.round(WA)) // 2
-    */
 
     for (i = 0; i < book.chapters.length; i++) {
       for (i2 = 0; i2 < book.chapters[i].comments.length; i2++) {
@@ -167,11 +177,18 @@ app.get("/review/:type/:type2/:reviewID/:password", async (req, res) => {
 
     let bookData;
     if (type2 === "book") {
+      let date = new Date();
+      let newdate =
+        date.getMonth() + 1 + "/" + date.getDate() + "/" + date.getFullYear();
+
       let newBook = new bookShema({
         name: data.bookName,
         author: data.bookAuthor,
         description: data.bookDescription,
         icon: data.bookIcon,
+        updated: newdate,
+        published: newdate,
+        status: "Ongoing",
       }).save();
 
       bookData = await newBook;

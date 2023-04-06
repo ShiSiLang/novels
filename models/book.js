@@ -16,6 +16,9 @@ const bookSchema = mongoose.Schema({
   author: String,
   chapters: Array,
   followers: Array, // It will only store usernames
+  updated: String,
+  status: String,
+  published: String,
   views: { type: Number, default: 0 },
 });
 

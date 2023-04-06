@@ -447,13 +447,27 @@
     <div class="text-inline">
       <h1 class="fieldName">Author</h1>
       <p class="fieldValue">$$author$$</p>
+      <h1 class="fieldName">Published</h1>
+      <p class="fieldValue">$$published$$</p>
+      <h1 class="fieldName">Updated</h1>
+      <p class="fieldValue">$$updated$$</p>
     </div>
+    <button class="favorite-button" id="fb">
+      <span>❤️</span>
+      <span class="favtext">Add to favorites</span>
+    </button>
   </div>
 
-  <button class="favorite-button" id="fb">
-    <span class="heart-empty">❤️</span>
-    <span class="favtext">Add to favorites</span>
-  </button>
+  <script>
+    let favoriteButton = document.getElementById("fb");
+    let bookData = JSON.parse(localStorage.loginUser);
+    let response = await fetch($$novel$$);
+    let json = await response.json();
+    if (json.followers.includes(bookData.username)) {
+      favoriteButton.innerHTML = `<span>❤️</span>
+    <span class="favtext">Remove from favorites</span>`
+    }
+  </script>
 
   <div id="error" class="alert">
     <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
