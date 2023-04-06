@@ -152,63 +152,62 @@
     color: #ffcc99;
   }
 
+  .container {
+    /*display: flex;*/
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #000;
+  }
 
-.container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background-color: #000;
-}
+  .text-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #fff;
+    margin-right: 20px;
+  }
 
-.text-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  color: #fff;
-  margin-right: 20px;
-}
+  .title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
 
-.title {
-  font-size: 24px;
-  font-weight: bold;
-  margin-bottom: 10px;
-}
+  .description {
+    font-size: 18px;
+    margin-bottom: 20px;
+  }
 
-.description {
-  font-size: 18px;
-  margin-bottom: 20px;
-}
+  .rounded-box {
+    border-radius: 10px;
+    padding: 10px;
+    background-color: #f8f8f8;
+    width: 80%;
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 10px;
+  }
 
-.rounded-box {
-  border-radius: 10px;
-  padding: 10px;
-  background-color: #f8f8f8;
-  width: 80%;
-  max-width: 600px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  margin: 10px;
-}
+  .content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
 
-.content {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-}
+  .left-text {
+    font-weight: bold;
+  }
 
-.left-text {
-  font-weight: bold;
-}
-
-.right-text {
-  text-align: right;
-  font-weight: bold;
-}
+  .right-text {
+    text-align: right;
+    font-weight: bold;
+  }
 
 
   .text {
@@ -249,41 +248,41 @@
     transition: 1s;
   }
 
-.favorite-button {
-  display: flex;
-  align-items: center;
-  background: none;
-  border: none;
-  color: #333;
-  font-size: 16px;
-  cursor: pointer;
-}
+  .favorite-button {
+    display: flex;
+    align-items: center;
+    background: none;
+    border: none;
+    color: #333;
+    font-size: 16px;
+    cursor: pointer;
+  }
 
-.favorite-button:focus {
-  outline: none;
-}
+  .favorite-button:focus {
+    outline: none;
+  }
 
-.heart-empty {
-  margin-right: 5px;
-}
+  .heart-empty {
+    margin-right: 5px;
+  }
 
-.heart-full {
-  display: none;
-  margin-right: 5px;
-  color: red;
-}
+  .heart-full {
+    display: none;
+    margin-right: 5px;
+    color: red;
+  }
 
-.favorite-button.active .heart-empty {
-  display: none;
-}
+  .favorite-button.active .heart-empty {
+    display: none;
+  }
 
-.favorite-button.active .heart-full {
-  display: inline-block;
-}
+  .favorite-button.active .heart-full {
+    display: inline-block;
+  }
 
-.favtext {
-  margin-left: 5px;
-}
+  .favtext {
+    margin-left: 5px;
+  }
 
 
 
@@ -425,7 +424,7 @@
     style="max-width: 100%; height: 500px; background-image: url('$$icon$$'); background-size: contain; background-position: center;">
   </div>
 
-<!--<div class="rounded-box">
+  <!--<div class="rounded-box">
   <div class="content">
     <div class="left-text">Views</div>
     <div class="right-text">$$Views$$</div>
@@ -444,25 +443,25 @@
     <h3>Author: $$author$$</h3>
   </div>-->
 
-<div class="container">
-  <div class="text-container">
-    <h2 class="title">$$name$$</h2>
-    <p class="description">$$desc$$</p>
-<p class="description">$$author$$</p>
-  </div>
-  <div class="rounded-box">
-    <div class="content">
-      <p class="left-text">Left Text</p>
-      <p class="right-text">Right Text</p>
+  <div class="container">
+    <div class="text-container">
+      <h2 class="title">$$name$$</h2>
+      <p class="description">$$desc$$</p>
+      <p class="description">$$author$$</p>
+    </div>
+    <div class="rounded-box">
+      <div class="content">
+        <p class="left-text">Left Text</p>
+        <p class="right-text">Right Text</p>
+      </div>
     </div>
   </div>
-</div>
 
-<button class="favorite-button">
-  <span class="heart-empty">❤️</span>
-  <span class="heart-full">❤️</span>
-  <span class="favtext">Add to favorites</span>
-</button>
+  <button class="favorite-button">
+    <span class="heart-empty">❤️</span>
+    <span class="heart-full">❤️</span>
+    <span class="favtext">Add to favorites</span>
+  </button>
 
   <button class="flex" id="fb">Follow Book</button>
 
