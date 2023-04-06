@@ -292,11 +292,15 @@
             let json = await response.json()
             const imageGrid = document.getElementById("image-grid");
 
-            for (i = 0; i < json.length; i++) {
+            let sorted = json.sort(function (a, b) {
+                return parseFloat(a.views) - parseFloat(b.views);
+            });
+
+            for (i = 0; i < sorted.length; i++) {
                 if (i === 0) {
-                    imageGrid.innerHTML = ` <a class="image-grid-col-2 image-grid-row-2" href="/explore/${json[0].name.replace(/\s/g, "")}"><img src="${json[0].icon}" alt="${json[0].name}" /></a>`
+                    imageGrid.innerHTML = ` <a class="image-grid-col-2 image-grid-row-2" href="/explore/${sorted[0].name.replace(/\s/g, "")}"><img src="${sorted[0].icon}" alt="${sorted[0].name}" /></a>`
                 } else {
-                    imageGrid.innerHTML += `<a href="/explore/${json[i].name.replace(/\s/g, "")}"><img src="${json[i].icon}" alt="${json[i].name}" /></a>`
+                    imageGrid.innerHTML += `<a href="/explore/${sorted[i].name.replace(/\s/g, "")}"><img src="${sorted[i].icon}" alt="${sorted[i].name}" /></a>`
                 }
             }
         } catch (err) {
