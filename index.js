@@ -66,8 +66,8 @@ app.get("/explore/:bookName", async (req, res) => {
   file = file.replaceAll("$$views$$", book.views);
   file = file.replaceAll("$$status$$", book.status);
   file = file.replaceAll("$$favorites$$", book.followers.length);
-  file = file.replaceAll("$$published$$", book.published);
-  file = file.replaceAll("$$updated$$", book.updated);
+  file = file.replaceAll("$$published$$", getTimeDifference(book.published));
+  file = file.replaceAll("$$updated$$", getTimeDifference(book.updated));
   file = file.replaceAll(
     "$$novel$$",
     `'https://novels-production.up.railway.app/data/book/${book.name}'`
@@ -174,16 +174,14 @@ app.get("/review/:type/:type2/:reviewID/:password", async (req, res) => {
     let bookData;
     if (type2 === "book") {
       let date = new Date();
-      let newdate =
-        date.getMonth() + 1 + "/" + date.getDate() + "/" + date.getFullYear();
-
+     
       let newBook = new bookShema({
         name: data.bookName,
         author: data.bookAuthor,
         description: data.bookDescription,
         icon: data.bookIcon,
-        updated: newdate,
-        published: newdate,
+        updated: date,
+        published: date,
         status: "Ongoing",
       }).save();
 
@@ -208,6 +206,8 @@ app.get("/review/:type/:type2/:reviewID/:password", async (req, res) => {
         content: data.bookDescription,
         comments: [],
       });
+
+      bookData.updated = new Date();
 
       bookData.save();
 
@@ -695,4 +695,31 @@ process.on("multipleResolves", (type, promise, reason) => {
 
 function trim(str, max) {
   return str.length > max ? `${str.slice(0, max - 3)}...` : str;
+}
+
+
+function getTimeDifference(timestamp) {
+  const seconds = Math.floor((new Date() - new Date(timestamp)) / 1000);
+  
+  let interval = Math.floor(seconds / 31536000);
+  if (interval >= 1) {
+    return interval + " year" + (interval == 1 ? "" : "s") + " ago";
+  }
+  interval = Math.floor(seconds / 2592000);
+  if (interval >= 1) {
+    return interval + " month" + (interval == 1 ? "" : "s") + " ago";
+  }
+  interval = Math.floor(seconds / 86400);
+  if (interval >= 1) {
+    return interval + " day" + (interval == 1 ? "" : "s") + " ago";
+  }
+  interval = Math.floor(seconds / 3600);
+  if (interval >= 1) {
+    return interval + " hour" + (interval == 1 ? "" : "s") + " ago";
+  }
+  interval = Math.floor(seconds / 60);
+  if (interval >= 1) {
+    return interval + " minute" + (interval == 1 ? "" : "s") + " ago";
+  }
+  return "just now";
 }
