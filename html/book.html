@@ -155,8 +155,9 @@
   .container {
     justify-content: center;
     align-items: center;
-    height: 105%;
+    height: 100%;
     background-color: #967bb6;
+    padding: 5px;
   }
 
   .text-container {
@@ -176,6 +177,23 @@
   }
 
   .description {
+    font-size: 18px;
+    margin-bottom: 20px;
+  }
+
+
+  .text-inline {
+    text-align: left;
+    color: #fff;
+  }
+
+  .fieldName {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+
+  .fieldValue {
     font-size: 18px;
     margin-bottom: 20px;
   }
@@ -249,9 +267,9 @@
   .favorite-button {
     padding: 10px 24px;
     margin-top: 10px;
+    margin-bottom: 10px;
     display: flex;
     align-items: center;
-    font-size: 16px;
     cursor: pointer;
   }
 
@@ -398,15 +416,10 @@
   </div>
 
   <div class="container">
-    <div class="text-container">
-      <h2 class="title">$$name$$</h2>
-      <p class="description">$$desc$$</p>
-      <p class="description">$$author$$</p>
-    </div>
     <div class="rounded-box">
       <div class="content">
         <p class="left-text">Views</p>
-        <p class="right-text">$$Views$$</p>
+        <p class="right-text">$$views$$</p>
       </div>
     </div>
     <div class="rounded-box">
@@ -415,19 +428,26 @@
         <p class="right-text">$$status$$</p>
       </div>
     </div>
+    <div class="rounded-box">
+      <div class="content">
+        <p class="left-text">Favorites</p>
+        <p class="right-text">$$favorites$$</p>
+      </div>
+    </div>
+    <div class="text-container">
+      <h2 class="title">$$name$$</h2>
+      <p class="description">$$desc$$</p>
+    </div>
+    <div class="text-inline">
+      <p class="fieldName">Author</p>
+      <p class="fieldValue">$$author$$</p>
+    </div>
   </div>
 
-  <button class="favorite-button">
-    <span class="glyphicon">&#xe143;</span>
-    <p class="favtext">Add to favorites</p>
-  </button>
-
-  <button class="favorite-button">
+  <button class="favorite-button" id="fb">
     <span class="heart-empty">❤️</span>
-    <span class="favtext">Other</span>
+    <span class="favtext">Add to favorites</span>
   </button>
-
-  <button class="flex" id="fb">Follow Book</button>
 
   <div id="error" class="alert">
     <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
