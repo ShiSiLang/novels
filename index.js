@@ -53,14 +53,10 @@ app.get("/explore/:bookName", async (req, res) => {
     encoding: "utf8",
   });
 
-  if (!book?.views) {
+  if (!book?.published) {
     let date = new Date();
-    let newdate =
-      date.getMonth() + 1 + "/" + date.getDate() + "/" + date.getFullYear();
-    book.views = 0;
-    book.updated = newdate;
-    book.published = newdate;
-    book.status = "Ongoing";
+    book.updated = date;
+    book.published = date;
     await book.save();
   }
   file = file.replaceAll("$$name$$", book.name);
