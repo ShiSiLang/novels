@@ -485,7 +485,7 @@
     let response = await fetch($$novel$$);
     let json = await response.json();
     if (json.followers.includes(bookData.username)) {
-      favoriteButton.innerHTML = `<span>❤️</span>
+      favoriteButton.innerHTML = `<span>💔</span>
     <span class="favtext">Remove from favorites</span>`
     }
   </script>
