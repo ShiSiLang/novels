@@ -152,10 +152,11 @@
     color: #ffcc99;
   }
 
-  .rounded-box {
+.rounded-box {
   border-radius: 10px;
   padding: 10px;
-  background-color: #f8f8f8;
+  background-color: #000;
+  color: #fff;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -167,7 +168,11 @@
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  margin: 10px;
+  margin: 10px 0;
+}
+
+.left-text {
+  font-weight: bold;
 }
 
 .right-text {
@@ -355,11 +360,11 @@
 
 <div class="rounded-box">
   <div class="content">
-    <div>Views</div>
+    <div class="left-text">Views</div>
     <div class="right-text">$$Views$$</div>
   </div>
 <div class="content">
-    <div>Status</div>
+    <div class="left-text">Status</div>
     <div class="right-text">$$status$$</div>
   </div>
 </div>
