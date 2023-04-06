@@ -241,124 +241,125 @@
   }
 
   /*Modal*/
-  .submitbtn {
-    width: auto;
-    background-color: #967bb6;
-    padding: 14px 20px;
-    margin: 8px 0;
-    cursor: pointer;
-    width: 100%;
-    color: white;
-  }
-
-  .container {
-    padding: 16px;
-    background-color: #967bb6;
-    border-radius: 16px;
-  }
-
-  .container label {
-    color: #ffcc99;
-  }
-
-  .container input {
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
+  * {
     box-sizing: border-box;
-    background: transparent;
-    border: none;
-    color: #ffcc99;
-    outline: none;
   }
 
-  .container input:focus {
-    border: 3px solid #5c4981;
-    border-radius: 16px;
-    color: #ffcc99;
-  }
-
+  /* Full-width input fields */
   .container textarea {
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
     display: inline-block;
     box-sizing: border-box;
-    background: transparent;
+    background-color: #5c4981;
     border: none;
-    color: #ffcc99;
+    color: white;
     outline: none;
-  }
-
-  .container textarea:focus {
-    border: 3px solid #5c4981;
     border-radius: 16px;
-    color: #ffcc99;
   }
 
-  ::placeholder {
-    color: #ffcc99;
+  /* Extra styles for the cancel button */
+  .cancelbtn,
+  .signupbtn {
+    padding: 14px 20px;
   }
 
+  /* Float cancel and signup buttons and add an equal width */
+  .cancelbtn,
+  .signupbtn {
+    padding: 14px 20px;
+    margin: 8px 0;
+    cursor: pointer;
+    width: 100%;
+    opacity: 0.9;
+    float: left;
+    width: 50%;
+  }
+
+  .cancelbtn:hover,
+  .signupbtn:hover {
+    opacity: 1;
+  }
+
+  /* Add padding to container elements */
+  .container {
+    background-color: #967bb6;
+    padding: 16px;
+  }
+
+  .container h1,
+  p {
+    color: white
+  }
+
+  /* The Modal (background) */
   .modal {
     display: none;
+    /* Hidden by default */
     position: fixed;
+    /* Stay in place */
     z-index: 1;
+    /* Sit on top */
     left: 0;
     top: 0;
     width: 100%;
+    /* Full width */
     height: 100%;
+    /* Full height */
     overflow: auto;
-    padding-top: 60px;
+    /* Enable scroll if needed */
+    background-color: #ffcc99;
+    padding-top: 50px;
   }
 
+  /* Modal Content/Box */
   .modal-content {
-    color: white;
+    background-color: #fefefe;
     margin: 5% auto 15% auto;
-    border-radius: 16px;
-    box-shadow: 0px 0px 10px #967bb6;
-    background-color: #967bb6;
-    border: 3px solid #5c4981;
+    /* 5% from the top, 15% from the bottom and centered */
+    border: 1px solid #888;
     width: 80%;
+    /* Could be more or less, depending on screen size */
   }
 
-  .animate {
-    -webkit-animation: animatezoom 0.6s;
-    animation: animatezoom 0.6s
+  /* Style the horizontal ruler */
+  hr {
+    border: 1px solid #f1f1f1;
+    margin-bottom: 25px;
   }
 
-  @-webkit-keyframes animatezoom {
-    from {
-      -webkit-transform: scale(0)
-    }
-
-    to {
-      -webkit-transform: scale(1)
-    }
+  /* The Close Button (x) */
+  .close {
+    position: absolute;
+    right: 35px;
+    top: 15px;
+    font-size: 40px;
+    font-weight: bold;
+    color: #f1f1f1;
   }
 
-  @keyframes animatezoom {
-    from {
-      transform: scale(0)
-    }
-
-    to {
-      transform: scale(1)
-    }
+  .close:hover,
+  .close:focus {
+    color: #f44336;
+    cursor: pointer;
   }
 
+  /* Clear floats */
+  .clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+
+  /* Change styles for cancel button and signup button on extra small screens */
   @media screen and (max-width: 300px) {
-    span.psw {
-      display: block;
-      float: none;
-    }
 
-    .submitbtn {
+    .cancelbtn,
+    .signupbtn {
       width: 100%;
     }
   }
-
   /*Modal End*/
 
   /* The alert message box */
@@ -561,6 +562,7 @@
     });
   </script>
 
+
   <div id="error" class="alert">
     <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
     Error.
@@ -572,9 +574,13 @@
   </div>
 
   <div id="modal" class="modal">
-    <form class="modal-content animate" id="commentForm" method="post">
+    <span onclick="document.getElementById('modal').style.display='none'" class="close"
+      title="Close Modal">&times;</span>
+    <form class="modal-content" id="commentForm" method="post" action="/comment">
       <div class="container">
-
+        <h1>Comment</h1>
+        <p>Please follow the tos while commenting.</p>
+        <hr>
         <input id="inputusername" type="hidden" name="uname" value="NOTHING" />
         <input id="inputpass" type="hidden" name="psw" value="NOTHING" />
 
@@ -582,13 +588,13 @@
 
         <input type="hidden" name="chapter" value="$$chapter$$" />
 
-        <label for="comment"><b>Comment</b></label>
-        <textarea rows="3" cols="50" name="comment" form="commentForm" required></textarea>
-      </div>
+        <textarea rows="4" cols="50" name="comment" form="commentForm" required></textarea>
 
-      <div class="container">
-        <button type="submit" onclick="document.getElementById('modal').style.display='none'"
-          class="submitbtn">Comment</button>
+        <div class="clearfix">
+          <button type="button" onclick="document.getElementById('modal').style.display='none'"
+            class="cancelbtn">Cancel</button>
+          <button type="submit" class="signupbtn">Comment</button>
+        </div>
       </div>
     </form>
   </div>
