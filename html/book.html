@@ -486,7 +486,7 @@
       if (!data) {
         e.preventDefault();
         error.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-  Sign-In to follow!`;
+  Sign-In to favorite!`;
         error.style.display = "block";
       } else {
         const response = await fetch("/follow-book", {
