@@ -599,26 +599,39 @@
 
   <script>
 
-var select = document.getElementById("ebooks");
+    var select = document.getElementById("ebooks");
 
-select.addEventListener("change", async function() {
-  if (select.selectedIndex !== -1) {
-    // An option has been selected
-    var selectedOption = select.options[select.selectedIndex];
-    console.log("Selected option:", selectedOption.value);
+    select.addEventListener("change", async function () {
+      if (select.selectedIndex !== -1) {
+        // An option has been selected
+        var selectedOption = select.options[select.selectedIndex];
+        console.log("Selected option:", selectedOption.value);
 
-let response = await fetch(`https://novels-production.up.railway.app/data/profileBooks/${selectedOption.value}`);
-          let json = await response.json();
-          console.log(json)
-          if (json) {
-            alert("This is a test.");
+        let response = await fetch(`https://novels-production.up.railway.app/data/profileBooks/${selectedOption.value}`);
+        let json = await response.json();
+        console.log(json)
+        if (json) {
+          var options = json.chapters.map(v => {
+            return {
+              "text": v.name,
+              "value": v.name
+            }
+          });
+
+          var selectChaptersBox = document.getElementById('echapters');
+
+          for (var i = 0, l = options.length; i < l; i++) {
+            var option = options[i];
+            selectChaptersBox.options.add(new Option(option.text, option.value, option.selected));
           }
-        });
-  } else {
-    // No option has been selected
-    console.log("Please select an option");
-  }
-});
+
+          alert("This is a test.");
+        }
+      } else {
+        // No option has been selected
+        console.log("Please select an option");
+      }
+    });
   </script>
 
   <footer>
