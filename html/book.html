@@ -458,27 +458,6 @@
     </button>
   </div>
 
-  <div id="error" class="alert">
-    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-    Error.
-  </div>
-
-  <div id="success" class="alert success">
-    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-    <strong>Success!</strong> Yay.
-  </div>
-
-  <script>
-    document.getElementById("fb").addEventListener("click", async (e) => {
-      if (!localStorage.loginUser) {
-        e.preventDefault();
-        error.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-  Sign-In to favorite!`;
-        error.style.display = "block";
-      }
-    });
-  </script>
-
   <script>
     let favoriteButton = document.getElementById("fb");
     let bookData = JSON.parse(localStorage.loginUser);
@@ -489,6 +468,16 @@
     <span class="favtext">Remove from favorites</span>`
     }
   </script>
+
+  <div id="error" class="alert">
+    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+    Error.
+  </div>
+
+  <div id="success" class="alert success">
+    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+    <strong>Success!</strong> Yay.
+  </div>
 
   <script>
     const button = document.getElementById("fb");
