@@ -177,59 +177,59 @@
         gap: var(--gap);
     }
 
-.image-grid a {
-  position: relative;
-}
+    .image-grid a {
+        position: relative;
+    }
 
-.image-grid a:hover::before {
-  content: attr(title);
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-background-color: rgba(0, 0, 0, 0.5);
+    .image-grid a:hover::before {
+        content: attr(title);
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.5);
         color: #fff;
         padding: 10px;
-  font-weight: bold;
-  font-size: 45px;
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  opacity: 0;
-  transition: opacity 0.5s ease-in-out;
-}
+        font-weight: bold;
+        font-size: 45px;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        opacity: 0;
+        transition: opacity 0.5s ease-in-out;
+    }
 
-.image-grid a:hover::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  opacity: 0;
-  transition: opacity 0.5s ease-in-out;
-}
+    .image-grid a:hover::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        opacity: 0;
+        transition: opacity 0.5s ease-in-out;
+    }
 
-.image-grid a:hover img {
-  opacity: 0.3;
-  transition: opacity 0.5s ease-in-out;
-}
+    .image-grid a:hover img {
+        opacity: 0.3;
+        transition: opacity 0.5s ease-in-out;
+    }
 
-.image-grid a:hover::before,
-.image-grid a:hover::after,
-.image-grid a:hover img {
-  opacity: 0.3;
-}
+    .image-grid a:hover::before,
+    .image-grid a:hover::after,
+    .image-grid a:hover img {
+        opacity: 0.3;
+    }
 
-.image-grid img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  cursor: pointer;
-  transition: opacity 0.5s ease-in-out;
-}
+    .image-grid img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        cursor: pointer;
+        transition: opacity 0.5s ease-in-out;
+    }
 
     .image-grid-col-2 {
         grid-column: span 2;
@@ -335,12 +335,12 @@ background-color: rgba(0, 0, 0, 0.5);
             const imageGrid = document.getElementById("image-grid");
 
             let sorted = json.sort(function (a, b) {
-               return b.views - a.views;
+                return b.views - a.views;
             });
 
             for (i = 0; i < sorted.length; i++) {
                 if (i === 0) {
-                   imageGrid.innerHTML = `<a class="image-grid-col-2 image-grid-row-2" href="/explore/${sorted[0].name.replace(/\s/g, "")}" title="${sorted[0].name}"><img src="${sorted[0].icon}" alt="${sorted[0].name}" /></a>`
+                    imageGrid.innerHTML = `<a class="image-grid-col-2 image-grid-row-2" href="/explore/${sorted[0].name.replace(/\s/g, "")}" title="${sorted[0].name}"><img src="${sorted[0].icon}" alt="${sorted[0].name}" /></a>`
                 } else {
                     imageGrid.innerHTML += `<a href="/explore/${sorted[i].name.replace(/\s/g, "")}" title="${sorted[i].name}"><img src="${sorted[i].icon}" alt="${sorted[i].name}" /></a>`
                 }

@@ -90,7 +90,7 @@ app.get("/read/:bookName/:chapter", async (req, res) => {
     encoding: "utf8",
   });
 
-  file = file.replace(
+  file = file.replaceAll(
     "$$novel$$",
     `'https://novels-production.up.railway.app/data/book/${book.name}'`
   );
@@ -174,7 +174,7 @@ app.get("/review/:type/:type2/:reviewID/:password", async (req, res) => {
     let bookData;
     if (type2 === "book") {
       let date = new Date();
-     
+
       let newBook = new bookShema({
         name: data.bookName,
         author: data.bookAuthor,
@@ -697,10 +697,9 @@ function trim(str, max) {
   return str.length > max ? `${str.slice(0, max - 3)}...` : str;
 }
 
-
 function getTimeDifference(timestamp) {
   const seconds = Math.floor((new Date() - new Date(timestamp)) / 1000);
-  
+
   let interval = Math.floor(seconds / 31536000);
   if (interval >= 1) {
     return interval + " year" + (interval == 1 ? "" : "s") + " ago";
