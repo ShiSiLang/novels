@@ -279,6 +279,11 @@
     margin-left: 5px;
   }
 
+  hr {
+    border: 1px solid #f1f1f1;
+    margin-bottom: 25px;
+  }
+
   * {
     box-sizing: border-box
   }
@@ -352,7 +357,7 @@
 
       const div = document.getElementById("chapters");
       for (let i = 0; i < json.chapters.length; i++) {
-        div.innerHTML += `<button onclick="window.location.href='/read/${json.name}/${i + 1}'">${json.chapters[i].name}</button>`;
+        div.innerHTML += `<button onclick="window.location.href='/read/${json.name}/${i + 1}'">${json.chapters[i].name}</button> <hr>`;
       }
     } catch (err) {
       const div = document.getElementById("nca");
