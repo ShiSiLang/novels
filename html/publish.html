@@ -193,68 +193,40 @@
 
   /*Modal*/
 
-  .submitbtn {
-    width: auto;
-    background-color: #967bb6;
-    padding: 14px 20px;
-    margin: 8px 0;
-    cursor: pointer;
-    width: 100%;
-    color: white;
-  }
-
-  .container {
-    padding: 16px;
-    background-color: #967bb6;
-    border-radius: 16px;
-  }
-
-  .container label {
-    color: #ffcc99;
-  }
-
-  .container input {
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
+  * {
     box-sizing: border-box;
-    background: transparent;
+  }
+
+  label {
+    color: white
+  }
+
+  input[type=text],
+  input[type=password] {
+    width: 100%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    display: inline-block;
     border: none;
-    color: #ffcc99;
+    background: transparent;
+  }
+
+  input[type=text]:focus,
+  input[type=password]:focus {
+    border: 3px solid #5c4981;
+    border-radius: 16px;
+    color: black;
     outline: none;
   }
 
-  .container input:focus {
-    border: 3px solid #5c4981;
-    border-radius: 16px;
-    color: #ffcc99;
-  }
-
-  .container textarea {
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    box-sizing: border-box;
-    background: transparent;
-    border: none;
-    color: #ffcc99;
-    outline: none;
-  }
-
-  .container textarea:focus {
-    border: 3px solid #5c4981;
-    border-radius: 16px;
-    color: #ffcc99;
+  ::placeholder {
+    color: black;
   }
 
   .container select {
     width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    box-sizing: border-box;
+    padding: 15px;
+    margin: 5px 0 22px 0;
     background: transparent;
     border: none;
     color: #ffcc99;
@@ -267,10 +239,53 @@
     color: #ffcc99;
   }
 
-  ::placeholder {
-    color: #ffcc99;
+  .container textarea {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    box-sizing: border-box;
+    background-color: #5c4981;
+    border: none;
+    color: white;
+    outline: none;
+    border-radius: 16px;
   }
 
+  /* Extra styles for the cancel button */
+  .cancelbtn,
+  .signupbtn {
+    padding: 14px 20px;
+  }
+
+  .cancelbtn,
+  .signupbtn {
+    padding: 14px 20px;
+    margin: 8px 0;
+    cursor: pointer;
+    width: 100%;
+    opacity: 0.9;
+    float: left;
+    width: 50%;
+  }
+
+  .cancelbtn:hover,
+  .signupbtn:hover {
+    opacity: 1;
+  }
+
+  .container {
+    background-color: #967bb6;
+    padding: 16px;
+  }
+
+
+  .container h1,
+  p {
+    color: white
+  }
+
+  /* The Modal (background) */
   .modal {
     display: none;
     position: fixed;
@@ -280,51 +295,51 @@
     width: 100%;
     height: 100%;
     overflow: auto;
-    padding-top: 60px;
+    background-color: #ffcc99;
+    padding-top: 50px;
   }
 
   .modal-content {
-    color: white;
+    background-color: #fefefe;
     margin: 5% auto 15% auto;
-    border-radius: 16px;
-    box-shadow: 0px 0px 10px #967bb6;
-    background-color: #967bb6;
-    border: 3px solid #5c4981;
+    border: 1px solid #888;
     width: 80%;
   }
 
-  .animate {
-    -webkit-animation: animatezoom 0.6s;
-    animation: animatezoom 0.6s
+  /* Style the horizontal ruler */
+  hr {
+    border: 1px solid #f1f1f1;
+    margin-bottom: 25px;
   }
 
-  @-webkit-keyframes animatezoom {
-    from {
-      -webkit-transform: scale(0)
-    }
-
-    to {
-      -webkit-transform: scale(1)
-    }
+  /* The Close Button (x) */
+  .close {
+    position: absolute;
+    right: 35px;
+    top: 15px;
+    font-size: 40px;
+    font-weight: bold;
+    color: #f1f1f1;
   }
 
-  @keyframes animatezoom {
-    from {
-      transform: scale(0)
-    }
-
-    to {
-      transform: scale(1)
-    }
+  .close:hover,
+  .close:focus {
+    color: #f44336;
+    cursor: pointer;
   }
 
+  /* Clear floats */
+  .clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+
+  /* Change styles for cancel button and signup button on extra small screens */
   @media screen and (max-width: 300px) {
-    span.psw {
-      display: block;
-      float: none;
-    }
 
-    .submitbtn {
+    .cancelbtn,
+    .signupbtn {
       width: 100%;
     }
   }
@@ -434,8 +449,10 @@
       Chapter</button>
   </div>
   <div class="flex">
-    <button id="ec" class="publishButtons" onclick="document.getElementById('ecmodal').style.display='block'">Edit
+    <button id="ecb" class="publishButtons" onclick="document.getElementById('ecmodal').style.display='block'">Edit
       Chapter</button>
+    <button id="ebb" class="publishButtons" onclick="document.getElementById('ebmodal').style.display='block'">Edit
+      Book</button>
   </div>
 
   <div id="error" class="alert">
@@ -449,10 +466,16 @@
   </div>
 
   <div id="pbmodal" class="modal">
-    <form class="modal-content animate" id="pbForm" action="/publish-book" method="post">
+    <span onclick="document.getElementById('pbmodal').style.display='none'" class="close"
+      title="Close Modal">&times;</span>
+    <form id="pbForm" class="modal-content" action="/publish-book">
       <div class="container">
-        <input id="iusername" type="hidden" name="uname" value="NOTHING" />
-        <input id="ipass" type="hidden" name="psw" value="NOTHING" />
+        <h1>Publish Book</h1>
+        <p>Please fill in this form to publish a book.</p>
+        <hr>
+
+        <input id="inputusername" type="hidden" name="uname" value="NOTHING" />
+        <input id="inputpass" type="hidden" name="psw" value="NOTHING" />
 
         <label for="name"><b>Book Name</b></label>
         <input type="text" placeholder="Enter Book Name" name="name" autocomplete="off" required />
@@ -462,26 +485,37 @@
 
         <label for="icon"><b>Book Icon</b></label>
         <input type="text" placeholder="Enter Book Icon" name="icon" autocomplete="off" required />
-      </div>
-      <div class="container">
-        <button type="submit" onclick="document.getElementById('pbmodal').style.display='none'" class="submitbtn">
-          Publish Book for review
-        </button>
+
+        <div class="clearfix">
+          <button type="button" onclick="document.getElementById('pbmodal').style.display='none'"
+            class="cancelbtn">Cancel</button>
+          <button type="submit" class="signupbtn">Publish book for review</button>
+        </div>
       </div>
     </form>
   </div>
 
   <div id="pcmodal" class="modal">
-    <form class="modal-content animate" id="pcForm" action="/publish-chapter" method="post">
+    <span onclick="document.getElementById('pcmodal').style.display='none'" class="close"
+      title="Close Modal">&times;</span>
+    <form id="pcForm" class="modal-content" action="/publish-chapter">
       <div class="container">
+        <h1>Publish Chapter</h1>
+        <p>Please fill in this form to publish a chapter.</p>
+        <hr>
+
         <input id="inputusername" type="hidden" name="uname" value="NOTHING" />
         <input id="inputpass" type="hidden" name="psw" value="NOTHING" />
 
-        <label for="name"><b>Book Name</b></label>
-        <select name="name" id="books" form="pcForm" required></select>
+        <label for="ebooks"><b>Book Name</b></label>
+        <select name="ebooks" id="ebooks" form="ecForm" required></select>
+
 
         <label for="cname"><b>Chapter Name</b></label>
         <input type="text" placeholder="Enter Chapter Name" name="cname" autocomplete="off" required />
+
+        <label for="thumbnail"><b>Chapter Thumbnail</b></label>
+        <input type="text" placeholder="Enter Chapter Thumbnail" name="thumbnail" autocomplete="off" required />
 
         <label for="intro"><b>Chapter Intro</b></label>
         <textarea rows="3" cols="50" name="intro" form="pcForm" required></textarea>
@@ -489,28 +523,31 @@
         <label for="credits"><b>Chapter Credits</b></label>
         <textarea rows="3" cols="50" name="credits" form="pcForm" required></textarea>
 
-        <label for="thumbnail"><b>Chapter Thumbnail</b></label>
-        <input type="text" placeholder="Enter Chapter Thumbnail" name="thumbnail" autocomplete="off" required />
-
         <input id="type" type="hidden" name="type" value="novel" />
 
         <label for="content"><b>Chapter Content</b></label>
         <textarea rows="10" cols="50" name="content" form="pcForm" required></textarea>
         <p>For italicized text use *text* for bold use **text**</p>
-      </div>
-      <div class="container">
-        <button type="submit" onclick="document.getElementById('pcmodal').style.display='none'" class="submitbtn">
-          Publish chapter for review
-        </button>
+        <div class="clearfix">
+          <button type="button" onclick="document.getElementById('pcmodal').style.display='none'"
+            class="cancelbtn">Cancel</button>
+          <button type="submit" class="signupbtn">Publish chapter for review</button>
+        </div>
       </div>
     </form>
   </div>
 
   <div id="ecmodal" class="modal">
-    <form class="modal-content animate" id="ecForm" action="/publish-chapter" method="post">
+    <span onclick="document.getElementById('ecmodal').style.display='none'" class="close"
+      title="Close Modal">&times;</span>
+    <form id="ecForm" class="modal-content" action="/edit-chapter">
       <div class="container">
-        <input id="inputusername2" type="hidden" name="uname" value="NOTHING" />
-        <input id="inputpass2" type="hidden" name="psw" value="NOTHING" />
+        <h1>Edit Chapter</h1>
+        <p>Please fill in this form to edit a chapter.</p>
+        <hr>
+
+        <input id="inputusername" type="hidden" name="uname" value="NOTHING" />
+        <input id="inputpass" type="hidden" name="psw" value="NOTHING" />
 
         <label for="ebooks"><b>Book Name</b></label>
         <select name="ebooks" id="ebooks" form="ecForm" required></select>
@@ -518,25 +555,59 @@
         <label for="echapters"><b>Chapter Name</b></label>
         <select name="echapters" id="echapters" form="ecForm" required></select>
 
+        <label for="thumbnail"><b>Chapter Thumbnail</b></label>
+        <input type="text" placeholder="Edit Chapter Thumbnail" name="thumbnail" autocomplete="off" required />
+
         <label for="intro"><b>Chapter Intro</b></label>
         <textarea rows="3" cols="50" name="intro" form="ecForm" required></textarea>
 
         <label for="credits"><b>Chapter Credits</b></label>
         <textarea rows="3" cols="50" name="credits" form="ecForm" required></textarea>
 
-        <label for="thumbnail"><b>Chapter Thumbnail</b></label>
-        <input type="text" placeholder="Edit Chapter Thumbnail" name="thumbnail" autocomplete="off" required />
-
-        <input id="type" type="hidden" name="type" value="novel" />
-
         <label for="content"><b>Chapter Content</b></label>
         <textarea rows="15" cols="100" name="content" form="ecForm" required></textarea>
         <p>For italicized text use *text* for bold use **text**</p>
+
+        <div class="clearfix">
+          <button type="button" onclick="document.getElementById('ecmodal').style.display='none'"
+            class="cancelbtn">Cancel</button>
+          <button type="submit" class="signupbtn">Edit Chapter</button>
+        </div>
       </div>
+    </form>
+  </div>
+
+
+  <div id="ebmodal" class="modal">
+    <span onclick="document.getElementById('ebmodal').style.display='none'" class="close"
+      title="Close Modal">&times;</span>
+    <form id="ebForm" class="modal-content" action="/edit-book">
       <div class="container">
-        <button type="submit" onclick="document.getElementById('ecmodal').style.display='none'" class="submitbtn">
-          Edit Chapter
-        </button>
+        <h1>Edit Book</h1>
+        <p>Please fill in this form to edit your book.</p>
+        <hr>
+
+        <input id="inputusername" type="hidden" name="uname" value="NOTHING" />
+        <input id="inputpass" type="hidden" name="psw" value="NOTHING" />
+
+        <label for="bbooks"><b>Book Name</b></label>
+        <select name="bbooks" id="bbooks" form="ebForm" required></select>
+
+        <label for="desc"><b>Book Description</b></label>
+        <textarea rows="3" cols="50" name="intro" form="ebForm" required></textarea>
+
+        <label for="thumbnail"><b>Book Thumbnail</b></label>
+        <input type="text" placeholder="Edit Thumbnail" name="psw" required>
+
+        <label>
+          <input type="checkbox" checked="checked" name="ongoing" style="margin-bottom:15px"> Is the book ongoing?
+        </label>
+
+        <div class="clearfix">
+          <button type="button" onclick="document.getElementById('ebmodal').style.display='none'"
+            class="cancelbtn">Cancel</button>
+          <button type="submit" class="signupbtn">Edit Book</button>
+        </div>
       </div>
     </form>
   </div>
@@ -557,16 +628,21 @@
           document.getElementById("pbb").style.display = "none";
           document.getElementById("pcb").style.display = "none";
           document.getElementById("ecb").style.display = "none";
+          document.getElementById("ebb").style.display = "none";
         }
       } else {
         document.getElementById("pbb").style.display = "none";
         document.getElementById("pcb").style.display = "none";
         document.getElementById("ecb").style.display = "none";
+        document.getElementById("ebb").style.display = "none";
+
       }
     } else {
       document.getElementById("pbb").style.display = "none";
       document.getElementById("pcb").style.display = "none";
       document.getElementById("ecb").style.display = "none";
+      document.getElementById("ebb").style.display = "none";
+
     }
   </script>
 
@@ -587,18 +663,19 @@
 
         var selectBox = document.getElementById('books');
         var selectBox2 = document.getElementById('ebooks');
+        var selectBox3 = document.getElementById('bbooks');
 
         for (var i = 0, l = options.length; i < l; i++) {
           var option = options[i];
           selectBox.options.add(new Option(option.text, option.value, option.selected));
           selectBox2.options.add(new Option(option.text, option.value, option.selected));
+          selectBox3.options.add(new Option(option.text, option.value, option.selected));
         }
       } catch (err) { console.log(err) }
     }
   </script>
 
   <script>
-
     var select = document.getElementById("ebooks");
 
     select.addEventListener("change", async function () {
@@ -647,11 +724,17 @@
   <script>
     const modal = document.getElementById("pbmodal");
     const modal2 = document.getElementById("pcmodal");
+    const modal3 = document.getElementById("ecmodal");
+    const modal4 = document.getElementById("ebmodal");
     window.onclick = function (event) {
       if (event.target === modal) {
         modal.style.display = "none";
       } else if (event.target === modal2) {
         modal2.style.display = "none";
+      } else if (event.target === modal3) {
+        modal3.style.display = "none";
+      } else if (event.target === modal4) {
+        modal4.style.display = "none";
       }
     };
   </script>
