@@ -541,8 +541,8 @@
         <input id="inputusername" type="hidden" name="uname" value="NOTHING" />
         <input id="inputpass" type="hidden" name="psw" value="NOTHING" />
 
-        <label for="ebooks"><b>Book Name</b></label>
-        <select name="ebooks" id="ebooks" form="ecForm" required></select>
+        <label for="ebooks2"><b>Book Name</b></label>
+        <select name="ebooks2" id="ebooks2" form="ecForm" required></select>
 
         <label for="echapters"><b>Chapter Name</b></label>
         <select name="echapters" id="echapters" form="ecForm" required></select>
@@ -582,8 +582,8 @@
         <input id="inputusername" type="hidden" name="uname" value="NOTHING" />
         <input id="inputpass" type="hidden" name="psw" value="NOTHING" />
 
-        <label for="bbooks"><b>Book Name</b></label>
-        <select name="bbooks" id="bbooks" form="ebForm" required></select>
+        <label for="ebooks3"><b>Book Name</b></label>
+        <select name="ebooks3" id="ebooks3" form="ebForm" required></select>
 
         <label for="desc"><b>Book Description</b></label>
         <textarea rows="3" cols="50" name="intro" form="ebForm" required></textarea>
@@ -653,9 +653,9 @@
           }
         });
 
-        var selectBox = document.getElementById('books');
-        var selectBox2 = document.getElementById('ebooks');
-        var selectBox3 = document.getElementById('bbooks');
+        var selectBox = document.getElementById('ebooks');
+        var selectBox2 = document.getElementById('ebooks2');
+        var selectBox3 = document.getElementById('ebooks3');
 
         for (var i = 0, l = options.length; i < l; i++) {
           var option = options[i];
@@ -668,7 +668,7 @@
   </script>
 
   <script>
-    var select = document.getElementById("ebooks");
+    var select = document.getElementById("ebooks2");
 
     select.addEventListener("change", async function () {
       if (select.selectedIndex !== -1) {
