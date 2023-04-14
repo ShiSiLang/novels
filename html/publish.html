@@ -496,8 +496,8 @@
         <p>Please fill in this form to publish a chapter.</p>
         <hr>
 
-        <input id="inputusername" type="hidden" name="uname" value="NOTHING" />
-        <input id="inputpass" type="hidden" name="psw" value="NOTHING" />
+        <input id="inputusername2" type="hidden" name="uname" value="NOTHING" />
+        <input id="inputpass2" type="hidden" name="psw" value="NOTHING" />
 
         <label for="ebooks"><b>Book Name</b></label>
         <select name="ebooks" id="ebooks" form="ecForm" required></select>
@@ -538,8 +538,8 @@
         <p>Please fill in this form to edit a chapter.</p>
         <hr>
 
-        <input id="inputusername" type="hidden" name="uname" value="NOTHING" />
-        <input id="inputpass" type="hidden" name="psw" value="NOTHING" />
+        <input id="inputusername3" type="hidden" name="uname" value="NOTHING" />
+        <input id="inputpass3" type="hidden" name="psw" value="NOTHING" />
 
         <label for="ebooks2"><b>Book Name</b></label>
         <select name="ebooks2" id="ebooks2" form="ecForm" required></select>
@@ -579,8 +579,8 @@
         <p>Please fill in this form to edit your book.</p>
         <hr>
 
-        <input id="inputusername" type="hidden" name="uname" value="NOTHING" />
-        <input id="inputpass" type="hidden" name="psw" value="NOTHING" />
+        <input id="inputusername4" type="hidden" name="uname" value="NOTHING" />
+        <input id="inputpass4" type="hidden" name="psw" value="NOTHING" />
 
         <label for="ebooks3"><b>Book Name</b></label>
         <select name="ebooks3" id="ebooks3" form="ebForm" required></select>
@@ -613,8 +613,10 @@
           document.getElementById("inputpass").value = data.password;
           document.getElementById("inputusername2").value = data.username;
           document.getElementById("inputpass2").value = data.password;
-          document.getElementById("iusername").value = data.username;
-          document.getElementById("ipass").value = data.password;
+          document.getElementById("inputusername3").value = data.username;
+          document.getElementById("inputpass3").value = data.password;
+          document.getElementById("inputusername4").value = data.username;
+          document.getElementById("inputpass4").value = data.password;
         }
         if (data.author === false) {
           document.getElementById("pbb").style.display = "none";
