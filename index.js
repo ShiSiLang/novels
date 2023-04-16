@@ -246,8 +246,8 @@ app.get("/review/:type/:type2/:reviewID/:password", async (req, res) => {
     });
   }
 
-  if (type === "deny") {
-    await reviewShema.findOneAndDelete({ type: type2, reviewID: ID });
+  if (type === "deny" || type === "decline") {
+    let bookData = await reviewShema.findOne({ type: type2, reviewID: ID });
 
     res.status(200).json({
       success: `Successfully denied the ${type2}!.`,
@@ -263,6 +263,9 @@ app.get("/review/:type/:type2/:reviewID/:password", async (req, res) => {
       ],
       username: type2 === "chapter" ? "New Chapter Post" : "New Book Post",
     };
+
+    await reviewShema.findOneAndDelete({ type: type2, reviewID: ID });
+
     await axios({
       method: "POST",
       headers: {
@@ -447,7 +450,7 @@ app.post("/publish-book", async (req, res) => {
 
 app.post("/publish-chapter", async (req, res) => {
   let html = req.body.data;
-  console.log(html)
+  //console.log(html)
 
   let data = await profileShema.findOne({
     password: html.psw,
