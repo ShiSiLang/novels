@@ -394,6 +394,9 @@ app.post("/sign-in", async (req, res) => {
 app.post("/publish-book", async (req, res) => {
   let html = req.body.data;
 
+  if (!html.name || !html)
+    return res.status(400).json({ error: `Missing Data!` });
+
   let data = await profileShema.findOne({
     password: html.psw,
     username: html.uname,
