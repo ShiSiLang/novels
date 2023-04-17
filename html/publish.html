@@ -501,8 +501,8 @@
         <input id="inputusername2" type="hidden" name="uname" value="NOTHING" />
         <input id="inputpass2" type="hidden" name="psw" value="NOTHING" />
 
-        <label for="ebooks"><b>Book Name</b></label>
-        <select name="name" id="ebooks" form="ecForm" required></select>
+        <label for="name"><b>Book Name</b></label>
+        <select name="name" id="ebooks" form="pcForm" required></select>
 
 
         <label for="cname"><b>Chapter Name</b></label>
@@ -759,11 +759,13 @@
         success.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
       <strong>Success!</strong> ${successData.success}`;
         success.style.display = "block";
+        alert(successData.success)
       } else {
         const errorData = await response.json();
         error.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
   ${errorData.error}`;
         error.style.display = "block";
+        alert(errorData.error)
       }
     });
 
@@ -785,11 +787,13 @@
         success.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
       <strong>Success!</strong> ${successData.success}`;
         success.style.display = "block";
+        alert(successData.success)
       } else {
         const errorData = await response.json();
         error.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
   ${errorData.error}`;
         error.style.display = "block";
+        alert(errorData.error)
       }
     });
   </script>
