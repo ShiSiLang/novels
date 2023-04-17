@@ -196,6 +196,8 @@ app.get("/review/:type/:type2/:reviewID/:password", async (req, res) => {
         name: data.bookName,
         author: data.bookAuthor,
       });
+      console.log(data);
+      console.log(bookData);
 
       bookData.chapters.push({
         name: data.cName,
