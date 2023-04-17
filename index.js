@@ -214,8 +214,8 @@ app.get("/review/:type/:type2/:reviewID/:password", async (req, res) => {
       bookData.save();
 
       let getSystem = await system.find({ id: "6427a45e2d7d901440fc43cf" });
-
-      if (getSystem.latestChapters.length >= 25) latestChapters.pop();
+      console.log(getSystem)
+      if (getSystem?.latestChapters?.length >= 25) getSystem.latestChapters.pop();
       getSystem.latestChapters.push(data.cName);
     }
 
