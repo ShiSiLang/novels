@@ -359,7 +359,7 @@
       for (let i = 0; i < json.chapters.length; i++) {
         div.innerHTML += `<button onclick="window.location.href='/read/${json.name}/${i + 1}'">${json.chapters[i].name}</button> <hr>`;
       }
-      
+
       const button = document.getElementById("fb");
       let user = JSON.parse(localStorage.loginUser);
       if (json.followers.includes(user.username)) {
@@ -504,7 +504,7 @@
           let bookData = await fetch($$novel$$);
           let json = await bookData.json();
           console.log(json)
-          if (json.followers.includes(user.username)) {
+          if (json.followers.includes(user.username) || json.followers.find(v => v === user.username)) {
             button.innerHTML = `<span>💔</span>
   <span class="favtext">Remove from favorites</span>`
           }
