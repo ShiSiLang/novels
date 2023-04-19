@@ -359,6 +359,13 @@
       for (let i = 0; i < json.chapters.length; i++) {
         div.innerHTML += `<button onclick="window.location.href='/read/${json.name}/${i + 1}'">${json.chapters[i].name}</button> <hr>`;
       }
+      
+      const button = document.getElementById("fb");
+      let user = JSON.parse(localStorage.loginUser);
+      if (json.followers.includes(user.username)) {
+        button.innerHTML = `<span>💔</span>
+  <span class="favtext">Remove from favorites</span>`
+      }
     } catch (err) {
       const div = document.getElementById("nca");
       div.innerHTML += `<h1>No chapters available</h1>`;
@@ -493,7 +500,13 @@
 
         if (response.ok) {
           // Display success message here
-          await favButton()
+          let user = JSON.parse(localStorage.loginUser);
+          let bookData = await fetch($$novel$$);
+          let json = await bookData.json();
+          if (json.followers.includes(user.username)) {
+            button.innerHTML = `<span>💔</span>
+  <span class="favtext">Remove from favorites</span>`
+          }
           const successData = await response.json();
           success.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
 <strong>Success!</strong> ${successData.success}`;
@@ -506,20 +519,6 @@ ${errorData.error}`;
         }
       }
     });
-  </script>
-
-  <script>
-    favButton()
-    async function favButton() {
-      let favoriteButton = document.getElementById("fb");
-      let user = JSON.parse(localStorage.loginUser);
-      let response = await fetch($$novel$$);
-      let json = await response.json();
-      if (json.followers.includes(user.username)) {
-        favoriteButton.innerHTML = `<span>💔</span>
-  <span class="favtext">Remove from favorites</span>`
-      }
-    }
   </script>
 
   <div id="nca" class="text"></div>
