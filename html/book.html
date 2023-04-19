@@ -503,10 +503,14 @@
           let user = JSON.parse(localStorage.loginUser);
           let bookData = await fetch($$novel$$);
           let json = await bookData.json();
-          console.log(json)
-          if (json.followers.includes(user.username) || json.followers.find(v => v === user.username)) {
+          if (json.followers.includes(user.username)) {
             button.innerHTML = `<span>💔</span>
   <span class="favtext">Remove from favorites</span>`
+          } else {
+            if (json.followers.includes(user.username)) {
+              button.innerHTML = `<span>❤️</span>
+      <span class="favtext">Add to favorites</span>`
+            }
           }
           const successData = await response.json();
           success.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
