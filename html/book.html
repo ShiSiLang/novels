@@ -460,14 +460,17 @@
   </div>
 
   <script>
-    let favoriteButton = document.getElementById("fb");
-    let user = JSON.parse(localStorage.loginUser);
-    let response = await fetch($$novel$$);
-    let json = await response.json();
-    console.log(json)
-    if (json.followers.includes(user.username)) {
-      favoriteButton.innerHTML = `<span>💔</span>
+    favButton()
+    async function favButton() {
+      let favoriteButton = document.getElementById("fb");
+      let user = JSON.parse(localStorage.loginUser);
+      let response = await fetch($$novel$$);
+      let json = await response.json();
+      console.log(json)
+      if (json.followers.includes(user.username)) {
+        favoriteButton.innerHTML = `<span>💔</span>
     <span class="favtext">Remove from favorites</span>`
+      }
     }
   </script>
 
