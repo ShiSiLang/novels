@@ -673,6 +673,7 @@
     var select = document.getElementById("ebooks2");
 
     select.addEventListener("change", async function () {
+      console.log("Change")
       if (select.selectedIndex !== -1) {
         // An option has been selected
         var selectedOption = select.options[select.selectedIndex];
