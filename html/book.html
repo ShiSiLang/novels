@@ -503,6 +503,7 @@
           let user = JSON.parse(localStorage.loginUser);
           let bookData = await fetch($$novel$$);
           let json = await bookData.json();
+          console.log(json)
           if (json.followers.includes(user.username)) {
             button.innerHTML = `<span>💔</span>
   <span class="favtext">Remove from favorites</span>`
