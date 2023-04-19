@@ -459,21 +459,6 @@
     </button>
   </div>
 
-  <script>
-    favButton()
-    async function favButton() {
-      let favoriteButton = document.getElementById("fb");
-      let user = JSON.parse(localStorage.loginUser);
-      let response = await fetch($$novel$$);
-      let json = await response.json();
-      console.log(json)
-      if (json.followers.includes(user.username)) {
-        favoriteButton.innerHTML = `<span>💔</span>
-    <span class="favtext">Remove from favorites</span>`
-      }
-    }
-  </script>
-
   <div id="error" class="alert">
     <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
     Error.
@@ -508,6 +493,7 @@
 
         if (response.ok) {
           // Display success message here
+          favButton()
           const successData = await response.json();
           success.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
 <strong>Success!</strong> ${successData.success}`;
@@ -520,6 +506,21 @@ ${errorData.error}`;
         }
       }
     });
+  </script>
+
+  <script>
+    favButton()
+    async function favButton() {
+      let favoriteButton = document.getElementById("fb");
+      let user = JSON.parse(localStorage.loginUser);
+      let response = await fetch($$novel$$);
+      let json = await response.json();
+      console.log(json)
+      if (json.followers.includes(user.username)) {
+        favoriteButton.innerHTML = `<span>💔</span>
+  <span class="favtext">Remove from favorites</span>`
+      }
+    }
   </script>
 
   <div id="nca" class="text"></div>
