@@ -506,11 +506,9 @@
           if (json.followers.includes(user.username)) {
             button.innerHTML = `<span>💔</span>
   <span class="favtext">Remove from favorites</span>`
-          } else {
-            if (json.followers.includes(user.username)) {
-              button.innerHTML = `<span>❤️</span>
-      <span class="favtext">Add to favorites</span>`
-            }
+          } else if (!json.followers.includes(user.username)) {
+            button.innerHTML = `<span>❤️</span>
+      <span class="favtext">Add to favorites</span>`;
           }
           const successData = await response.json();
           success.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
