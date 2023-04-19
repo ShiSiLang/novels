@@ -127,7 +127,7 @@ app.get("/data/:type/:other", async (req, res) => {
   if (type === "latest") {
     let getSystem = await system.find({ id: "6427a45e2d7d901440fc43cf" });
     let obj = [];
-    //getSystem.latestChapters
+    if (getSystem.latestChapters.length > 0) obj = getSystem.latestChapters;
     res.send(obj);
   }
   if (type === "books") {
