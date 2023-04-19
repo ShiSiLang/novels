@@ -493,7 +493,7 @@
 
         if (response.ok) {
           // Display success message here
-          favButton()
+          await favButton()
           const successData = await response.json();
           success.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
 <strong>Success!</strong> ${successData.success}`;
