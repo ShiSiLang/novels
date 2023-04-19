@@ -670,10 +670,15 @@
   </script>
 
   <script>
+    alert('onload');
     var select = document.getElementById("ebooks2");
 
-    select.addEventListener("change", async function () {
-      console.log("Change")
+    document.getElementById('ebooks2').addEventListener('change', function () {
+      alert('Hello');
+    });
+
+    select.addEventListener("input", async function () {
+      alert("Change")
       if (select.selectedIndex !== -1) {
         // An option has been selected
         var selectedOption = select.options[select.selectedIndex];
