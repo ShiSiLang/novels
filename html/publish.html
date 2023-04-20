@@ -1,427 +1,410 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="icon" href="https://i.imgur.com/XjWCCeV.png" />
-    <title>LonelyBall Media</title>
-    <meta property="og:title" content="Publish Page" />
-    <meta property="og:site_name" content="LonelyBall Media" />
-    <meta
-      property="og:description"
-      content="Welcome to LonelyBall Media, here you can read all of our novels and manga!"
-    />
-    <meta property="og:image" content="https://i.imgur.com/XjWCCeV.png" />
-    <meta name="theme-color" content="#cbc3e3" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <link
-      rel="stylesheet"
-      href="https://site-assets.fontawesome.com/releases/v6.1.1/css/all.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-    />
-  </head>
-  <link
-    href="https://fonts.googleapis.com/css?family=Nunito"
-    rel="stylesheet"
-  />
-  <style>
-    body {
-      background-size: 400% 400%;
-      margin: 0;
-      background-color: #ffcc99;
-      font-family: 'Nunito';
-      font-size: 22px;
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="icon" href="https://i.imgur.com/XjWCCeV.png" />
+  <title>LonelyBall Media</title>
+  <meta property="og:title" content="Publish Page" />
+  <meta property="og:site_name" content="LonelyBall Media" />
+  <meta property="og:description"
+    content="Welcome to LonelyBall Media, here you can read all of our novels and manga!" />
+  <meta property="og:image" content="https://i.imgur.com/XjWCCeV.png" />
+  <meta name="theme-color" content="#cbc3e3" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.1.1/css/all.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+</head>
+<link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" />
+<style>
+  body {
+    background-size: 400% 400%;
+    margin: 0;
+    background-color: #ffcc99;
+    font-family: 'Nunito';
+    font-size: 22px;
+  }
+
+  .flex {
+    display: flex;
+    justify-content: center;
+  }
+
+  .topnav {
+    width: 100%;
+    background-color: #967bb6;
+  }
+
+  .topnav img {
+    text-align: center;
+    border-radius: 50%;
+    transition-duration: 0.3s;
+    display: inline-block;
+    width: 60px;
+    height: 60px;
+    position: absolute;
+    margin-bottom: 2px;
+    right: 0;
+    z-index: 0;
+  }
+
+  .topnav img:hover {
+    transform: scale(1.1);
+    border-radius: 40%;
+    animation: fade-in-out 1s ease-in-out infinite;
+  }
+
+  @keyframes fade-in-out {
+    0% {
+      opacity: 1;
     }
 
-    .flex {
-      display: flex;
-      justify-content: center;
+    50% {
+      opacity: 0.5;
     }
 
-    .topnav {
+    100% {
+      opacity: 1;
+    }
+  }
+
+  .dropdown {
+    display: inline-block;
+    position: relative
+  }
+
+  .dropdown-menu-right {
+    float: right;
+    top: 65px;
+    right: 160px;
+  }
+
+  .dropdown-content {
+    position: absolute;
+    display: none;
+    background-color: #967bb6;
+    min-width: 160px;
+    box-shadow: 0px 0px 10px #967bb6;
+    z-index: 1;
+  }
+
+  .dropdown-content a {
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+
+  .topnav>a {
+    display: inline-block;
+    border-radius: 30px;
+    padding: 19px 16px;
+    transition-duration: 0.2s;
+    font-size: 1.0em;
+    font-weight: 650;
+    text-decoration: none;
+    color: white;
+  }
+
+  .topnav a.active {
+    background-color: #5c4981;
+  }
+
+  .topnav a:hover {
+    background-color: white;
+    color: black;
+  }
+
+  footer {
+    width: 100vw;
+    height: auto;
+    background-color: #967bb6;
+    padding-top: 40px;
+    color: white;
+  }
+
+  .footer-content {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .footer-content h3 {
+    font-size: 1.8rem;
+    font-weight: 400;
+    text-transform: capitalize;
+    line-height: 3rem;
+  }
+
+  .socials {
+    margin: 0 auto;
+  }
+
+  .socials a {
+    transition: color .4s ease;
+    text-decoration: none;
+    color: white;
+  }
+
+  .socials a:hover {
+    color: #ffcc99;
+  }
+
+  .text {
+    padding-bottom: 25px;
+  }
+
+  .text h1,
+  h2,
+  p {
+    text-align: center;
+    color: #FFFFFF;
+  }
+
+  button {
+    text-align: center;
+    font-weight: bold;
+    text-decoration: none;
+    font-family: 'Nunito';
+    display: inline-block;
+    border: 2px solid #5c4981;
+    border-radius: 16px;
+    box-shadow: 0px 0px 10px #967bb6;
+    background-color: #967bb6;
+    cursor: pointer;
+    padding: 20px;
+    font-size: 30px;
+    color: white;
+    margin: auto;
+  }
+
+  button:hover {
+    background-color: #5c4981;
+    transition: 1s;
+  }
+
+  .publishButtons {
+    width: 100%;
+    margin: 25px 50px 25px 50px;
+  }
+
+  /*Modal Start*/
+  * {
+    box-sizing: border-box;
+  }
+
+  label {
+    color: white
+  }
+
+  input[type=text],
+  input[type=password] {
+    width: 100%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    display: inline-block;
+    border: none;
+    background: transparent;
+  }
+
+  input[type=text]:focus,
+  input[type=password]:focus {
+    border: 3px solid #5c4981;
+    border-radius: 16px;
+    color: black;
+    outline: none;
+  }
+
+  ::placeholder {
+    color: black;
+  }
+
+  .container select {
+    width: 100%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    background: transparent;
+    border: none;
+    color: #ffcc99;
+    outline: none;
+  }
+
+  .container select:focus {
+    border: 3px solid #5c4981;
+    border-radius: 16px;
+    color: #ffcc99;
+  }
+
+  .container textarea {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    box-sizing: border-box;
+    background-color: #5c4981;
+    border: none;
+    color: white;
+    outline: none;
+    border-radius: 16px;
+  }
+
+  hr {
+    border: 1px solid #f1f1f1;
+    margin-bottom: 25px;
+  }
+
+  /* Add padding to container elements */
+  .container {
+    background-color: #967bb6;
+    border-radius: 16px;
+    padding: 16px;
+    margin: 20px;
+  }
+
+  .container h1,
+  p {
+    color: white
+  }
+
+  /* Clear floats */
+  .clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+
+  /* Change styles for cancel button and signup button on extra small screens */
+  @media screen and (max-width: 300px) {
+
+    .cancelbtn,
+    .signupbtn {
       width: 100%;
-      background-color: #967bb6;
     }
+  }
 
-    .topnav img {
-      text-align: center;
-      border-radius: 50%;
-      transition-duration: 0.3s;
-      display: inline-block;
-      width: 55px;
-      height: 50;
-      position: absolute;
-      margin-bottom: 2px;
-      right: 0;
-      z-index: 0;
-    }
+  /*Modal End*/
 
-    .topnav img:hover {
-      transform: scale(1.1);
-      border-radius: 40%;
-      animation: fade-in-out 1s ease-in-out infinite;
-    }
+  .alert {
+    padding: 20px;
+    background-color: #f44336;
+    color: white;
+    margin-bottom: 15px;
+    display: none;
+  }
 
-    @keyframes fade-in-out {
-      0% {
-        opacity: 1;
-      }
+  .alert.success {
+    background-color: #04AA6D;
+  }
 
-      50% {
-        opacity: 0.5;
-      }
+  .alert.info {
+    background-color: #2196F3;
+  }
 
-      100% {
-        opacity: 1;
-      }
-    }
+  .alert.warning {
+    background-color: #ff9800;
+  }
 
-    .dropdown {
-      display: inline-block;
-      position: relative
-    }
+  .closebtn {
+    margin-left: 15px;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
 
-    .dropdown-menu-right {
-      float: right;
-      top: 57px;
-      right: 160px;
-    }
+  .closebtn:hover {
+    color: black;
+  }
+</style>
 
-    .dropdown-content {
-      position: absolute;
-      display: none;
-      background-color: #967bb6;
-      min-width: 160px;
-      box-shadow: 0px 0px 10px #967bb6;
-      z-index: 1;
-    }
-
-    .dropdown-content a {
-      color: white;
-      padding: 12px 16px;
-      text-decoration: none;
-      display: block;
-    }
-
-    .topnav>a {
-      display: inline-block;
-      border-radius: 30px;
-      padding: 19px 16px;
-      transition-duration: 0.2s;
-      font-size: 1.0em;
-      font-weight: 650;
-      text-decoration: none;
-      color: white;
-    }
-
-    .topnav a.active {
-      background-color: #5c4981;
-    }
-
-    .topnav a:hover {
-      background-color: white;
-      color: black;
-    }
-
-    footer {
-      width: 100vw;
-      height: auto;
-      background-color: #967bb6;
-      padding-top: 40px;
-      color: white;
-    }
-
-    .footer-content {
-      align-items: center;
-      display: flex;
-      justify-content: center;
-      flex-direction: column;
-      text-align: center;
-    }
-
-    .footer-content h3 {
-      font-size: 1.8rem;
-      font-weight: 400;
-      text-transform: capitalize;
-      line-height: 3rem;
-    }
-
-    .socials {
-      margin: 0 auto;
-    }
-
-    .socials a {
-      transition: color .4s ease;
-      text-decoration: none;
-      color: white;
-    }
-
-    .socials a:hover {
-      color: #ffcc99;
-    }
-
-    .text {
-      padding-bottom: 25px;
-    }
-
-    .text h1,
-    h2,
-    p {
-      text-align: center;
-      color: #FFFFFF;
-    }
-
-    button {
-      text-align: center;
-      font-weight: bold;
-      text-decoration: none;
-      font-family: 'Nunito';
-      display: inline-block;
-      border: 2px solid #5c4981;
-      border-radius: 16px;
-      box-shadow: 0px 0px 10px #967bb6;
-      background-color: #967bb6;
-      cursor: pointer;
-      padding: 20px;
-      font-size: 30px;
-      color: white;
-      margin: auto;
-    }
-
-    button:hover {
-      background-color: #5c4981;
-      transition: 1s;
-    }
-
-    .publishButtons {
-      width: 100%;
-      margin: 25px 50px 25px 50px;
-    }
-
-    /*Modal Start*/
-    * {
-      box-sizing: border-box;
-    }
-
-    label {
-      color: white
-    }
-
-    input[type=text],
-    input[type=password] {
-      width: 100%;
-      padding: 15px;
-      margin: 5px 0 22px 0;
-      display: inline-block;
-      border: none;
-      background: transparent;
-    }
-
-    input[type=text]:focus,
-    input[type=password]:focus {
-      border: 3px solid #5c4981;
-      border-radius: 16px;
-      color: black;
-      outline: none;
-    }
-
-    ::placeholder {
-      color: black;
-    }
-
-    .container select {
-      width: 100%;
-      padding: 15px;
-      margin: 5px 0 22px 0;
-      background: transparent;
-      border: none;
-      color: #ffcc99;
-      outline: none;
-    }
-
-    .container select:focus {
-      border: 3px solid #5c4981;
-      border-radius: 16px;
-      color: #ffcc99;
-    }
-
-    .container textarea {
-      width: 100%;
-      padding: 12px 20px;
-      margin: 8px 0;
-      display: inline-block;
-      box-sizing: border-box;
-      background-color: #5c4981;
-      border: none;
-      color: white;
-      outline: none;
-      border-radius: 16px;
-    }
-
-    hr {
-      border: 1px solid #f1f1f1;
-      margin-bottom: 25px;
-    }
-
-    /* Add padding to container elements */
-    .container {
-      background-color: #967bb6;
-      border-radius: 16px;
-      padding: 16px;
-      margin: 20px;
-    }
-
-    .container h1,
-    p {
-      color: white
-    }
-
-    /* Clear floats */
-    .clearfix::after {
-      content: "";
-      clear: both;
-      display: table;
-    }
-
-    /* Change styles for cancel button and signup button on extra small screens */
-    @media screen and (max-width: 300px) {
-
-      .cancelbtn,
-      .signupbtn {
-        width: 100%;
-      }
-    }
-
-    /*Modal End*/
-
-    .alert {
-      padding: 20px;
-      background-color: #f44336;
-      color: white;
-      margin-bottom: 15px;
-      display: none;
-    }
-
-    .alert.success {
-      background-color: #04AA6D;
-    }
-
-    .alert.info {
-      background-color: #2196F3;
-    }
-
-    .alert.warning {
-      background-color: #ff9800;
-    }
-
-    .closebtn {
-      margin-left: 15px;
-      color: white;
-      font-weight: bold;
-      float: right;
-      font-size: 22px;
-      line-height: 20px;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-
-    .closebtn:hover {
-      color: black;
-    }
-  </style>
-
-  <body>
-    <div class="topnav">
-      <a href="/home">Home</a>
-      <a href="/explore">Explore</a>
-      <a href="https://cash.app/$PerezDeDios" target="_blank">Donate</a>
-      <img
-        id="userIcon"
-        src="https://i.imgur.com/XjWCCeV.png"
-        alt="LonelyBall Media"
-        onclick="Dropdown()"
-      />
-      <div class="dropdown dropdown-menu-right">
-        <div class="dropdown-content" id="drop">
-          <a id="account" href="#">My Account</a>
-          <a id="loso" href="#">$$Log$$</a>
-        </div>
+<body>
+  <div class="topnav">
+    <a href="/home">Home</a>
+    <a href="/explore">Explore</a>
+    <a href="https://cash.app/$PerezDeDios" target="_blank">Donate</a>
+    <img id="userIcon" src="https://i.imgur.com/XjWCCeV.png" alt="LonelyBall Media" onclick="Dropdown()" />
+    <div class="dropdown dropdown-menu-right">
+      <div class="dropdown-content" id="drop">
+        <a id="account" href="#">My Account</a>
+        <a id="loso" href="#">$$Log$$</a>
       </div>
     </div>
+  </div>
 
-    <script>
-      document.getElementById("loso").addEventListener("click", async (e) => {
-        if (e.target.innerText === "Sign out") {
-          alert("Signing you out!");
-          localStorage.removeItem("loginUser");
-          window.location.reload();
-        }
-      });
-    </script>
+  <script>
+    document.getElementById("loso").addEventListener("click", async (e) => {
+      if (e.target.innerText === "Sign out") {
+        alert("Signing you out!");
+        localStorage.removeItem("loginUser");
+        window.location.reload();
+      }
+    });
+  </script>
 
-    <script>
-      if (typeof Storage !== "undefined") {
-        if (localStorage.loginUser) {
-          document.getElementById("loso").innerHTML = "Sign out";
-          let data = JSON.parse(localStorage.loginUser);
-          document.getElementById("account").href = `/profile/${data.username}`;
-          document.getElementById("userIcon").src = `${data.icon}`;
-        } else {
-          document.getElementById("loso").innerHTML = "Sign in";
-          document.getElementById("loso").href = "/sign-in";
-        }
+  <script>
+    if (typeof Storage !== "undefined") {
+      if (localStorage.loginUser) {
+        document.getElementById("loso").innerHTML = "Sign out";
+        let data = JSON.parse(localStorage.loginUser);
+        document.getElementById("account").href = `/profile/${data.username}`;
+        document.getElementById("userIcon").src = `${data.icon}`;
       } else {
-        document.getElementById("loso").innerHTML = "<span>&empty;</span>";
-        document.getElementById("account").innerHTML = "<span>&empty;</span>";
+        document.getElementById("loso").innerHTML = "Sign in";
+        document.getElementById("loso").href = "/sign-in";
       }
-    </script>
+    } else {
+      document.getElementById("loso").innerHTML = "<span>&empty;</span>";
+      document.getElementById("account").innerHTML = "<span>&empty;</span>";
+    }
+  </script>
 
-    <script>
-      function Dropdown() {
-        let drop = document.getElementById("drop");
-        if (drop.style.display === "block") {
-          drop.style.display = "none";
-        } else {
-          drop.style.display = "block";
-        }
+  <script>
+    function Dropdown() {
+      let drop = document.getElementById("drop");
+      if (drop.style.display === "block") {
+        drop.style.display = "none";
+      } else {
+        drop.style.display = "block";
       }
-    </script>
+    }
+  </script>
 
-    <div class="text">
-      <h1>Publish</h1>
-      <p>
-        Want to publish your novel or your manga? Contact our staff trough a
-        ticket on the official
-        <a href="https://discord.gg/j3YamACwPu" target="_blank"
-          >Discord Server</a
-        >.
-      </p>
-    </div>
+  <div class="text">
+    <h1>Publish</h1>
+    <p>
+      Want to publish your novel or your manga? Contact our staff trough a
+      ticket on the official
+      <a href="https://discord.gg/j3YamACwPu" target="_blank">Discord Server</a>.
+    </p>
+  </div>
 
-    <div class="flex">
-      <button id="pbb" class="publishButtons" onclick="change1()">
-        Publish Book
-      </button>
-      <button id="pcb" class="publishButtons" onclick="change2()">
-        Publish Chapter
-      </button>
-      <button id="ecb" class="publishButtons" onclick="change3()">
-        Edit Chapter
-      </button>
-      <button id="ebb" class="publishButtons" onclick="change4()">
-        Edit Book
-      </button>
-    </div>
+  <div class="flex">
+    <button id="pbb" class="publishButtons" onclick="change1()">
+      Publish Book
+    </button>
+    <button id="pcb" class="publishButtons" onclick="change2()">
+      Publish Chapter
+    </button>
+    <button id="ecb" class="publishButtons" onclick="change3()">
+      Edit Chapter
+    </button>
+    <button id="ebb" class="publishButtons" onclick="change4()">
+      Edit Book
+    </button>
+  </div>
 
-    <div id="modal"></div>
+  <div id="modal"></div>
 
-    <script>
-      let modal = document.getElementById("modal");
-      function change1() {
-        modal.innerHTML = `<form id="pbForm" class="modal-content" action="/publish-book">
+  <script>
+    let modal = document.getElementById("modal");
+    function change1() {
+      modal.innerHTML = `<form id="pbForm" class="modal-content" action="/publish-book">
       <div class="container">
         <h1>Publish Book</h1>
         <p>Please fill in this form to publish a book.</p>
@@ -446,10 +429,10 @@
         </div>
       </div>
     </form>`;
-      }
+    }
 
-      function change2() {
-        modal.innerHTML = `<form id="pcForm" class="modal-content" action="/publish-chapter">
+    function change2() {
+      modal.innerHTML = `<form id="pcForm" class="modal-content" action="/publish-chapter">
       <div class="container">
         <h1>Publish Chapter</h1>
         <p>Please fill in this form to publish a chapter.</p>
@@ -486,10 +469,10 @@
         </div>
       </div>
     </form>`;
-      }
+    }
 
-      function change3() {
-        modal.innerHTML = `<form id="ecForm" class="modal-content" action="/edit-chapter">
+    function change3() {
+      modal.innerHTML = `<form id="ecForm" class="modal-content" action="/edit-chapter">
       <div class="container">
         <h1>Edit Chapter</h1>
         <p>Please fill in this form to edit a chapter.</p>
@@ -524,10 +507,10 @@
         </div>
       </div>
     </form>`;
-      }
+    }
 
-      function change4() {
-        modal.innerHTML = `<form id="ebForm" class="modal-content" action="/edit-book">
+    function change4() {
+      modal.innerHTML = `<form id="ebForm" class="modal-content" action="/edit-book">
       <div class="container">
         <h1>Edit Book</h1>
         <p>Please fill in this form to edit your book.</p>
@@ -556,44 +539,34 @@
         </div>
       </div>
     </form>`;
-      }
-    </script>
+    }
+  </script>
 
-    <div id="error" class="alert">
-      <span class="closebtn" onclick="this.parentElement.style.display='none';"
-        >&times;</span
-      >
-      Error.
-    </div>
+  <div id="error" class="alert">
+    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+    Error.
+  </div>
 
-    <div id="success" class="alert success">
-      <span class="closebtn" onclick="this.parentElement.style.display='none';"
-        >&times;</span
-      >
-      <strong>Success!</strong> Yay.
-    </div>
+  <div id="success" class="alert success">
+    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+    <strong>Success!</strong> Yay.
+  </div>
 
-    <script>
-      if (typeof Storage !== "undefined") {
-        if (localStorage.loginUser) {
-          let data = JSON.parse(localStorage.loginUser);
-          if (data.author === true) {
-            document.getElementById("inputusername").value = data.username;
-            document.getElementById("inputpass").value = data.password;
-            document.getElementById("inputusername2").value = data.username;
-            document.getElementById("inputpass2").value = data.password;
-            document.getElementById("inputusername3").value = data.username;
-            document.getElementById("inputpass3").value = data.password;
-            document.getElementById("inputusername4").value = data.username;
-            document.getElementById("inputpass4").value = data.password;
-          }
-          if (data.author === false) {
-            document.getElementById("pbb").style.display = "none";
-            document.getElementById("pcb").style.display = "none";
-            document.getElementById("ecb").style.display = "none";
-            document.getElementById("ebb").style.display = "none";
-          }
-        } else {
+  <script>
+    if (typeof Storage !== "undefined") {
+      if (localStorage.loginUser) {
+        let data = JSON.parse(localStorage.loginUser);
+        if (data.author === true) {
+          document.getElementById("inputusername").value = data.username;
+          document.getElementById("inputpass").value = data.password;
+          document.getElementById("inputusername2").value = data.username;
+          document.getElementById("inputpass2").value = data.password;
+          document.getElementById("inputusername3").value = data.username;
+          document.getElementById("inputpass3").value = data.password;
+          document.getElementById("inputusername4").value = data.username;
+          document.getElementById("inputpass4").value = data.password;
+        }
+        if (data.author === false) {
           document.getElementById("pbb").style.display = "none";
           document.getElementById("pcb").style.display = "none";
           document.getElementById("ecb").style.display = "none";
@@ -605,170 +578,173 @@
         document.getElementById("ecb").style.display = "none";
         document.getElementById("ebb").style.display = "none";
       }
-    </script>
+    } else {
+      document.getElementById("pbb").style.display = "none";
+      document.getElementById("pcb").style.display = "none";
+      document.getElementById("ecb").style.display = "none";
+      document.getElementById("ebb").style.display = "none";
+    }
+  </script>
 
-    <script>
-      updateSelect();
-      async function updateSelect() {
-        try {
-          let data = JSON.parse(localStorage.loginUser);
-          let response = await fetch(
-            `https://novels-production.up.railway.app/data/profileBooks/${data.username}`
+  <script>
+    updateSelect();
+    async function updateSelect() {
+      try {
+        let data = JSON.parse(localStorage.loginUser);
+        let response = await fetch(
+          `https://novels-production.up.railway.app/data/profileBooks/${data.username}`
+        );
+        let json = await response.json();
+
+        var options = json.map((v) => {
+          return {
+            text: v,
+            value: v,
+          };
+        });
+
+        var selectBox = document.getElementById("ebooks");
+        var selectBox2 = document.getElementById("ebooks2");
+        var selectBox3 = document.getElementById("ebooks3");
+
+        for (var i = 0, l = options.length; i < l; i++) {
+          var option = options[i];
+          selectBox.options.add(
+            new Option(option.text, option.value, option.selected)
           );
-          let json = await response.json();
+          selectBox2.options.add(
+            new Option(option.text, option.value, option.selected)
+          );
+          selectBox3.options.add(
+            new Option(option.text, option.value, option.selected)
+          );
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  </script>
 
-          var options = json.map((v) => {
+  <script>
+    alert("onload");
+    let select = document.getElementById("ebooks2");
+    console.log(select);
+    document
+      .getElementById("ebooks2")
+      .addEventListener("change", function () {
+        alert("Hello");
+      });
+
+    select.addEventListener("input", async function () {
+      alert("Change");
+      if (select.selectedIndex !== -1) {
+        // An option has been selected
+        var selectedOption = select.options[select.selectedIndex];
+        console.log("Selected option:", selectedOption.value);
+
+        let response = await fetch(
+          `https://novels-production.up.railway.app/data/profileBooks/${selectedOption.value}`
+        );
+        let json = await response.json();
+        console.log(json);
+        if (json) {
+          var options = json.chapters.map((v) => {
             return {
-              text: v,
-              value: v,
+              text: v.name,
+              value: v.name,
             };
           });
 
-          var selectBox = document.getElementById("ebooks");
-          var selectBox2 = document.getElementById("ebooks2");
-          var selectBox3 = document.getElementById("ebooks3");
+          var selectChaptersBox = document.getElementById("echapters");
 
           for (var i = 0, l = options.length; i < l; i++) {
             var option = options[i];
-            selectBox.options.add(
-              new Option(option.text, option.value, option.selected)
-            );
-            selectBox2.options.add(
-              new Option(option.text, option.value, option.selected)
-            );
-            selectBox3.options.add(
+            selectChaptersBox.options.add(
               new Option(option.text, option.value, option.selected)
             );
           }
-        } catch (err) {
-          console.log(err);
+
+          alert("This is a test.");
         }
+      } else {
+        // No option has been selected
+        console.log("Please select an option");
       }
-    </script>
+    });
+  </script>
 
-    <script>
-      alert("onload");
-      let select = document.getElementById("ebooks2");
-      console.log(select);
-      document
-        .getElementById("ebooks2")
-        .addEventListener("change", function () {
-          alert("Hello");
-        });
-
-      select.addEventListener("input", async function () {
-        alert("Change");
-        if (select.selectedIndex !== -1) {
-          // An option has been selected
-          var selectedOption = select.options[select.selectedIndex];
-          console.log("Selected option:", selectedOption.value);
-
-          let response = await fetch(
-            `https://novels-production.up.railway.app/data/profileBooks/${selectedOption.value}`
-          );
-          let json = await response.json();
-          console.log(json);
-          if (json) {
-            var options = json.chapters.map((v) => {
-              return {
-                text: v.name,
-                value: v.name,
-              };
-            });
-
-            var selectChaptersBox = document.getElementById("echapters");
-
-            for (var i = 0, l = options.length; i < l; i++) {
-              var option = options[i];
-              selectChaptersBox.options.add(
-                new Option(option.text, option.value, option.selected)
-              );
-            }
-
-            alert("This is a test.");
-          }
-        } else {
-          // No option has been selected
-          console.log("Please select an option");
-        }
-      });
-    </script>
-
-    <footer>
-      <div class="footer-content">
-        <h3>Copyright © 2023 LonelyBall Media</h3>
-        <div class="socials">
-          <a href="https://discord.gg/j3YamACwPu"
-            ><i class="fa fa-discord"></i
-          ></a>
-          <a href="https://twitter.com/LoneOrangeBall"
-            ><i class="fa fa-twitter"></i
-          ></a>
-        </div>
+  <footer>
+    <div class="footer-content">
+      <h3>Copyright © 2023 LonelyBall Media</h3>
+      <div class="socials">
+        <a href="https://discord.gg/j3YamACwPu"><i class="fa fa-discord"></i></a>
+        <a href="https://twitter.com/LoneOrangeBall"><i class="fa fa-twitter"></i></a>
       </div>
-    </footer>
+    </div>
+  </footer>
 
-    <script>
-      const form = document.getElementById("pbForm");
-      const form2 = document.getElementById("pcForm");
-      const error = document.getElementById("error");
-      const success = document.getElementById("success");
+  <script>
+    const form = document.getElementById("pbForm");
+    const form2 = document.getElementById("pcForm");
+    const error = document.getElementById("error");
+    const success = document.getElementById("success");
 
-      form.addEventListener("submit", async (e) => {
-        e.preventDefault();
-        const data = Object.fromEntries(new FormData(form).entries());
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const data = Object.fromEntries(new FormData(form).entries());
 
-        const response = await fetch("/publish-book", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ data }),
-        });
-
-        if (response.ok) {
-          // Display success message here
-          const successData = await response.json();
-          success.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-      <strong>Success!</strong> ${successData.success}`;
-          success.style.display = "block";
-          alert(successData.success);
-        } else {
-          const errorData = await response.json();
-          error.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-  ${errorData.error}`;
-          error.style.display = "block";
-          alert(errorData.error);
-        }
+      const response = await fetch("/publish-book", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ data }),
       });
 
-      form2.addEventListener("submit", async (e) => {
-        e.preventDefault();
-        const data = Object.fromEntries(new FormData(form2).entries());
-
-        const response = await fetch("/publish-chapter", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ data }),
-        });
-
-        if (response.ok) {
-          // Display success message here
-          const successData = await response.json();
-          success.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+      if (response.ok) {
+        // Display success message here
+        const successData = await response.json();
+        success.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
       <strong>Success!</strong> ${successData.success}`;
-          success.style.display = "block";
-          alert(successData.success);
-        } else {
-          const errorData = await response.json();
-          error.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+        success.style.display = "block";
+        alert(successData.success);
+      } else {
+        const errorData = await response.json();
+        error.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
   ${errorData.error}`;
-          error.style.display = "block";
-          alert(errorData.error);
-        }
+        error.style.display = "block";
+        alert(errorData.error);
+      }
+    });
+
+    form2.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const data = Object.fromEntries(new FormData(form2).entries());
+
+      const response = await fetch("/publish-chapter", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ data }),
       });
-    </script>
-  </body>
+
+      if (response.ok) {
+        // Display success message here
+        const successData = await response.json();
+        success.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+      <strong>Success!</strong> ${successData.success}`;
+        success.style.display = "block";
+        alert(successData.success);
+      } else {
+        const errorData = await response.json();
+        error.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+  ${errorData.error}`;
+        error.style.display = "block";
+        alert(errorData.error);
+      }
+    });
+  </script>
+</body>
+
 </html>

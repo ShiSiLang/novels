@@ -15,7 +15,7 @@
   <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.1.1/css/all.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
 </head>
-<link href='https://fonts.googleapis.com/css?family=Nunito' rel='stylesheet'>
+<link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" />
 <style>
   body {
     background-size: 400% 400%;
@@ -40,8 +40,8 @@
     border-radius: 50%;
     transition-duration: 0.3s;
     display: inline-block;
-    width: 55px;
-    height: 50;
+    width: 60px;
+    height: 60px;
     position: absolute;
     margin-bottom: 2px;
     right: 0;
@@ -75,7 +75,7 @@
 
   .dropdown-menu-right {
     float: right;
-    top: 57px;
+    top: 65px;
     right: 160px;
   }
 
@@ -357,14 +357,15 @@
 
       const div = document.getElementById("chapters");
       for (let i = 0; i < json.chapters.length; i++) {
-        div.innerHTML += `<button onclick="window.location.href='/read/${json.name}/${i + 1}'">${json.chapters[i].name}</button> <hr>`;
+        div.innerHTML += `<button onclick="window.location.href='/read/${json.name
+          }/${i + 1}'">${json.chapters[i].name}</button> <hr>`;
       }
 
       const button = document.getElementById("fb");
       let user = JSON.parse(localStorage.loginUser);
       if (json.followers.includes(user.username)) {
         button.innerHTML = `<span>💔</span>
-  <span class="favtext">Remove from favorites</span>`
+  <span class="favtext">Remove from favorites</span>`;
       }
     } catch (err) {
       const div = document.getElementById("nca");
@@ -416,7 +417,7 @@
 
   <script>
     function Dropdown() {
-      let drop = document.getElementById("drop")
+      let drop = document.getElementById("drop");
       if (drop.style.display === "block") {
         drop.style.display = "none";
       } else {
@@ -505,7 +506,7 @@
           let json = await bookData.json();
           if (json.followers.includes(user.username)) {
             button.innerHTML = `<span>💔</span>
-  <span class="favtext">Remove from favorites</span>`
+  <span class="favtext">Remove from favorites</span>`;
           } else if (!json.followers.includes(user.username)) {
             button.innerHTML = `<span>❤️</span>
       <span class="favtext">Add to favorites</span>`;

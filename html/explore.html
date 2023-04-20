@@ -41,8 +41,8 @@
         border-radius: 50%;
         transition-duration: 0.3s;
         display: inline-block;
-        width: 55px;
-        height: 50;
+        width: 60px;
+        height: 60px;
         position: absolute;
         margin-bottom: 2px;
         right: 0;
@@ -76,7 +76,7 @@
 
     .dropdown-menu-right {
         float: right;
-        top: 57px;
+        top: 65px;
         right: 160px;
     }
 
@@ -330,8 +330,10 @@
 <script type="text/javascript">
     async function changeDivContent() {
         try {
-            let response = await fetch('https://novels-production.up.railway.app/data/books/null');
-            let json = await response.json()
+            let response = await fetch(
+                "https://novels-production.up.railway.app/data/books/null"
+            );
+            let json = await response.json();
             const imageGrid = document.getElementById("image-grid");
 
             let sorted = json.sort(function (a, b) {
@@ -340,16 +342,24 @@
 
             for (i = 0; i < sorted.length; i++) {
                 if (i === 0) {
-                    imageGrid.innerHTML = `<a class="image-grid-col-2 image-grid-row-2" href="/explore/${sorted[0].name.replace(/\s/g, "")}" title="${sorted[0].name}"><img src="${sorted[0].icon}" alt="${sorted[0].name}" /></a>`
+                    imageGrid.innerHTML = `<a class="image-grid-col-2 image-grid-row-2" href="/explore/${sorted[0].name.replace(
+                        /\s/g,
+                        ""
+                    )}" title="${sorted[0].name}"><img src="${sorted[0].icon}" alt="${sorted[0].name
+                        }" /></a>`;
                 } else {
-                    imageGrid.innerHTML += `<a href="/explore/${sorted[i].name.replace(/\s/g, "")}" title="${sorted[i].name}"><img src="${sorted[i].icon}" alt="${sorted[i].name}" /></a>`
+                    imageGrid.innerHTML += `<a href="/explore/${sorted[i].name.replace(
+                        /\s/g,
+                        ""
+                    )}" title="${sorted[i].name}"><img src="${sorted[i].icon}" alt="${sorted[i].name
+                        }" /></a>`;
                 }
             }
         } catch (err) {
-            console.log(err)
-            alert('Could not fetch data.')
+            console.log(err);
+            alert("Could not fetch data.");
         }
-    };
+    }
 </script>
 
 <body onload="changeDivContent()">
@@ -448,7 +458,9 @@
                 linkTag.setAttribute("href", webLink);
                 linkTag.click();
             };
-            let response = await fetch("https://novels-production.up.railway.app/data/books/null");
+            let response = await fetch(
+                "https://novels-production.up.railway.app/data/books/null"
+            );
             let json = await response.json();
             emptyArray = json.filter((data) => {
                 return data.name
