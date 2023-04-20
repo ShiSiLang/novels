@@ -140,7 +140,7 @@ app.get("/data/:type/:other", async (req, res) => {
     if (!book) return res.status(400).json({ error: `Not Found` });
 
     for (i = 0; i < book.chapters.length; i++) {
-      console.log(book.chapters[i])
+      //console.log(book.chapters[i])
       for (i2 = 0; i2 < book.chapters[i].comments.length; i2++) {
         let comment = book.chapters[i].comments[i2];
         let userData = await profileShema.findOne({
@@ -216,6 +216,7 @@ app.get("/review/:type/:type2/:reviewID/:password", async (req, res) => {
       if (getSystem.latestChapters.length >= 25)
         getSystem.latestChapters.pop();
       getSystem.latestChapters.push(data.cName);
+      getSystem.save();
     }
 
     res.status(200).json({
