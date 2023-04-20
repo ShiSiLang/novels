@@ -29,7 +29,9 @@ body {
 }
 
 body::before,
-body::after {
+body::after,
+body::before::before,
+body::after::after {
   content: "";
   position: absolute;
   width: 50px;
@@ -45,10 +47,22 @@ body::before {
   animation-delay: 0s;
 }
 
+body::before::before {
+  bottom: 0;
+  left: 20%;
+  animation-delay: 3s;
+}
+
 body::after {
   bottom: 0;
   left: 30%;
   animation-delay: 5s;
+}
+
+body::after::after {
+  bottom: 0;
+  left: 40%;
+  animation-delay: 7s;
 }
 
 @keyframes bubble-up {
@@ -59,9 +73,10 @@ body::after {
     transform: translateY(-100vh) rotate(360deg);
   }
   100% {
-    transform: translateY(100vh) rotate(720deg);
+    transform: translateY(-100vh) rotate(720deg);
   }
 }
+
   .flex {
     display: flex;
     justify-content: center;
