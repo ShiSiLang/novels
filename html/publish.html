@@ -673,9 +673,9 @@
   </script>
 
   <script>
-    var select = document.getElementById("ebooks2");
-
-    select.addEventListener("change", async function () {
+    document.getElementById("ebooks2").addEventListener("change", async (v) => {
+      console.log(v)
+      alert(JSON.stringify(v))
       if (select.selectedIndex !== -1) {
         // An option has been selected
         var selectedOption = select.options[select.selectedIndex];
