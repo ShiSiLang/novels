@@ -19,8 +19,6 @@
 <link href='https://fonts.googleapis.com/css?family=Nunito' rel='stylesheet'>
 <style>
 body {
-  position: relative;
-  height: 100vh;
   background-size: 400% 400%;
   margin: 0;
   background-color: #ffcc99;
@@ -28,52 +26,24 @@ body {
   font-size: 22px;
 }
 
-body::before,
-body::after,
-body::before::before,
-body::after::after {
-  content: "";
-  position: absolute;
+.bubble {
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  background-color: purple;
-  animation: bubble-up 10s ease-in-out infinite;
+  background-color: rgba(255, 255, 255, 0.2);
+  position: absolute;
+  animation: float 5s ease-in-out infinite;
 }
 
-body::before {
-  bottom: 0;
-  left: 10%;
-  animation-delay: 0s;
-}
-
-body::before::before {
-  bottom: 0;
-  left: 20%;
-  animation-delay: 3s;
-}
-
-body::after {
-  bottom: 0;
-  left: 30%;
-  animation-delay: 5s;
-}
-
-body::after::after {
-  bottom: 0;
-  left: 40%;
-  animation-delay: 7s;
-}
-
-@keyframes bubble-up {
+@keyframes float {
   0% {
-    transform: translateY(100vh) rotate(0);
+    transform: translateY(0);
   }
   50% {
-    transform: translateY(-100vh) rotate(360deg);
+    transform: translateY(-50px);
   }
   100% {
-    transform: translateY(-100vh) rotate(720deg);
+    transform: translateY(0);
   }
 }
 
@@ -417,6 +387,24 @@ const newArray = [];
       Follow Orange Ball's <a href="https://twitter.com/LoneOrangeBall" target="_blank">Twitter</a>.
     </p>
   </div>
+
+<div id="bubble-container"></div>
+
+<script>
+const numBubbles = 4; // number of bubbles to create
+const bubbleContainer = document.getElementById('bubble-container'); // get bubble container element
+
+// create bubbles and append to container
+for (let i = 0; i < numBubbles; i++) {
+  const bubble = document.createElement('span');
+  bubble.classList.add('bubble');
+  bubble.style.left = `${Math.random() * 100}%`; // set random left position
+  bubble.style.animationDelay = `${i}s`; // stagger animation delay
+  bubbleContainer.appendChild(bubble);
+}
+
+</script>
+
 
   <footer>
     <div class="footer-content">
