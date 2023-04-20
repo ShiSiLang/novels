@@ -329,12 +329,9 @@
         let json = await books.json();
         let latestJson = await latest.json();
 
-        let newArray = json.map((e) => {
-  return {
-    ...e,
-    chapters: e.chapters.filter(v => latestJson.includes(v.name))
-  }
-});
+        for(I=0; I > json.length; I ++) {
+        json[I].chapters.filter(v => latestJson.includes(v.name))
+        }
 
         const myBooks = document.getElementById("myBooks");
 
