@@ -329,12 +329,16 @@
         let json = await books.json();
         let latestJson = await latest.json();
 
-        for(I=0; I > json.length; I ++) {
-        json[I].chapters.filter(v => latestJson.includes(v.name))
-        }
-
         const myBooks = document.getElementById("myBooks");
+const newArray = [];
 
+    for (const book of json) {
+      const bookChapters = book.chapters.map(chapter => chapter.name);
+      const hasMatchingChapter = latestJson.some(chapterName => bookChapters.includes(chapterName));
+      if (hasMatchingChapter) {
+        newArray.push(book);
+      }
+    }
         alert(JSON.stringify(newArray))
 
         if (newArray[0].length !== 0) {
