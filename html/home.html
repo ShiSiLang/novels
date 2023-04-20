@@ -330,8 +330,12 @@
         let latestJson = await latest.json();
 
         let newArray = json.map((e) => {
-          return e.chapters.filter(v => latestJson.includes(v.name))
-        });
+  return {
+    ...e,
+    chapters: e.chapters.filter(v => latestJson.includes(v.name))
+  }
+});
+
         const myBooks = document.getElementById("myBooks");
 
         alert(JSON.stringify(newArray))
