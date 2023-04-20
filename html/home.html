@@ -28,8 +28,7 @@
   font-size: 22px;
 }
 
-body::before,
-body::after {
+.bubble {
   content: "";
   position: absolute;
   width: 50px;
@@ -39,18 +38,29 @@ body::after {
   animation: bubble 10s ease-in-out infinite;
 }
 
-body::before {
+.bubble:nth-child(1) {
   top: 10%;
   left: 10%;
   animation-delay: 0s;
 }
 
-body::after {
+.bubble:nth-child(2) {
   top: 30%;
   left: 30%;
   animation-delay: 5s;
 }
 
+.bubble:nth-child(3) {
+  top: 50%;
+  left: 50%;
+  animation-delay: 2s;
+}
+
+.bubble:nth-child(4) {
+  top: 70%;
+  left: 70%;
+  animation-delay: 7s;
+}
 
 @keyframes bubble {
   0% {
@@ -63,6 +73,7 @@ body::after {
     transform: translateY(0) rotate(720deg);
   }
 }
+
 
   .flex {
     display: flex;
