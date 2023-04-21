@@ -242,6 +242,7 @@
       <div class="dropdown-content" id="drop">
         <a id="account" href="#">My Account</a>
         <a id="loso" href="#">$$Log$$</a>
+        <a id="mode" href="#">Normal Mode</a>
       </div>
     </div>
   </div>
@@ -252,6 +253,15 @@
         alert("Signing you out!");
         localStorage.removeItem("loginUser");
         window.location.reload();
+      }
+    });
+    document.getElementById("mode").addEventListener("click", async (e) => {
+      if (e.target.innerText === "Normal Mode") {
+        alert("Changing to dark mode!");
+        e.target.innerText = "Dark Mode"
+      } else if (e.target.innerText === "Dark Mode") {
+        alert("Changing to normal mode!");
+        e.target.innerText = "Normal Mode"
       }
     });
   </script>
