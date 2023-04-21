@@ -18,36 +18,13 @@
 </head>
 <link href='https://fonts.googleapis.com/css?family=Nunito' rel='stylesheet'>
 <style>
-body {
-  background-size: 400% 400%;
-  margin: 0;
-  background-color: #ffcc99;
-  font-family: 'Nunito';
-  font-size: 22px;
-}
-
-.bubble {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.2);
-  position: absolute;
-  animation: float 5s ease-in-out infinite;
-}
-
-@keyframes float {
-  0% {
-    top: 100%;
+  body {
+    background-size: 400% 400%;
+    margin: 0;
+    background-color: #ffcc99;
+    font-family: 'Nunito';
+    font-size: 22px;
   }
-  50% {
-    top: calc(50% - 50px);
-  }
-  100% {
-    top: 0;
-    display: none;
-  }
-}
-
 
   .flex {
     display: flex;
@@ -353,15 +330,15 @@ body {
         let latestJson = await latest.json();
 
         const myBooks = document.getElementById("myBooks");
-const newArray = [];
+        const newArray = [];
 
-    for (const book of json) {
-      const bookChapters = book.chapters.map(chapter => chapter.name);
-      const hasMatchingChapter = latestJson.some(chapterName => bookChapters.includes(chapterName));
-      if (hasMatchingChapter) {
-        newArray.push(book);
-      }
-    }
+        for (const book of json) {
+          const bookChapters = book.chapters.map(chapter => chapter.name);
+          const hasMatchingChapter = latestJson.some(chapterName => bookChapters.includes(chapterName));
+          if (hasMatchingChapter) {
+            newArray.push(book);
+          }
+        }
 
         if (newArray[0].length !== 0) {
           for (i = 0; i < newArray.length; i++) {
@@ -370,7 +347,6 @@ const newArray = [];
         }
       } catch (err) {
         console.log(err)
-        alert('Could not fetch data.')
       }
     };
   </script>
@@ -388,24 +364,6 @@ const newArray = [];
       Follow Orange Ball's <a href="https://twitter.com/LoneOrangeBall" target="_blank">Twitter</a>.
     </p>
   </div>
-
-<div id="bubble-container"></div>
-
-<script>
-const numBubbles = 4; // number of bubbles to create
-const bubbleContainer = document.getElementById('bubble-container'); // get bubble container element
-
-// create bubbles and append to container
-for (let i = 0; i < numBubbles; i++) {
-  const bubble = document.createElement('span');
-  bubble.classList.add('bubble');
-  bubble.style.left = `${Math.random() * 100}%`; // set random left position
-  bubble.style.animationDelay = `${i}s`; // stagger animation delay
-  bubbleContainer.appendChild(bubble);
-}
-
-</script>
-
 
   <footer>
     <div class="footer-content">
