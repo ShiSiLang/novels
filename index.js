@@ -318,6 +318,10 @@ app.get("/profile/:username", async (req, res) => {
     });
 
   file = file.replaceAll("$$username$$", userData.username);
+  file = file.replace(
+    "$$banner$$",
+    userData?.bio || "https://i.imgur.com/XjWCCeV.png"
+  );
   file = file.replaceAll("$$avatar$$", iconLink);
   file = file.replaceAll("$$followers$$", userData.followers);
   file = file.replaceAll("$$comments$$", comments.length);
@@ -325,7 +329,7 @@ app.get("/profile/:username", async (req, res) => {
   file = file.replace("$$twitter$$", userData.twitter || "#");
   file = file.replace(
     "$$bio$$",
-    userData.bio || `Welcome to ${userData.username}'s profile!`
+    userData?.bio || `Welcome to ${userData.username}'s profile!`
   );
   file = file.replace("$$date$$", userData.date);
   res.send(file);
@@ -546,6 +550,7 @@ app.post("/edit", upload.single("icon"), async (req, res) => {
     icon: image?.buffer || data.icon,
     discord: html?.discord || data?.discord || null,
     twitter: html?.twitter || data?.twitter || null,
+    bio: html?.bio?.replace(/</g, "&lt;") || data?.bio || null,
   };
 
   function isDiscord(url) {
@@ -571,6 +576,7 @@ app.post("/edit", upload.single("icon"), async (req, res) => {
   data.icon = params.icon;
   data.discord = params.discord;
   data.twitter = params.twitter;
+  data.bio = params.bio;
   data.save();
 
   return res.status(200).json({ success: `Profile successfully edited.` });

@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.1.1/css/all.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
 </head>
-<link href='https://fonts.googleapis.com/css?family=Nunito' rel='stylesheet'>
+<link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" />
 <style>
     body {
         background-size: 400% 400%;
@@ -162,18 +162,44 @@
         color: #FFFFFF;
     }
 
-    /*User Card Start*/
-
-    .card {
-        box-shadow: 0px 0px 10px #956a9d;
-        max-width: 550px;
-        margin: 0 auto;
-        margin-bottom: 100px;
+    /*Profile Start*/
+    .profile {
+        max-width: 100%;
         text-align: center;
-        border: 3px solid #956a9d;
-        border-radius: 16px;
-        background-color: #c499cc;
         color: white;
+    }
+
+    .profile .images {
+        max-width: 100%;
+        position: relative;
+        margin-bottom: 10px;
+    }
+
+    .images .banner {
+        width: 100%;
+        height: 55%;
+    }
+
+    .images .avatar {
+        width: 20%;
+        border-radius: 50%;
+        position: absolute;
+        left: 550px;
+        top: 300px;
+    }
+
+    .profile .ctext {
+        margin-top: 150px;
+    }
+
+    .ctext a {
+        transition: color .4s ease;
+        text-decoration: none;
+        color: white;
+    }
+
+    .ctext a:hover {
+        color: black;
     }
 
     button {
@@ -199,9 +225,11 @@
     }
 
     .cardButton {
-        width: 100%;
-        margin-bottom: 1px;
-        padding: 10px;
+        width: 250px;
+        margin: 10px;
+        margin-top: 25px;
+        text-align: center;
+        padding: 5px;
     }
 
     /*User Card End*/
@@ -534,6 +562,34 @@
             }
         }
     </script>
+    <div class="profile">
+        <div class="images">
+            <img class="banner" src="$$banner$$" alt="User Banner" />
+            <img class="avatar" src="$$avatar$$" alt="User Avatar" />
+        </div>
+        <div class="ctext">
+            <h1>$$username$$</h1>
+            <h1>$$username$$</h1>
+            <h2>$$bio$$</h2>
+            <h3>Followers: $$followers$$</h3>
+            <h3>Comments: $$comments$$</h3>
+            <h3>Joined: $$date$$</h3>
+            <a href="$$discord$$"><i class="fa fa-discord"></i></a>
+            <a href="$$twitter$$"><i class="fa fa-twitter"></i></a>
+            <div class="flex">
+                <button class="cardButton" id="epb" onclick="document.getElementById('id01').style.display='block'">
+                    Edit Profile
+                </button>
+                <button class="cardButton" id="fpb">Follow Profile</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="text">
+        <h1>My Books</h1>
+    </div>
+
+    <div id="myBooks" class="media-scroller snaps-inline"></div>
 
     <div class="wrapper">
         <div class="search-input">
@@ -546,52 +602,30 @@
         </div>
     </div>
 
-    <div class="card">
-        <img src="$$avatar$$" alt="User Avatar" style="width:100%" />
-        <h1>$$username$$</h1>
-        <h2>Followers: $$followers$$</h2>
-        <h2>Comments: $$comments$$</h2>
-        <p class="date">Joined: $$date$$</p>
-        <div class="socials">
-            <a href="$$discord$$"><i class="fa fa-discord"></i></a>
-            <a href="$$twitter$$"><i class="fa fa-twitter"></i></a>
-        </div>
-        <p>
-            <button class="cardButton" id="epb" onclick="document.getElementById('id01').style.display='block'">
-                Edit Profile
-            </button>
-        </p>
-        <p>
-            <button class="cardButton" id="fpb">Follow Profile</button>
-        </p>
-    </div>
-
-    <div class="text">
-        <h1>My Books</h1>
-    </div>
-
-    <div id="myBooks" class="media-scroller snaps-inline"></div>
-
     <script>
-        myBooks()
+        myBooks();
         async function myBooks() {
             try {
-                let response = await fetch('https://novels-production.up.railway.app/data/profilebooks/$$username$$');
-                let books = await fetch('https://novels-production.up.railway.app/data/books/null');
+                let response = await fetch(
+                    "https://novels-production.up.railway.app/data/profilebooks/$$username$$"
+                );
+                let books = await fetch(
+                    "https://novels-production.up.railway.app/data/books/null"
+                );
                 let json = await response.json();
                 let bookjson = await books.json();
 
-                let newArray = bookjson.filter(v => json.includes(v.name))
+                let newArray = bookjson.filter((v) => json.includes(v.name));
                 const myBooks = document.getElementById("myBooks");
 
                 for (i = 0; i < newArray.length; i++) {
-                    myBooks.innerHTML += `<a href="https://novels-production.up.railway.app/explore/${newArray[i].name}"><img src="${newArray[i].icon}" alt="${newArray[i].name}"></a>`
+                    myBooks.innerHTML += `<a href="https://novels-production.up.railway.app/explore/${newArray[i].name}"><img src="${newArray[i].icon}" alt="${newArray[i].name}"></a>`;
                 }
             } catch (err) {
-                console.log(err)
-                alert('Could not fetch data.')
+                console.log(err);
+                alert("Could not fetch data.");
             }
-        };
+        }
     </script>
 
     <div id="id01" class="modal">
@@ -605,6 +639,8 @@
                 <input type="text" placeholder="Enter new discord" name="discord" autocomplete="off" />
                 <label for="twitter"><b>Edit Twitter Link</b></label>
                 <input type="text" placeholder="Enter new twitter" name="twitter" autocomplete="off" />
+                <label for="twitter"><b>Edit Bio</b></label>
+                <input type="text" placeholder="Enter new bio" name="bio" autocomplete="off" />
             </div>
             <div class="container">
                 <button type="submit" onclick="document.getElementById('id01').style.display='none'" class="submitbtn">
@@ -613,7 +649,6 @@
             </div>
         </form>
     </div>
-
 
     <div id="error" class="alert">
         <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
@@ -713,7 +748,9 @@ ${errorData.error}`;
                 linkTag.setAttribute("href", webLink);
                 linkTag.click();
             };
-            let response = await fetch("https://novels-production.up.railway.app/data/profiles/null");
+            let response = await fetch(
+                "https://novels-production.up.railway.app/data/profiles/null"
+            );
             let json = await response.json();
             emptyArray = json.filter((data) => {
                 return data
