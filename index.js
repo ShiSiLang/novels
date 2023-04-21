@@ -213,8 +213,7 @@ app.get("/review/:type/:type2/:reviewID/:password", async (req, res) => {
       bookData.save();
 
       let getSystem = await system.findOne({ id: "6427a45e2d7d901440fc43cf" });
-      if (getSystem.latestChapters.length >= 25)
-        getSystem.latestChapters.pop();
+      if (getSystem.latestChapters.length >= 25) getSystem.latestChapters.pop();
       getSystem.latestChapters.push(data.cName);
       getSystem.save();
     }
@@ -324,6 +323,10 @@ app.get("/profile/:username", async (req, res) => {
   file = file.replaceAll("$$comments$$", comments.length);
   file = file.replace("$$discord$$", userData.discord || "#");
   file = file.replace("$$twitter$$", userData.twitter || "#");
+  file = file.replace(
+    "$$bio$$",
+    userData.bio || `Welcome to ${userData.username}'s profile!`
+  );
   file = file.replace("$$date$$", userData.date);
   res.send(file);
 });
@@ -351,6 +354,8 @@ app.post("/sign-up", upload.single("icon"), async (req, res) => {
     username: html.uname.replace(/</g, "&lt;"),
     password: html.psw.replace(/</g, "&lt;"),
     icon: image.buffer,
+    bio: "",
+    banner: "",
     date: newdate,
     followers: 0,
     discord: null,
