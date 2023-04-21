@@ -320,7 +320,7 @@ app.get("/profile/:username", async (req, res) => {
   file = file.replaceAll("$$username$$", userData.username);
   file = file.replace(
     "$$banner$$",
-    userData?.bio || "https://i.imgur.com/XjWCCeV.png"
+    userData?.banner || "https://i.imgur.com/XjWCCeV.png"
   );
   file = file.replaceAll("$$avatar$$", iconLink);
   file = file.replaceAll("$$followers$$", userData.followers);
