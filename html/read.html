@@ -385,12 +385,13 @@
     try {
       let response = await fetch($$novel$$);
       let json = await response.json();
+      let index = Number('$$previous$$');
 
-      if (json.chapters[json.chapters.length - 2] === undefined) {
+      if (json.chapters[index - 1] === undefined) {
         const previousButton = document.getElementById("previousButton");
         previousButton.style.display = "none";
       }
-      if (json.chapters[json.chapters.length + 1] === undefined) {
+      if (json.chapters[index + 1] === undefined) {
         const nextButton = document.getElementById("nextButton");
         nextButton.style.display = "none";
       }
@@ -398,8 +399,7 @@
       const div2 = document.getElementById("credits");
       const div3 = document.getElementById("comments");
       const div4 = document.getElementById("commentstitle");
-      let index = Number('$$previous$$');
-
+      
       let novelContent = json.chapters[index].content;
 
       function formatString(content) {
