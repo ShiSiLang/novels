@@ -13,9 +13,9 @@
   <meta name="theme-color" content="#cbc3e3" />
   <meta name="twitter:card" content="summary_large_image" />
   <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.1.1/css/all.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" />
 </head>
-<link href='https://fonts.googleapis.com/css?family=Nunito' rel='stylesheet'>
 <style>
   body {
     background-size: 400% 400%;
@@ -198,9 +198,16 @@
     transition: 1s;
   }
 
-  .pnButtons {
+  .topButtons {
     width: 100%;
     margin: 25px 50px 25px 50px;
+  }
+
+  .pnButtons {
+    width: 250px;
+    margin: 10px;
+    text-align: center;
+    padding: 5px;
   }
 
   /*Buttons End*/
@@ -385,7 +392,7 @@
     try {
       let response = await fetch($$novel$$);
       let json = await response.json();
-      let index = Number('$$previous$$');
+      let index = Number("$$previous$$");
 
       if (json.chapters[index - 1] === undefined) {
         const previousButton = document.getElementById("previousButton");
@@ -399,11 +406,14 @@
       const div2 = document.getElementById("credits");
       const div3 = document.getElementById("comments");
       const div4 = document.getElementById("commentstitle");
-      
+
       let novelContent = json.chapters[index].content;
 
       function formatString(content) {
-        let step1 = content.split(" ").join(" ").replaceAll("\n\n", "</br></br>");
+        let step1 = content
+          .split(" ")
+          .join(" ")
+          .replaceAll("\n\n", "</br></br>");
         let step2 = step1.replaceAll(/\*\*(.*?)\*\*/g, "<b>$1</b>");
         let step3 = step2.replaceAll(/\*(.*?)\*/g, "<em>$1</em>");
         let step4 = step3.replaceAll(/\_(.*?)\_/g, "<ins>$1</ins>");
@@ -416,17 +426,17 @@
           <h1><b>${json.name}</b></h1>
           <p>${formatString(json.chapters[index].intro)}</p>
           <h2>${json.chapters[index].name}</h2>
-          <p>${novelContent}</p>`
+          <p>${novelContent}</p>`;
       div2.innerHTML = `	
           <h1>Credits</h1>
           <p>${formatString(json.chapters[index].credits)}</p>
-          `
+          `;
       if (json.chapters[index]?.comments.length === 0) {
         div4.innerHTML = `
-            <p>No comments for this chapter</p>`
+            <p>No comments for this chapter</p>`;
       } else {
         for (let i = 0; i < json.chapters[index].comments.length; i++) {
-          let chapter = json.chapters[index]
+          let chapter = json.chapters[index];
           div3.innerHTML += `
               <div class="comment mt-4 text-justify float-left">
                 <img src="${chapter.comments[i].icon}" alt=" " class="rounded-circle" width="40" height="40">
@@ -434,19 +444,18 @@
                 <span>- ${chapter.comments[i].date}</span>
                 <br>
                 <p>${chapter.comments[i].comment}</p>
-                </div>`
+                </div>`;
         }
       }
     } catch (err) {
-      console.log(err)
+      console.log(err);
       const div = document.getElementById("novel");
-      div.innerHTML += `<h1>Chapter Not Found</h1>`
+      div.innerHTML += `<h1>Chapter Not Found</h1>`;
     }
-  };
+  }
 </script>
 
 <body onload="changeDivContent()">
-
   <div class="topnav">
     <a href="/home">Home</a>
     <a href="/explore">Explore</a>
@@ -489,7 +498,7 @@
 
   <script>
     function Dropdown() {
-      let drop = document.getElementById("drop")
+      let drop = document.getElementById("drop");
       if (drop.style.display === "block") {
         drop.style.display = "none";
       } else {
@@ -499,19 +508,21 @@
   </script>
 
   <div class="flex">
-    <button class="pnButtons" style="width:auto;" onclick="window.location.href='/explore/$$book$$'">Go Back</button>
-    <button class="pnButtons" style="width:auto;" onclick="toggleText()">Toggle Text</button>
+    <button class="topButtons" style="width:auto;" onclick="window.location.href='/explore/$$book$$'">
+      Go Back
+    </button>
+    <button class="topButtons" style="width:auto;" onclick="toggleText()">
+      Toggle Text
+    </button>
   </div>
 
   <div class="text text-novel" id="novel"></div>
 
   <div class="flex">
-    <button id="previousButton" class="pnButtons" style="width:auto;"
-      onclick="window.location.href='/read/$$book$$/$$previous$$'">Last
-      Chapter</button>
-    <button id="nextButton" class="pnButtons" style="width:auto;"
-      onclick="window.location.href='/read/$$book$$/$$next$$'">Next
-      Chapter</button>
+    <button id="pnButtons" class="pnButtons" style="width:auto;"
+      onclick="window.location.href='/read/$$book$$/$$previous$$'"><i class="fa fa-chevron-circle-left"></i></button>
+    <button id="pnButtons" class="pnButtons" style="width:auto;"
+      onclick="window.location.href='/read/$$book$$/$$next$$'"><i class="fa fa-chevron-circle-right"></i></button>
   </div>
 
   <div class="text" id="credits"></div>
@@ -529,22 +540,25 @@
   </section>
 
   <div class="flex">
-    <button class="pnButtons" id="commentButton" style="width:auto;">Comment</button>
+    <button class="pnButtons" id="commentButton" style="width:auto;">
+      Comment
+    </button>
   </div>
 
   <script>
-    document.getElementById("commentButton").addEventListener("click", async (e) => {
-      if (!localStorage.loginUser) {
-        e.preventDefault();
-        error.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+    document
+      .getElementById("commentButton")
+      .addEventListener("click", async (e) => {
+        if (!localStorage.loginUser) {
+          e.preventDefault();
+          error.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
   Sign-In to comment!`;
-        error.style.display = "block";
-      } else {
-        document.getElementById('modal').style.display = 'block';
-      }
-    });
+          error.style.display = "block";
+        } else {
+          document.getElementById("modal").style.display = "block";
+        }
+      });
   </script>
-
 
   <div id="error" class="alert">
     <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
@@ -563,7 +577,7 @@
       <div class="container">
         <h1>Comment</h1>
         <p>Please follow the tos while commenting.</p>
-        <hr>
+        <hr />
         <input id="inputusername" type="hidden" name="uname" value="NOTHING" />
         <input id="inputpass" type="hidden" name="psw" value="NOTHING" />
 
@@ -574,8 +588,9 @@
         <textarea rows="4" cols="50" name="comment" form="commentForm" required></textarea>
 
         <div class="clearfix">
-          <button type="button" onclick="document.getElementById('modal').style.display='none'"
-            class="cancelbtn">Cancel</button>
+          <button type="button" onclick="document.getElementById('modal').style.display='none'" class="cancelbtn">
+            Cancel
+          </button>
           <button type="submit" class="signupbtn">Comment</button>
         </div>
       </div>
@@ -609,19 +624,19 @@
   </script>
 
   <script>
-    const form = document.getElementById('commentForm')
+    const form = document.getElementById("commentForm");
     const error = document.getElementById("error");
     const success = document.getElementById("success");
 
     form.addEventListener("submit", async (e) => {
-      e.preventDefault()
+      e.preventDefault();
       const data = Object.fromEntries(new FormData(form).entries());
-      const response = await fetch('/comment', {
-        method: 'POST',
+      const response = await fetch("/comment", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json'
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify({ data })
+        body: JSON.stringify({ data }),
       });
 
       if (response.ok) {
@@ -640,20 +655,20 @@
   </script>
 
   <script>
-    var modal = document.getElementById('modal');
+    var modal = document.getElementById("modal");
     window.onclick = function (event) {
       if (event.target == modal) {
         modal.style.display = "none";
       }
-    }
+    };
   </script>
   <script>
     function toggleText() {
-      var element = document.querySelector('.text');
-      if (element.style.textAlign === 'justify') {
-        element.style.textAlign = 'center';
+      var element = document.querySelector(".text");
+      if (element.style.textAlign === "justify") {
+        element.style.textAlign = "center";
       } else {
-        element.style.textAlign = 'justify';
+        element.style.textAlign = "justify";
       }
     }
   </script>
