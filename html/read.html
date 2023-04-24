@@ -230,22 +230,15 @@
     border-radius: 16px;
   }
 
-  .comment h4,
-  .comment span,
-  .darker h4,
-  .darker span {
+  .comment span {
     display: inline;
   }
 
   .comment p,
-  .comment span,
-  .darker p,
-  .darker span {
+  .comment span {
     color: #ffffff;
   }
 
-  .comment h1,
-  .comment h3,
   .comment a {
     color: #956a9d;
     font-weight: bold;
@@ -443,7 +436,7 @@
         for (let i = 0; i < json.chapters[index].comments.length; i++) {
           let chapter = json.chapters[index];
           div3.innerHTML += `
-              <div class="comment mt-4 text-justify float-left">
+              <div class="comment">
                 <img src="${chapter.comments[i].icon}" alt="${chapter.comments[i].username}" class="pfp" width="40" height="40">
                 <a href="/profile/${chapter.comments[i].username}">${chapter.comments[i].username}</a>
                 <span>- ${chapter.comments[i].date}</span>
@@ -537,11 +530,7 @@
   </div>
 
   <section>
-    <div class="comments">
-      <div class="row">
-        <div class="col-sm-5 col-md-6 col-12 pb-4" id="comments"></div>
-      </div>
-    </div>
+    <div class="comments" id="comments"></div>
   </section>
 
   <div class="flex">
