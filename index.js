@@ -414,14 +414,11 @@ app.post("/publish-book", async (req, res) => {
 
   let image = html.icon.replace(/</g, "&lt;");
 
-  function isImage(url) {
-    return /^https?:\/\/.+\.(jpg|jpeg|png|webp|avif|gif|svg)$/.test(url);
-  }
-
   if (isImage(image) === false)
     return res
       .status(400)
       .json({ error: `Please make sure the icon is a valid URL.` });
+
   let newID = Date.now();
 
   let params = {
@@ -467,7 +464,7 @@ app.post("/publish-chapter", async (req, res) => {
 
   if (!html.name || !html)
     return res.status(400).json({ error: `Missing Data!` });
-  //console.log(html)
+  console.log(html);
 
   let data = await profileShema.findOne({
     password: html.psw,
@@ -479,10 +476,6 @@ app.post("/publish-chapter", async (req, res) => {
 
   let image = html.thumbnail.replace(/</g, "&lt;");
 
-  function isImage(url) {
-    return /^https?:\/\/.+\.(jpg|jpeg|png|webp|avif|gif|svg)$/.test(url);
-  }
-
   if (isImage(image) === false)
     return res
       .status(400)
@@ -490,6 +483,11 @@ app.post("/publish-chapter", async (req, res) => {
 
   let content = html.content.replace(/</g, "&lt;");
   let newID = Date.now();
+
+  let replace = false;
+  let replaceNumber = 0;
+  if (data.replace) replace = true;
+  if (data.replaceNumber > 0) replaceNumber = data.replaceNumber;
 
   let params = {
     content: `New chapter has been submitted for review.`,
@@ -503,6 +501,7 @@ app.post("/publish-chapter", async (req, res) => {
     ],
     username: "New Chapter Post",
   };
+
   await axios({
     method: "POST",
     headers: {
@@ -526,6 +525,8 @@ app.post("/publish-chapter", async (req, res) => {
     cName: html.cname.replace(/</g, "&lt;"),
     cCredits: html.credits.replace(/</g, "&lt;"),
     reviewID: newID,
+    replace: replace,
+    replaceNumber: 1,
   }).save();
 
   res.status(200).json({
@@ -743,4 +744,8 @@ function getTimeDifference(timestamp) {
     return interval + " minute" + (interval == 1 ? "" : "s") + " ago";
   }
   return "just now";
+}
+
+function isImage(url) {
+  return /^https?:\/\/.+\.(jpg|jpeg|png|webp|avif|gif|svg)$/.test(url);
 }

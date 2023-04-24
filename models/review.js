@@ -11,6 +11,8 @@ const reviewSchema = mongoose.Schema({
   cName: String,
   cCredits: String,
   reviewID: String,
+  replace: Boolean,
+  replaceNumber: Number,
 });
 
 module.exports = mongoose.model("review", reviewSchema);

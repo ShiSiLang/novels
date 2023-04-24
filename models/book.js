@@ -3,10 +3,17 @@ const mongoose = require("mongoose");
     name: String,
     intro: String,
     credits: String,
-    timer: String,
     thumbnail: ImageLink,
-    type: manga/novel, 
-    content: images/String, 
+    type: novel, 
+    content: String, 
+    comments: { username, comment, date } 
+}*/
+
+/* manga chapters: { 
+    name: String,
+    thumbnail: ImageLink,
+    type: manga, 
+    content: images, 
     comments: { username, comment, date } 
 }*/
 const bookSchema = mongoose.Schema({
