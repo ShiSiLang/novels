@@ -575,9 +575,9 @@ app.post("/edit", upload.single("icon"), async (req, res) => {
       .status(400)
       .json({ error: `Please make sure the twitter link is a valid image URL.` });
 
-  let image = params.banner.replace(/</g, "&lt;");
+  let banner = params.banner.replace(/</g, "&lt;");
 
-  if (isImage(image) === false)
+  if (isImage(banner) === false)
     return res
       .status(400)
       .json({ error: `Please make sure the banner is a valid URL.` });
@@ -586,6 +586,7 @@ app.post("/edit", upload.single("icon"), async (req, res) => {
   data.discord = params.discord;
   data.twitter = params.twitter;
   data.bio = params.bio;
+  data.banner = params.banner;
   data.save();
 
   return res.status(200).json({ success: `Profile successfully edited.` });
