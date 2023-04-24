@@ -177,9 +177,9 @@
 
     .images .banner {
         width: 100%;
-        height: 30vh;    
+        height: 30vh;
     }
-    
+
     .images .avatar {
         width: 30%;
         border-radius: 50%;
@@ -488,6 +488,7 @@
     }
 
     .media-scroller img {
+        border-radius: 16px;
         width: 100%;
         height: 100%;
         object-fit: cover;
@@ -634,6 +635,8 @@
                 <input id="inputpass" type="hidden" name="psw" value="NOTHING" />
                 <label for="icon"><b>Edit Avatar</b></label>
                 <input type="file" id="icon" name="icon" accept=".jpg, .jpeg, .png" />
+                <label for="banner"><b>Edit Banner Link</b></label>
+                <input type="text" placeholder="Enter banner url" name="banner" autocomplete="off" />
                 <label for="discord"><b>Edit Discord Link</b></label>
                 <input type="text" placeholder="Enter new discord" name="discord" autocomplete="off" />
                 <label for="twitter"><b>Edit Twitter Link</b></label>

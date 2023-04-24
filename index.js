@@ -479,7 +479,7 @@ app.post("/publish-chapter", async (req, res) => {
   if (isImage(image) === false)
     return res
       .status(400)
-      .json({ error: `Please make sure the icon is a valid URL.` });
+      .json({ error: `Please make sure the thumbnail is a valid image URL.` });
 
   let content = html.content.replace(/</g, "&lt;");
   let newID = Date.now();
@@ -551,6 +551,7 @@ app.post("/edit", upload.single("icon"), async (req, res) => {
     icon: image?.buffer || data.icon,
     discord: html?.discord || data?.discord || null,
     twitter: html?.twitter || data?.twitter || null,
+    banner: html?.banner || data?.banner || null,
     bio: html?.bio?.replace(/</g, "&lt;") || data?.bio || null,
   };
 
@@ -572,7 +573,14 @@ app.post("/edit", upload.single("icon"), async (req, res) => {
   if (params.twitter !== null && isTwitter(params.twitter) === false)
     return res
       .status(400)
-      .json({ error: `Please make sure the twitter link is a valid URL.` });
+      .json({ error: `Please make sure the twitter link is a valid image URL.` });
+
+  let image = params.banner.replace(/</g, "&lt;");
+
+  if (isImage(image) === false)
+    return res
+      .status(400)
+      .json({ error: `Please make sure the banner is a valid URL.` });
 
   data.icon = params.icon;
   data.discord = params.discord;
