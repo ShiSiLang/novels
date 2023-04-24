@@ -218,12 +218,16 @@
   }
 
   .comment {
-    border: 1px solid #956a9d;
+    border: 3px solid #956a9d;
     background-color: #c499cc;
-    border-radius: 5px;
+    border-radius: 16px;
     padding: 25px;
     width: 75%;
-    margin: auto;
+    margin: 0 auto;
+  }
+
+  .comment .pfp {
+    border-radius: 16px;
   }
 
   .comment h4,
@@ -440,7 +444,7 @@
           let chapter = json.chapters[index];
           div3.innerHTML += `
               <div class="comment mt-4 text-justify float-left">
-                <img src="${chapter.comments[i].icon}" alt=" " class="rounded-circle" width="40" height="40">
+                <img src="${chapter.comments[i].icon}" alt="${chapter.comments[i].username}" class="pfp" width="40" height="40">
                 <a href="/profile/${chapter.comments[i].username}">${chapter.comments[i].username}</a>
                 <span>- ${chapter.comments[i].date}</span>
                 <br>
