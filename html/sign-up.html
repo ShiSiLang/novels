@@ -199,7 +199,7 @@
         padding: 12px 24px;
         cursor: pointer;
         transition: background-color 0.3s ease;
-        margin: auto;
+        margin: 10px;
     }
 
     .discordButton:hover {
@@ -253,8 +253,10 @@
         <img src="https://i.imgur.com/XjWCCeV.png" alt="LonelyBall Media" />
     </div>
 
-    <button id="discordSignUp" class="discordButton">Sign Up with Discord</button>
-    <button id="discordSignIn" class="discordButton">Sign In with Discord</button>
+    <div class="flex">
+        <button id="discordSignUp" class="discordButton">Sign Up with Discord</button>
+        <button id="discordSignIn" class="discordButton">Sign In with Discord</button>
+    </div>
 
     <div id="error" class="alert">
         <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
@@ -311,38 +313,6 @@
             </div>
         </div>
     </footer>
-
-    <script>
-        const form = document.getElementById("FormSignUp");
-        const error = document.getElementById("error");
-        const success = document.getElementById("success");
-
-        form.addEventListener("submit", async (e) => {
-            e.preventDefault();
-            document.getElementById("signupbtn").disabled = true;
-            form.disabled = true;
-
-            const formData = new FormData(form);
-
-            const response = await fetch("/sign-up", {
-                method: "POST",
-                body: formData,
-            });
-
-            if (response.ok) {
-                // Display success message here
-                const successData = await response.json();
-                success.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-            <strong>Success!</strong> ${successData.success}`;
-                success.style.display = "block";
-            } else {
-                const errorData = await response.json();
-                error.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-        ${errorData.error}`;
-                error.style.display = "block";
-            }
-        });
-    </script>
 </body>
 
 </html>
