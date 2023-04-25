@@ -344,23 +344,53 @@ let image = req.file;
 image.buffer
 */
 
-app.post("/sign-up", async (req, res) => {
-  return console.log(req.body);
-  let discordCode = req.body.code;
+app.get('/sign-up', async (req, res) => {
+  const code = req.body.code;
 
-  // Make a request to the Discord API to get the user's email and other information
-  let discordData = await fetch("https://discord.com/api/users/@me", {
-    headers: {
-      Authorization: `Bearer ${discordAccessToken}`,
-    },
-  });
+  if (!code) {
+    return res.status(400).send({ error: 'Authorization code not found' });
+  }
 
-  let discordJson = await discordData.json();
-  let discordEmail = discordJson.email;
+  try {
+    // Exchange the authorization code for an access token
+    const tokenResponse = await axios.post(`${DISCORD_API_BASE_URL}/oauth2/token`, new URLSearchParams({
+      client_id: CLIENT_ID,
+      client_secret: CLIENT_SECRET,
+      grant_type: 'authorization_code',
+      code: code,
+      redirect_uri: REDIRECT_URI,
+      scope: 'identify email'
+    }), {
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      }
+    });
 
-  // Perform any necessary validation on the email, username, password, etc.
+    if (!tokenResponse.status === 200) {
+      const errorData = tokenResponse.data;
+      throw new Error(`Failed to get access token: ${errorData.error}`);
+    }
 
-  let date = new Date();
+    const tokenData = tokenResponse.data;
+    const accessToken = tokenData.access_token;
+
+    // Get the user's ID and username
+    const userResponse = await axios.get(`${DISCORD_API_BASE_URL}/users/@me`, {
+      headers: {
+        authorization: `Bearer ${accessToken}`
+      }
+    });
+
+    if (!userResponse.status === 200) {
+      const errorData = userResponse.data;
+      throw new Error(`Failed to get user data: ${errorData.error}`);
+    }
+
+    const userData = userResponse.data;
+    const userId = userData.id;
+    const username = userData.username;
+return console.log(userResponse)
+    let date = new Date();
   let newdate =
     date.getMonth() + 1 + "/" + date.getDate() + "/" + date.getFullYear();
 
@@ -386,6 +416,11 @@ app.post("/sign-up", async (req, res) => {
   return res
     .status(200)
     .json({ success: `${html.uname.replace(/</g, "&lt;")} added!` });
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({ error: error.message });
+  }
 });
 
 app.post("/sign-in", async (req, res) => {
