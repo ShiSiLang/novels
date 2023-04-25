@@ -341,7 +341,7 @@ Image.buffer
 */
 
 app.post("/sign-up", async (req, res) => {
-return console.log(req.query)
+return console.log(req.query, req.body)
   let discordCode = req.query.code;
   
   // Make a request to the Discord API to get the user's email and other information
