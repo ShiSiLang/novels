@@ -279,7 +279,18 @@ app.get("/review/:type/:type2/:reviewID/:password", async (req, res) => {
     });
   }
 });
+app.get("/update/:username", async (req, res) => {
+let username = req.params.username.replace(/\s/g, "").toLowerCase();
+  let users = await profileShema.find().sort({ username: 1 });
+  let userData = users.find(
+    (v) => v.username.replace(/\s/g, "").toLowerCase() === username
+  );
 
+  if (!userData) return res.sendFile(dir("error"));
+
+  const iconLink = `data:image/png;base64,${userData.icon.toString("base64")}`;
+let data = await profileShema.findOneAndUpdate({ username: userData.username },{icon: iconLink})
+})
 app.get("/profile/:username", async (req, res) => {
   let username = req.params.username.replace(/\s/g, "").toLowerCase();
   let users = await profileShema.find().sort({ username: 1 });
@@ -354,10 +365,12 @@ app.post("/sign-up", upload.single("icon"), async (req, res) => {
   if (data.find((v) => v.username === html.uname.replace(/</g, "&lt;")))
     return res.status(400).json({ error: `That username is already taken.` });
 
+  const iconLink = `data:image/png;base64,${image.buffer.toString("base64")}`;
+
   let newProfile = new profileShema({
     username: html.uname.replace(/</g, "&lt;"),
     password: html.psw.replace(/</g, "&lt;"),
-    icon: image.buffer,
+    icon: iconLink,
     bio: "",
     banner: "",
     date: newdate,
