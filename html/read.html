@@ -212,67 +212,81 @@
   }
 
   /*Buttons End*/
-.comments {
+
+.comments-container {
+  max-width: 700px;
   margin: 0 auto;
 }
 
 .comment {
-  background-color: #f7f7f7;
-  border-radius: 10px;
-  border: 1px solid #e5e5e5;
-  margin: 20px 0;
-  padding: 20px;
-  position: relative;
+  border: 3px solid #956a9d;
+  background-color: #c499cc;
+  border-radius: 16px;
+  padding: 25px;
+  margin-bottom: 20px;
 }
 
-.comment:before {
-  content: "";
-  position: absolute;
-  top: -10px;
-  left: 50%;
-  margin-left: -10px;
-  border: 10px solid transparent;
-  border-bottom-color: #e5e5e5;
+.pfp-container {
+  float: left;
+  margin-right: 15px;
 }
 
-.comment:after {
-  content: "";
-  position: absolute;
-  top: -8px;
-  left: 50%;
-  margin-left: -8px;
-  border: 8px solid transparent;
-  border-bottom-color: #f7f7f7;
-}
-
-.comment .header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.comment .header img {
+.pfp {
   border-radius: 50%;
-  margin-right: 10px;
+  width: 75px;
+  height: 75px;
 }
 
-.comment .header h4 {
-  margin: 0;
-  font-weight: bold;
+.comment-content {
+  overflow: hidden;
 }
 
-.comment p {
-  margin: 10px 0;
+.commenter-name {
+  margin-top: 0;
+  margin-bottom: 10px;
+  color: #ffffff;
+  font-size: 18px;
 }
 
-.comment span {
-  color: #999999;
-  font-size: 12px;
+.comment-date {
+  display: block;
+  margin-bottom: 10px;
+  color: #ffffff;
+  font-size: 14px;
 }
 
-.comment a {
+.comment-text {
+  margin-bottom: 10px;
+  color: #ffffff;
+  font-size: 16px;
+}
+
+.reply-link {
   color: #956a9d;
   font-weight: bold;
+}
+
+@media screen and (max-width: 600px) {
+  .comments-container {
+    max-width: 100%;
+    padding: 0 20px;
+  }
+  
+  .comment {
+    padding: 20px;
+  }
+  
+  .pfp-container {
+    float: none;
+    margin-right: 0;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+  
+  .pfp {
+    width: 50px;
+    height: 50px;
+  }
 }
 
 
@@ -468,12 +482,14 @@
         for (let i = 0; i < json.chapters[index].comments.length; i++) {
           let chapter = json.chapters[index];
           div3.innerHTML += `<div class="comment">
-    <div class="header">
+    <div class="pfp-container">
       <img class="pfp" src="${chapter.comments[i].icon}" alt="Avatar">
-      <h4>${chapter.comments[i].username}</h4>
-      <span>${chapter.comments[i].date}</span>
     </div>
-    <p>${chapter.comments[i].comment}</p>
+    <div class="comment-content">
+      <h4 class="commenter-name">${chapter.comments[i].username}</h4>
+      <span class="comment-date">${chapter.comments[i].date}</span>
+      <p class="comment-text">${chapter.comments[i].comment</p>
+    </div>
   </div>`;
 /*`
               <div class="comment">
