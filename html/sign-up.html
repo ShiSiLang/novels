@@ -290,34 +290,32 @@
         const queryString = window.location.search;
         const urlParams = new URLSearchParams(queryString);
         const code = urlParams.get('code');
-        if (code) {
+        if (code) signUp();
+
+        async function signUp() {
             // send the code to server side for verification and handling
-            fetch("/sign-up", {
+            const response = await fetch("/sign-up", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify({ code: code }),
-            }).then(response => {
-                let data = response.json();
-                if (response.ok) {
-                    const success = document.getElementById('success');
-                    success.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                body: JSON.stringify({
+                    code: code,
+                }),
+            });
+
+            let data = response.json();
+            if (response.ok) {
+                const success = document.getElementById('success');
+                success.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
                       <strong>Success!</strong> ${data.username}, you have successfully signed up with email ${data.email}.`;
-                    success.style.display = "block";
-                } else {
-                    const error = document.getElementById('error');
-                    error.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                success.style.display = "block";
+            } else {
+                const error = document.getElementById('error');
+                error.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
                       ${data.error}`;
-                    error.style.display = "block";
-                }
-            })
-                .catch(error => {
-                    const errorDiv = document.getElementById('error');
-                    errorDiv.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-                  ${error.message}`;
-                    errorDiv.style.display = "block";
-                });
+                error.style.display = "block";
+            }
         }
     </script>
 
