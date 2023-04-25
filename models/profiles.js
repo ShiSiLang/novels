@@ -13,6 +13,7 @@ const profileSchema = mongoose.Schema({
   twitter: String,
   author: Boolean,
   books: Array,
+  discordEmail: String,
 });
 
 module.exports = mongoose.model("profileSchema", profileSchema);
