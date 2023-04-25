@@ -344,7 +344,7 @@ let image = req.file;
 image.buffer
 */
 
-app.get("/sign-up", async (req, res) => {
+app.post("/sign-up", async (req, res) => {
   console.log(req.body);
   const code = req.body.code;
 
