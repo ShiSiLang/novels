@@ -13,7 +13,18 @@ const profileSchema = mongoose.Schema({
   twitter: String,
   author: Boolean,
   books: Array,
-  discordEmail: String,
+// Login data
+  login: {
+    email: {
+      type: String,
+      required: true,
+      unique: true
+    },
+    passwordHash: {
+      type: String,
+      required: true
+    }
+  }
 });
 
 module.exports = mongoose.model("profileSchema", profileSchema);
