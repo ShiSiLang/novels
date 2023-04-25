@@ -391,8 +391,6 @@ const urlParams = new URLSearchParams(queryString);
 const code = urlParams.get('code');
 if (code) {
     // send the code to server side for verification and handling
-    const success = document.getElementById("success");
-    const errAlert = document.getElementById("error");
 
 fetch('/sign-up?code=' + code)
   .then(response => {
@@ -403,15 +401,26 @@ fetch('/sign-up?code=' + code)
     }
   })
   .then(data => {
-    success.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+    if (data.success) {
+      // Display success message
+      const success = document.getElementById('success');
+      success.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
             <strong>Success!</strong> ${data.success}`;
-    success.style.display = "block";
+      success.style.display = "block";
+    } else {
+      // Display error message
+      const error = document.getElementById('error');
+      error.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+            ${data.error}`;
+      error.style.display = "block";
+    }
   })
   .catch(error => {
-    const errorMsg = error.message || "Something went wrong.";
-    errAlert.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-            ${errorMsg}`;
-    errAlert.style.display = "block";
+    // Display error message
+    const error = document.getElementById('error');
+    error.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+            ${error.message}`;
+    error.style.display = "block";
   });
 
 }
