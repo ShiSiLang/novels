@@ -256,8 +256,12 @@
     </div>
 
     <div class="flex">
-        <button id="discordSignUp" class="discordButton">Sign Up with Discord</button>
-        <button id="discordSignIn" class="discordButton">Sign In with Discord</button>
+        <button id="discordSignUp" class="discordButton">
+            Sign Up with Discord
+        </button>
+        <button id="discordSignIn" class="discordButton">
+            Sign In with Discord
+        </button>
     </div>
 
     <div id="error" class="alert">
@@ -288,21 +292,23 @@
         const code = urlParams.get('code');
         if (code) {
             // send the code to server side for verification and handling
-            fetch('/sign-up?code=' + code)
-                .then(response => {
-                    let data = response.json();
-                    if (response.ok) {
-                        const success = document.getElementById('success');
-                        success.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-            <strong>Success!</strong> ${data.success}`;
-                        success.style.display = "block";
-                    } else {
-                        const error = document.getElementById('error');
-                        error.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-            ${data.error}`;
-                        error.style.display = "block";
-                    }
-                })
+            const response = await fetch("/sign-up", {
+                method: "POST",
+                body: { code: code },
+            });
+
+            let data = response.json();
+            if (response.ok) {
+                const success = document.getElementById('success');
+                success.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+          <strong>Success!</strong> ${data.success}`;
+                success.style.display = "block";
+            } else {
+                const error = document.getElementById('error');
+                error.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+          ${data.error}`;
+                error.style.display = "block";
+            }
         }
     </script>
 
