@@ -341,16 +341,16 @@ Image.buffer
 */
 
 app.post("/sign-up", async (req, res) => {
-return console.log(req.query, req.body)
+  return console.log(req.query, req.body);
   let discordCode = req.query.code;
-  
+
   // Make a request to the Discord API to get the user's email and other information
-  let discordData = await fetch('https://discord.com/api/users/@me', {
+  let discordData = await fetch("https://discord.com/api/users/@me", {
     headers: {
-      'Authorization': `Bearer ${discordAccessToken}`
-    }
+      Authorization: `Bearer ${discordAccessToken}`,
+    },
   });
-  
+
   let discordJson = await discordData.json();
   let discordEmail = discordJson.email;
 
@@ -546,7 +546,7 @@ app.post("/publish-chapter", async (req, res) => {
   });
 });
 
-app.post("/edit", upload.single("icon"), async (req, res) => {
+app.post("/edit", async (req, res) => {
   let html = req.body;
 
   let image = req.file;
@@ -560,7 +560,6 @@ app.post("/edit", upload.single("icon"), async (req, res) => {
     return res.status(400).json({ error: `Incorrect username or password!` });
 
   let params = {
-    icon: image?.buffer || data.icon,
     discord: html?.discord || data?.discord || null,
     twitter: html?.twitter || data?.twitter || null,
     banner: html?.banner || data?.banner || null,
@@ -583,9 +582,9 @@ app.post("/edit", upload.single("icon"), async (req, res) => {
   }
 
   if (params.twitter !== null && isTwitter(params.twitter) === false)
-    return res
-      .status(400)
-      .json({ error: `Please make sure the twitter link is a valid image URL.` });
+    return res.status(400).json({
+      error: `Please make sure the twitter link is a valid image URL.`,
+    });
 
   let banner = params.banner.replace(/</g, "&lt;");
 
@@ -594,7 +593,6 @@ app.post("/edit", upload.single("icon"), async (req, res) => {
       .status(400)
       .json({ error: `Please make sure the banner is a valid URL.` });
 
-  data.icon = params.icon;
   data.discord = params.discord;
   data.twitter = params.twitter;
   data.bio = params.bio;
