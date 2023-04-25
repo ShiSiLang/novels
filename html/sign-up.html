@@ -365,6 +365,16 @@
     Sign Up with Discord
 </button>
 
+<div id="error" class="alert">
+        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+        Error.
+    </div>
+
+    <div id="success" class="alert success">
+        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+        <strong>Success!</strong> Yay.
+    </div>
+
 <script>
 const discordSignUpBtn = document.getElementById('discordSignUp');
 
@@ -377,19 +387,37 @@ discordSignUpBtn.addEventListener('click', () => {
     window.location.href = url;
 });
 
+const queryString = window.location.search;
+const urlParams = new URLSearchParams(queryString);
+const code = urlParams.get('code');
+if (code) {
+    // send the code to server side for verification and handling
+    const success = document.getElementById("success");
+    const errAlert = document.getElementById("error");
+
+fetch('/discord/callback?code=' + code)
+  .then(response => {
+    if (response.ok) {
+      return response.json();
+    } else {
+      throw new Error('Something went wrong.');
+    }
+  })
+  .then(data => {
+    success.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+            <strong>Success!</strong> ${data.success}`;
+    success.style.display = "block";
+  })
+  .catch(error => {
+    const errorMsg = error.message || "Something went wrong.";
+    errAlert.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+            ${errorMsg}`;
+    errAlert.style.display = "block";
+  });
+
+}
 </script>
-            
-
-    <div id="error" class="alert">
-        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-        Error.
-    </div>
-
-    <div id="success" class="alert success">
-        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-        <strong>Success!</strong> Yay.
-    </div>
-
+           
     <footer>
         <div class="footer-content">
             <h1>Copyright © 2023 LonelyBall Media</h1>
