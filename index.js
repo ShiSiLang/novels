@@ -9,6 +9,10 @@ const bookShema = require("./models/book");
 const system = require("./models/system");
 let webhook_url = process.env.webhook;
 const multer = require("multer");
+const CLIENT_ID = '1100495054063284354';
+const CLIENT_SECRET = process.env.ClientSecret; // replace with your actual client secret
+const REDIRECT_URI = 'https://novels-production.up.railway.app/sign-up';
+const DISCORD_API_BASE_URL = 'https://discordapp.com/api';
 
 const storage = multer.memoryStorage();
 
