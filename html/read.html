@@ -212,37 +212,69 @@
   }
 
   /*Buttons End*/
+.comments {
+  margin: 0 auto;
+}
 
-  .comments {
-    margin: 0 auto;
-  }
+.comment {
+  background-color: #f7f7f7;
+  border-radius: 10px;
+  border: 1px solid #e5e5e5;
+  margin: 20px 0;
+  padding: 20px;
+  position: relative;
+}
 
-  .comment {
-    border: 3px solid #956a9d;
-    background-color: #c499cc;
-    border-radius: 16px;
-    padding: 25px;
-    width: 75%;
-    margin: 0 auto;
-  }
+.comment:before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  margin-left: -10px;
+  border: 10px solid transparent;
+  border-bottom-color: #e5e5e5;
+}
 
-  .comment .pfp {
-    border-radius: 16px;
-  }
+.comment:after {
+  content: "";
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  margin-left: -8px;
+  border: 8px solid transparent;
+  border-bottom-color: #f7f7f7;
+}
 
-  .comment span {
-    display: inline;
-  }
+.comment .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
-  .comment p,
-  .comment span {
-    color: #ffffff;
-  }
+.comment .header img {
+  border-radius: 50%;
+  margin-right: 10px;
+}
 
-  .comment a {
-    color: #956a9d;
-    font-weight: bold;
-  }
+.comment .header h4 {
+  margin: 0;
+  font-weight: bold;
+}
+
+.comment p {
+  margin: 10px 0;
+}
+
+.comment span {
+  color: #999999;
+  font-size: 12px;
+}
+
+.comment a {
+  color: #956a9d;
+  font-weight: bold;
+}
+
 
   /*Modal*/
   * {
@@ -435,14 +467,22 @@
       } else {
         for (let i = 0; i < json.chapters[index].comments.length; i++) {
           let chapter = json.chapters[index];
-          div3.innerHTML += `
+          div3.innerHTML += `<div class="comment">
+    <div class="header">
+      <img class="pfp" src="${chapter.comments[i].icon}" alt="Avatar">
+      <h4>${chapter.comments[i].username}</h4>
+      <span>${chapter.comments[i].date}</span>
+    </div>
+    <p>${chapter.comments[i].comment}</p>
+  </div>`;
+/*`
               <div class="comment">
                 <img src="${chapter.comments[i].icon}" alt="${chapter.comments[i].username}" class="pfp" width="40" height="40">
                 <a href="/profile/${chapter.comments[i].username}">${chapter.comments[i].username}</a>
                 <span>- ${chapter.comments[i].date}</span>
                 <br>
                 <p>${chapter.comments[i].comment}</p>
-                </div>`;
+                </div>`;*/
         }
       }
     } catch (err) {
