@@ -283,7 +283,8 @@
             const redirectURI = encodeURIComponent('https://novels-production.up.railway.app/access-portal');
             const scopes = encodeURIComponent('email identify');
             const url = `https://discord.com/oauth2/authorize?client_id=${clientID}&redirect_uri=${redirectURI}&response_type=code&scope=${scopes}`;
-
+            const newUrl = new URL('https://novels-production.up.railway.app/access-portal');
+            newUrl.searchParams.append('x', 0);
             window.location.href = url;
         });
 
