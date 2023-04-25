@@ -367,16 +367,15 @@ app.post("/sign-up", async (req, res) => {
       }
     );
 
-    console.log(tokenResponse.status);
+    const tokenData = tokenResponse.data;
 
-    if (!tokenResponse.status === 200) {
+    if (!tokenData.error) {
       const errorData = tokenResponse.data;
       return res
         .status(400)
         .send({ error: `Failed to get access token: ${errorData.error}` });
     }
 
-    const tokenData = tokenResponse.data;
     const accessToken = tokenData.access_token;
 
     console.log(tokenData)
