@@ -382,6 +382,7 @@
         const discordSignInBtn = document.getElementById('discordSignIn');
 
         discordSignUpBtn.addEventListener('click', () => {
+            alert("Clicked")
             const clientID = '1100495054063284354';
             const redirectURI = encodeURIComponent('https://novels-production.up.railway.app/sign-up');
             const scopes = encodeURIComponent('email identify');
