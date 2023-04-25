@@ -256,73 +256,71 @@
     </div>
 
     <div class="flex">
-    <button id="discordSignUp" class="discordButton">
-        Sign Up with Discord
-    </button>
-    <button id="discordSignIn" class="discordButton">
-        Sign In with Discord
-    </button>
-</div>
+        <button id="discordSignUp" class="discordButton">
+            Sign Up with Discord
+        </button>
+        <button id="discordSignIn" class="discordButton">
+            Sign In with Discord
+        </button>
+    </div>
 
-<div id="error" class="alert">
-    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-    Error.
-</div>
+    <div id="error" class="alert">
+        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+        Error.
+    </div>
 
-<div id="success" class="alert success">
-    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-    <strong>Success!</strong> Yay.
-</div>
+    <div id="success" class="alert success">
+        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+        <strong>Success!</strong> Yay.
+    </div>
 
-<script>
-    const discordSignUpBtn = document.getElementById('discordSignUp');
-    const discordSignInBtn = document.getElementById('discordSignIn');
+    <script>
+        const discordSignUpBtn = document.getElementById('discordSignUp');
+        const discordSignInBtn = document.getElementById('discordSignIn');
 
-    discordSignUpBtn.addEventListener('click', () => {
-        const clientID = '1100495054063284354';
-        const redirectURI = encodeURIComponent('https://novels-production.up.railway.app/sign-up');
-        const scopes = encodeURIComponent('email identify');
-        const url = `https://discord.com/oauth2/authorize?client_id=${clientID}&redirect_uri=${redirectURI}&response_type=code&scope=${scopes}`;
+        discordSignUpBtn.addEventListener('click', () => {
+            const clientID = '1100495054063284354';
+            const redirectURI = encodeURIComponent('https://novels-production.up.railway.app/sign-up');
+            const scopes = encodeURIComponent('email identify');
+            const url = `https://discord.com/oauth2/authorize?client_id=${clientID}&redirect_uri=${redirectURI}&response_type=code&scope=${scopes}`;
 
-        window.location.href = url;
-    });
-
-    const queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
-    const code = urlParams.get('code');
-    if (code) {
-        // send the code to server side for verification and handling
-        fetch("/sign-up", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ code: code }),
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                const success = document.getElementById('success');
-                const username = data.username;
-                const email = data.email;
-                success.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-                      <strong>Success!</strong> ${username}, you have successfully signed up with email ${email}.`;
-                success.style.display = "block";
-            } else {
-                const error = document.getElementById('error');
-                error.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-                      ${data.error}`;
-                error.style.display = "block";
-            }
-        })
-        .catch(error => {
-            const errorDiv = document.getElementById('error');
-            errorDiv.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-                  ${error.message}`;
-            errorDiv.style.display = "block";
+            window.location.href = url;
         });
-    }
-</script>
+
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        const code = urlParams.get('code');
+        if (code) {
+            // send the code to server side for verification and handling
+            fetch("/sign-up", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ code: code }),
+            })
+                .then(response => {
+                    let data = response.json();
+                    if (response.ok) {
+                        const success = document.getElementById('success');
+                        success.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                      <strong>Success!</strong> ${data.username}, you have successfully signed up with email ${data.email}.`;
+                        success.style.display = "block";
+                    } else {
+                        const error = document.getElementById('error');
+                        error.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                      ${data.error}`;
+                        error.style.display = "block";
+                    }
+                })
+                .catch(error => {
+                    const errorDiv = document.getElementById('error');
+                    errorDiv.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                  ${error.message}`;
+                    errorDiv.style.display = "block";
+                });
+        }
+    </script>
 
     <footer>
         <div class="footer-content">
