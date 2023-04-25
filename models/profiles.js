@@ -2,8 +2,8 @@ const mongoose = require("mongoose");
 
 const profileSchema = mongoose.Schema({
   username: String,
-  password: String,
-  icon: { type: String, required: true },
+  id: String,
+  icon: String,
   banner: String,
   bio: String,
   date: String,
@@ -13,18 +13,18 @@ const profileSchema = mongoose.Schema({
   twitter: String,
   author: Boolean,
   books: Array,
-// Login data
+  // Login data
   login: {
     email: {
       type: String,
       required: true,
-      unique: true
+      unique: true,
     },
     passwordHash: {
       type: String,
-      required: true
-    }
-  }
+      required: true,
+    },
+  },
 });
 
 module.exports = mongoose.model("profileSchema", profileSchema);

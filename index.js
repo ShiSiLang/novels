@@ -9,10 +9,10 @@ const bookShema = require("./models/book");
 const system = require("./models/system");
 let webhook_url = process.env.webhook;
 const multer = require("multer");
-const CLIENT_ID = '1100495054063284354';
+const CLIENT_ID = "1100495054063284354";
 const CLIENT_SECRET = process.env.ClientSecret; // replace with your actual client secret
-const REDIRECT_URI = 'https://novels-production.up.railway.app/sign-up';
-const DISCORD_API_BASE_URL = 'https://discordapp.com/api';
+const REDIRECT_URI = "https://novels-production.up.railway.app/sign-up";
+const DISCORD_API_BASE_URL = "https://discordapp.com/api";
 
 const storage = multer.memoryStorage();
 
@@ -344,27 +344,31 @@ let image = req.file;
 image.buffer
 */
 
-app.get('/sign-up', async (req, res) => {
+app.get("/sign-up", async (req, res) => {
   const code = req.body.code;
 
   if (!code) {
-    return res.status(400).send({ error: 'Authorization code not found' });
+    return res.status(400).send({ error: "Authorization code not found" });
   }
 
   try {
     // Exchange the authorization code for an access token
-    const tokenResponse = await axios.post(`${DISCORD_API_BASE_URL}/oauth2/token`, new URLSearchParams({
-      client_id: CLIENT_ID,
-      client_secret: CLIENT_SECRET,
-      grant_type: 'authorization_code',
-      code: code,
-      redirect_uri: REDIRECT_URI,
-      scope: 'identify email'
-    }), {
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded'
+    const tokenResponse = await axios.post(
+      `${DISCORD_API_BASE_URL}/oauth2/token`,
+      new URLSearchParams({
+        client_id: CLIENT_ID,
+        client_secret: CLIENT_SECRET,
+        grant_type: "authorization_code",
+        code: code,
+        redirect_uri: REDIRECT_URI,
+        scope: "identify email",
+      }),
+      {
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
       }
-    });
+    );
 
     if (!tokenResponse.status === 200) {
       const errorData = tokenResponse.data;
@@ -377,8 +381,8 @@ app.get('/sign-up', async (req, res) => {
     // Get the user's ID and username
     const userResponse = await axios.get(`${DISCORD_API_BASE_URL}/users/@me`, {
       headers: {
-        authorization: `Bearer ${accessToken}`
-      }
+        authorization: `Bearer ${accessToken}`,
+      },
     });
 
     if (!userResponse.status === 200) {
@@ -389,34 +393,31 @@ app.get('/sign-up', async (req, res) => {
     const userData = userResponse.data;
     const userId = userData.id;
     const username = userData.username;
-return console.log(userResponse)
+    return console.log(userResponse);
     let date = new Date();
-  let newdate =
-    date.getMonth() + 1 + "/" + date.getDate() + "/" + date.getFullYear();
 
-  let data = await profileShema.find().sort({ username: 1 });
+    let data = await profileShema.find().sort({ username: 1 });
 
-  if (data.find((v) => v.username === html.uname.replace(/</g, "&lt;")))
-    return res.status(400).json({ error: `That username is already taken.` });
+    if (data.find((v) => v.username === html.uname.replace(/</g, "&lt;")))
+      return res.status(400).json({ error: `That username is already taken.` });
 
-  let newProfile = new profileShema({
-    username: html.uname.replace(/</g, "&lt;"),
-    password: html.psw.replace(/</g, "&lt;"),
-    icon: null, // Replace this with the user's Discord avatar
-    bio: "",
-    banner: "",
-    date: date,
-    followers: 0,
-    discord: null,
-    twitter: null,
-    author: false,
-    discordEmail,
-  }).save();
+    let newProfile = new profileShema({
+      username: html.uname.replace(/</g, "&lt;"),
+      password: html.psw.replace(/</g, "&lt;"),
+      icon: null, // Replace this with the user's Discord avatar
+      bio: "",
+      banner: "",
+      date: date,
+      followers: 0,
+      discord: null,
+      twitter: null,
+      author: false,
+      discordEmail,
+    }).save();
 
-  return res
-    .status(200)
-    .json({ success: `${html.uname.replace(/</g, "&lt;")} added!` });
-
+    return res
+      .status(200)
+      .json({ success: `${html.uname.replace(/</g, "&lt;")} added!` });
   } catch (error) {
     console.error(error);
     res.status(500).send({ error: error.message });
