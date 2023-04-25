@@ -152,8 +152,6 @@
         color: #ffcc99;
     }
 
-
-
     /*Buttons*/
 
     button {
@@ -201,6 +199,7 @@
     padding: 12px 24px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    margin: 0 auto;
 }
 
 .discordSignUp:hover {
@@ -330,7 +329,7 @@
         <img src="https://i.imgur.com/XjWCCeV.png" alt="LonelyBall Media" />
     </div>
 
-    <form id="FormSignUp" action="/sign-up" method="post" enctype="multipart/form-data">
+    <!--<form id="FormSignUp" action="/sign-up" method="post" enctype="multipart/form-data">
         <div class="container">
             <h1>Sign Up</h1>
             <p>Please fill in this form to create an account.</p>
@@ -357,7 +356,7 @@
                 </button>
             </div>
         </div>
-    </form>
+    </form>-->
 
 
             
@@ -395,7 +394,7 @@ if (code) {
     const success = document.getElementById("success");
     const errAlert = document.getElementById("error");
 
-fetch('/discord/sign-up?code=' + code)
+fetch('/sign-up?code=' + code)
   .then(response => {
     if (response.ok) {
       return response.json();
