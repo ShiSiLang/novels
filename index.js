@@ -345,11 +345,11 @@ image.buffer
 */
 
 app.get("/sign-up", async (req, res) => {
+  console.log(req.body);
   const code = req.body.code;
 
-  if (!code) {
-    return res.status(400).send({ error: "Authorization code not found" });
-  }
+  if (!code)
+    return res.status(400).send({ error: "Authorization code not found." });
 
   try {
     // Exchange the authorization code for an access token
@@ -372,7 +372,9 @@ app.get("/sign-up", async (req, res) => {
 
     if (!tokenResponse.status === 200) {
       const errorData = tokenResponse.data;
-      throw new Error(`Failed to get access token: ${errorData.error}`);
+      return res
+        .status(400)
+        .send({ error: `Failed to get access token: ${errorData.error}` });
     }
 
     const tokenData = tokenResponse.data;
@@ -387,7 +389,9 @@ app.get("/sign-up", async (req, res) => {
 
     if (!userResponse.status === 200) {
       const errorData = userResponse.data;
-      throw new Error(`Failed to get user data: ${errorData.error}`);
+      return res
+        .status(400)
+        .send({ error: `Failed to get user data: ${errorData.error}` });
     }
 
     const userData = userResponse.data;
@@ -420,7 +424,7 @@ app.get("/sign-up", async (req, res) => {
       .json({ success: `${html.uname.replace(/</g, "&lt;")} added!` });
   } catch (error) {
     console.error(error);
-    res.status(500).send({ error: error.message });
+    return res.status(400).send({ error: error.message });
   }
 });
 

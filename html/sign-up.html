@@ -298,21 +298,20 @@
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({ code: code }),
-            })
-                .then(response => {
-                    let data = response.json();
-                    if (response.ok) {
-                        const success = document.getElementById('success');
-                        success.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+            }).then(response => {
+                let data = response.json();
+                if (response.ok) {
+                    const success = document.getElementById('success');
+                    success.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
                       <strong>Success!</strong> ${data.username}, you have successfully signed up with email ${data.email}.`;
-                        success.style.display = "block";
-                    } else {
-                        const error = document.getElementById('error');
-                        error.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                    success.style.display = "block";
+                } else {
+                    const error = document.getElementById('error');
+                    error.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
                       ${data.error}`;
-                        error.style.display = "block";
-                    }
-                })
+                    error.style.display = "block";
+                }
+            })
                 .catch(error => {
                     const errorDiv = document.getElementById('error');
                     errorDiv.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
