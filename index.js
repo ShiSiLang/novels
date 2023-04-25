@@ -335,14 +335,14 @@ app.get("/profile/:username", async (req, res) => {
   res.send(file);
 });
 /*
-app.post("/sign-up", upload.single("icon"), async (req, res) => {
+app.post("/upload-manga", upload.multiple("pages"), async (req, res) => {
 let image = req.file;
-Image.buffer
+image.buffer
 */
 
 app.post("/sign-up", async (req, res) => {
-  return console.log(req.query, req.body);
-  let discordCode = req.query.code;
+  return console.log(req.body);
+  let discordCode = req.body.code;
 
   // Make a request to the Discord API to get the user's email and other information
   let discordData = await fetch("https://discord.com/api/users/@me", {
