@@ -279,18 +279,7 @@ app.get("/review/:type/:type2/:reviewID/:password", async (req, res) => {
     });
   }
 });
-app.get("/update/:username", async (req, res) => {
-let username = req.params.username.replace(/\s/g, "").toLowerCase();
-  let users = await profileShema.find().sort({ username: 1 });
-  let userData = users.find(
-    (v) => v.username.replace(/\s/g, "").toLowerCase() === username
-  );
 
-  if (!userData) return res.sendFile(dir("error"));
-
-  const iconLink = `data:image/png;base64,${userData.icon.toString("base64")}`;
-let data = await profileShema.findOneAndUpdate({ username: userData.username },{icon: iconLink})
-})
 app.get("/profile/:username", async (req, res) => {
   let username = req.params.username.replace(/\s/g, "").toLowerCase();
   let users = await profileShema.find().sort({ username: 1 });
@@ -345,16 +334,27 @@ app.get("/profile/:username", async (req, res) => {
   file = file.replace("$$date$$", userData.date);
   res.send(file);
 });
-
+/*
 app.post("/sign-up", upload.single("icon"), async (req, res) => {
-  let html = req.body;
-  if (html.psw !== html.dp)
-    return res.status(400).json({ error: `Passwords do not match!` });
+let image = req.file;
+Image.buffer
+*/
 
-  if (!req.file)
-    return res.status(400).json({ error: `Please upload an image.` });
+app.post("/sign-up", async (req, res) => {
+return console.log(req.query)
+  let discordCode = req.query.code;
+  
+  // Make a request to the Discord API to get the user's email and other information
+  let discordData = await fetch('https://discord.com/api/users/@me', {
+    headers: {
+      'Authorization': `Bearer ${discordAccessToken}`
+    }
+  });
+  
+  let discordJson = await discordData.json();
+  let discordEmail = discordJson.email;
 
-  let image = req.file;
+  // Perform any necessary validation on the email, username, password, etc.
 
   let date = new Date();
   let newdate =
@@ -365,19 +365,18 @@ app.post("/sign-up", upload.single("icon"), async (req, res) => {
   if (data.find((v) => v.username === html.uname.replace(/</g, "&lt;")))
     return res.status(400).json({ error: `That username is already taken.` });
 
-  const iconLink = `data:image/png;base64,${image.buffer.toString("base64")}`;
-
   let newProfile = new profileShema({
     username: html.uname.replace(/</g, "&lt;"),
     password: html.psw.replace(/</g, "&lt;"),
-    icon: iconLink,
+    icon: null, // Replace this with the user's Discord avatar
     bio: "",
     banner: "",
-    date: newdate,
+    date: date,
     followers: 0,
     discord: null,
     twitter: null,
     author: false,
+    discordEmail,
   }).save();
 
   return res
