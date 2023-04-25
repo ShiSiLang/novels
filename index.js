@@ -34,9 +34,7 @@ app.get("/", (_, res) => res.redirect(link("home")));
 
 app.get("/home", async (_, res) => res.sendFile(dir("home")));
 
-app.get("/sign-in", (_, res) => res.sendFile(dir("sign-in")));
-
-app.get("/sign-up", (_, res) => res.sendFile(dir("sign-up")));
+app.get("/access-portal", (_, res) => res.sendFile(dir("sign-up")));
 
 app.get("/discord", (_, res) => res.redirect("https://discord.gg/j3YamACwPu"));
 
@@ -345,7 +343,6 @@ image.buffer
 */
 
 app.post("/sign-up", async (req, res) => {
-  console.log(req.body);
   const code = req.body.code;
 
   if (!code)
@@ -370,6 +367,8 @@ app.post("/sign-up", async (req, res) => {
       }
     );
 
+    console.log(tokenResponse.status);
+
     if (!tokenResponse.status === 200) {
       const errorData = tokenResponse.data;
       return res
@@ -379,6 +378,8 @@ app.post("/sign-up", async (req, res) => {
 
     const tokenData = tokenResponse.data;
     const accessToken = tokenData.access_token;
+
+    console.log(tokenData)
 
     // Get the user's ID and username
     const userResponse = await axios.get(`${DISCORD_API_BASE_URL}/users/@me`, {
