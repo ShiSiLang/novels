@@ -294,7 +294,10 @@
             // send the code to server side for verification and handling
             const response = await fetch("/sign-up", {
                 method: "POST",
-                body: { code: code },
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ code: code }),
             });
 
             let data = response.json();
