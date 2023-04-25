@@ -192,6 +192,22 @@
         width: 100%;
     }
 
+.discordSignUp {
+    background-color: #7289DA;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    padding: 12px 24px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.discordSignUp:hover {
+    background-color: #677bc4;
+}
+
+
     /*Buttons End*/
 
     /* modal*/
@@ -342,6 +358,27 @@
             </div>
         </div>
     </form>
+
+
+            
+    <button id="discordSignUp" class="discordSignUp">
+    Sign Up with Discord
+</button>
+
+<script>
+const discordSignUpBtn = document.getElementById('discordSignUp');
+
+discordSignUpBtn.addEventListener('click', () => {
+    const clientID = '1100495054063284354';
+    const redirectURI = encodeURIComponent('https://novels-production.up.railway.app/sign-up');
+    const scopes = encodeURIComponent('email identify');
+    const url = `https://discord.com/oauth2/authorize?client_id=${clientID}&redirect_uri=${redirectURI}&response_type=code&scope=${scopes}`;
+
+    window.location.href = url;
+});
+
+</script>
+            
 
     <div id="error" class="alert">
         <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
