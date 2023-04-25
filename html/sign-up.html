@@ -395,7 +395,7 @@ if (code) {
     const success = document.getElementById("success");
     const errAlert = document.getElementById("error");
 
-fetch('/discord/callback?code=' + code)
+fetch('/discord/sign-up?code=' + code)
   .then(response => {
     if (response.ok) {
       return response.json();
