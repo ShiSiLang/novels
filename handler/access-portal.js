@@ -8,7 +8,7 @@ module.exports = {
   name: "auth/discord/callback",
   get: true,
   run: async (req, res) => {
-    return res.status(400).json({ error: `System currently down!` });
+    //return res.status(400).json({ error: `System currently down!` });
 
     const code = req.query.code;
 
