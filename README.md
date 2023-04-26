@@ -1,7 +1,7 @@
 <div align="center">
 <h1><a href="https://novels-production.up.railway.app/home" target="_blank">Link</a><h1>
   <h1>About</h1>
-  <p>Welcome to LonelyBall Media, here you can read all of our novels and manga!</p>
+  <p>Welcome to LonelyBall Media! We have a great selection of graphic novels and stories for you to read. Dive into our imaginative worlds and enjoy reading our engaging books.</p>
   <h1>Updates | Socials</h1>
   <p>Get the latest updates by joining the official <a href="https://discord.gg/j3YamACwPu" target="_blank">Discord Server</a>.
   </br>

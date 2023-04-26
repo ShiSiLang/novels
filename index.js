@@ -34,7 +34,7 @@ app.get("/", (_, res) => res.redirect(link("home")));
 
 app.get("/home", async (_, res) => res.sendFile(dir("home")));
 
-app.get("/access-portal", (_, res) => res.sendFile(dir("sign-up")));
+app.get("/access-portal", (_, res) => res.sendFile(dir("access-portal")));
 
 app.get("/discord", (_, res) => res.redirect("https://discord.gg/j3YamACwPu"));
 
@@ -705,13 +705,11 @@ app.post("/comment", async (req, res) => {
     return res.status(400).json({ error: `Something went wrong.` });
 
   let date = new Date();
-  let newdate =
-    date.getMonth() + 1 + "/" + date.getDate() + "/" + date.getFullYear();
 
   bookData.chapters[chapterIndex].comments.push({
     comment: html.comment.replace(/</g, "&lt;"),
     username: user.username,
-    date: newdate,
+    date: date,
   });
 
   bookData.markModified("chapters");
