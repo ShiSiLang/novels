@@ -100,6 +100,7 @@ module.exports = {
         .status(200)
         .json({ success: `${html.uname.replace(/</g, "&lt;")} added!` });
     } catch (error) {
+      console.log(error);
       return res.status(400).send({ error: error.message });
     }
   },
