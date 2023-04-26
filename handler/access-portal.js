@@ -57,6 +57,8 @@ module.exports = {
         }
       );
 
+return console.log(userResponse);
+
       if (!userResponse.status === 200) {
         const errorData = userResponse.data;
         return res
@@ -67,7 +69,6 @@ module.exports = {
       const userData = userResponse.data;
       const userId = userData.id;
       const username = userData.username;
-      return console.log(userResponse);
 
       let date = new Date();
 
