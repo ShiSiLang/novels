@@ -6,7 +6,7 @@ const DISCORD_API_BASE_URL = "https://discordapp.com/api";
 module.exports = {
   name: "access-portal",
   run: async (req, res) => {
-    return res.status(400).json({ error: `System currently down!` });
+    //return res.status(400).json({ error: `System currently down!` });
 
     const code = req.body.code;
 
