@@ -277,20 +277,18 @@
     <script>
         const discordSignUpBtn = document.getElementById('discordSignUp');
         const discordSignInBtn = document.getElementById('discordSignIn');
-        let x = 0;
         discordSignUpBtn.addEventListener('click', () => {
             const clientID = '1100495054063284354';
             const redirectURI = encodeURIComponent('https://novels-production.up.railway.app/access-portal');
             const scopes = encodeURIComponent('email identify');
             const url = `https://discord.com/oauth2/authorize?client_id=${clientID}&redirect_uri=${redirectURI}&response_type=code&scope=${scopes}`;
-            x = 1;
             window.location.href = url;
         });
 
         const queryString = window.location.search;
         const urlParams = new URLSearchParams(queryString);
         const code = urlParams.get('code');
-        if (code & x === 1) signUp();
+        if (code) signUp();
 
         async function signUp() {
             // send the code to server side for verification and handling
