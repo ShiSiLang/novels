@@ -1,4 +1,6 @@
 const reviewShema = require("../models/review");
+const bookShema = require("../models/book");
+const profileShema = require("./models/profiles");
 
 module.exports = {
   name: "review",
