@@ -1,7 +1,6 @@
 const CLIENT_ID = "1100495054063284354";
 const CLIENT_SECRET = process.env.ClientSecret; // replace with your actual client secret
 const REDIRECT_URI = "https://novels-production.up.railway.app/access-portal";
-const DISCORD_API_BASE_URL = "https://discordapp.com/api";
 const axios = require("axios");
 const profileShema = require("../models/profiles");
 
@@ -15,38 +14,39 @@ module.exports = {
     if (!code)
       return res.status(400).send({ error: "Authorization code not found." });
 
+    const params = new URLSearchParams({
+      client_id: CLIENT_ID,
+      client_secret: CLIENT_SECRET,
+      grant_type: "authorization_code",
+      code,
+      redirect_uri: REDIRECT_URI,
+    });
+
+    const headers = {
+      "Content-Type": "application/x-www-form-urlencoded",
+      "Accept-Encoding": "application/x-www-form-urlencoded",
+    };
+
     try {
       // Exchange the authorization code for an access token
       const tokenResponse = await axios.post(
-  `${DISCORD_API_BASE_URL}/oauth2/token`,
-  new URLSearchParams({
-    client_id: CLIENT_ID,
-    client_secret: CLIENT_SECRET,
-    grant_type: "authorization_code",
-    code: code,
-    redirect_uri: REDIRECT_URI,
-    scope: "identify email",
-  }),
-  {
-    headers: {
-      "Content-Type": "application/x-www-form-urlencoded",
-    },
-  }
-);
+        `https://discordapp.com/api/oauth2/token`,
+        params,
+        { headers }
+      );
 
-console.log(tokenResponse.data); // Add this line to check the response data
+      console.log(tokenResponse.data); // Add this line to check the response data
 
-const tokenData = tokenResponse.data;
+      const tokenData = tokenResponse.data;
 
-if (!tokenData.access_token) {
-  const errorData = tokenResponse.data;
-  return res
-    .status(400)
-    .send({ error: `Failed to get access token: ${errorData.error}` });
-}
+      if (!tokenData.access_token) {
+        const errorData = tokenResponse.data;
+        return res
+          .status(400)
+          .send({ error: `Failed to get access token: ${errorData.error}` });
+      }
 
-const accessToken = tokenData.access_token;
-
+      const accessToken = tokenData.access_token;
       // Get the user's ID and username
       const userResponse = await axios.get(
         `${DISCORD_API_BASE_URL}/users/@me`,
