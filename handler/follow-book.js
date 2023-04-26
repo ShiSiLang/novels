@@ -1,3 +1,5 @@
+const bookShema = require("../models/book");
+
 module.exports = {
   name: "follow-book",
   run: async (req, res) => {

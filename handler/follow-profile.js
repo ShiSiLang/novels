@@ -1,3 +1,5 @@
+const profileShema = require("../models/profiles");
+
 module.exports = {
   name: "follow-profile",
   run: async (req, res) => {

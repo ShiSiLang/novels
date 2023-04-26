@@ -3,6 +3,7 @@ const CLIENT_SECRET = process.env.ClientSecret; // replace with your actual clie
 const REDIRECT_URI = "https://novels-production.up.railway.app/sign-up";
 const DISCORD_API_BASE_URL = "https://discordapp.com/api";
 const axios = require("axios");
+const profileShema = require("../models/profiles");
 
 module.exports = {
   name: "access-portal",

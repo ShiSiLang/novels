@@ -1,3 +1,5 @@
+const profileShema = require("../models/profiles");
+
 module.exports = {
   name: "edit-profile",
   run: async (req, res) => {

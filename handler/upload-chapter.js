@@ -1,4 +1,6 @@
 let webhook_url = process.env.webhook;
+const profileShema = require("../models/profiles");
+const reviewShema = require("../models/review");
 
 module.exports = {
   name: "upload-chapter",

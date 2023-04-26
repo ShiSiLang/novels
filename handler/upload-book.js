@@ -1,4 +1,6 @@
 let webhook_url = process.env.webhook;
+const profileShema = require("../models/profiles");
+const reviewShema = require("../models/review");
 const { trim, getBase64DataUrl } = require("../util.js");
 
 module.exports = {
