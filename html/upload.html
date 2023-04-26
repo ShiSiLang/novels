@@ -470,7 +470,7 @@
   <div id="pbmodal" class="modal">
     <span onclick="document.getElementById('pbmodal').style.display='none'" class="close"
       title="Close Modal">&times;</span>
-    <form id="pbForm" class="modal-content" action="/upload-book">
+    <form id="pbForm" class="modal-content" action="/upload-book" enctype="multipart/form-data">
       <div class="container">
         <h1>Upload Book</h1>
         <p>Please fill in this form to upload a book.</p>
@@ -500,7 +500,7 @@
   <div id="pcmodal" class="modal">
     <span onclick="document.getElementById('pcmodal').style.display='none'" class="close"
       title="Close Modal">&times;</span>
-    <form id="pcForm" class="modal-content" action="/upload-chapter">
+    <form id="pcForm" class="modal-content" action="/upload-chapter" enctype="multipart/form-data">
       <div class="container">
         <h1>Upload Chapter</h1>
         <p>Please fill in this form to upload a chapter.</p>
@@ -595,7 +595,7 @@
   <div id="ebmodal" class="modal">
     <span onclick="document.getElementById('ebmodal').style.display='none'" class="close"
       title="Close Modal">&times;</span>
-    <form id="ebForm" class="modal-content" action="/edit-book">
+    <form id="ebForm" class="modal-content" action="/edit-book" enctype="multipart/form-data">
       <div class="container">
         <h1>Edit Book</h1>
         <p>Please fill in this form to edit your book.</p>
@@ -724,14 +724,12 @@
 
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
-      const data = Object.fromEntries(new FormData(form).entries());
+
+      const formData = new FormData(form);
 
       const response = await fetch("/upload-book", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ data }),
+        body: formData,
       });
 
       if (response.ok) {

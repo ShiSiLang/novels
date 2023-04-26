@@ -6,10 +6,12 @@ module.exports = {
   run: async (req, res) => {
     return res.status(400).json({ error: `System currently down!` });
 
-    let html = req.body.data;
+    let html = req.body;
 
-    if (!html.name || !html)
-      return res.status(400).json({ error: `Missing Data!` });
+    if (!req.file)
+      return res.status(400).json({ error: `Please upload an icon.` });
+
+    let icon = req.file.buffer;
 
     let data = await profileShema.findOne({
       password: html.psw,
@@ -19,7 +21,6 @@ module.exports = {
     if (!data)
       return res.status(400).json({ error: `Incorrect username or password!` });
 
-    let image = html.icon.replace(/</g, "&lt;");
 
     if (isImage(image) === false)
       return res
