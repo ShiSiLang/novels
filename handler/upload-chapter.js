@@ -1,6 +1,7 @@
 let webhook_url = process.env.webhook;
 const profileShema = require("../models/profiles");
 const reviewShema = require("../models/review");
+const { trim, getBase64DataUrl } = require("../util.js");
 
 module.exports = {
   name: "upload-chapter",
@@ -22,14 +23,12 @@ module.exports = {
     if (!data)
       return res.status(400).json({ error: `Incorrect username or password!` });
 
-    let image = html.thumbnail.replace(/</g, "&lt;");
+    let image = html.file.buffer;
 
     if (isImage(image) === false)
-      return res
-        .status(400)
-        .json({
-          error: `Please make sure the thumbnail is a valid image URL.`,
-        });
+      return res.status(400).json({
+        error: `Please make sure the thumbnail is a valid image URL.`,
+      });
 
     let content = html.content.replace(/</g, "&lt;");
     let newID = Date.now();
@@ -45,7 +44,7 @@ module.exports = {
         {
           title: html.name,
           description: trim(content, 4095),
-          image: { url: image },
+          image: { url: getBase64DataUrl(image) },
           footer: { text: newID },
         },
       ],

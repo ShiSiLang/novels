@@ -36,7 +36,7 @@ module.exports = {
       embeds: [
         {
           title: html.name.replace(/</g, "&lt;"),
-          description: trim(html.description.replace(/</g, "&lt;"), 100),
+          description: trim(html.description.replace(/</g, "&lt;"), 4095),
           image: { url: getBase64DataUrl(icon) },
           footer: { text: reviewID },
         },
