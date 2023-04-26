@@ -1,6 +1,6 @@
 const CLIENT_ID = "1100495054063284354";
 const CLIENT_SECRET = process.env.ClientSecret; // replace with your actual client secret
-const REDIRECT_URI = "https://novels-production.up.railway.app/sign-up";
+const REDIRECT_URI = "https://novels-production.up.railway.app/access-portal";
 const DISCORD_API_BASE_URL = "https://discordapp.com/api";
 const axios = require("axios");
 const profileShema = require("../models/profiles");
