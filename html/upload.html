@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="icon" type="icon" href="https://i.imgur.com/XjWCCeV.png" />
   <title>LonelyBall Media</title>
-  <meta property="og:title" content="Publish Page" />
+  <meta property="og:title" content="Upload Page" />
   <meta property="og:site_name" content="LonelyBall Media" />
   <meta property="og:description"
     content="Welcome to LonelyBall Media! We have a great selection of graphic novels and stories for you to read. Dive into our imaginative worlds and enjoy reading our engaging books." />
@@ -185,7 +185,7 @@
     transition: 1s;
   }
 
-  .publishButtons {
+  .uploadButtons {
     width: 100%;
     margin: 25px 50px 25px 50px;
   }
@@ -436,24 +436,24 @@
   </script>
 
   <div class="text">
-    <h1>Publish</h1>
+    <h1>Upload</h1>
     <p>
-      Want to publish your novel or your manga? Contact our staff trough a ticket on the official <a
+      Want to upload your story, novel, manga, or webtoon? Contact our staff trough a ticket on the official <a
         href="https://discord.gg/j3YamACwPu" target="_blank">Discord Server</a>.
     </p>
   </div>
 
   <div class="flex">
-    <button id="pbb" class="publishButtons" onclick="document.getElementById('pbmodal').style.display='block'">Publish
+    <button id="pbb" class="uploadButtons" onclick="document.getElementById('pbmodal').style.display='block'">Upload
       Book</button>
-    <button id="pcb" class="publishButtons" onclick="document.getElementById('pcmodal').style.display='block'">Publish
+    <button id="pcb" class="uploadButtons" onclick="document.getElementById('pcmodal').style.display='block'">Upload
       Chapter</button>
   </div>
 
   <div class="flex">
-    <button id="pmb" class="publishButtons" onclick="document.getElementById('pmmodal').style.display='block'">Publish
+    <button id="pmb" class="uploadButtons" onclick="document.getElementById('pmmodal').style.display='block'">Upload
       Manga</button>
-    <button id="ebb" class="publishButtons" onclick="document.getElementById('ebmodal').style.display='block'">Edit
+    <button id="ebb" class="uploadButtons" onclick="document.getElementById('ebmodal').style.display='block'">Edit
       Book</button>
   </div>
 
@@ -470,10 +470,10 @@
   <div id="pbmodal" class="modal">
     <span onclick="document.getElementById('pbmodal').style.display='none'" class="close"
       title="Close Modal">&times;</span>
-    <form id="pbForm" class="modal-content" action="/publish-book">
+    <form id="pbForm" class="modal-content" action="/upload-book">
       <div class="container">
-        <h1>Publish Book</h1>
-        <p>Please fill in this form to publish a book.</p>
+        <h1>Upload Book</h1>
+        <p>Please fill in this form to upload a book.</p>
         <hr>
 
         <input id="inputusername" type="hidden" name="uname" value="NOTHING" />
@@ -486,12 +486,12 @@
         <input type="text" placeholder="Enter Book Description" name="description" autocomplete="off" required />
 
         <label for="icon"><b>Book Icon</b></label>
-        <input type="text" placeholder="Enter Book Icon" name="icon" autocomplete="off" required />
+        <input type="file" id="icon" name="icon" accept=".jpg, .jpeg, .png" required />
 
         <div class="clearfix">
           <button type="button" onclick="document.getElementById('pbmodal').style.display='none'"
             class="cancelbtn">Cancel</button>
-          <button type="submit" class="signupbtn">Publish book for review</button>
+          <button type="submit" class="signupbtn">Upload book for review</button>
         </div>
       </div>
     </form>
@@ -500,25 +500,25 @@
   <div id="pcmodal" class="modal">
     <span onclick="document.getElementById('pcmodal').style.display='none'" class="close"
       title="Close Modal">&times;</span>
-    <form id="pcForm" class="modal-content" action="/publish-chapter">
+    <form id="pcForm" class="modal-content" action="/upload-chapter">
       <div class="container">
-        <h1>Publish Chapter</h1>
-        <p>Please fill in this form to publish a chapter.</p>
+        <h1>Upload Chapter</h1>
+        <p>Please fill in this form to upload a chapter.</p>
         <hr>
 
         <input id="inputusername2" type="hidden" name="uname" value="NOTHING" />
         <input id="inputpass2" type="hidden" name="psw" value="NOTHING" />
 
-        <label for="name"><b>Book Name</b></label>
-        <select name="name" id="ebooks" form="pcForm" required></select>
+        <label for="bookName"><b>Book Name</b></label>
+        <select name="bookName" id="ebooks" form="pcForm" required></select>
 
         <input id="type" type="hidden" name="type" value="novel" />
 
-        <label for="cname"><b>Chapter Name</b></label>
-        <input type="text" placeholder="Enter Chapter Name" name="cname" autocomplete="off" required />
+        <label for="chapterName"><b>Chapter Name</b></label>
+        <input type="text" placeholder="Enter Chapter Name" name="chapterName" autocomplete="off" required />
 
         <label for="thumbnail"><b>Chapter Thumbnail</b></label>
-        <input type="text" placeholder="Enter Chapter Thumbnail" name="thumbnail" autocomplete="off" required />
+        <input type="file" id="thumbnail" name="thumbnail" accept=".jpg, .jpeg, .png" required />
 
         <label for="intro"><b>Chapter Intro</b></label>
         <textarea rows="3" cols="50" name="intro" form="pcForm" required></textarea>
@@ -534,13 +534,13 @@
           <input type="checkbox" name="replace" style="margin-bottom:15px"> Is this chapter a replace?
         </label>
 
-        <input type="number" placeholder="If the chapter is a replace please input the chapter number" name="replaceNumber"
-          autocomplete="off" />
+        <input type="number" placeholder="If the chapter is a replace please input the chapter number"
+          name="replaceNumber" autocomplete="off" />
 
         <div class="clearfix">
           <button type="button" onclick="document.getElementById('pcmodal').style.display='none'"
             class="cancelbtn">Cancel</button>
-          <button type="submit" class="signupbtn">Publish chapter for review</button>
+          <button type="submit" class="signupbtn">Upload chapter for review</button>
         </div>
       </div>
     </form>
@@ -549,25 +549,29 @@
   <div id="pmmodal" class="modal">
     <span onclick="document.getElementById('pmmodal').style.display='none'" class="close"
       title="Close Modal">&times;</span>
-    <form id="pmForm" class="modal-content" action="/publish-manga" enctype="multipart/form-data">
+    <form id="pmForm" class="modal-content" action="/upload-manga" enctype="multipart/form-data">
       <div class="container">
-        <h1>Publish Chapter</h1>
-        <p>Please fill in this form to publish a manga chapter.</p>
+        <h1>Upload Chapter</h1>
+        <p>Please fill in this form to upload a manga chapter.</p>
         <hr>
 
         <input id="inputusername4" type="hidden" name="uname" value="NOTHING" />
         <input id="inputpass4" type="hidden" name="psw" value="NOTHING" />
 
-        <label for="ebooks3"><b>Book Name</b></label>
-        <select name="ebooks3" id="ebooks3" form="pmForm" required></select>
+        <label for="bookName"><b>Book Name</b></label>
+        <select name="bookName" id="ebooks3" form="pmForm" required></select>
 
-        <input id="type" type="hidden" name="type" value="manga" />
+        <label for="type"><b>Chapter Type</b></label>
+        <select name="type" id="type" form="pmForm" required>
+          <option value="Manga">Manga</option>
+          <option value="Webtoon">Webtoon</option>
+        </select>
 
-        <label for="cname"><b>Chapter Name</b></label>
-        <input type="text" placeholder="Enter Chapter Name" name="cname" autocomplete="off" required />
+        <label for="chapterName"><b>Chapter Name</b></label>
+        <input type="text" placeholder="Enter Chapter Name" name="chapterName" autocomplete="off" required />
 
         <label for="thumbnail"><b>Chapter Thumbnail</b></label>
-        <input type="text" placeholder="Enter Chapter Thumbnail" name="thumbnail" autocomplete="off" required />
+        <input type="file" id="thumbnail" name="thumbnail" accept=".jpg, .jpeg, .png" required />
 
         <label for="pages"><b>Pages</b></label>
         <input type="file" id="pages" name="pages" accept=".jpg, .jpeg, .png" multiple required />
@@ -576,13 +580,13 @@
           <input type="checkbox" name="replace" style="margin-bottom:15px"> Is this chapter a replace?
         </label>
 
-        <input type="number" placeholder="If the chapter is a replace please input the chapter number" name="replaceNumber"
-          autocomplete="off" />
+        <input type="number" placeholder="If the chapter is a replace please input the chapter number"
+          name="replaceNumber" autocomplete="off" />
 
         <div class="clearfix">
           <button type="button" onclick="document.getElementById('pmmodal').style.display='none'"
             class="cancelbtn">Cancel</button>
-          <button type="submit" class="signupbtn">Publish chapter for review</button>
+          <button type="submit" class="signupbtn">Upload chapter for review</button>
         </div>
       </div>
     </form>
@@ -600,14 +604,14 @@
         <input id="inputusername3" type="hidden" name="uname" value="NOTHING" />
         <input id="inputpass3" type="hidden" name="psw" value="NOTHING" />
 
-        <label for="ebooks2"><b>Book Name</b></label>
-        <select name="ebooks2" id="ebooks2" form="ebForm" required></select>
+        <label for="bookName"><b>Book Name</b></label>
+        <select name="bookName" id="ebooks2" form="ebForm" required></select>
 
-        <label for="desc"><b>Book Description</b></label>
-        <textarea rows="3" cols="50" name="intro" form="ebForm" required></textarea>
+        <label for="description"><b>Book Description</b></label>
+        <textarea rows="3" cols="50" name="description" form="ebForm" required></textarea>
 
-        <label for="thumbnail"><b>Book Thumbnail</b></label>
-        <input type="text" placeholder="Edit Thumbnail" name="psw" required>
+        <label for="icon"><b>Book Icon</b></label>
+        <input type="file" id="icon" name="icon" accept=".jpg, .jpeg, .png" required />
 
         <label>
           <input type="checkbox" checked="checked" name="ongoing" style="margin-bottom:15px"> Is the book ongoing?
@@ -722,7 +726,7 @@
       e.preventDefault();
       const data = Object.fromEntries(new FormData(form).entries());
 
-      const response = await fetch("/publish-book", {
+      const response = await fetch("/upload-book", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -750,7 +754,7 @@
       e.preventDefault();
       const data = Object.fromEntries(new FormData(form2).entries());
 
-      const response = await fetch("/publish-chapter", {
+      const response = await fetch("/upload-chapter", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
