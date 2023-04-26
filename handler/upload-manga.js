@@ -9,6 +9,7 @@ module.exports = {
 
     try {
       // Access form data and uploaded files from req.body and req.files objects respectively
+      console.log(req.body)
       const bookName = req.body.bookName;
       const chapterType = req.body.type;
       const chapterName = req.body.chapterName;
