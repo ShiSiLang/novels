@@ -303,6 +303,8 @@
             });
 
             let data = response.json();
+            alert(response)
+            alert(data)
             if (response.ok) {
                 const success = document.getElementById('success');
                 success.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
