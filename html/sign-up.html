@@ -302,8 +302,7 @@
                 }),
             });
 
-            let data = response.json();
-            alert(response)
+            let data = await response.json();
             alert(data)
             if (response.ok) {
                 const success = document.getElementById('success');
