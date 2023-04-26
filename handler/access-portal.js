@@ -57,7 +57,7 @@ module.exports = {
         }
       );
 
-return console.log(userResponse);
+      return console.log(userResponse);
 
       if (!userResponse.status === 200) {
         const errorData = userResponse.data;
