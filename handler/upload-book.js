@@ -1,4 +1,5 @@
 let webhook_url = process.env.webhook;
+const { trim, getBase64DataUrl } = require("../util.js");
 
 module.exports = {
   name: "upload-book",
@@ -11,36 +12,36 @@ module.exports = {
     if (!req.file)
       return res.status(400).json({ error: `Please upload an icon.` });
 
-    let icon = req.file.buffer;
-
-    let data = await profileShema.findOne({
-      password: html.psw,
-      username: html.uname,
-    });
+    let user = await profileShema.findOne({
+      username: html.username,
+      id: html.id,
+    }); //get user
 
     if (!data)
-      return res.status(400).json({ error: `Incorrect username or password!` });
+      return res.status(400).json({ error: `Your profile was not found!` });
 
-
-    if (isImage(image) === false)
+    if (data.author !== true)
       return res
         .status(400)
-        .json({ error: `Please make sure the icon is a valid URL.` });
+        .json({ error: `Your profile does not have author perms!` });
 
-    let newID = Date.now();
+    let icon = req.file.buffer;
+
+    let reviewID = Date.now();
 
     let params = {
       content: `New book has been submitted for review.`,
       embeds: [
         {
           title: html.name.replace(/</g, "&lt;"),
-          description: html.description.replace(/</g, "&lt;"),
-          image: { url: html.icon.replace(/</g, "&lt;") },
-          footer: { text: newID },
+          description: trim(html.description.replace(/</g, "&lt;"), 100),
+          image: { url: getBase64DataUrl(icon) },
+          footer: { text: reviewID },
         },
       ],
-      username: "New Book Post",
+      username: "New Book Upload",
     };
+
     await axios({
       method: "POST",
       headers: {
@@ -54,12 +55,14 @@ module.exports = {
     });
 
     let newReview = new reviewShema({
-      bookName: html.name.replace(/</g, "&lt;"),
-      bookAuthor: html.uname,
-      bookDescription: html.description.replace(/</g, "&lt;"),
-      bookIcon: html.icon.replace(/</g, "&lt;"),
-      type: "book",
-      reviewID: newID,
+      type: "Book",
+      reviewID: reviewID,
+      book: {
+        name: html.name.replace(/</g, "&lt;"),
+        description: html.description.replace(/</g, "&lt;"),
+        icon: icon,
+        author: html.id,
+      },
     }).save();
 
     res.status(200).json({

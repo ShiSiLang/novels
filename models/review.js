@@ -25,9 +25,6 @@ const reviewSchema = mongoose.Schema({
     description: String,
     icon: Buffer,
     author: String,
-    updated: String,
-    published: String,
-    status: String,
   },
 });
 
