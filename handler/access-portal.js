@@ -36,12 +36,14 @@ module.exports = {
 
       const tokenData = tokenResponse.data;
 
-      if (!tokenData.error) {
-        const errorData = tokenResponse.data;
-        return res
-          .status(400)
-          .send({ error: `Failed to get access token: ${errorData.error}` });
-      }
+console.log(tokenData)
+
+      if (tokenData.error) {
+  const errorData = tokenResponse.data;
+  return res
+    .status(400)
+    .send({ error: `Failed to get access token: ${errorData.error}` });
+}
 
       const accessToken = tokenData.access_token;
 
@@ -100,7 +102,7 @@ module.exports = {
         .status(200)
         .json({ success: `${html.uname.replace(/</g, "&lt;")} added!` });
     } catch (error) {
-      console.log(error);
+      //console.log(error);
       return res.status(400).send({ error: error.message });
     }
   },
