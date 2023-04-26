@@ -32,6 +32,8 @@ app.get("/discord", (_, res) => res.redirect("https://discord.gg/j3YamACwPu"));
 
 app.get("/upload", (_, res) => res.sendFile(dir("upload")));
 
+app.get("/review", (_, res) => res.sendFile(dir("review")));
+
 app.get("/explore", (_, res) => res.sendFile(dir("explore")));
 
 app.get("/explore/:bookName", async (req, res) => {

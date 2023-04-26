@@ -9,56 +9,78 @@ module.exports = {
       return res.status(400).json({ error: `Incorrect password!` });
 
     if (html.type1 === "accept") {
-      let data = await reviewShema.findOne({ type: html.type2, reviewID: html.reviewID });
-      if (!data) return res.status(400).json({ error: `Data not found.` });
+      let reviewData = await reviewShema.findOne({
+        type: html.type2,
+        reviewID: html.reviewID,
+      });
+      if (!reviewData)
+        return res.status(400).json({ error: `Data not found.` });
 
-      let bookData;
-      if (html.type2 === "book") {
+      let data;
+      if (html.type2 === "Book") {
+        data = reviewData.book;
+
         let date = new Date();
 
         let newBook = new bookShema({
-          name: data.bookName,
-          author: data.bookAuthor,
-          description: data.bookDescription,
-          icon: data.bookIcon,
+          name: data.name,
+          author: data.author,
+          description: datacription,
+          icon: data.icon,
           updated: date,
           published: date,
           status: "Ongoing",
         }).save();
 
-        bookData = await newBook;
         let authorData = await profileShema.findOne({
-          username: bookData.author,
-        });
-        authorData.books.push(bookData.name);
-        authorData.save();
-      } else {
-        bookData = await bookShema.findOne({
-          name: data.bookName,
-          author: data.bookAuthor,
+          username: data.author,
         });
 
-        bookData.chapters.push({
-          name: data.cName,
-          intro: data.cIntro,
-          credits: data.cCredits,
-          thumbnail: data.bookIcon,
-          type: data.cType,
-          content: data.bookDescription,
-          comments: [],
+        authorData.books.push(data.name);
+        authorData.save();
+      } else if (html.type2 === "Chapter") {
+        data = reviewData.chapter;
+        let data2 = reviewData.book;
+
+        let bookData = await bookShema.findOne({
+          name: data2.name,
+          author: data2.author,
         });
+
+        if (data.type === "Novel") {
+          bookData.chapters.push({
+            name: data.name,
+            intro: data.intro,
+            credits: data.credits,
+            thumbnail: data.thumbnail,
+            type: data.type,
+            novel: data.novel,
+            comments: [],
+          });
+        } else if (data.type === "Manga" || data.type === "Webtoon") {
+          bookData.chapters.push({
+            name: data.name,
+            intro: data.intro,
+            credits: data.credits,
+            thumbnail: data.thumbnail,
+            type: data.type,
+            images: data.images,
+            comments: [],
+          });
+        }
 
         bookData.updated = new Date();
 
         bookData.save();
 
-        let getSystem = await system.findOne({
+        //System
+        let system = await system.findOne({
           id: "6427a45e2d7d901440fc43cf",
         });
-        if (getSystem.latestChapters.length >= 25)
-          getSystem.latestChapters.pop();
-        getSystem.latestChapters.push(data.cName);
-        getSystem.save();
+
+        if (system.latestChapters.length >= 25) system.latestChapters.pop();
+        system.latestChapters.push(reviewData.chapter.name);
+        system.save();
       }
 
       res.status(200).json({
@@ -66,14 +88,17 @@ module.exports = {
       });
 
       let params = {
-        content: `Book/Chapter accepted!.`,
+        content:
+          html.type2 === "Chapter"
+            ? `New Chapter: ${reviewData.chapter.name}`
+            : "New Book Post",
         embeds: [
           {
-            title: bookData.name,
+            title: data.name,
             color: 65280,
           },
         ],
-        username: type2 === "chapter" ? `${data.cName}` : "New Book Post",
+        username: reviewData.book.name,
       };
 
       await reviewShema.findOneAndDelete({ reviewID: html.reviewID });
@@ -91,24 +116,33 @@ module.exports = {
     }
 
     if (html.type1 === "decline") {
-      let bookData = await reviewShema.findOne({ type: html.type2, reviewID: html.reviewID });
+      let bookData = await reviewShema.findOne({
+        type: html.type2,
+        reviewID: html.reviewID,
+      });
 
       res.status(200).json({
         success: `Successfully denied the ${html.type2}!.`,
       });
 
       let params = {
-        content: `Book/Chapter Denied!.`,
+        content:
+          html.type2 === "Chapter"
+            ? `New Chapter: ${reviewData.chapter.name} Denied`
+            : "New Book Denied",
         embeds: [
           {
-            title: bookData.name,
+            title: data.name,
             color: 16711680,
           },
         ],
-        username: type2 === "chapter" ? "New Chapter Post" : "New Book Post",
+        username: reviewData.book.name,
       };
 
-      await reviewShema.findOneAndDelete({ type: html.type2, reviewID: html.reviewID });
+      await reviewShema.findOneAndDelete({
+        type: html.type2,
+        reviewID: html.reviewID,
+      });
 
       await axios({
         method: "POST",
