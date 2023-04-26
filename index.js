@@ -423,7 +423,7 @@ app.post("/sign-up", async (req, res) => {
       .status(200)
       .json({ success: `${html.uname.replace(/</g, "&lt;")} added!` });
   } catch (error) {
-    console.error(error);
+    console.error(error.message);
     return res.status(400).send({ error: error.message });
   }
 });
