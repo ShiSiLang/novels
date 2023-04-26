@@ -320,10 +320,7 @@ app.get("/profile/:username", async (req, res) => {
     });
 
   file = file.replaceAll("$$username$$", userData.username);
-  file = file.replace(
-    "$$banner$$",
-    userData?.banner || "https://i.imgur.com/XjWCCeV.png"
-  );
+  file = file.replace("$$banner$$", userData?.banner);
   file = file.replaceAll("$$avatar$$", iconLink);
   file = file.replaceAll("$$followers$$", userData.followers);
   file = file.replaceAll("$$comments$$", comments.length);
@@ -342,7 +339,7 @@ let image = req.file;
 image.buffer
 */
 
-app.post("/sign-up", async (req, res) => {
+app.post("/access-portal", async (req, res) => {
   const code = req.body.code;
 
   if (!code)
@@ -378,7 +375,7 @@ app.post("/sign-up", async (req, res) => {
 
     const accessToken = tokenData.access_token;
 
-    console.log(tokenData)
+    console.log(tokenData);
 
     // Get the user's ID and username
     const userResponse = await axios.get(`${DISCORD_API_BASE_URL}/users/@me`, {
@@ -402,21 +399,26 @@ app.post("/sign-up", async (req, res) => {
 
     let data = await profileShema.find().sort({ username: 1 });
 
-    if (data.find((v) => v.username === html.uname.replace(/</g, "&lt;")))
+    if (data.find((v) => v.username === html.uname.replace(/</g, "&lt;"))) {
+      /* return res.status(200).json({
+        success: `Successfully logged you in.`,
+        userIcon: iconLink,
+        userAuthor: data.author,
+      });*/
       return res.status(400).json({ error: `That username is already taken.` });
+    }
 
     let newProfile = new profileShema({
       username: html.uname.replace(/</g, "&lt;"),
       password: html.psw.replace(/</g, "&lt;"),
       icon: null, // Replace this with the user's Discord avatar
       bio: "",
-      banner: "",
+      banner: "https://i.imgur.com/XjWCCeV.png",
       date: date,
       followers: 0,
       discord: null,
       twitter: null,
       author: false,
-      discordEmail,
     }).save();
 
     return res
@@ -425,32 +427,6 @@ app.post("/sign-up", async (req, res) => {
   } catch (error) {
     return res.status(400).send({ error: error.message });
   }
-});
-
-app.post("/sign-in", async (req, res) => {
-  let html = req.body.data;
-
-  let data = await profileShema.findOne({
-    username: html.uname,
-  });
-
-  if (!data)
-    return res
-      .status(400)
-      .json({ error: `Username or password is incorrect.` });
-
-  if (data.password !== html.psw)
-    return res
-      .status(400)
-      .json({ error: `Username or password is incorrect.` });
-
-  const iconLink = `data:image/png;base64,${data.icon.toString("base64")}`;
-
-  return res.status(200).json({
-    success: `Successfully logged you in.`,
-    userIcon: iconLink,
-    userAuthor: data.author,
-  });
 });
 
 app.post("/publish-book", async (req, res) => {

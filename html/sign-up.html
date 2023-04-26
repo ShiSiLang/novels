@@ -288,11 +288,11 @@
         const queryString = window.location.search;
         const urlParams = new URLSearchParams(queryString);
         const code = urlParams.get('code');
-        if (code) signUp();
+        if (code) post();
 
-        async function signUp() {
+        async function post() {
             // send the code to server side for verification and handling
-            const response = await fetch("/sign-up", {
+            const response = await fetch("/access-portal", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -303,7 +303,6 @@
             });
 
             let data = await response.json();
-            alert(data)
             if (response.ok) {
                 const success = document.getElementById('success');
                 success.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
