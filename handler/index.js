@@ -30,6 +30,10 @@ module.exports = function (app) {
             route.run(req, res);
           }
         );
+      } else if (route.get) {
+        app.get(`/${route.name}`, async (req, res) => {
+          route.run(req, res);
+        });
       } else {
         app.post(`/${route.name}`, async (req, res) => {
           route.run(req, res);

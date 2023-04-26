@@ -295,12 +295,13 @@
         const discordSignInBtn = document.getElementById('discordSignIn');
         discordSignUpBtn.addEventListener('click', () => {
             const clientID = '1100495054063284354';
-            const redirectURI = encodeURIComponent('https://novels-production.up.railway.app/access-portal');
+            const redirectURI = encodeURIComponent('https://novels-production.up.railway.app/auth/discord/callback');
             const scopes = encodeURIComponent('email identify');
             const url = `https://discord.com/oauth2/authorize?client_id=${clientID}&redirect_uri=${redirectURI}&response_type=code&scope=${scopes}`;
             window.location.href = url;
         });
 
+        /*
         const queryString = window.location.search;
         const urlParams = new URLSearchParams(queryString);
         const code = urlParams.get('code');
@@ -331,6 +332,7 @@
                 error.style.display = "block";
             }
         }
+        */
     </script>
 
     <footer>
