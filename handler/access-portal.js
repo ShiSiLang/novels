@@ -18,36 +18,34 @@ module.exports = {
     try {
       // Exchange the authorization code for an access token
       const tokenResponse = await axios.post(
-        `${DISCORD_API_BASE_URL}/oauth2/token`,
-        new URLSearchParams({
-          client_id: CLIENT_ID,
-          client_secret: CLIENT_SECRET,
-          grant_type: "authorization_code",
-          code: code,
-          redirect_uri: REDIRECT_URI,
-          scope: "identify email",
-        }),
-        {
-          headers: {
-            "Content-Type": "application/x-www-form-urlencoded",
-          },
-        }
-      );
+  `${DISCORD_API_BASE_URL}/oauth2/token`,
+  new URLSearchParams({
+    client_id: CLIENT_ID,
+    client_secret: CLIENT_SECRET,
+    grant_type: "authorization_code",
+    code: code,
+    redirect_uri: REDIRECT_URI,
+    scope: "identify email",
+  }),
+  {
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+  }
+);
 
-      const tokenData = tokenResponse.data;
+console.log(tokenResponse.data); // Add this line to check the response data
 
-console.log(tokenData)
+const tokenData = tokenResponse.data;
 
-      if (tokenData.error) {
+if (!tokenData.access_token) {
   const errorData = tokenResponse.data;
   return res
     .status(400)
     .send({ error: `Failed to get access token: ${errorData.error}` });
 }
 
-      const accessToken = tokenData.access_token;
-
-      console.log(tokenData);
+const accessToken = tokenData.access_token;
 
       // Get the user's ID and username
       const userResponse = await axios.get(
