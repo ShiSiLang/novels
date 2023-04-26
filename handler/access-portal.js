@@ -36,8 +36,6 @@ module.exports = {
         { headers }
       );
 
-      console.log(tokenResponse.data); // Add this line to check the response data
-
       const tokenData = tokenResponse.data;
 
       if (!tokenData.access_token) {
@@ -48,9 +46,10 @@ module.exports = {
       }
 
       const accessToken = tokenData.access_token;
+
       // Get the user's ID and username
       const userResponse = await axios.get(
-        `${DISCORD_API_BASE_URL}/users/@me`,
+        `https://discordapp.com/api/users/@me`,
         {
           headers: {
             authorization: `Bearer ${accessToken}`,
@@ -69,6 +68,7 @@ module.exports = {
       const userId = userData.id;
       const username = userData.username;
       return console.log(userResponse);
+
       let date = new Date();
 
       let data = await profileShema.find().sort({ username: 1 });
