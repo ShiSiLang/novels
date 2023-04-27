@@ -82,15 +82,18 @@ module.exports = {
 
       let data = await profileShema.findOne({ id: userId });
 
-      if (data) 
-        return res.status(200).json({
-        success: `Successfully logged you in.`,
-        avatar,
-        author: data.author,
-        id: userId,
-        username
-      });
-      
+      if (data) {
+var url = new URL("https://novels-production.up.railway.app/access-portal");
+
+// If your expected result is "http://foo.bar/?x=1&y=2&x=42"
+url.searchParams.append('avatar', avatar);
+url.searchParams.append('author', data.author);
+url.searchParams.append('id', userId);
+url.searchParams.append('username', username);
+
+
+        return res.status(200).redirect(url);
+      }
 
       let newProfile = new profileShema({
 username,
@@ -109,7 +112,6 @@ username,
       return res
         .status(200)
         .json({ success: `${username} added! Redirecting you in a bit` });
-//redirect
     } catch (error) {
       return res.status(400).send({ error: error.message });
     }
