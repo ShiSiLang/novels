@@ -109,6 +109,7 @@ username,
       return res
         .status(200)
         .json({ success: `${username} added! Redirecting you in a bit` });
+//redirect
     } catch (error) {
       return res.status(400).send({ error: error.message });
     }
