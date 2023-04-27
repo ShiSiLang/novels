@@ -616,8 +616,9 @@
   <script>
     if (typeof Storage !== "undefined") {
       if (localStorage.user) {
-alert(JSON.stringify(localStorage.user))
+alert(localStorage.user)
         let data = JSON.parse(localStorage.user);
+alert(data)
         if (data.author === true) {
           let userObject = JSON.stringify({ username: data.username, id: data.id, email: data.email })
         alert(userObject)
