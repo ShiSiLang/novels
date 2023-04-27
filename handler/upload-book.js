@@ -13,7 +13,7 @@ module.exports = {
 
     if (!req.file)
       return res.status(400).json({ error: `Please upload an icon.` });
-
+console.log(html.user)
     let userObject = JSON.parse(html.user);
 
     let user = await profileShema.findOne({
