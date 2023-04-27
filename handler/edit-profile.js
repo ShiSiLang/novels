@@ -7,13 +7,16 @@ module.exports = {
 
     let html = req.body;
 
+    let userObject = JSON.parse(html.user);
+
     let data = await profileShema.findOne({
-      password: html.psw,
-      username: html.uname,
+      username: userObject.username,
+      id: userObject.id,
+      email: userObject.email,
     });
 
     if (!data)
-      return res.status(400).json({ error: `Incorrect username or password!` });
+      return res.status(400).json({ error: `Could not fetch user data.` });
 
     let params = {
       discord: html?.discord || data?.discord || null,

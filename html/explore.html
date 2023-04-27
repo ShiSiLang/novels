@@ -393,7 +393,7 @@
                 document.getElementById("loso").innerHTML = "Sign out";
                 let data = JSON.parse(localStorage.user);
                 document.getElementById("account").href = `/profile/${data.username}`;
-                document.getElementById("userIcon").src = `${data.icon}`;
+                document.getElementById("userIcon").src = `${data.avatar}`;
             } else {
                 document.getElementById("loso").innerHTML = "Sign in";
                 document.getElementById("loso").href = "/sign-in";

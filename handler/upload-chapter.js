@@ -15,14 +15,22 @@ module.exports = {
       return res.status(400).json({ error: `Missing Data!` });
     console.log(html);
 
-    let data = await profileShema.findOne({
-      password: html.psw,
-      username: html.uname,
+    let userObject = JSON.parse(html.user);
+
+    let user = await profileShema.findOne({
+      username: userObject.username,
+      id: userObject.id,
+      email: userObject.email,
     });
 
-    if (!data)
-      return res.status(400).json({ error: `Incorrect username or password!` });
+    if (!user)
+      return res.status(400).json({ error: `Could not fetch user data.` });
 
+    if (user.author !== true)
+      return res
+        .status(400)
+        .json({ error: `Your profile does not have author perms!` });
+        
     let image = html.file.buffer;
 
     if (isImage(image) === false)

@@ -6,19 +6,24 @@ module.exports = {
   run: async (req, res) => {
     return res.status(400).json({ error: `System currently down!` });
 
-    let html = req.body.data; //book, chapter, uname, psw, comment
+    let html = req.body.data;
+    console.log(html);
+
     let bookData = await bookShema.findOne({ name: html.book });
 
     if (!bookData)
       return res.status(400).json({ error: `Something went wrong.` });
 
+    let userObject = JSON.parse(html.user);
+
     let user = await profileShema.findOne({
-      password: html.psw,
-      username: html.uname,
+      username: userObject.username,
+      id: userObject.id,
+      email: userObject.email,
     });
 
     if (!user)
-      return res.status(400).json({ error: `Incorrect username or password!` });
+      return res.status(400).json({ error: `Could not fetch user data.` });
 
     let chapterIndex = bookData.chapters.findIndex(
       (v) => v.name === html.chapter

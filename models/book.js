@@ -24,7 +24,7 @@ const bookSchema = mongoose.Schema({
       ],
     },
   ],
-  followers: Array, // Array of usernames
+  followers: Array, // Array of ids
   updated: String,
   status: String,
   published: String,

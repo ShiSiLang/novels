@@ -362,7 +362,7 @@
 
       const button = document.getElementById("fb");
       let user = JSON.parse(localStorage.user);
-      if (json.followers.includes(user.username)) {
+      if (json.followers.includes(user.id)) {
         button.innerHTML = `<span>💔</span>
   <span class="favtext">Remove from favorites</span>`;
       }
@@ -403,7 +403,7 @@
         document.getElementById("loso").innerHTML = "Sign out";
         let data = JSON.parse(localStorage.user);
         document.getElementById("account").href = `/profile/${data.username}`;
-        document.getElementById("userIcon").src = `${data.icon}`;
+        document.getElementById("userIcon").src = `${data.avatar}`;
       } else {
         document.getElementById("loso").innerHTML = "Sign in";
         document.getElementById("loso").href = "/sign-in";
@@ -492,8 +492,7 @@
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            uname: data.username,
-            psw: data.password,
+            id: data.id,
             follow: "$$name$$",
           }),
         });
@@ -503,10 +502,10 @@
           let user = JSON.parse(localStorage.user);
           let bookData = await fetch($$novel$$);
           let json = await bookData.json();
-          if (json.followers.includes(user.username)) {
+          if (json.followers.includes(user.id)) {
             button.innerHTML = `<span>💔</span>
   <span class="favtext">Remove from favorites</span>`;
-          } else if (!json.followers.includes(user.username)) {
+          } else if (!json.followers.includes(user.id)) {
             button.innerHTML = `<span>❤️</span>
       <span class="favtext">Add to favorites</span>`;
           }

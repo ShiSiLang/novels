@@ -413,7 +413,7 @@
         document.getElementById("loso").innerHTML = "Sign out";
         let data = JSON.parse(localStorage.user);
         document.getElementById("account").href = `/profile/${data.username}`;
-        document.getElementById("userIcon").src = `${data.icon}`;
+        document.getElementById("userIcon").src = `${data.avatar}`;
       } else {
         document.getElementById("loso").innerHTML = "Sign in";
         document.getElementById("loso").href = "/sign-in";
@@ -476,9 +476,7 @@
         <p>Please fill in this form to upload a book.</p>
         <hr>
 
-        <input id="inputusername" type="hidden" name="username" value="NOTHING" />
-        <input id="inputpass" type="hidden" name="psw" value="NOTHING" />
-        <input id="inputID" type="hidden" name="id" value="NOTHING" />
+        <input id="user" type="hidden" name="user" value="NOTHING" />
 
         <label for="name"><b>Book Name</b></label>
         <input type="text" placeholder="Enter Book Name" name="name" autocomplete="off" required />
@@ -507,8 +505,7 @@
         <p>Please fill in this form to upload a chapter.</p>
         <hr>
 
-        <input id="inputusername2" type="hidden" name="uname" value="NOTHING" />
-        <input id="inputpass2" type="hidden" name="psw" value="NOTHING" />
+        <input id="user2" type="hidden" name="user" value="NOTHING" />
 
         <label for="bookName"><b>Book Name</b></label>
         <select name="bookName" id="ebooks" form="pcForm" required></select>
@@ -556,8 +553,7 @@
         <p>Please fill in this form to upload a manga chapter.</p>
         <hr>
 
-        <input id="inputusername4" type="hidden" name="uname" value="NOTHING" />
-        <input id="inputpass4" type="hidden" name="psw" value="NOTHING" />
+        <input id="user3" type="hidden" name="user" value="NOTHING" />
 
         <label for="bookName"><b>Book Name</b></label>
         <select name="bookName" id="ebooks3" form="pmForm" required></select>
@@ -602,8 +598,7 @@
         <p>Please fill in this form to edit your book.</p>
         <hr>
 
-        <input id="inputusername3" type="hidden" name="uname" value="NOTHING" />
-        <input id="inputpass3" type="hidden" name="psw" value="NOTHING" />
+        <input id="user4" type="hidden" name="user" value="NOTHING" />
 
         <label for="bookName"><b>Book Name</b></label>
         <select name="bookName" id="ebooks2" form="ebForm" required></select>
@@ -632,14 +627,11 @@
       if (localStorage.user) {
         let data = JSON.parse(localStorage.user);
         if (data.author === true) {
-          document.getElementById("inputusername").value = data.username;
-          document.getElementById("inputpass").value = data.password;
-          document.getElementById("inputusername2").value = data.username;
-          document.getElementById("inputpass2").value = data.password;
-          document.getElementById("inputusername3").value = data.username;
-          document.getElementById("inputpass3").value = data.password;
-          document.getElementById("inputusername4").value = data.username;
-          document.getElementById("inputpass4").value = data.password;
+          let userObject = JSON.stringify({ username: data.username, id: data.id, email: data.email })
+          document.getElementById("user").value = userObject;
+          document.getElementById("user2").value = userObject;
+          document.getElementById("user3").value = userObject;
+          document.getElementById("user4").value = userObject;
         }
         if (data.author === false) {
           document.getElementById("pbb").style.display = "none";

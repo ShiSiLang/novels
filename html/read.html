@@ -213,81 +213,81 @@
 
   /*Buttons End*/
 
-.comments-container {
-  max-width: 700px;
-  margin: 0 auto;
-}
-
-.comment {
-  border: 3px solid #956a9d;
-  background-color: #c499cc;
-  border-radius: 16px;
-  padding: 25px;
-  margin-bottom: 20px;
-}
-
-.pfp-container {
-  float: left;
-  margin-right: 15px;
-}
-
-.pfp {
-  border-radius: 50%;
-  width: 75px;
-  height: 75px;
-}
-
-.comment-content {
-  overflow: hidden;
-}
-
-.commenter-name {
-  margin-top: 0;
-  margin-bottom: 10px;
-  color: #ffffff;
-  font-size: 18px;
-}
-
-.comment-date {
-  display: block;
-  margin-bottom: 10px;
-  color: #ffffff;
-  font-size: 14px;
-}
-
-.comment-text {
-  margin-bottom: 10px;
-  color: #ffffff;
-  font-size: 16px;
-}
-
-.reply-link {
-  color: #956a9d;
-  font-weight: bold;
-}
-
-@media screen and (max-width: 600px) {
   .comments-container {
-    max-width: 100%;
-    padding: 0 20px;
+    max-width: 700px;
+    margin: 0 auto;
   }
-  
+
   .comment {
-    padding: 20px;
+    border: 3px solid #956a9d;
+    background-color: #c499cc;
+    border-radius: 16px;
+    padding: 25px;
+    margin-bottom: 20px;
   }
-  
+
   .pfp-container {
-    float: none;
-    margin-right: 0;
-    margin-bottom: 10px;
-    text-align: center;
+    float: left;
+    margin-right: 15px;
   }
-  
+
   .pfp {
-    width: 50px;
-    height: 50px;
+    border-radius: 50%;
+    width: 75px;
+    height: 75px;
   }
-}
+
+  .comment-content {
+    overflow: hidden;
+  }
+
+  .commenter-name {
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: #ffffff;
+    font-size: 18px;
+  }
+
+  .comment-date {
+    display: block;
+    margin-bottom: 10px;
+    color: #ffffff;
+    font-size: 14px;
+  }
+
+  .comment-text {
+    margin-bottom: 10px;
+    color: #ffffff;
+    font-size: 16px;
+  }
+
+  .reply-link {
+    color: #956a9d;
+    font-weight: bold;
+  }
+
+  @media screen and (max-width: 600px) {
+    .comments-container {
+      max-width: 100%;
+      padding: 0 20px;
+    }
+
+    .comment {
+      padding: 20px;
+    }
+
+    .pfp-container {
+      float: none;
+      margin-right: 0;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+
+    .pfp {
+      width: 50px;
+      height: 50px;
+    }
+  }
 
 
   /*Modal*/
@@ -491,14 +491,14 @@
       <p class="comment-text">${chapter.comments[i].comment}</p>
     </div>
   </div>`;
-/*`
-              <div class="comment">
-                <img src="${chapter.comments[i].icon}" alt="${chapter.comments[i].username}" class="pfp" width="40" height="40">
-                <a href="/profile/${chapter.comments[i].username}">${chapter.comments[i].username}</a>
-                <span>- ${chapter.comments[i].date}</span>
-                <br>
-                <p>${chapter.comments[i].comment}</p>
-                </div>`;*/
+          /*`
+                        <div class="comment">
+                          <img src="${chapter.comments[i].icon}" alt="${chapter.comments[i].username}" class="pfp" width="40" height="40">
+                          <a href="/profile/${chapter.comments[i].username}">${chapter.comments[i].username}</a>
+                          <span>- ${chapter.comments[i].date}</span>
+                          <br>
+                          <p>${chapter.comments[i].comment}</p>
+                          </div>`;*/
         }
       }
     } catch (err) {
@@ -539,7 +539,7 @@
         document.getElementById("loso").innerHTML = "Sign out";
         let data = JSON.parse(localStorage.user);
         document.getElementById("account").href = `/profile/${data.username}`;
-        document.getElementById("userIcon").src = `${data.icon}`;
+        document.getElementById("userIcon").src = `${data.avatar}`;
       } else {
         document.getElementById("loso").innerHTML = "Sign in";
         document.getElementById("loso").href = "/sign-in";
@@ -585,7 +585,7 @@
     <h1>Comments</h1>
   </div>
 
-  
+
   <div class="comments-container" id="comments"></div>
 
   <div class="flex">
@@ -626,8 +626,7 @@
         <h1>Comment</h1>
         <p>Please follow the tos while commenting.</p>
         <hr />
-        <input id="inputusername" type="hidden" name="uname" value="NOTHING" />
-        <input id="inputpass" type="hidden" name="psw" value="NOTHING" />
+        <input id="user" type="hidden" name="user" value="NOTHING" />
 
         <input type="hidden" name="book" value="$$book$$" />
 
@@ -659,8 +658,8 @@
     if (typeof Storage !== "undefined") {
       if (localStorage.user) {
         let data = JSON.parse(localStorage.user);
-        document.getElementById("inputusername").value = data.username;
-        document.getElementById("inputpass").value = data.password;
+        let userObject = JSON.stringify({ username: data.username, id: data.id, email: data.email })
+        document.getElementById("user").value = userObject;
       } else {
         document.getElementById("pbb").style.display = "none";
         document.getElementById("pcb").style.display = "none";

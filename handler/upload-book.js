@@ -14,15 +14,18 @@ module.exports = {
     if (!req.file)
       return res.status(400).json({ error: `Please upload an icon.` });
 
+    let userObject = JSON.parse(html.user);
+
     let user = await profileShema.findOne({
-      username: html.username,
-      id: html.id,
-    }); //get user
+      username: userObject.username,
+      id: userObject.id,
+      email: userObject.email,
+    });
 
-    if (!data)
-      return res.status(400).json({ error: `Your profile was not found!` });
+    if (!user)
+      return res.status(400).json({ error: `Could not fetch user data.` });
 
-    if (data.author !== true)
+    if (user.author !== true)
       return res
         .status(400)
         .json({ error: `Your profile does not have author perms!` });
@@ -63,7 +66,7 @@ module.exports = {
         name: html.name.replace(/</g, "&lt;"),
         description: html.description.replace(/</g, "&lt;"),
         icon: icon,
-        author: html.id,
+        author: user.id,
       },
     }).save();
 
