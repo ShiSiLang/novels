@@ -1,5 +1,6 @@
 const bookShema = require("../models/book");
 const { trim, getTimeDifference } = require("../util.js");
+const fs = require("fs");
 
 module.exports = {
   name: "read/:bookName/:chapter",

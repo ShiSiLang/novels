@@ -41,10 +41,6 @@ app.get("/review", (_, res) => res.sendFile(dir("review")));
 
 app.get("/explore", (_, res) => res.sendFile(dir("explore")));
 
-app.get("/read/:bookName/:chapter", async (req, res) => {
-  
-});
-
 app.use((_, res) => res.status(404).sendFile(dir("error")));
 
 app.listen(process.env.PORT || 80, () => {
