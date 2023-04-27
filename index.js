@@ -37,6 +37,8 @@ app.get("/review", (_, res) => res.sendFile(dir("review")));
 
 app.get("/explore", (_, res) => res.sendFile(dir("explore")));
 
+app.get("/tos", (_, res) => res.sendFile(dir("tos")));
+
 app.use((_, res) => res.status(404).sendFile(dir("error")));
 
 app.listen(process.env.PORT || 80, () => {
