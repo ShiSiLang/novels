@@ -4,7 +4,7 @@ const system = require("../models/system");
 const reviewShema = require("../models/review");
 
 module.exports = {
-  name: "/data/:type/:other",
+  name: "data/:type/:other",
   get: true,
   run: async (req, res) => {
     let type = req.params.type.toLowerCase();
