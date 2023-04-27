@@ -7,7 +7,7 @@ module.exports = {
   name: "upload-book",
   upload: "icon",
   run: async (req, res) => {
-    return res.status(400).json({ error: `System currently down!` });
+    //return res.status(400).json({ error: `System currently down!` });
 
     let html = req.body;
 
@@ -21,6 +21,8 @@ module.exports = {
       id: userObject.id,
       email: userObject.email,
     });
+
+    console.log(user)
 
     if (!user)
       return res.status(400).json({ error: `Could not fetch user data.` });
