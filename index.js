@@ -3,11 +3,7 @@ const app = express();
 const fs = require("fs");
 const axios = require("axios");
 const mongoose = require("mongoose");
-const profileShema = require("./models/profiles");
-const reviewShema = require("./models/review");
-const bookShema = require("./models/book");
 const system = require("./models/system");
-let webhook_url = process.env.webhook;
 const {
   trim,
   getTimeDifference,

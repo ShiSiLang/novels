@@ -2,6 +2,7 @@ const reviewShema = require("../models/review");
 const bookShema = require("../models/book");
 const profileShema = require("../models/profiles");
 const { trim, getBase64DataUrl } = require("../util.js");
+let webhook_url = process.env.webhook;
 
 module.exports = {
   name: "review",
