@@ -1,4 +1,5 @@
 const bookShema = require("../models/book");
+const profileShema = require("../models/profiles");
 const { trim, getTimeDifference } = require("../util.js");
 const fs = require("fs");
 const dir = (text) => `/app/html/${text}.html`;
@@ -21,9 +22,12 @@ module.exports = {
 
     book.icon = `data:image/png;base64,${book.icon.toString("base64")}`;
 
+    let user = await profileShema.findOne({ id: book.author });
+
     file = file.replaceAll("$$name$$", book.name);
     file = file.replaceAll("$$desc$$", book.description);
-    file = file.replaceAll("$$author$$", book.author);
+    file = file.replaceAll("$$authorID$$", book.author);
+    file = file.replaceAll("$$author$$", user.username);
     file = file.replaceAll("$$icon$$", book.icon);
     file = file.replaceAll("$$views$$", book.views);
     file = file.replaceAll("$$status$$", book.status);
