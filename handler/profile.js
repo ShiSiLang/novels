@@ -21,7 +21,7 @@ module.exports = {
     let comments = data
       .filter((v) => {
         return (
-          v.chapters.filter((e) => {
+          v?.chapters?.filter((e) => {
             return (
               e.comments.filter((c) => {
                 return c.id === user.id;
