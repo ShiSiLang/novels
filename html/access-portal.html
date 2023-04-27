@@ -313,7 +313,7 @@
                     const author = urlParams.get('author');
 
                     let params = {
-                        id, username, avatar, author, mode: "Normal Mode"
+                        id, username, avatar, email, author, mode: "Normal Mode"
                     }
                     localStorage.setItem("user", JSON.stringify(params));
                 } else {
