@@ -39,11 +39,23 @@ module.exports = {
         });
       });
 
-    if (user.banner === null) user.banner = "https://i.imgur.com/XjWCCeV.png";
+    function formatString(content) {
+      let step1 = content.split(" ").join(" ").replaceAll("\n\n", "</br></br>");
+      let step2 = step1.replaceAll(/\*\*(.*?)\*\*/g, "<b>$1</b>");
+      let step3 = step2.replaceAll(/\*(.*?)\*/g, "<em>$1</em>");
+      let step4 = step3.replaceAll(/\_(.*?)\_/g, "<ins>$1</ins>");
+      return step4;
+    }
 
     file = file.replaceAll("$$username$$", user.username);
     file = file.replaceAll("$$userID$$", user.id);
-    file = file.replace("$$banner$$", user.banner);
+    file = file.replace(
+      "$$banner$$",
+      (user.banner =
+        user.banner === null
+          ? "https://i.imgur.com/XjWCCeV.png"
+          : `https://cdn.discordapp.com/banners/${id}/${user.banner}.png`)
+    );
     file = file.replaceAll(
       "$$avatar$$",
       `https://cdn.discordapp.com/avatars/${id}/${user.avatar}.png`
@@ -54,7 +66,7 @@ module.exports = {
     file = file.replace("$$twitter$$", user.twitter || "#");
     file = file.replace(
       "$$bio$$",
-      user.bio || `Welcome to ${user.username}'s profile!`
+      formatString(user.bio) || `Welcome to ${user.username}'s profile!`
     );
     file = file.replace("$$date$$", getTimeDifference(user.date));
     res.send(file);

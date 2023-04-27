@@ -22,7 +22,6 @@ module.exports = {
     let params = {
       discord: html?.discord || data?.discord || null,
       twitter: html?.twitter || data?.twitter || null,
-      banner: html?.banner || data?.banner || null,
       bio: html?.bio?.replace(/</g, "&lt;") || data?.bio || null,
     };
 
@@ -46,17 +45,19 @@ module.exports = {
         error: `Please make sure the twitter link is a valid image URL.`,
       });
 
-    let banner = params.banner.replace(/</g, "&lt;");
+    if (params.bio.length < 2)
+      return res.status(400).json({
+        error: `Please make sure the bio is larger than 2 chars!`,
+      });
 
-    if (isImage(banner) === false)
-      return res
-        .status(400)
-        .json({ error: `Please make sure the banner is a valid URL.` });
+    if (params.bio.length > 300)
+      return res.status(400).json({
+        error: `Please make sure the bio is smaller than 300 chars!`,
+      });
 
     data.discord = params.discord;
     data.twitter = params.twitter;
     data.bio = params.bio;
-    data.banner = params.banner;
     data.save();
 
     return res.status(200).json({ success: `Profile successfully edited.` });
