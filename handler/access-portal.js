@@ -95,7 +95,7 @@ module.exports = {
       let newProfile = new profileShema({
 username,
   id: userId,
-  email
+  email,
   avatar,
   banner,
   bio: "",
