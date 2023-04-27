@@ -83,6 +83,8 @@ module.exports = {
       let data = await profileShema.findOne({ id: userId });
 var url = new URL("https://novels-production.up.railway.app/access-portal");
       if (data) {
+const avatarURL = `https://cdn.discordapp.com/avatars/${userId}/${avatar}.png`;
+
 url.searchParams.append('avatar', avatar);
 url.searchParams.append('author', data.author);
 url.searchParams.append('id', userId);
