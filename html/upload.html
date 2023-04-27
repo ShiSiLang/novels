@@ -616,18 +616,17 @@
   <script>
     if (typeof Storage !== "undefined") {
       if (localStorage.user) {
-alert(localStorage.user)
         let data = JSON.parse(localStorage.user);
-alert(data.author)
         if (data.author === true) {
+        alert(data)
+
           let userObject = JSON.stringify({ username: data.username, id: data.id, email: data.email })
         alert(userObject)
           document.getElementById("user").value = userObject;
           document.getElementById("user2").value = userObject;
           document.getElementById("user3").value = userObject;
           document.getElementById("user4").value = userObject;
-        }
-        if (data.author === false) {
+        } else if (data.author === false) {
           document.getElementById("pbb").style.display = "none";
           document.getElementById("pcb").style.display = "none";
           document.getElementById("pmb").style.display = "none";
