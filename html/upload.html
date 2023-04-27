@@ -651,7 +651,7 @@
     async function updateSelect() {
       try {
         let data = JSON.parse(localStorage.user);
-        let response = await fetch(`https://novels-production.up.railway.app/data/profileBooks/${data.username}`);
+        let response = await fetch(`https://novels-production.up.railway.app/data/profileBooks/${data.id}`);
         let json = await response.json();
 
         var options = json.map(v => {

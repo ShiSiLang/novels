@@ -613,7 +613,7 @@
         async function myBooks() {
             try {
                 let response = await fetch(
-                    "https://novels-production.up.railway.app/data/profilebooks/$$username$$"
+                    "https://novels-production.up.railway.app/data/profilebooks/$$userID$$"
                 );
                 let books = await fetch(
                     "https://novels-production.up.railway.app/data/books/null"

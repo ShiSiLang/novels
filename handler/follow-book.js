@@ -20,8 +20,11 @@ module.exports = {
 
     let book = await bookShema.findOne({ name: html.follow });
 
-    if (book.followers.includes(user.username)) {
-      let index = book.followers.findIndex((v) => v === user.username);
+    if (!book)
+      return res.status(400).json({ error: `Could not fetch book data.` });
+
+    if (book.followers.includes(user.id)) {
+      let index = book.followers.findIndex((v) => v === user.id);
       book.followers.splice(index, 1);
       book.save();
       return res
