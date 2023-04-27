@@ -8,7 +8,12 @@ const reviewShema = require("./models/review");
 const bookShema = require("./models/book");
 const system = require("./models/system");
 let webhook_url = process.env.webhook;
-const { trim, getTimeDifference, isImage, getBase64DataUrl } = require("./util.js");
+const {
+  trim,
+  getTimeDifference,
+  isImage,
+  getBase64DataUrl,
+} = require("./util.js");
 
 const dir = (text) => `${__dirname}/html/${text}.html`;
 const link = (input) => `https://novels-production.up.railway.app/${input}`;

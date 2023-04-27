@@ -1,6 +1,7 @@
 const CLIENT_ID = "1100495054063284354";
 const CLIENT_SECRET = process.env.ClientSecret; // replace with your actual client secret
-const REDIRECT_URI = "https://novels-production.up.railway.app/auth/discord/callback";
+const REDIRECT_URI =
+  "https://novels-production.up.railway.app/auth/discord/callback";
 const axios = require("axios");
 const profileShema = require("../models/profiles");
 
@@ -8,8 +9,6 @@ module.exports = {
   name: "auth/discord/callback",
   get: true,
   run: async (req, res) => {
-    //return res.status(400).json({ error: `System currently down!` });
-
     const code = req.query.code;
 
     if (!code)
@@ -67,9 +66,7 @@ module.exports = {
       const userData = userResponse.data;
 
       if (userData.verified !== true) {
-        return res
-          .status(400)
-          .send({ error: `Your account is not verified.` });
+        return res.status(400).send({ error: `Your account is not verified.` });
       }
 
       const userId = userData.id;
@@ -77,44 +74,45 @@ module.exports = {
       const email = userData.email;
       const avatar = userData.avatar;
       const banner = userData.banner;
+      const avatarURL = `https://cdn.discordapp.com/avatars/${userId}/${avatar}.png`;
 
       let date = new Date();
 
       let data = await profileShema.findOne({ id: userId });
-var url = new URL("https://novels-production.up.railway.app/access-portal");
+      var url = new URL(
+        "https://novels-production.up.railway.app/access-portal"
+      );
       if (data) {
-const avatarURL = `https://cdn.discordapp.com/avatars/${userId}/${avatar}.png`;
-
-url.searchParams.append('avatar', avatar);
-url.searchParams.append('author', data.author);
-url.searchParams.append('id', userId);
-url.searchParams.append('username', username);
-url.searchParams.append('ok', true);
+        url.searchParams.append("avatar", avatarURL);
+        url.searchParams.append("author", data.author);
+        url.searchParams.append("id", userId);
+        url.searchParams.append("username", username);
+        url.searchParams.append("ok", true);
 
         return res.status(200).redirect(url);
       }
 
       let newProfile = new profileShema({
-username,
-  id: userId,
-  email,
-  avatar,
-  banner,
-  bio: "",
-  date,
-  followers: 0,
-  discord: null,
-  twitter: null,
-  author: false,
+        username,
+        id: userId,
+        email,
+        avatar,
+        banner,
+        bio: "",
+        date,
+        followers: 0,
+        discord: null,
+        twitter: null,
+        author: false,
       }).save();
 
-      url.searchParams.append('avatar', avatar);
-url.searchParams.append('author', data.author);
-url.searchParams.append('id', userId);
-url.searchParams.append('username', username);
-url.searchParams.append('ok', true);
+      url.searchParams.append("avatar", avatarURL);
+      url.searchParams.append("author", data.author);
+      url.searchParams.append("id", userId);
+      url.searchParams.append("username", username);
+      url.searchParams.append("ok", true);
 
-        return res.status(200).redirect(url);
+      return res.status(200).redirect(url);
     } catch (error) {
       return res.status(400).send({ error: error.message });
     }
