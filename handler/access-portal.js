@@ -57,9 +57,7 @@ module.exports = {
         }
       );
 
-      return console.log(userResponse);
-
-      if (!userResponse.status === 200) {
+      if (userResponse.status !== 200) {
         const errorData = userResponse.data;
         return res
           .status(400)
@@ -67,42 +65,51 @@ module.exports = {
       }
 
       const userData = userResponse.data;
+
+      if (userData.verified !== true) {
+        return res
+          .status(400)
+          .send({ error: `Your account is not verified.` });
+      }
+
       const userId = userData.id;
       const username = userData.username;
+      const email = userData.email;
+      const avatar = userData.avatar;
+      const banner = userData.banner;
 
       let date = new Date();
 
-      let data = await profileShema.find().sort({ username: 1 });
+      let data = await profileShema.findOne({ id: userId });
 
-      if (data.find((v) => v.username === html.uname.replace(/</g, "&lt;"))) {
-        /* return res.status(200).json({
+      if (data) 
+        return res.status(200).json({
         success: `Successfully logged you in.`,
-        userIcon: iconLink,
-        userAuthor: data.author,
-      });*/
-        return res
-          .status(400)
-          .json({ error: `That username is already taken.` });
-      }
+        avatar,
+        author: data.author,
+        id: userId,
+        username
+      });
+      
 
       let newProfile = new profileShema({
-        username: html.uname.replace(/</g, "&lt;"),
-        password: html.psw.replace(/</g, "&lt;"),
-        icon: null, // Replace this with the user's Discord avatar
-        bio: "",
-        banner: "https://i.imgur.com/XjWCCeV.png",
-        date: date,
-        followers: 0,
-        discord: null,
-        twitter: null,
-        author: false,
+username,
+  id: userId,
+  email
+  avatar,
+  banner,
+  bio: "",
+  date,
+  followers: 0,
+  discord: null,
+  twitter: null,
+  author: false,
       }).save();
 
       return res
         .status(200)
-        .json({ success: `${html.uname.replace(/</g, "&lt;")} added!` });
+        .json({ success: `${username} added!` });
     } catch (error) {
-      //console.log(error);
       return res.status(400).send({ error: error.message });
     }
   },
