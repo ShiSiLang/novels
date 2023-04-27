@@ -619,7 +619,7 @@
         try {
           let data = JSON.parse(localStorage.user);
           alert(data.author)
-          if (data.author === true) {
+          if (data.author === "true") {
             alert(data)
             let userObject = JSON.stringify({ username: data.username, id: data.id, email: data.email })
             alert(userObject)
