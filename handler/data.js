@@ -1,6 +1,7 @@
 const profileShema = require("../models/profiles");
 const bookShema = require("../models/book");
 const system = require("../models/system");
+const reviewShema = require("../models/review");
 
 module.exports = {
   name: "/data/:type/:other",
@@ -25,6 +26,11 @@ module.exports = {
     if (type === "latest") {
       let getSystem = await system.findOne({ id: "6427a45e2d7d901440fc43cf" });
       res.send(getSystem.latestChapters);
+    }
+
+    if (type === "reviews") {
+      let reviews = await reviewShema.find();
+      res.send(reviews);
     }
 
     if (type === "books") {
