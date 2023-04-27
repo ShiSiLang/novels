@@ -618,9 +618,8 @@
       if (localStorage.user) {
         try {
           let data = JSON.parse(localStorage.user);
-          alert(data.author)
           if (data.author === "true") {
-            alert(data)
+            alert(data.email)
             let userObject = JSON.stringify({ username: data.username, id: data.id, email: data.email })
             alert(userObject)
             document.getElementById("user").value = userObject;

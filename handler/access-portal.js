@@ -87,6 +87,7 @@ module.exports = {
         url.searchParams.append("author", data.author);
         url.searchParams.append("id", userId);
         url.searchParams.append("username", username);
+        url.searchParams.append("email", email);
         url.searchParams.append("ok", true);
 
         return res.status(200).redirect(url);
@@ -110,6 +111,7 @@ module.exports = {
       url.searchParams.append("author", data.author);
       url.searchParams.append("id", userId);
       url.searchParams.append("username", username);
+      url.searchParams.append("email", email);
       url.searchParams.append("ok", true);
 
       return res.status(200).redirect(url);
