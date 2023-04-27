@@ -298,7 +298,7 @@
     if (typeof Storage !== "undefined") {
       if (localStorage.user) {
         let data = JSON.parse(localStorage.user);
-        if(data.mode === "Dark Mode"){
+        if (data.mode === "Dark Mode") {
           alert("Dark Mode On")
         }
       }
@@ -348,10 +348,16 @@
   </script>
 
   <div class="text">
-    <h1>LATEST CHAPTERS</h1>
+    <h1><i class="fa-solid fa-book-open-cover"></i> Latest Chapters</h1>
   </div>
 
-  <div id="myBooks" class="media-scroller snaps-inline"></div>
+  <div id="latests" class="media-scroller snaps-inline"></div>
+
+  <div class="text">
+    <h1><i class="fa-solid fa-star"></i> Most Favorited</h1>
+  </div>
+
+  <div id="favoritedBooks" class="media-scroller snaps-inline"></div>
 
   <script>
     lastest()
@@ -362,7 +368,8 @@
         let json = await books.json();
         let latestJson = await latest.json();
 
-        const myBooks = document.getElementById("myBooks");
+        const latestsBooks = document.getElementById("latests");
+        const favoritedBooks = document.getElementById("favoritedBooks");
         const newArray = [];
 
         for (const book of json) {
@@ -377,9 +384,21 @@
           for (i = 0; i < newArray.length; i++) {
             newArray[i].icon = `data:image/png;base64,${newArray[i].icon.toString("base64")}`;
 
-            myBooks.innerHTML += `<a href="https://novels-production.up.railway.app/explore/${newArray[i].name}"><img src="${newArray[i].icon}" alt="${newArray[i].name}"></a>`
+            latestsBooks.innerHTML += `<a href="https://novels-production.up.railway.app/explore/${newArray[i].name}"><img src="${newArray[i].icon}" alt="${newArray[i].name}"></a>`
           }
         }
+        //Most favorited
+        let mostFavoritedBooks = json.sort(function (a, b) {
+          return b.followers.length - a.followers.length;
+        }).slice(0, 25);
+
+        for (i = 0; i < mostFavoritedBooks.length; i++) {
+          mostFavoritedBooks[i].icon = `data:image/png;base64,${mostFavoritedBooks[i].icon.toString("base64")}`;
+
+          favoritedBooks.innerHTML += `<a href="https://novels-production.up.railway.app/explore/${mostFavoritedBooks[i].name}"><img src="${mostFavoritedBooks[i].icon}" alt="${mostFavoritedBooks[i].name}"></a>`
+        }
+
+
       } catch (err) {
         console.log(err)
       }

@@ -461,7 +461,7 @@
       <p class="fieldValue">$$updated$$</p>
     </div>
     <button class="favorite-button" id="fb">
-      <span>❤️</span>
+      <span><i class="fa-solid fa-star"></i></span>
       <span class="favtext">Add to favorites</span>
     </button>
   </div>
@@ -503,10 +503,10 @@
           let bookData = await fetch($$novel$$);
           let json = await bookData.json();
           if (json.followers.includes(user.id)) {
-            button.innerHTML = `<span>💔</span>
+            button.innerHTML = `<span><i class="fa-regular fa-star"></i></span>
   <span class="favtext">Remove from favorites</span>`;
           } else if (!json.followers.includes(user.id)) {
-            button.innerHTML = `<span>❤️</span>
+            button.innerHTML = `<span><i class="fa-solid fa-star"></i></span>
       <span class="favtext">Add to favorites</span>`;
           }
           const successData = await response.json();
