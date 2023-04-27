@@ -491,14 +491,6 @@
       <p class="comment-text">${chapter.comments[i].comment}</p>
     </div>
   </div>`;
-          /*`
-                        <div class="comment">
-                          <img src="${chapter.comments[i].icon}" alt="${chapter.comments[i].username}" class="pfp" width="40" height="40">
-                          <a href="/profile/${chapter.comments[i].username}">${chapter.comments[i].username}</a>
-                          <span>- ${chapter.comments[i].date}</span>
-                          <br>
-                          <p>${chapter.comments[i].comment}</p>
-                          </div>`;*/
         }
       }
     } catch (err) {
@@ -538,7 +530,7 @@
       if (localStorage.user) {
         document.getElementById("loso").innerHTML = "Sign out";
         let data = JSON.parse(localStorage.user);
-        document.getElementById("account").href = `/profile/${data.username}`;
+        document.getElementById("account").href = `/profile/${data.id}`;
         document.getElementById("userIcon").src = `${data.avatar}`;
       } else {
         document.getElementById("loso").innerHTML = "Sign in";
