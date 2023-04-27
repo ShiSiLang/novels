@@ -31,6 +31,11 @@
         justify-content: center;
     }
 
+    .mid {
+        margin: 0 auto;
+        justify-content: center;
+    }
+
     .topnav {
         width: 100%;
         background-color: #c499cc;
@@ -271,11 +276,8 @@
         <p>Sign Up or Sign In with Discord!</p>
     </div>
 
-    <div class="flex">
+    <div class="mid">
         <button id="discordSignUp" class="discordButton">
-            Sign Up with Discord
-        </button>
-        <button id="discordSignIn" class="discordButton">
             Sign In with Discord
         </button>
     </div>
@@ -292,7 +294,6 @@
 
     <script>
         const discordSignUpBtn = document.getElementById('discordSignUp');
-        const discordSignInBtn = document.getElementById('discordSignIn');
         discordSignUpBtn.addEventListener('click', () => {
             const clientID = '1100495054063284354';
             const redirectURI = encodeURIComponent('https://novels-production.up.railway.app/auth/discord/callback');
@@ -301,38 +302,25 @@
             window.location.href = url;
         });
 
-        /*
         const queryString = window.location.search;
         const urlParams = new URLSearchParams(queryString);
-        const code = urlParams.get('code');
-        if (code) post();
+        const id = urlParams.get('id');
+        const username = urlParams.get('username');
+        const ok = urlParams.get('ok');
 
-        async function post() {
-            // send the code to server side for verification and handling
-            const response = await fetch("/access-portal", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    code: code,
-                }),
-            });
-
-            let data = await response.json();
-            if (response.ok) {
+        if (id && username && ok) {
+            if (ok === true) {
                 const success = document.getElementById('success');
                 success.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-                      <strong>Success!</strong> ${data.username}, you have successfully signed up with email ${data.email}.`;
+                      <strong>Success!</strong> ${username}, you have successfully signed in with Discord.`;
                 success.style.display = "block";
             } else {
                 const error = document.getElementById('error');
                 error.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-                      ${data.error}`;
+                      Something went wrong`;
                 error.style.display = "block";
             }
         }
-        */
     </script>
 
     <footer>
