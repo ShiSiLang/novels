@@ -625,6 +625,7 @@
                 const myBooks = document.getElementById("myBooks");
 
                 for (i = 0; i < newArray.length; i++) {
+                    newArray[i].icon = `data:image/png;base64,${newArray[i].icon.toString("base64")}`;
                     myBooks.innerHTML += `<a href="https://novels-production.up.railway.app/explore/${newArray[i].name}"><img src="${newArray[i].icon}" alt="${newArray[i].name}"></a>`;
                 }
             } catch (err) {
