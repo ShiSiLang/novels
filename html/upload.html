@@ -618,6 +618,7 @@
       if (localStorage.user) {
         let data = JSON.parse(localStorage.user);
         if (data.author === true) {
+alert(data)
           let userObject = JSON.stringify({ username: data.username, id: data.id, email: data.email })
         alert(userObject)
           document.getElementById("user").value = userObject;
