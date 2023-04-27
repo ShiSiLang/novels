@@ -81,16 +81,13 @@ module.exports = {
       let date = new Date();
 
       let data = await profileShema.findOne({ id: userId });
-
-      if (data) {
 var url = new URL("https://novels-production.up.railway.app/access-portal");
-
-// If your expected result is "http://foo.bar/?x=1&y=2&x=42"
+      if (data) {
 url.searchParams.append('avatar', avatar);
 url.searchParams.append('author', data.author);
 url.searchParams.append('id', userId);
 url.searchParams.append('username', username);
-
+url.searchParams.append('ok', true);
 
         return res.status(200).redirect(url);
       }
@@ -109,9 +106,13 @@ username,
   author: false,
       }).save();
 
-      return res
-        .status(200)
-        .json({ success: `${username} added! Redirecting you in a bit` });
+      url.searchParams.append('avatar', avatar);
+url.searchParams.append('author', data.author);
+url.searchParams.append('id', userId);
+url.searchParams.append('username', username);
+url.searchParams.append('ok', true);
+
+        return res.status(200).redirect(url);
     } catch (error) {
       return res.status(400).send({ error: error.message });
     }
