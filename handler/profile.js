@@ -1,4 +1,5 @@
 const profileShema = require("../models/profiles");
+const dir = (text) => `${__dirname}/html/${text}.html`;
 
 module.exports = {
   name: "profile/:id",
