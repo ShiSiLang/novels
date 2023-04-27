@@ -212,6 +212,7 @@
         cursor: pointer;
         transition: background-color 0.3s ease;
         margin-left: 50%;
+        margin-right: 50%;
         margin-top: 50px;
         margin-bottom: 55px;
     }
@@ -320,6 +321,7 @@
                     document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
                 }
             } else if (!ok || ok !== true) {
+ alert(ok)
                 const error = document.getElementById('error');
                 error.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
                       Something went wrong`;
