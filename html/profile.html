@@ -192,13 +192,17 @@
         margin-top: 24%;
     }
 
-    .ctext a {
+    .ctext .social {
+        margin: 0 auto;
+    }
+
+    .social a {
         transition: color .4s ease;
         text-decoration: none;
         color: white;
     }
 
-    .ctext a:hover {
+    .social a:hover {
         color: black;
     }
 
@@ -574,8 +578,10 @@
             <h3>Followers: $$followers$$</h3>
             <h3>Comments: $$comments$$</h3>
             <h3>Joined: $$date$$</h3>
-            <a href="$$discord$$"><i class="fa fa-discord"></i></a>
-            <a href="$$twitter$$"><i class="fa fa-twitter"></i></a>
+            <div class="social">
+                <a href="$$discord$$"><i class="fa fa-discord"></i></a>
+                <a href="$$twitter$$"><i class="fa fa-twitter"></i></a>
+            </div>
             <div class="flex">
                 <button class="cardButton" id="epb" onclick="document.getElementById('id01').style.display='block'">
                     Edit Profile
