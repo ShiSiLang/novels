@@ -1,5 +1,6 @@
 const reviewShema = require("../models/review");
 const bookShema = require("../models/book");
+const systemSchema = require("../models/system");
 const profileShema = require("../models/profiles");
 const { trim, getBase64DataUrl } = require("../util.js");
 let webhook_url = process.env.webhook;
@@ -80,7 +81,7 @@ module.exports = {
         bookData.save();
 
         //System
-        let system = await system.findOne({
+        let system = await systemSchema.findOne({
           id: "6427a45e2d7d901440fc43cf",
         });
 

@@ -1,4 +1,5 @@
 const bookShema = require("../models/book");
+const system = require("../models/system");
 const { trim, getTimeDifference } = require("../util.js");
 const fs = require("fs");
 const dir = (text) => `/app/html/${text}.html`;
@@ -34,6 +35,18 @@ module.exports = {
     file = file.replaceAll("$$thumbnail$$", book.icon);
     book.views += 1;
     await book.save();
+
+    async function addBook(book) {
+      let getSystem = await system.findOne({ id: "6427a45e2d7d901440fc43cf" });
+
+      if (!getSystem.readingNow.includes(book)) {
+        getSystem.readingNow.push(book);
+      }
+      await getSystem.save();
+    }
+
+    addBook(book.name);
+
     res.send(file);
   },
 };
