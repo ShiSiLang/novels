@@ -14,7 +14,7 @@ module.exports = {
 
     if (!req.file)
       return res.status(400).json({ error: `Please upload an icon.` });
-console.log(html.user)
+
     let userObject = JSON.parse(html.user);
 
     let user = await profileShema.findOne({
@@ -23,7 +23,7 @@ console.log(html.user)
       email: userObject.email,
     });
 
-    console.log(user)
+    console.log(user);
 
     if (!user)
       return res.status(400).json({ error: `Could not fetch user data.` });
@@ -36,6 +36,8 @@ console.log(html.user)
     let icon = req.file.buffer;
 
     let reviewID = Date.now();
+
+    console.log(getBase64DataUrl(icon))
 
     let params = {
       content: `New book has been submitted for review.`,
