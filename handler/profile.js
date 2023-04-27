@@ -2,6 +2,7 @@ const profileShema = require("../models/profiles");
 const bookShema = require("../models/book");
 const dir = (text) => `/app/html/${text}.html`;
 const fs = require("fs");
+const { getTimeDifference } = require("./util.js");
 
 module.exports = {
   name: "profile/:id",
@@ -52,9 +53,9 @@ module.exports = {
     file = file.replace("$$twitter$$", user.twitter || "#");
     file = file.replace(
       "$$bio$$",
-      user.bio || `Welcome to ${data.username}'s profile!`
+      user.bio || `Welcome to ${user.username}'s profile!`
     );
-    file = file.replace("$$date$$", user.date);
+    file = file.replace("$$date$$", getTimeDifference(user.date));
     res.send(file);
   },
 };
