@@ -31,11 +31,6 @@
         justify-content: center;
     }
 
-    .mid {
-        margin: 0 auto;
-        justify-content: center;
-    }
-
     .topnav {
         width: 100%;
         background-color: #c499cc;
@@ -276,11 +271,9 @@
         <p>Sign Up or Sign In with Discord!</p>
     </div>
 
-    <div class="mid">
-        <button id="discordSignUp" class="discordButton">
-            Sign In with Discord
-        </button>
-    </div>
+    <button id="discordSignUp" class="discordButton">
+        Sign In with Discord
+    </button>
 
     <div id="error" class="alert">
         <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
@@ -314,7 +307,19 @@
                 success.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
                       <strong>Success!</strong> ${username}, you have successfully signed in with Discord.`;
                 success.style.display = "block";
-            } else {
+                if (typeof (Storage) !== "undefined") {
+                    // Store
+                    const avatar = urlParams.get('avatar');
+                    const author = urlParams.get('author');
+
+                    let params = {
+                        id, username, avatar, author
+                    }
+                    localStorage.setItem("user", JSON.stringify(params));
+                } else {
+                    document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
+                }
+            } else if (!ok || ok !== true) {
                 const error = document.getElementById('error');
                 error.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
                       Something went wrong`;

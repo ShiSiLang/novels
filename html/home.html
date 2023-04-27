@@ -252,7 +252,7 @@
     document.getElementById("loso").addEventListener("click", async (e) => {
       if (e.target.innerText === "Sign out") {
         alert("Signing you out!");
-        localStorage.removeItem("loginUser");
+        localStorage.removeItem("user");
         window.location.reload();
       }
     });
@@ -269,9 +269,9 @@
 
   <script>
     if (typeof Storage !== "undefined") {
-      if (localStorage.loginUser) {
+      if (localStorage.user) {
         document.getElementById("loso").innerHTML = "Sign out";
-        let data = JSON.parse(localStorage.loginUser);
+        let data = JSON.parse(localStorage.user);
         document.getElementById("account").href = `/profile/${data.username}`;
         document.getElementById("userIcon").src = `${data.icon}`;
       } else {

@@ -401,7 +401,7 @@
     document.getElementById("loso").addEventListener("click", async (e) => {
       if (e.target.innerText === "Sign out") {
         alert("Signing you out!");
-        localStorage.removeItem("loginUser");
+        localStorage.removeItem("user");
         window.location.reload();
       }
     });
@@ -409,9 +409,9 @@
 
   <script>
     if (typeof Storage !== "undefined") {
-      if (localStorage.loginUser) {
+      if (localStorage.user) {
         document.getElementById("loso").innerHTML = "Sign out";
-        let data = JSON.parse(localStorage.loginUser);
+        let data = JSON.parse(localStorage.user);
         document.getElementById("account").href = `/profile/${data.username}`;
         document.getElementById("userIcon").src = `${data.icon}`;
       } else {
@@ -629,8 +629,8 @@
 
   <script>
     if (typeof Storage !== "undefined") {
-      if (localStorage.loginUser) {
-        let data = JSON.parse(localStorage.loginUser);
+      if (localStorage.user) {
+        let data = JSON.parse(localStorage.user);
         if (data.author === true) {
           document.getElementById("inputusername").value = data.username;
           document.getElementById("inputpass").value = data.password;
@@ -667,7 +667,7 @@
     updateSelect()
     async function updateSelect() {
       try {
-        let data = JSON.parse(localStorage.loginUser);
+        let data = JSON.parse(localStorage.user);
         let response = await fetch(`https://novels-production.up.railway.app/data/profileBooks/${data.username}`);
         let json = await response.json();
 
