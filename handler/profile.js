@@ -1,5 +1,5 @@
 const profileShema = require("../models/profiles");
-const dir = (text) => `${__dirname}/html/${text}.html`;
+const dir = (text) => `app/html/${text}.html`;
 const fs = require("fs");
 
 module.exports = {
