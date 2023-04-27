@@ -2,7 +2,7 @@ const profileShema = require("../models/profiles");
 const bookShema = require("../models/book");
 const dir = (text) => `/app/html/${text}.html`;
 const fs = require("fs");
-const { getTimeDifference } = require("./util.js");
+const { getTimeDifference } = require("../util.js");
 
 module.exports = {
   name: "profile/:id",
