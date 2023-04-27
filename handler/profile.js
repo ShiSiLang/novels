@@ -38,6 +38,8 @@ module.exports = {
         });
       });
 
+    if (user.banner === null) user.banner = "https://i.imgur.com/XjWCCeV.png";
+
     file = file.replaceAll("$$username$$", user.username);
     file = file.replace("$$banner$$", user.banner);
     file = file.replaceAll(
