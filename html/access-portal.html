@@ -211,8 +211,6 @@
         padding: 12px 24px;
         cursor: pointer;
         transition: background-color 0.3s ease;
-        margin-left: 50%;
-        margin-right: 50%;
         margin-top: 50px;
         margin-bottom: 55px;
     }
@@ -272,9 +270,11 @@
         <p>Sign Up or Sign In with Discord!</p>
     </div>
 
+<div class="flex">
     <button id="discordSignUp" class="discordButton">
         Sign In with Discord
     </button>
+</div>
 
     <div id="error" class="alert">
         <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
@@ -303,7 +303,7 @@
         const ok = urlParams.get('ok');
 
         if (id && username && ok) {
-            if (ok === true) {
+            if (ok === "true") {
                 const success = document.getElementById('success');
                 success.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
                       <strong>Success!</strong> ${username}, you have successfully signed in with Discord.`;
@@ -320,8 +320,7 @@
                 } else {
                     document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
                 }
-            } else if (!ok || ok !== true) {
- alert(ok)
+            } else if (!ok || ok !== "true") {
                 const error = document.getElementById('error');
                 error.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
                       Something went wrong`;
