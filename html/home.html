@@ -260,9 +260,17 @@
       if (e.target.innerText === "Normal Mode") {
         alert("Changing to dark mode!");
         e.target.innerText = "Dark Mode"
+        if (localStorage.user) {
+          let data = JSON.parse(localStorage.user);
+          data.mode = "Dark Mode";
+        }
       } else if (e.target.innerText === "Dark Mode") {
         alert("Changing to normal mode!");
         e.target.innerText = "Normal Mode"
+        if (localStorage.user) {
+          let data = JSON.parse(localStorage.user);
+          data.mode = "Normal Mode";
+        }
       }
     });
   </script>
@@ -274,13 +282,26 @@
         let data = JSON.parse(localStorage.user);
         document.getElementById("account").href = `/profile/${data.id}`;
         document.getElementById("userIcon").src = `${data.avatar}`;
+        document.getElementById("mode").innerHTML = data.mode;
       } else {
         document.getElementById("loso").innerHTML = "Sign in";
-        document.getElementById("loso").href = "/sign-in";
+        document.getElementById("loso").href = "/access-portal";
+        document.getElementById("mode").innerHTML = "Normal Mode";
       }
     } else {
       document.getElementById("loso").innerHTML = "<span>&empty;</span>";
       document.getElementById("account").innerHTML = "<span>&empty;</span>";
+    }
+  </script>
+
+  <script>
+    if (typeof Storage !== "undefined") {
+      if (localStorage.user) {
+        let data = JSON.parse(localStorage.user);
+        if(data.mode === "Dark Mode"){
+          alert("Dark Mode On")
+        }
+      }
     }
   </script>
 

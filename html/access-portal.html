@@ -206,9 +206,9 @@
         background-color: #7289DA;
         color: #FFFFFF;
         border: none;
-        border-radius: 4px;
-        font-size: 16px;
-        padding: 12px 24px;
+        border-radius: 12px;
+        font-size: 30px;
+        padding: 17px;
         cursor: pointer;
         transition: background-color 0.3s ease;
         margin-top: 50px;
@@ -267,14 +267,12 @@
 
     <div class="text">
         <h1>Access Portal</h1>
-        <p>Sign Up or Sign In with Discord!</p>
+        <p>Experience the full potential of our community by joining or logging in with Discord!</p>
     </div>
 
-<div class="flex">
-    <button id="discordSignUp" class="discordButton">
-        Sign In with Discord
-    </button>
-</div>
+    <div class="flex">
+        <button id="discordSignUp" class="discordButton"><i class="fa fa-discord"></i> Sign In with Discord</button>
+    </div>
 
     <div id="error" class="alert">
         <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
@@ -306,7 +304,7 @@
             if (ok === "true") {
                 const success = document.getElementById('success');
                 success.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-                      <strong>Success!</strong> ${username}, you have successfully signed in with Discord.`;
+                      <strong>Success!</strong> ${username}, you have successfully signed in with Discord. Check out your <a href="/profile/${id}">profile</a>!`;
                 success.style.display = "block";
                 if (typeof (Storage) !== "undefined") {
                     // Store
@@ -314,7 +312,7 @@
                     const author = urlParams.get('author');
 
                     let params = {
-                        id, username, avatar, author
+                        id, username, avatar, author, mode: "Normal Mode"
                     }
                     localStorage.setItem("user", JSON.stringify(params));
                 } else {
