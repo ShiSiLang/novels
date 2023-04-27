@@ -37,15 +37,12 @@ module.exports = {
 
     let reviewID = Date.now();
 
-    console.log(getBase64DataUrl(icon))
-
     let params = {
       content: `New book has been submitted for review.`,
       embeds: [
         {
           title: html.name.replace(/</g, "&lt;"),
           description: trim(html.description.replace(/</g, "&lt;"), 4095),
-          image: { url: getBase64DataUrl(icon) },
           footer: { text: reviewID },
         },
       ],
