@@ -30,15 +30,7 @@ module.exports = {
 
     if (type === "reviews") {
       let reviews = await reviewShema.find();
-
-      let mapped = reviews.map((v) => {
-        return {
-          ...v.book,
-          url: `data:image/png;base64,${v.book.icon.toString("base64")}`,
-        };
-      });
-
-      res.send(mapped);
+      res.send(reviews);
     }
 
     if (type === "books") {

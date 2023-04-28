@@ -447,31 +447,25 @@
             const descriptionElement = document.querySelector('.review-description');
             const authorElement = document.querySelector('.review-author');
 
-            typeElement.textContent = reviewData.type;
-            idElement.textContent = `ID: ${reviewData.reviewID}`;
-            try {
-                let imageBuffer = null;
-                if (reviewData.book) {
-                    imageBuffer = reviewData.book.icon;
-                } else if (reviewData.chapter) {
-                    imageBuffer = reviewData.chapter.thumbnail;
-                }
+            if (reviewData.type === "Book") {
+                let newObj = {
+                    type: reviewData.type,
+                    reviewID: reviewData.reviewID,
+                    book: {
+                        name: reviewData.book.name,
+                        description: reviewData.book.description,
+                        icon: `data:image/png;base64,${reviewData.book.icon.toString("base64")}`,
+                        author: reviewData.book.author,
+                    }
+                };
 
-                if (imageBuffer) { // Check if imageBuffer is defined and not null
-                    const base64String = imageBuffer.toString("base64");
-                    imageElement.src = `data:image/png;base64,${base64String}`;
-                } else {
-                    imageElement.src = ''; // Clear the src attribute of the image element
-                }
-            } catch (err) {
-                alert(err)
-                console.log(alert)
+                typeElement.textContent = newObj.type;
+                idElement.textContent = `ID: ${newObj.reviewID}`;
+                titleElement.textContent = newObj.book.name;
+                descriptionElement.textContent = newObj.book.description;
+                authorElement.textContent = newObj.book.author;
+
             }
-
-            titleElement.textContent = reviewData.chapter?.name ?? reviewData.book?.name ?? '';
-            descriptionElement.textContent = reviewData.chapter?.intro ?? reviewData.book?.description ?? '';
-            authorElement.textContent = reviewData.book?.author ?? '';
-
         });
     </script>
 
@@ -494,7 +488,7 @@
             </select>
 
             <label for="reviewID"><b>Review ID</b></label>
-            <input type="text" placeholder="Enter Review ID" name="reviewID" required autocomplete="off"/>
+            <input type="text" placeholder="Enter Review ID" name="reviewID" required autocomplete="off" />
 
             <label for="password"><b>Password</b></label>
             <input type="password" placeholder="Enter Password" name="password" required />
