@@ -458,7 +458,9 @@
                         author: reviewData.book.author,
                     }
                 };
+                console.log(newObj)
 
+                imageElement.src = newObj.book.icon;
                 typeElement.textContent = newObj.type;
                 idElement.textContent = `ID: ${newObj.reviewID}`;
                 titleElement.textContent = newObj.book.name;

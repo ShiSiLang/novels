@@ -14,6 +14,7 @@ module.exports = {
 
     if (!html.name || !html)
       return res.status(400).json({ error: `Missing Data!` });
+
     console.log(html);
 
     let userObject = JSON.parse(html.user);
@@ -38,10 +39,9 @@ module.exports = {
     let content = html.content.replace(/</g, "&lt;");
     let newID = Date.now();
 
-    let replace = false;
     let replaceNumber = 0;
-    if (data.replace) replace = true;
-    if (data.replaceNumber > 0) replaceNumber = data.replaceNumber;
+    const replace = req.body.replace === "on";
+    if (req.body.replaceNumber > 0) replaceNumber = req.body.replaceNumber;
 
     let params = {
       content: `New chapter has been submitted for review.`,
@@ -81,6 +81,8 @@ module.exports = {
         thumbnail: image,
         type: "Novel", //Novel
         novel: content, // String for novels
+        replace,
+        replaceNumber,
       },
     }).save();
 
