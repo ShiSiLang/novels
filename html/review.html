@@ -319,31 +319,26 @@
     <script>
         updateSelect()
         async function updateSelect() {
-          try {
-            let data = JSON.parse(localStorage.user);
-            let response = await fetch(`https://novels-production.up.railway.app/data/profileBooks/${data.id}`);
-            let json = await response.json();
-    
-            var options = json.map(v => {
-              return {
-                "text": v,
-                "value": v
-              }
-            });
-    
-            var selectBox = document.getElementById('ebooks');
-            var selectBox2 = document.getElementById('ebooks2');
-            var selectBox3 = document.getElementById('ebooks3');
-    
-            for (var i = 0, l = options.length; i < l; i++) {
-              var option = options[i];
-              selectBox.options.add(new Option(option.text, option.value, option.selected));
-              selectBox2.options.add(new Option(option.text, option.value, option.selected));
-              selectBox3.options.add(new Option(option.text, option.value, option.selected));
-            }
-          } catch (err) { console.log(err) }
+            try {
+                let response = await fetch(`https://novels-production.up.railway.app/data/reviews/null`);
+                let json = await response.json();
+
+                var options = json.map(v => {
+                    return {
+                        "text": v.reviewID,
+                        "value": v.reviewID
+                    }
+                });
+
+                var selectBox = document.getElementById('reviewIds');
+
+                for (var i = 0, l = options.length; i < l; i++) {
+                    var option = options[i];
+                    selectBox.options.add(new Option(option.text, option.value, option.selected));
+                }
+            } catch (err) { console.log(err) }
         }
-      </script>
+    </script>
 
     <form id="FormReview" action="/review" method="post">
         <div class="container">
