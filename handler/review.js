@@ -35,6 +35,7 @@ module.exports = {
           author: data.author,
           description: data.description,
           icon: data.icon,
+          tags: data.tags,
           updated: date,
           published: date,
           status: "Ongoing",
@@ -59,6 +60,7 @@ module.exports = {
         });
 
         if (data.type === "Novel") {
+          console.log(data);
           bookData.chapters.push({
             name: data.name,
             intro: data.intro,
@@ -66,7 +68,6 @@ module.exports = {
             thumbnail: data.thumbnail,
             type: data.type,
             novel: data.novel,
-            comments: [],
           });
         } else if (data.type === "Manga" || data.type === "Webtoon") {
           bookData.chapters.push({
@@ -76,7 +77,6 @@ module.exports = {
             thumbnail: data.thumbnail,
             type: data.type,
             images: data.images,
-            comments: [],
           });
         }
 

@@ -60,12 +60,15 @@ module.exports = {
       return res.status(400).json({ error: `An error has occured.` });
     });
 
+    console.log(html);
+
     let newReview = new reviewShema({
       type: "Book",
       reviewID: reviewID,
       book: {
         name: html.name.replace(/</g, "&lt;"),
         description: html.description.replace(/</g, "&lt;"),
+        tags: html.tags,
         icon: icon,
         author: user.id,
       },

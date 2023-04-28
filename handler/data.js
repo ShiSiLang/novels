@@ -42,6 +42,7 @@ module.exports = {
           description: v.description,
           icon: `data:image/png;base64,${v.icon.toString("base64")}`,
           author: v.author,
+          tags: v.tags,
           chapters: v.chapters,
           followers: v.followers,
           updated: v.updated,

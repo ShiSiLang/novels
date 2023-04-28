@@ -246,6 +246,57 @@
     color: #ffcc99;
   }
 
+  select[name="tags"] {
+    appearance: none;
+    border: none;
+    background-color: #eee;
+    padding: 8px;
+    font-size: 16px;
+    border-radius: 8px;
+    width: 100%;
+    margin: 5px 0 22px 0;
+  }
+
+  select[name="tags"] option {
+    background-color: white;
+    color: #333;
+  }
+
+  select[name="tags"] option:checked {
+    background-color: #956a9d;
+    color: white;
+  }
+
+  /* Style for the selected tags */
+  .selected-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+
+  .selected-tag {
+    background-color: #956a9d;
+    color: white;
+    padding: 8px;
+    border-radius: 16px;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+  }
+
+  .selected-tag span {
+    margin-right: 8px;
+  }
+
+  .selected-tag button {
+    background-color: transparent;
+    color: white;
+    border: none;
+    margin-left: 8px;
+    cursor: pointer;
+  }
+
   .container textarea {
     width: 100%;
     padding: 12px 20px;
@@ -478,6 +529,17 @@
         <label for="icon"><b>Book Icon</b></label>
         <input type="file" id="icon" name="icon" accept=".jpg, .jpeg, .png" required />
 
+        <label for="tags"><b>Tags</b></label>
+        <select id="tags" name="tags" multiple>
+          <option value="fantasy">Fantasy</option>
+          <option value="sci-fi">Sci-fi</option>
+          <option value="romance">Romance</option>
+          <option value="thriller">Thriller</option>
+          <option value="mystery">Mystery</option>
+        </select>
+
+        <div class="selected-tags"></div>
+
         <div class="clearfix">
           <button type="button" onclick="document.getElementById('pbmodal').style.display='none'"
             class="cancelbtn">Cancel</button>
@@ -486,6 +548,33 @@
       </div>
     </form>
   </div>
+
+  <script>
+    const selectEl = document.querySelector('select[name="tags"]');
+    const selectedTagsEl = document.querySelector('.selected-tags');
+
+    selectEl.addEventListener('change', (event) => {
+      const selectedOptions = Array.from(selectEl.selectedOptions);
+      const selectedTags = selectedOptions.map(option => option.value);
+
+      selectedTagsEl.innerHTML = '';
+      selectedTags.forEach(tag => {
+        const tagEl = document.createElement('div');
+        tagEl.classList.add('selected-tag');
+        tagEl.innerHTML = `<span>${tag}</span><button data-tag="${tag}">&times;</button>`;
+        selectedTagsEl.appendChild(tagEl);
+      });
+    });
+
+    selectedTagsEl.addEventListener('click', (event) => {
+      if (event.target.tagName === 'BUTTON') {
+        const tag = event.target.dataset.tag;
+        const option = selectEl.querySelector(`option[value="${tag}"]`);
+        option.selected = false;
+        event.target.parentElement.remove();
+      }
+    });
+  </script>
 
   <div id="pcmodal" class="modal">
     <span onclick="document.getElementById('pcmodal').style.display='none'" class="close"

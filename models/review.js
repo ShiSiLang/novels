@@ -17,6 +17,7 @@ const reviewSchema = mongoose.Schema({
   book: {
     name: String,
     description: String,
+    tags: Array,
     icon: Buffer,
     author: String,
   },

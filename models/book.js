@@ -25,6 +25,7 @@ const bookSchema = mongoose.Schema({
     },
   ],
   followers: Array, // Array of ids
+  tags: Array,
   updated: String,
   status: String,
   published: String,
