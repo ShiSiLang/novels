@@ -365,6 +365,15 @@
         }
     </script>
 
+    <script>
+        const selectElement = document.getElementById('reviewIds');
+
+        selectElement.addEventListener('change', () => {
+            const selectedValue = selectElement.value;
+            alert(selectedValue); // print the selected value in console
+        });
+    </script>
+
     <form id="FormReview" action="/review" method="post">
         <div class="container">
             <h1>Review</h1>
