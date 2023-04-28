@@ -34,7 +34,7 @@ module.exports = {
 
     let image = req.file.buffer;
 
-    let content = html.content.replace(/</g, "&lt;");
+    let content = html.novel.replace(/</g, "&lt;");
     let newID = Date.now();
 
     let replaceNumber = 0;
