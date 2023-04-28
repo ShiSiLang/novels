@@ -468,6 +468,34 @@
                 authorElement.textContent = newObj.book.author;
 
             }
+
+            if (reviewData.type === "Chapter") {
+                let newObj = {
+                    type: reviewData.type,
+                    reviewID: reviewData.reviewID,
+                    chapter: {
+                        name: reviewData.chapter.name,
+                        intro: reviewData.chapter.intro,
+                        credits: reviewData.chapter.credits,
+                        thumbnail: `data:image/png;base64,${reviewData.chapter.thumbnail.toString("base64")}`,
+                        type: reviewData.chapter.type,
+                        novel: reviewData.chapter.novel,
+                    },
+                    book: {
+                        name: reviewData.book.name,
+                        author: reviewData.book.author,
+                    }
+                };
+
+                console.log(newObj)
+
+                imageElement.src = newObj.chapter.thumbnail;
+                typeElement.textContent = newObj.type;
+                idElement.textContent = `ID: ${newObj.reviewID}`;
+                titleElement.textContent = newObj.book.name;
+                descriptionElement.textContent = newObj.chapter.novel;
+                authorElement.textContent = newObj.book.author;
+            }
         });
     </script>
 
