@@ -397,7 +397,7 @@
         </div>
         <div class="review-details">
             <div class="image-container">
-                <img src="" alt="" class="review-image">
+                <img src="" alt="imageBuffer" class="review-image">
             </div>
             <div class="review-text">
                 <h3 class="review-title"></h3>
@@ -440,9 +440,6 @@
             let json = await response.json();
 
             let reviewData = json.find(v => v.reviewID === selectedValue)
-
-            alert(reviewData.type);
-
             const typeElement = document.querySelector('.review-type');
             const idElement = document.querySelector('.review-id');
             const imageElement = document.querySelector('.review-image');
@@ -459,6 +456,8 @@
             } else if (reviewData.book) {
                 imageBuffer = reviewData.book.icon;
             }
+
+            alert(imageBuffer)
 
             imageElement.src = imageBuffer ? `data:image/jpeg;base64,${imageBuffer.toString('base64')}` : '';
             titleElement.textContent = reviewData.chapter?.name ?? reviewData.book?.name ?? '';
