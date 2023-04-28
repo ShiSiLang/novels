@@ -456,9 +456,7 @@
             } else if (reviewData.book) {
                 imageBuffer = reviewData.book.icon;
             }
-
-            alert(imageBuffer)
-
+            
             imageElement.src = `data:image/jpeg;base64,${imageBuffer.toString('base64')}`;
             titleElement.textContent = reviewData.chapter?.name ?? reviewData.book?.name ?? '';
             descriptionElement.textContent = reviewData.chapter?.intro ?? reviewData.book?.description ?? '';
