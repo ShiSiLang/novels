@@ -39,15 +39,20 @@ module.exports = {
     }
 
     if (type === "books") {
-  let data = await bookShema.find().sort({ name: 1 });
-  let mapped = data.map((v) => {
-    let iconData = Buffer.from(v.icon.buffer);
-    v.icon = `data:image/png;base64,${iconData.toString("base64")}`;
-    return v;
-  });
-  console.log(mapped[2]);
-  res.send(mapped);
-}
+      let data = await bookShema.find().sort({ name: 1 });
+      let newArray = [];
+      for (let i = 0; i < data.length; i++) {
+        const element = data[i];
+        newArray.push(element);
+      }
+
+      let mapped = newArray.map((v) => {
+        v.icon = `data:image/png;base64,${v.icon.toString("base64")}`;
+        return v;
+      });
+      console.log(mapped[2]);
+      res.send(mapped);
+    }
 
     if (type === "book") {
       let bookName = req.params.other;
