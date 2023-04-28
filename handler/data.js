@@ -42,8 +42,10 @@ module.exports = {
       let data = await bookShema.find().sort({ name: 1 });
 
       let mapped = data.map((v) => {
-        v.url = `data:image/png;base64,${v.icon.toString("base64")}`;
-        return v;
+        return {
+          ...v,
+          url: `data:image/png;base64,${v.icon.toString("base64")}`,
+        };
       });
       console.log(mapped[2]);
       res.send(mapped);
