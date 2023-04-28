@@ -439,6 +439,8 @@
             let response = await fetch(`https://novels-production.up.railway.app/data/reviews/null`);
             let json = await response.json();
 
+            alert(json.length)
+
             let reviewData = json.find(v => v.reviewID === selectedValue)
             const typeElement = document.querySelector('.review-type');
             const idElement = document.querySelector('.review-id');
@@ -456,8 +458,6 @@
             } else if (reviewData.chapter) {
                 imageBuffer = reviewData.chapter.thumbnail;
             }
-
-            alert(reviewData.book.icon)
 
             imageElement.src = `data:image/png;base64,${imageBuffer.toString("base64")}`;
             titleElement.textContent = reviewData.chapter?.name ?? reviewData.book?.name ?? '';
