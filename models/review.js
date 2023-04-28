@@ -21,6 +21,6 @@ const reviewSchema = mongoose.Schema({
     icon: Buffer,
     author: String,
   },
-});
+}, { typeKey: '$type' });
 
 module.exports = mongoose.model("review", reviewSchema);
