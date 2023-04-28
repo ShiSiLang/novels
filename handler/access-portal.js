@@ -96,7 +96,7 @@ module.exports = {
         "https://novels-production.up.railway.app/access-portal"
       );
       if (data) {
-        if (!data.password) data.password = chosenPassword;
+        if (!data.password) { data.password = chosenPassword; await data.save();}
         url.searchParams.append("avatar", avatarURL);
         url.searchParams.append("author", data.author);
         url.searchParams.append("id", userId);
@@ -104,7 +104,7 @@ module.exports = {
         url.searchParams.append("email", email);
         url.searchParams.append("password", data.password);
         url.searchParams.append("ok", true);
-
+        
         return res.status(200).redirect(url);
       }
 
