@@ -379,8 +379,8 @@
         const newArray = [];
 
         for (const book of json) {
-          const bookChapters = book.chapters.map(chapter => chapter.name);
-          const hasMatchingChapter = latestJson.some(chapterName => bookChapters.includes(chapterName));
+          const bookChapters = book.chapters?.map(chapter => chapter.name);
+          const hasMatchingChapter = latestJson?.some(chapterName => bookChapters.includes(chapterName));
           if (hasMatchingChapter) {
             newArray.push(book);
           }
@@ -394,7 +394,7 @@
           }
         }
         //Most favorited
-        let mostFavoritedBooks = json.sort(function (a, b) {
+        let mostFavoritedBooks = json?.sort(function (a, b) {
           return b.followers.length - a.followers.length;
         }).slice(0, 25);
 
