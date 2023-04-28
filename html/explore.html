@@ -343,17 +343,12 @@
 
             for (i = 0; i < sorted.length; i++) {
                 if (i === 0) {
-                    sorted[0].icon = `data:image/png;base64,${sorted[0].icon.toString("base64")}`;
-
                     imageGrid.innerHTML = `<a class="image-grid-col-2 image-grid-row-2" href="/explore/${sorted[0].name.replace(
                         /\s/g,
                         ""
                     )}" title="${sorted[0].name}"><img src="${sorted[0].icon}" alt="${sorted[0].name
                         }" /></a>`;
                 } else {
-                    sorted[i].icon = `data:image/png;base64,${sorted[i].icon.toString("base64")}`;
-                    alert(sorted[i].icon)
-
                     imageGrid.innerHTML += `<a href="/explore/${sorted[i].name.replace(
                         /\s/g,
                         ""

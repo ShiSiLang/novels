@@ -35,6 +35,12 @@ module.exports = {
 
     if (type === "books") {
       let data = await bookShema.find().sort({ name: 1 });
+      for (let index = 0; index < data.length; index++) {
+        const element = data[index];
+        element.icon = `data:image/png;base64,${sorted[i].icon.toString(
+          "base64"
+        )}`;
+      }
       res.send(data);
     }
     if (type === "book") {
