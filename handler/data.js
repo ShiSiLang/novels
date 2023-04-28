@@ -45,6 +45,7 @@ module.exports = {
           "base64"
         )}`;
       }
+      console.log(data[2]);
       res.send(data);
     }
     if (type === "book") {
