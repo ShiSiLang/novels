@@ -37,7 +37,7 @@ module.exports = {
       let data = await bookShema.find().sort({ name: 1 });
       for (let index = 0; index < data.length; index++) {
         const element = data[index];
-        element.icon = `data:image/png;base64,${sorted[i].icon.toString(
+        element.icon = `data:image/png;base64,${element.icon.toString(
           "base64"
         )}`;
       }
