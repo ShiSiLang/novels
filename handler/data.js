@@ -47,7 +47,7 @@ module.exports = {
       }
 
       let mapped = newArray.map((v) => {
-        v.icon = `data:image/png;base64,${v.icon.toString("base64")}`;
+        v.url = `data:image/png;base64,${v.icon.toString("base64")}`;
         return v;
       });
       console.log(mapped[2]);
