@@ -51,7 +51,6 @@ module.exports = {
         };
       });
 
-      console.log(mapped[2]);
       res.send(mapped);
     }
 
