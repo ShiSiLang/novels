@@ -825,14 +825,11 @@
 
     form2.addEventListener("submit", async (e) => {
       e.preventDefault();
-      const data = Object.fromEntries(new FormData(form2).entries());
+      const formData = new FormData(form);
 
       const response = await fetch("/upload-chapter", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ data }),
+        body: formData,
       });
 
       if (response.ok) {
