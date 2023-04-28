@@ -11,7 +11,7 @@ module.exports = {
   run: async (req, res) => {
     //return res.status(400).json({ error: `System currently down!` });
 
-    let html = req.body.data; //type1, type2, reviewID, password
+    let html = req.body; //type1, type2, reviewID, password
     console.log(html)
     if (html.password !== process.env.devPassword)
       return res.status(400).json({ error: `Incorrect password!` });
