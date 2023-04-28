@@ -457,6 +457,8 @@
                 imageBuffer = reviewData.chapter.thumbnail;
             }
 
+            alert(`data:image/png;base64,${imageBuffer.toString("base64")}`)
+
             imageElement.src = `data:image/png;base64,${imageBuffer.toString("base64")}`;
             titleElement.textContent = reviewData.chapter?.name ?? reviewData.book?.name ?? '';
             descriptionElement.textContent = reviewData.chapter?.intro ?? reviewData.book?.description ?? '';
