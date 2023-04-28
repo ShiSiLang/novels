@@ -12,10 +12,8 @@ module.exports = {
 
     let html = req.body;
 
-    if (!html)
-      return res.status(400).json({ error: `Missing Data!` });
-
-    console.log(html);
+    if (!req.file)
+      return res.status(400).json({ error: `Please upload an icon.` });
 
     let userObject = JSON.parse(html.user);
 
