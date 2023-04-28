@@ -12,7 +12,7 @@ module.exports = {
 
     let html = req.body;
 
-    if (!html.name || !html)
+    if (!html)
       return res.status(400).json({ error: `Missing Data!` });
 
     console.log(html);
