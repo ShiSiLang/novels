@@ -21,7 +21,7 @@ module.exports = {
       encoding: "utf8",
     });
 
-    book.icon = `data:image/png;base64,${book.icon.toString("base64")}`;
+    let j = { icon: `data:image/png;base64,${book.icon.toString("base64")}` };
 
     file = file.replaceAll(
       "$$novel$$",
@@ -32,7 +32,7 @@ module.exports = {
     file = file.replaceAll("$$bookDescription$$", book.description);
     file = file.replaceAll("$$next$$", `${chapter + 1}`);
     file = file.replaceAll("$$previous$$", `${chapter - 1}`);
-    file = file.replaceAll("$$thumbnail$$", book.icon);
+    file = file.replaceAll("$$thumbnail$$", j.icon);
     book.views += 1;
     await book.save();
 
