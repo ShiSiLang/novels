@@ -132,20 +132,18 @@ module.exports = {
         reviewID: html.reviewID,
       });
 
-    console.log(bookData)
-
       let params = {
         content:
           html.type2 === "Chapter"
-            ? `New Chapter: ${html.chapterName} Denied`
+            ? `New Chapter: ${html.chapter.name} Denied`
             : "New Book Denied",
         embeds: [
           {
-            title: bookData.name,
+            title: bookData.book.name,
             color: 16711680,
           },
         ],
-        username: bookData.name,
+        username: bookData.book.name,
       };
 
       await reviewShema.findOneAndDelete({
