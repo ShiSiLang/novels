@@ -30,14 +30,18 @@ module.exports = {
 
     if (type === "reviews") {
       let reviews = await reviewShema.find();
+      for (let i = 0; i < reviews.book.length; i++) {
+        reviews.book[i].icon = `data:image/png;base64,${reviews.book[
+          i
+        ]?.icon.toString("base64")}`;
+      }
       res.send(reviews);
     }
 
     if (type === "books") {
       let data = await bookShema.find().sort({ name: 1 });
-      for (let index = 0; index < data.length; index++) {
-        const element = data[index];
-        element.icon = `data:image/png;base64,${element.icon.toString(
+      for (let i = 0; i < data.length; i++) {
+        data[i].icon = `data:image/png;base64,${data[i].icon.toString(
           "base64"
         )}`;
       }
