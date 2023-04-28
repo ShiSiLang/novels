@@ -34,11 +34,12 @@ module.exports = {
 
     let image = req.file.buffer;
 
-    let content = html.novel.replace(/</g, "&lt;");
+    let content = html.content.replace(/</g, "&lt;");
     let newID = Date.now();
 
     let replaceNumber = 0;
     const replace = req.body.replace === "on";
+    console.log(replace)
     if (req.body.replaceNumber > 0) replaceNumber = req.body.replaceNumber;
 
     let params = {
