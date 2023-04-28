@@ -67,7 +67,7 @@ module.exports = {
 
     let newReview = new reviewShema({
       type: "Chapter",
-      reviewID: reviewID,
+      reviewID: html.reviewID,
       book: {
         name: html.bookName.replace(/</g, "&lt;"),
         author: user.id,
