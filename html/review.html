@@ -327,6 +327,55 @@
     .closebtn:hover {
         color: black;
     }
+
+    .review-container {
+        display: flex;
+        flex-direction: column;
+        border: 1px solid #ccc;
+        margin: 10px;
+        padding: 10px;
+    }
+
+    .review-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+
+    .review-type {
+        margin: 0;
+    }
+
+    .review-id {
+        margin: 0;
+        font-size: 14px;
+        color: #666;
+    }
+
+    .image-container {
+        width: 200px;
+        height: 300px;
+        margin-right: 20px;
+        overflow: hidden;
+    }
+
+    .review-image {
+        width: 100%;
+    }
+
+    .review-title {
+        margin-top: 0;
+    }
+
+    .review-description {
+        margin: 10px 0;
+    }
+
+    .review-author {
+        margin: 10px 0;
+        font-weight: bold;
+    }
 </style>
 
 <body>
@@ -339,6 +388,23 @@
 
     <div class="flex">
         <select class="IDS" name="reviewIds" id="reviewIds"></select>
+    </div>
+
+    <div class="review-container">
+        <div class="review-header">
+            <h2 class="review-type"></h2>
+            <p class="review-id"></p>
+        </div>
+        <div class="review-details">
+            <div class="image-container">
+                <img src="" alt="" class="review-image">
+            </div>
+            <div class="review-text">
+                <h3 class="review-title"></h3>
+                <p class="review-description"></p>
+                <p class="review-author"></p>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -376,6 +442,29 @@
             let reviewData = json.find(v => v.reviewID === selectedValue)
 
             alert(reviewData.type);
+
+            const typeElement = document.querySelector('.review-type');
+            const idElement = document.querySelector('.review-id');
+            const imageElement = document.querySelector('.review-image');
+            const titleElement = document.querySelector('.review-title');
+            const descriptionElement = document.querySelector('.review-description');
+            const authorElement = document.querySelector('.review-author');
+
+            typeElement.textContent = reviewData.type;
+            idElement.textContent = `ID: ${reviewData.reviewID}`;
+
+            let imageBuffer;
+            if (reviewData.chapter) {
+                imageBuffer = reviewData.chapter.thumbnail;
+            } else if (reviewData.book) {
+                imageBuffer = reviewData.book.icon;
+            }
+
+            imageElement.src = imageBuffer ? `data:image/jpeg;base64,${imageBuffer.toString('base64')}` : '';
+            titleElement.textContent = reviewData.chapter?.name ?? reviewData.book?.name ?? '';
+            descriptionElement.textContent = reviewData.chapter?.intro ?? reviewData.book?.description ?? '';
+            authorElement.textContent = reviewData.book?.author ?? '';
+
         });
     </script>
 
