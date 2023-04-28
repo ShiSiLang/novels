@@ -135,7 +135,7 @@ module.exports = {
       let params = {
         content:
           html.type2 === "Chapter"
-            ? `New Chapter: ${html.chapter.name} Denied`
+            ? `New Chapter: ${bookData.chapter.name} Denied`
             : "New Book Denied",
         embeds: [
           {
@@ -151,7 +151,7 @@ module.exports = {
         reviewID: html.reviewID,
       });
 
-res.status(200).json({
+      res.status(200).json({
         success: `Successfully denied the ${html.type2}!.`,
       });
 
@@ -164,8 +164,7 @@ res.status(200).json({
         url: webhook_url,
       }).catch((err) => {
         console.log(err);
-      return res.status(400).json({ error: error.message });
-
+        return res.status(400).json({ error: error.message });
       });
     }
   },
