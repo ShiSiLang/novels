@@ -10,7 +10,7 @@ module.exports = {
   run: async (req, res) => {
     return res.status(400).json({ error: `System currently down!` });
 
-    let html = req.body.data;
+    let html = req.body;
 
     if (!html.name || !html)
       return res.status(400).json({ error: `Missing Data!` });
@@ -31,13 +31,8 @@ module.exports = {
       return res
         .status(400)
         .json({ error: `Your profile does not have author perms!` });
-        
-    let image = html.file.buffer;
 
-    if (isImage(image) === false)
-      return res.status(400).json({
-        error: `Please make sure the thumbnail is a valid image URL.`,
-      });
+    let image = html.file.buffer;
 
     let content = html.content.replace(/</g, "&lt;");
     let newID = Date.now();
@@ -53,7 +48,6 @@ module.exports = {
         {
           title: html.name,
           description: trim(content, 4095),
-          image: { url: getBase64DataUrl(image) },
           footer: { text: newID },
         },
       ],
@@ -73,18 +67,20 @@ module.exports = {
     });
 
     let newReview = new reviewShema({
-      bookName: html.name,
-      bookAuthor: html.uname,
-      bookDescription: content,
-      bookIcon: image,
-      type: "chapter",
-      cType: html.type,
-      cIntro: html.intro.replace(/</g, "&lt;"),
-      cName: html.cname.replace(/</g, "&lt;"),
-      cCredits: html.credits.replace(/</g, "&lt;"),
-      reviewID: newID,
-      replace: replace,
-      replaceNumber: 1,
+      type: "Chapter",
+      reviewID: reviewID,
+      book: {
+        name: html.bookName.replace(/</g, "&lt;"),
+        author: user.id,
+      },
+      chapter: {
+        name: html.chapterName.replace(/</g, "&lt;"),
+        intro: html.intro.replace(/</g, "&lt;"),
+        credits: html.credits.replace(/</g, "&lt;"),
+        thumbnail: image,
+        type: "Novel", //Novel
+        novel: content, // String for novels
+      },
     }).save();
 
     res.status(200).json({
