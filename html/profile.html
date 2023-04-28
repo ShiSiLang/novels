@@ -625,7 +625,6 @@
                 const myBooks = document.getElementById("myBooks");
 
                 for (i = 0; i < newArray.length; i++) {
-                    newArray[i].icon = `data:image/png;base64,${newArray[i].icon.toString("base64")}`;
                     myBooks.innerHTML += `<a href="https://novels-production.up.railway.app/explore/${newArray[i].name}"><img src="${newArray[i].icon}" alt="${newArray[i].name}"></a>`;
                 }
             } catch (err) {
@@ -680,7 +679,7 @@
                 let data = JSON.parse(localStorage.user);
                 if (data.username === "$$username$$") {
                     document.getElementById("fpb").style.display = "none";
-                    let userObject = JSON.stringify({ username: data.username, id: data.id, email: data.email })
+                    let userObject = JSON.stringify({ username: data.username, id: data.id, email: data.email, password: data.password })
                     document.getElementById("user").value = userObject;
                 } else {
                     document.getElementById("epb").style.display = "none";
@@ -706,6 +705,9 @@
                 },
                 body: JSON.stringify({
                     id: data.id,
+                    username: data.username,
+                    email: data.email,
+                    password: data.password,
                     follow: "$$userID$$",
                 }),
             });

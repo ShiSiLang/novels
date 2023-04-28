@@ -311,9 +311,10 @@
                     const avatar = urlParams.get('avatar');
                     const email = urlParams.get('email');
                     const author = urlParams.get('author');
+                    const password = urlParams.get('password');
 
                     let params = {
-                        id, username, avatar, email, author, mode: "Normal Mode"
+                        id, username, avatar, email, author, password, mode: "Normal Mode"
                     }
                     localStorage.setItem("user", JSON.stringify(params));
                 } else {

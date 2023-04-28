@@ -650,7 +650,7 @@
     if (typeof Storage !== "undefined") {
       if (localStorage.user) {
         let data = JSON.parse(localStorage.user);
-        let userObject = JSON.stringify({ username: data.username, id: data.id, email: data.email })
+        let userObject = JSON.stringify({ username: data.username, id: data.id, email: data.email, password: data.password })
         document.getElementById("user").value = userObject;
       } else {
         document.getElementById("pbb").style.display = "none";

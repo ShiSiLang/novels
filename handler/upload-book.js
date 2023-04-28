@@ -21,6 +21,7 @@ module.exports = {
       username: userObject.username,
       id: userObject.id,
       email: userObject.email,
+      password: userObject.password,
     });
 
     if (!user)

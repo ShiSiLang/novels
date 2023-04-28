@@ -14,6 +14,7 @@ const profileSchema = mongoose.Schema({
   author: Boolean,
   books: Array,
   email: String,
+  password: String,
 });
 
 module.exports = mongoose.model("profileSchema", profileSchema);
