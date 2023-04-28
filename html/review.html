@@ -449,19 +449,23 @@
 
             typeElement.textContent = reviewData.type;
             idElement.textContent = `ID: ${reviewData.reviewID}`;
+            try {
+                let imageBuffer = null;
+                if (reviewData.book) {
+                    imageBuffer = reviewData.book.icon;
+                } else if (reviewData.chapter) {
+                    imageBuffer = reviewData.chapter.thumbnail;
+                }
 
-            let imageBuffer = null;
-            if (reviewData.book) {
-                imageBuffer = reviewData.book.icon;
-            } else if (reviewData.chapter) {
-                imageBuffer = reviewData.chapter.thumbnail;
-            }
-
-            if (imageBuffer) { // Check if imageBuffer is defined and not null
-                const base64String = imageBuffer.toString("base64");
-                imageElement.src = `data:image/png;base64,${base64String}`;
-            } else {
-                imageElement.src = ''; // Clear the src attribute of the image element
+                if (imageBuffer) { // Check if imageBuffer is defined and not null
+                    const base64String = imageBuffer.toString("base64");
+                    imageElement.src = `data:image/png;base64,${base64String}`;
+                } else {
+                    imageElement.src = ''; // Clear the src attribute of the image element
+                }
+            } catch (err) {
+                alert(err)
+                console.log(alert)
             }
 
             titleElement.textContent = reviewData.chapter?.name ?? reviewData.book?.name ?? '';
