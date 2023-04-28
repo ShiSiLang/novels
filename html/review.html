@@ -451,10 +451,10 @@
             idElement.textContent = `ID: ${reviewData.reviewID}`;
 
             let imageBuffer;
-            if (reviewData?.chapter) {
-                imageBuffer = reviewData.chapter.thumbnail;
-            } else if (reviewData?.book) {
+            if (reviewData.book) {
                 imageBuffer = reviewData.book.icon;
+            } else if (reviewData.chapter) {
+                imageBuffer = reviewData.chapter.thumbnail;
             }
 
             imageElement.src = `data:image/png;base64,${imageBuffer.toString("base64")}`;
