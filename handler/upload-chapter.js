@@ -32,7 +32,7 @@ module.exports = {
         .status(400)
         .json({ error: `Your profile does not have author perms!` });
 
-    let image = html.file.buffer;
+    let image = req.file.buffer;
 
     let content = html.content.replace(/</g, "&lt;");
     let newID = Date.now();
