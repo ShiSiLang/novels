@@ -38,7 +38,7 @@ module.exports = {
         };
       });
 
-      res.send(reviews);
+      res.send(mapped);
     }
 
     if (type === "books") {
@@ -46,10 +46,19 @@ module.exports = {
 
       let mapped = data.map((v) => {
         return {
-          ...v,
-          url: `data:image/png;base64,${v.icon.toString("base64")}`,
+          name: v.name,
+          description: v.description,
+          icon: `data:image/png;base64,${v.icon.toString("base64")}`,
+          author: v.author,
+          chapters: v.chapters,
+          followers: v.followers,
+          updated: v.updated,
+          status: v.status,
+          published: v.published,
+          views: v.views,
         };
       });
+
       console.log(mapped[2]);
       res.send(mapped);
     }
