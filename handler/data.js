@@ -44,8 +44,8 @@ module.exports = {
         (v) =>
           (v.icon = `data:image/png;base64,${data[i].icon.toString("base64")}`)
       );
-      console.log(data[2]);
-      res.send(data);
+      console.log(mapped[2]);
+      res.send(mapped);
     }
     if (type === "book") {
       let bookName = req.params.other;
