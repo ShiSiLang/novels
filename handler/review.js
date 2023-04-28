@@ -11,12 +11,12 @@ module.exports = {
   run: async (req, res) => {
     //return res.status(400).json({ error: `System currently down!` });
 
-    let html = req.body; //type1, type2, reviewID, password
+    let html = req.body.data; //type1, type2, reviewID, password
     console.log(html)
     if (html.password !== process.env.devPassword)
       return res.status(400).json({ error: `Incorrect password!` });
 
-    if (html.type1 === "accept") {
+    if (html.type === "accept") {
       let reviewData = await reviewShema.findOne({
         type: html.type2,
         reviewID: html.reviewID,
@@ -123,7 +123,7 @@ module.exports = {
       });
     }
 
-    if (html.type1 === "decline") {
+    if (html.type === "decline") {
       let bookData = await reviewShema.findOne({
         type: html.type2,
         reviewID: html.reviewID,
