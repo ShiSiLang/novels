@@ -23,8 +23,6 @@ module.exports = {
       email: userObject.email,
     });
 
-    console.log(user);
-
     if (!user)
       return res.status(400).json({ error: `Could not fetch user data.` });
 
