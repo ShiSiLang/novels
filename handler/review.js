@@ -139,15 +139,15 @@ module.exports = {
       let params = {
         content:
           html.type2 === "Chapter"
-            ? `New Chapter: ${reviewData.chapter.name} Denied`
+            ? `New Chapter: ${html.chapterName} Denied`
             : "New Book Denied",
         embeds: [
           {
-            title: reviewData.book.name,
+            title: bookData.name,
             color: 16711680,
           },
         ],
-        username: reviewData.book.name,
+        username: bookData.name,
       };
 
       await reviewShema.findOneAndDelete({
