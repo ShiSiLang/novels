@@ -143,7 +143,7 @@ module.exports = {
             : "New Book Denied",
         embeds: [
           {
-            title: data.name,
+            title: reviewData.book.name,
             color: 16711680,
           },
         ],
