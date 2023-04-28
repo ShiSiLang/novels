@@ -132,9 +132,7 @@ module.exports = {
         reviewID: html.reviewID,
       });
 
-      res.status(200).json({
-        success: `Successfully denied the ${html.type2}!.`,
-      });
+    console.log(bookData)
 
       let params = {
         content:
@@ -155,6 +153,10 @@ module.exports = {
         reviewID: html.reviewID,
       });
 
+res.status(200).json({
+        success: `Successfully denied the ${html.type2}!.`,
+      });
+
       await axios({
         method: "POST",
         headers: {
@@ -164,6 +166,8 @@ module.exports = {
         url: webhook_url,
       }).catch((err) => {
         console.log(err);
+      return res.status(400).json({ error: error.message });
+
       });
     }
   },
