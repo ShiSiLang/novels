@@ -8,7 +8,6 @@ module.exports = {
   get: true,
   run: async (req, res) => {
     let type = req.params.type.toLowerCase();
-    console.log(type)
     if (type === "profiles") {
       let data = await profileShema.find().sort({ username: 1 });
       let newObj = data.map((v) => v.username);
