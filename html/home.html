@@ -380,7 +380,7 @@
 
         for (const book of json) {
           const bookChapters = book.chapters?.map(chapter => chapter.name);
-          const hasMatchingChapter = latestJson?.some(chapterName => bookChapters.includes(chapterName));
+          const hasMatchingChapter = latestJson?.some(chapterName => bookChapters?.includes(chapterName));
           if (hasMatchingChapter) {
             newArray.push(book);
           }
