@@ -39,7 +39,6 @@ module.exports = {
 
     let replaceNumber = 0;
     const replace = req.body.replace === "on";
-    console.log(replace)
     if (req.body.replaceNumber > 0) replaceNumber = req.body.replaceNumber;
 
     let params = {
