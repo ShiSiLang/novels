@@ -554,6 +554,9 @@
         ${errorData.error}`;
                 error.style.display = "block";
             }
+            setTimeout(function () {
+                form.disabled = false;
+            }, 5000);
         });
     </script>
 </body>

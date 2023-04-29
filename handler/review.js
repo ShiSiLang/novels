@@ -12,7 +12,7 @@ module.exports = {
     //return res.status(400).json({ error: `System currently down!` });
 
     let html = req.body.data; //type, type2, reviewID, password
-    console.log(html);
+
     if (html.password !== process.env.devPassword)
       return res.status(400).json({ error: `Incorrect password!` });
 
@@ -60,7 +60,6 @@ module.exports = {
         });
 
         if (data.type === "Novel") {
-          console.log(data);
           bookData.chapters.push({
             name: data.name,
             intro: data.intro,
