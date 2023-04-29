@@ -112,7 +112,7 @@ module.exports = {
           let userData = await profileShema.findOne({
             username: comment.username,
           });
-          comment.icon = userData.avatar;
+          comment.icon = `https://cdn.discordapp.com/avatars/${userData.id}/${userData.avatar}.png`;
         }
       }
 

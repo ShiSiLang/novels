@@ -6,6 +6,7 @@ module.exports = {
     //return res.status(400).json({ error: `System currently down!` });
 
     let html = req.body;
+    console.log(html)
 
     let userObject = JSON.parse(html.user);
 
