@@ -122,9 +122,9 @@ module.exports = {
             comment: comment.comment,
           };
           newComments.push(newComment);
-          console.log(newComment);
         }
         newChapters[i].comments = newComments;
+        console.log(newChapters[i])
         newComments = [];
       }
 
