@@ -493,10 +493,13 @@
                 typeElement.textContent = newObj.type;
                 idElement.textContent = `ID: ${newObj.reviewID}`;
                 titleElement.textContent = newObj.book.name;
-                descriptionElement.textContent = newObj.chapter.novel;
+                descriptionElement.textContent = trim(newObj.chapter.novel, 200);
                 authorElement.textContent = newObj.book.author;
             }
         });
+function trim(str, max) {
+    return str.length > max ? `${str.slice(0, max - 3)}...` : str;
+  }
     </script>
 
     <form id="FormReview" action="/review" method="post">
