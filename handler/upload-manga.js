@@ -1,5 +1,8 @@
 const profileShema = require("../models/profiles");
 const reviewShema = require("../models/review");
+const axios = require("axios");
+const { trim, getBase64DataUrl } = require("../util.js");
+let webhook_url = process.env.webhook;
 
 module.exports = {
   name: "upload-manga",
