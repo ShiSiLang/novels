@@ -107,7 +107,6 @@ module.exports = {
       let newChapters = [];
       for (i = 0; i < book.chapters.length; i++) {
         newChapters.push(book.chapters[i]);
-        //console.log(book.chapters[i])
         let newComments = [];
         for (i2 = 0; i2 < book.chapters[i].comments.length; i2++) {
           let comment = book.chapters[i].comments[i2];
@@ -141,6 +140,8 @@ module.exports = {
         views: book.views,
         chapter: newChapters,
       };
+
+      console.log(newBook)
 
       res.send(newBook);
     }
