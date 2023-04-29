@@ -458,7 +458,7 @@
           let step1 = content
             .split(" ")
             .join(" ")
-            .replaceAll("\n", "</br></br>")
+            .replaceAll("\n", "</br>")
             .replaceAll("\n\n", "</br></br>");
           let step2 = step1.replaceAll(/\*\*(.*?)\*\*/g, "<b>$1</b>");
           let step3 = step2.replaceAll(/\*(.*?)\*/g, "<em>$1</em>");
