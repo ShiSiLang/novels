@@ -8,7 +8,7 @@ module.exports = {
   name: "upload-chapter",
   upload: "thumbnail",
   run: async (req, res) => {
-   // return res.status(400).json({ error: `System currently down!` });
+    // return res.status(400).json({ error: `System currently down!` });
 
     let html = req.body;
 

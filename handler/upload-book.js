@@ -60,8 +60,6 @@ module.exports = {
       return res.status(400).json({ error: `An error has occured.` });
     });
 
-    console.log(html);
-
     let newReview = new reviewShema({
       type: "Book",
       reviewID: reviewID,
