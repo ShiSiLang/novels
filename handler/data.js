@@ -2,6 +2,7 @@ const profileShema = require("../models/profiles");
 const bookShema = require("../models/book");
 const system = require("../models/system");
 const reviewShema = require("../models/review");
+const { trim, getTimeDifference } = require("../util.js");
 
 module.exports = {
   name: "data/:type/:other",
@@ -110,9 +111,12 @@ module.exports = {
         for (i2 = 0; i2 < book.chapters[i].comments.length; i2++) {
           let comment = book.chapters[i].comments[i2];
           let userData = await profileShema.findOne({
-            username: comment.username,
+            id: comment.userID,
           });
+          comment.username = userData.username;
           comment.icon = `https://cdn.discordapp.com/avatars/${userData.id}/${userData.avatar}.png`;
+          comment.date = getTimeDifference(comment.date);
+          console.log(comment);
         }
       }
 

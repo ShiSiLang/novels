@@ -35,7 +35,6 @@ module.exports = {
     let date = new Date();
 
     bookData.chapters[chapterIndex].comments.push({
-      username: user.username,
       userID: user.id,
       comment: html.comment.replace(/</g, "&lt;"),
       date: date,
