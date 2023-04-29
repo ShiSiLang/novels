@@ -22,7 +22,7 @@ module.exports = {
     });
 
     let j = { icon: `data:image/png;base64,${book.icon.toString("base64")}` };
-
+console.log(j)
     file = file.replaceAll(
       "$$novel$$",
       `'https://novels-production.up.railway.app/data/book/${book.name}'`
@@ -39,7 +39,7 @@ module.exports = {
     async function addBook(book) {
       let getSystem = await system.findOne({ id: "6427a45e2d7d901440fc43cf" });
 
-      if (!getSystem.readingNow.includes(book)) {
+      if (!getSystem?.readingNow.includes(book)) {
         getSystem.readingNow.push(book);
       }
       await getSystem.save();
