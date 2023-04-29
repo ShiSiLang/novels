@@ -104,23 +104,45 @@ module.exports = {
       let book = await bookShema.findOne({ name: bookName });
       if (!book) return res.status(400).json({ error: `Not Found` });
 
-      book.icon = `data:image/png;base64,${book.icon.toString("base64")}`;
-
+      let newChapters = [];
       for (i = 0; i < book.chapters.length; i++) {
+        newChapters.push(book.chapters[i]);
         //console.log(book.chapters[i])
+        let newComments = [];
         for (i2 = 0; i2 < book.chapters[i].comments.length; i2++) {
           let comment = book.chapters[i].comments[i2];
           let userData = await profileShema.findOne({
             id: comment.userID,
           });
-          comment.username = userData.username;
-          comment.icon = `https://cdn.discordapp.com/avatars/${userData.id}/${userData.avatar}.png`;
-          comment.date = getTimeDifference(comment.date);
-          console.log(comment);
+          let newComment = {
+            userID: userData.id,
+            username: userData.username,
+            icon: `https://cdn.discordapp.com/avatars/${userData.id}/${userData.avatar}.png`,
+            date: getTimeDifference(comment.date),
+            comment: comment.comment,
+          };
+          newComments.comments(newComment);
+          console.log(newComment);
         }
+        newChapters.comments = newComments;
+        newComments = [];
       }
 
-      res.send(book);
+      let newBook = {
+        name: book.name,
+        description: book.description,
+        icon: `data:image/png;base64,${book.icon.toString("base64")}`,
+        author: book.author,
+        followers: book.followers,
+        tags: book.tags,
+        updated: book.updated,
+        status: book.status,
+        published: book.published,
+        views: book.views,
+        chapter: newChapters,
+      };
+
+      res.send(newBook);
     }
   },
 };
