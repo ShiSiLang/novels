@@ -31,7 +31,7 @@ module.exports = {
         .status(200)
         .json({ success: `Successfully unfollowed ${html.follow}!` });
     } else {
-      book.followers.push(user.username);
+      book.followers.push(user.id);
       book.save();
       return res
         .status(200)

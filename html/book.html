@@ -363,7 +363,7 @@
       const button = document.getElementById("fb");
       let user = JSON.parse(localStorage.user);
       if (json.followers.includes(user.id)) {
-        button.innerHTML = `<span>💔</span>
+        button.innerHTML = `<span><i class="fa-regular fa-star"></i></span>
   <span class="favtext">Remove from favorites</span>`;
       }
     } catch (err) {
