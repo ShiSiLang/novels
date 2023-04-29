@@ -548,13 +548,13 @@
                 success.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
             <strong>Success!</strong> ${successData.success}`;
                 success.style.display = "block";
-                form.disabled = false;
+                document.getElementById("submit").disabled = false;
             } else {
                 const errorData = await response.json();
                 error.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
         ${errorData.error}`;
                 error.style.display = "block";
-                form.disabled = false;
+                document.getElementById("submit").disabled = false;
             }
         });
     </script>
