@@ -120,10 +120,19 @@ module.exports = {
             };
           })
         );
-        v.comments = newComments;
-        v.thumbnail = `data:image/png;base64,${v.thumbnail.toString("base64")}`;
-        console.log(v);
-        return v;
+
+        let newOBJ = {
+          name: v.name,
+          intro: v.intro,
+          credits: v.credits,
+          thumbnail: `data:image/png;base64,${v.thumbnail.toString("base64")}`,
+          type: v.type,
+          images: v.images,
+          novel: v.novel,
+          comments: newComments,
+        };
+        console.log(newOBJ);
+        return newOBJ;
       });
 
       let newBook = {
@@ -140,7 +149,7 @@ module.exports = {
         chapters: newChapters,
       };
 
-      console.log(newBook);
+      //console.log(newBook);
 
       res.send(newBook);
     }
