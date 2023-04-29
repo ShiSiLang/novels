@@ -18,8 +18,6 @@ module.exports = {
 
       if (!book) return res.sendFile(dir("error"));
 
-      console.log(book.views);
-
       let file = fs.readFileSync("./html/read.html", {
         encoding: "utf8",
       });
@@ -52,7 +50,9 @@ module.exports = {
 
       res.send(file);
 
-      book.views += 1;
+      console.log(book.views);
+
+      book.views = Number(book.views) += 1;
       await book.save();
     } catch (err) {
       console.log(err);
