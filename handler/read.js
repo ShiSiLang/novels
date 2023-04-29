@@ -33,6 +33,7 @@ console.log(j)
     file = file.replaceAll("$$next$$", `${chapter + 1}`);
     file = file.replaceAll("$$previous$$", `${chapter - 1}`);
     file = file.replaceAll("$$thumbnail$$", j.icon);
+   console.log(book.views)
     book.views += 1;
     await book.save();
 
