@@ -152,8 +152,6 @@ module.exports = {
         chapters: newChapters,
       };
 
-      console.log(newBook);
-
       res.send(newBook);
     }
   },
