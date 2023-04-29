@@ -35,7 +35,43 @@ module.exports = {
 
     if (type === "reviews") {
       let reviews = await reviewShema.find();
-      res.send(reviews);
+
+      let mapped = reviews.map((v) => {
+        if (v.type === "Book") {
+          return {
+            type: v.type,
+            reviewID: v.reviewID,
+            book: {
+              name: v.book.name,
+              description: v.book.description,
+              icon: `data:image/png;base64,${v.book.icon.toString("base64")}`,
+              author: v.book.author,
+            },
+          };
+        }
+        if (v.type === "Chapter") {
+          return {
+            type: v.type,
+            reviewID: v.reviewID,
+            chapter: {
+              name: v.chapter.name,
+              intro: v.chapter.intro,
+              credits: v.chapter.credits,
+              thumbnail: `data:image/png;base64,${v.chapter.thumbnail.toString(
+                "base64"
+              )}`,
+              type: v.chapter.type,
+              novel: v.chapter.novel,
+            },
+            book: {
+              name: v.book.name,
+              author: v.book.author,
+            },
+          };
+        }
+      });
+
+      res.send(mapped);
     }
 
     if (type === "books") {

@@ -448,58 +448,26 @@
             const authorElement = document.querySelector('.review-author');
 
             if (reviewData.type === "Book") {
-                let newObj = {
-                    type: reviewData.type,
-                    reviewID: reviewData.reviewID,
-                    book: {
-                        name: reviewData.book.name,
-                        description: reviewData.book.description,
-                        icon: `data:image/png;base64,${reviewData.book.icon.toString("base64")}`,
-                        author: reviewData.book.author,
-                    }
-                };
-                console.log(newObj)
-
-                imageElement.src = newObj.book.icon;
-                typeElement.textContent = newObj.type;
-                idElement.textContent = `ID: ${newObj.reviewID}`;
-                titleElement.textContent = newObj.book.name;
-                descriptionElement.textContent = newObj.book.description;
-                authorElement.textContent = newObj.book.author;
-
+                imageElement.src = reviewData.book.icon;
+                typeElement.textContent = reviewData.type;
+                idElement.textContent = `ID: ${reviewData.reviewID}`;
+                titleElement.textContent = reviewData.book.name;
+                descriptionElement.textContent = reviewData.book.description;
+                authorElement.textContent = reviewData.book.author;
             }
 
             if (reviewData.type === "Chapter") {
-                let newObj = {
-                    type: reviewData.type,
-                    reviewID: reviewData.reviewID,
-                    chapter: {
-                        name: reviewData.chapter.name,
-                        intro: reviewData.chapter.intro,
-                        credits: reviewData.chapter.credits,
-                        thumbnail: `data:image/png;base64,${reviewData.chapter.thumbnail.toString("base64")}`,
-                        type: reviewData.chapter.type,
-                        novel: reviewData.chapter.novel,
-                    },
-                    book: {
-                        name: reviewData.book.name,
-                        author: reviewData.book.author,
-                    }
-                };
-
-                console.log(newObj)
-
-                imageElement.src = newObj.chapter.thumbnail;
-                typeElement.textContent = newObj.type;
-                idElement.textContent = `ID: ${newObj.reviewID}`;
-                titleElement.textContent = newObj.book.name;
-                descriptionElement.textContent = trim(newObj.chapter.novel, 200);
-                authorElement.textContent = newObj.book.author;
+                imageElement.src = reviewData.chapter.thumbnail;
+                typeElement.textContent = reviewData.type;
+                idElement.textContent = `ID: ${reviewData.reviewID}`;
+                titleElement.textContent = reviewData.book.name;
+                descriptionElement.textContent = trim(reviewData.chapter.novel, 200);
+                authorElement.textContent = reviewData.book.author;
             }
         });
-function trim(str, max) {
-    return str.length > max ? `${str.slice(0, max - 3)}...` : str;
-  }
+        function trim(str, max) {
+            return str.length > max ? `${str.slice(0, max - 3)}...` : str;
+        }
     </script>
 
     <form id="FormReview" action="/review" method="post">
