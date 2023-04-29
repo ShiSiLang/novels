@@ -18,7 +18,7 @@ try {
 
     if (!book) return res.sendFile(dir("error"));
 
-   console.log(book)
+   console.log(book.views)
 
     let file = fs.readFileSync("./html/read.html", {
       encoding: "utf8",
@@ -36,8 +36,6 @@ try {
     file = file.replaceAll("$$next$$", `${chapter + 1}`);
     file = file.replaceAll("$$previous$$", `${chapter - 1}`);
     file = file.replaceAll("$$thumbnail$$", j.icon);
-    book.views += 1;
-    await book.save();
 
     async function addBook(book) {
       let getSystem = await system.findOne({ id: "6427a45e2d7d901440fc43cf" });
@@ -51,6 +49,9 @@ try {
     addBook(book.name);
 
     res.send(file);
+
+    book.views += 1;
+    await book.save();
 } catch(err) {
 console.log(err)
 }
