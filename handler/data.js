@@ -141,7 +141,7 @@ module.exports = {
         status: book.status,
         published: book.published,
         views: book.views,
-        chapter: newChapters,
+        chapters: newChapters,
       };
 
       console.log(newBook);
