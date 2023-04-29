@@ -8,6 +8,7 @@ module.exports = {
   name: "read/:bookName/:chapter",
   get: true,
   run: async (req, res) => {
+try {
     let chapter = Number(req.params.chapter) || 1;
     let bookName = req.params.bookName.replace(/\s/g, "").toLowerCase();
     let books = await bookShema.find().sort({ name: 1 });
@@ -17,12 +18,14 @@ module.exports = {
 
     if (!book) return res.sendFile(dir("error"));
 
+   console.log(book)
+
     let file = fs.readFileSync("./html/read.html", {
       encoding: "utf8",
     });
 
     let j = { icon: `data:image/png;base64,${book.icon.toString("base64")}` };
-console.log(j)
+
     file = file.replaceAll(
       "$$novel$$",
       `'https://novels-production.up.railway.app/data/book/${book.name}'`
@@ -33,7 +36,6 @@ console.log(j)
     file = file.replaceAll("$$next$$", `${chapter + 1}`);
     file = file.replaceAll("$$previous$$", `${chapter - 1}`);
     file = file.replaceAll("$$thumbnail$$", j.icon);
-   console.log(book.views)
     book.views += 1;
     await book.save();
 
@@ -49,5 +51,8 @@ console.log(j)
     addBook(book.name);
 
     res.send(file);
+} catch(err) {
+console.log(err)
+}
   },
 };
