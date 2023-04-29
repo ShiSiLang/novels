@@ -28,6 +28,11 @@ module.exports = {
       res.send(getSystem.latestChapters);
     }
 
+    if (type === "readingnow") {
+      let getSystem = await system.findOne({ id: "6427a45e2d7d901440fc43cf" });
+      res.send(getSystem.readingNow);
+    }
+
     if (type === "reviews") {
       let reviews = await reviewShema.find();
       res.send(reviews);

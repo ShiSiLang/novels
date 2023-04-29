@@ -371,11 +371,17 @@
       try {
         let books = await fetch('https://novels-production.up.railway.app/data/books/null');
         let latest = await fetch('https://novels-production.up.railway.app/data/latest/null');
+        let reading = await fetch('https://novels-production.up.railway.app/data/readingnow/null');
+
         let json = await books.json();
         let latestJson = await latest.json();
+        let readingNow = await reading.json();
+
 
         const latestsBooks = document.getElementById("latests");
         const favoritedBooks = document.getElementById("favoritedBooks");
+        const readingNowDiv = document.getElementById("readingNow");
+
         const newArray = [];
 
         for (const book of json) {
@@ -386,13 +392,12 @@
           }
         }
 
-        console.log(newArray)
-
         if (newArray[0].length !== 0) {
           for (i = 0; i < newArray.length; i++) {
             latestsBooks.innerHTML += `<a href="https://novels-production.up.railway.app/explore/${newArray[i].name}"><img src="${newArray[i].icon}" alt="${newArray[i].name}"></a>`
           }
         }
+
         //Most favorited
         let mostFavoritedBooks = json?.sort(function (a, b) {
           return b.followers.length - a.followers.length;
@@ -400,6 +405,22 @@
 
         for (i = 0; i < mostFavoritedBooks.length; i++) {
           favoritedBooks.innerHTML += `<a href="https://novels-production.up.railway.app/explore/${mostFavoritedBooks[i].name}"><img src="${mostFavoritedBooks[i].icon}" alt="${mostFavoritedBooks[i].name}"></a>`
+        }
+
+        //readingNow
+        const newArray2 = [];
+
+        for (const book of json) {
+          const hasMatchingName = readingNow.some(name => book.name === name);
+          if (hasMatchingName) {
+            newArray2.push(book);
+          }
+        }
+
+        if (newArray2[0].length !== 0) {
+          for (i = 0; i < newArray2.length; i++) {
+            readingNowDiv.innerHTML += `<a href="https://novels-production.up.railway.app/explore/${newArray2[i].name}"><img src="${newArray2[i].icon}" alt="${newArray2[i].name}"></a>`
+          }
         }
       } catch (err) {
         console.log(err)
