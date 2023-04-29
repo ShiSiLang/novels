@@ -6,15 +6,12 @@ module.exports = {
     //return res.status(400).json({ error: `System currently down!` });
 
     let html = req.body;
-    console.log(html)
-
-    let userObject = JSON.parse(html.user);
 
     let user = await profileShema.findOne({
-      username: userObject.username,
-      id: userObject.id,
-      email: userObject.email,
-      password: userObject.password,
+      username: html.username,
+      id: html.id,
+      email: html.email,
+      password: html.password,
     });
 
     if (!user)
