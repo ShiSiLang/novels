@@ -379,17 +379,17 @@
         const newArray = [];
 
         for (const book of json) {
-          const bookChapters = book.chapters?.map(chapter => chapter.name);
-          const hasMatchingChapter = latestJson?.some(chapterName => bookChapters?.includes(chapterName));
+          const bookChapters = book.chapters.map(chapter => chapter.name);
+          const hasMatchingChapter = latestJson.some(chapterName => bookChapters?.includes(chapterName));
           if (hasMatchingChapter) {
             newArray.push(book);
           }
         }
 
-        if (newArray[0]?.length !== 0) {
-          for (i = 0; i < newArray.length; i++) {
-            newArray[i].icon = `data:image/png;base64,${newArray[i].icon.toString("base64")}`;
+        console.log(newArray)
 
+        if (newArray[0].length !== 0) {
+          for (i = 0; i < newArray.length; i++) {
             latestsBooks.innerHTML += `<a href="https://novels-production.up.railway.app/explore/${newArray[i].name}"><img src="${newArray[i].icon}" alt="${newArray[i].name}"></a>`
           }
         }
@@ -399,14 +399,9 @@
         }).slice(0, 25);
 
         for (i = 0; i < mostFavoritedBooks.length; i++) {
-          mostFavoritedBooks[i].icon = `data:image/png;base64,${mostFavoritedBooks[i].icon.toString("base64")}`;
-
           favoritedBooks.innerHTML += `<a href="https://novels-production.up.railway.app/explore/${mostFavoritedBooks[i].name}"><img src="${mostFavoritedBooks[i].icon}" alt="${mostFavoritedBooks[i].name}"></a>`
         }
-
-
       } catch (err) {
-        alert(err)
         console.log(err)
       }
     };
