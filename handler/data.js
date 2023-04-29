@@ -131,7 +131,6 @@ module.exports = {
           novel: v.novel,
           comments: newComments,
         };
-        console.log(newOBJ);
         return newOBJ;
       });
 
@@ -149,7 +148,7 @@ module.exports = {
         chapters: newChapters,
       };
 
-      //console.log(newBook);
+      console.log(newBook);
 
       res.send(newBook);
     }
