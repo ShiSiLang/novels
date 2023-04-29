@@ -50,8 +50,6 @@ module.exports = {
 
       res.send(file);
 
-      console.log((book.views += 1));
-
       await bookShema.findOneAndUpdate(
         { name: book.name },
         {
