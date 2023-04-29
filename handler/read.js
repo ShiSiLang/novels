@@ -40,7 +40,7 @@ module.exports = {
           id: "6427a45e2d7d901440fc43cf",
         });
 
-        if (!getSystem?.readingNow.includes(book)) {
+        if (!getSystem.readingNow.includes(book)) {
           getSystem.readingNow.push(book);
         }
         await getSystem.save();
