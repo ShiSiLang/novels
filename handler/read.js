@@ -52,7 +52,7 @@ module.exports = {
 
       console.log((book.views += 1));
 
-      await books.findOneAndUpdate(
+      await bookShema.findOneAndUpdate(
         { name: book.name },
         {
           $inc: {
