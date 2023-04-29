@@ -530,7 +530,6 @@
         form.addEventListener("submit", async (e) => {
             e.preventDefault();
             document.getElementById("submit").disabled = true;
-            form.disabled = true;
 
             const data = Object.fromEntries(new FormData(form).entries());
 

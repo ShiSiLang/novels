@@ -543,7 +543,7 @@
         <div class="clearfix">
           <button type="button" onclick="document.getElementById('pbmodal').style.display='none'"
             class="cancelbtn">Cancel</button>
-          <button type="submit" class="signupbtn">Upload book for review</button>
+          <button id="submitub" type="submit" class="signupbtn">Upload book for review</button>
         </div>
       </div>
     </form>
@@ -618,7 +618,7 @@
         <div class="clearfix">
           <button type="button" onclick="document.getElementById('pcmodal').style.display='none'"
             class="cancelbtn">Cancel</button>
-          <button type="submit" class="signupbtn">Upload chapter for review</button>
+          <button id="submituc" type="submit" class="signupbtn">Upload chapter for review</button>
         </div>
       </div>
     </form>
@@ -799,6 +799,7 @@
 
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
+      document.getElementById("submitub").disabled = true;
 
       const formData = new FormData(form);
 
@@ -814,17 +815,21 @@
       <strong>Success!</strong> ${successData.success}`;
         success.style.display = "block";
         alert(successData.success)
+        document.getElementById("submitub").disabled = false;
       } else {
         const errorData = await response.json();
         error.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
   ${errorData.error}`;
         error.style.display = "block";
         alert(errorData.error)
+        document.getElementById("submitub").disabled = false;
       }
     });
 
     form2.addEventListener("submit", async (e) => {
       e.preventDefault();
+      document.getElementById("submituc").disabled = true;
+
       const formData = new FormData(form2);
 
       const response = await fetch("/upload-chapter", {
@@ -839,12 +844,14 @@
       <strong>Success!</strong> ${successData.success}`;
         success.style.display = "block";
         alert(successData.success)
+        document.getElementById("submituc").disabled = false;
       } else {
         const errorData = await response.json();
         error.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
   ${errorData.error}`;
         error.style.display = "block";
         alert(errorData.error)
+        document.getElementById("submituc").disabled = false;
       }
     });
   </script>
