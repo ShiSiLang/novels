@@ -123,7 +123,10 @@ module.exports = {
           newComments.push(newComment);
         }
         newChapters[i].comments = newComments;
-        console.log(newChapters[i])
+        newChapters[i].thumbnail = `data:image/png;base64,${book.chapters[
+          i
+        ].thumbnail.toString("base64")}`;
+        console.log(newChapters[i]);
         newComments = [];
       }
 
@@ -141,7 +144,7 @@ module.exports = {
         chapter: newChapters,
       };
 
-      console.log(newBook)
+      console.log(newBook);
 
       res.send(newBook);
     }
