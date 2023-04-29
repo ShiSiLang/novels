@@ -663,7 +663,7 @@
         <div class="clearfix">
           <button type="button" onclick="document.getElementById('pmmodal').style.display='none'"
             class="cancelbtn">Cancel</button>
-          <button type="submit" class="signupbtn">Upload chapter for review</button>
+          <button id="submitum" type="submit" class="signupbtn">Upload chapter for review</button>
         </div>
       </div>
     </form>
@@ -794,6 +794,7 @@
   <script>
     const form = document.getElementById("pbForm");
     const form2 = document.getElementById("pcForm");
+    const form3 = document.getElementById("pmForm");
     const error = document.getElementById("error");
     const success = document.getElementById("success");
 
@@ -852,6 +853,35 @@
         error.style.display = "block";
         alert(errorData.error)
         document.getElementById("submituc").disabled = false;
+      }
+    });
+
+    form3.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      document.getElementById("submitum").disabled = true;
+
+      const formData = new FormData(form3);
+
+      const response = await fetch("/upload-manga", {
+        method: "POST",
+        body: formData,
+      });
+
+      if (response.ok) {
+        // Display success message here
+        const successData = await response.json();
+        success.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+      <strong>Success!</strong> ${successData.success}`;
+        success.style.display = "block";
+        alert(successData.success)
+        document.getElementById("submitum").disabled = false;
+      } else {
+        const errorData = await response.json();
+        error.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+  ${errorData.error}`;
+        error.style.display = "block";
+        alert(errorData.error)
+        document.getElementById("submitum").disabled = false;
       }
     });
   </script>

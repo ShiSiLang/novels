@@ -633,7 +633,7 @@
           <button type="button" onclick="document.getElementById('modal').style.display='none'" class="cancelbtn">
             Cancel
           </button>
-          <button type="submit" class="signupbtn">Comment</button>
+          <button id="submit" type="submit" class="signupbtn">Comment</button>
         </div>
       </div>
     </form>
@@ -672,6 +672,7 @@
 
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
+      document.getElementById("submit").disabled = true;
       const data = Object.fromEntries(new FormData(form).entries());
       const response = await fetch("/comment", {
         method: "POST",
@@ -687,11 +688,15 @@
         success.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
       <strong>Success!</strong> ${successData.success}`;
         success.style.display = "block";
+        alert(successData.success)
+        document.getElementById("submit").disabled = false;
       } else {
         const errorData = await response.json();
         error.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
   ${errorData.error}`;
         error.style.display = "block";
+        alert(errorData.error)
+        document.getElementById("submit").disabled = false;
       }
     });
   </script>

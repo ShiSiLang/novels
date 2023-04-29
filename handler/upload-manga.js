@@ -40,7 +40,8 @@ module.exports = {
       // Save the paths to the database and update the book object with the new chapter information
       // ...
     } catch (error) {
-      // Handle errors
+      console.log(error);
+      return res.status(400).json({ error: error.message });
     }
   },
 };
