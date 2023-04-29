@@ -5,7 +5,7 @@ module.exports = {
   name: "upload-manga",
   fields: [{ name: "thumbnail", maxCount: 1 }, { name: "pages" }],
   run: async (req, res) => {
-    return res.status(400).json({ error: `System currently down!` });
+    //return res.status(400).json({ error: `System currently down!` });
 
     let userObject = JSON.parse(html.user);
 
