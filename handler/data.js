@@ -124,7 +124,7 @@ module.exports = {
           newComments.comments(newComment);
           console.log(newComment);
         }
-        newChapters.comments = newComments;
+        newChapters[i].comments = newComments;
         newComments = [];
       }
 
