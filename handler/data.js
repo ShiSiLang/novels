@@ -121,7 +121,7 @@ module.exports = {
             date: getTimeDifference(comment.date),
             comment: comment.comment,
           };
-          newComments.comments(newComment);
+          newComments.push(newComment);
           console.log(newComment);
         }
         newChapters[i].comments = newComments;
