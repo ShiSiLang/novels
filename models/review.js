@@ -9,7 +9,7 @@ const reviewSchema = mongoose.Schema({
     credits: String,
     thumbnail: Buffer,
     type: String, //Novel/Manga/Webtoon
-    images: [Buffer], // Array of binary image data for manga/webtoon
+    C: [Buffer], // Array of binary image data for manga/webtoon
     novel: String, // String for novels
     replace: Boolean,
     replaceNumber: Number,

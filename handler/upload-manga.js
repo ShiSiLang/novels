@@ -9,6 +9,11 @@ module.exports = {
 
     let html = req.body;
 
+    if (!req.files)
+      return res
+        .status(400)
+        .json({ error: `Please upload an thumbnail and pages.` });
+
     let userObject = JSON.parse(html.user);
 
     let user = await profileShema.findOne({
@@ -28,19 +33,63 @@ module.exports = {
 
     try {
       // Access form data and uploaded files from req.body and req.files objects respectively
-      console.log(req.body);
       const bookName = req.body.bookName;
       const chapterType = req.body.type;
-      const chapterName = req.body.chapterName;
-      const isReplace = req.body.replace === "on";
-      const replaceNumber = req.body.replaceNumber || null;
+      const chapterName = req.body.chapterName.replace(/</g, "&lt;");
+
+      let replaceNumber = 0;
+      const replace = req.body.replace === "on";
+      if (req.body.replaceNumber > 0) replaceNumber = req.body.replaceNumber;
+
       const thumbnailPath = req.files.thumbnail[0].buffer;
       const pagesPaths = req.files.pages.map((file) => file.buffer);
-      console.log(thumbnailPath);
-      console.log(pagesPaths);
 
-      // Save the paths to the database and update the book object with the new chapter information
-      // ...
+      let newID = Date.now();
+
+      let params = {
+        content: `New pages chapter has been submitted for review.`,
+        embeds: [
+          {
+            title: bookName,
+            description: `Type: ${chapterType}, Name: ${chapterName}`,
+            footer: { text: newID },
+          },
+        ],
+        username: "New Pages Chapter Post",
+      };
+
+      await axios({
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        data: JSON.stringify(params),
+        url: webhook_url,
+      }).catch((err) => {
+        console.log(err);
+        return res.status(400).json({ error: `An error has occured.` });
+      });
+
+      let newReview = new reviewShema({
+        type: "Chapter",
+        reviewID: newID,
+        book: {
+          name: bookName,
+          author: user.id,
+        },
+        chapter: {
+          name: chapterName,
+          thumbnail: thumbnailPath,
+          type: chapterType, //Manga/Webtoon
+          images: pagesPaths,
+          replace,
+          replaceNumber,
+        },
+      }).save();
+
+      res.status(200).json({
+        success: `Successfully published for review! The Staff team will dm your results.`,
+      });
     } catch (error) {
       console.log(error);
       return res.status(400).json({ error: error.message });
