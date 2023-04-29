@@ -104,31 +104,27 @@ module.exports = {
       let book = await bookShema.findOne({ name: bookName });
       if (!book) return res.status(400).json({ error: `Not Found` });
 
-      let newChapters = [];
-      for (i = 0; i < book.chapters.length; i++) {
-        newChapters.push(book.chapters[i]);
-        let newComments = [];
-        for (i2 = 0; i2 < book.chapters[i].comments.length; i2++) {
-          let comment = book.chapters[i].comments[i2];
-          let userData = await profileShema.findOne({
-            id: comment.userID,
-          });
-          let newComment = {
-            userID: userData.id,
-            username: userData.username,
-            icon: `https://cdn.discordapp.com/avatars/${userData.id}/${userData.avatar}.png`,
-            date: getTimeDifference(comment.date),
-            comment: comment.comment,
-          };
-          newComments.push(newComment);
-        }
-        newChapters[i].comments = newComments;
-        newChapters[i].thumbnail = `data:image/png;base64,${book.chapters[
-          i
-        ].thumbnail.toString("base64")}`;
-        console.log(newChapters[i]);
-        newComments = [];
-      }
+      let newChapters = book.chapters.map((v) => {
+        let newComments = Promise.all(
+          v.comments.map(async (c) => {
+            let comment = c;
+            let userData = await profileShema.findOne({
+              id: comment.userID,
+            });
+            return {
+              userID: userData.id,
+              username: userData.username,
+              icon: `https://cdn.discordapp.com/avatars/${userData.id}/${userData.avatar}.png`,
+              date: getTimeDifference(comment.date),
+              comment: comment.comment,
+            };
+          })
+        );
+        v.comments = newComments;
+        v.thumbnail = `data:image/png;base64,${v.thumbnail.toString("base64")}`;
+        console.log(v);
+        return v;
+      });
 
       let newBook = {
         name: book.name,
