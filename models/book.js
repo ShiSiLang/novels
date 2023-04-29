@@ -30,6 +30,6 @@ const bookSchema = mongoose.Schema({
   status: String,
   published: String,
   views: { type: Number, default: 0 },
-});
+}, { typeKey: '$type' });
 
 module.exports = mongoose.model("book", bookSchema);
