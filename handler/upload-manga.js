@@ -7,6 +7,8 @@ module.exports = {
   run: async (req, res) => {
     //return res.status(400).json({ error: `System currently down!` });
 
+    let html = req.body;
+
     let userObject = JSON.parse(html.user);
 
     let user = await profileShema.findOne({
