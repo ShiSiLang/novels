@@ -50,10 +50,16 @@ module.exports = {
 
       res.send(file);
 
-      console.log(book.views);
+      console.log((book.views += 1));
 
-      book.views = Number(book.views) += 1;
-      await book.save();
+      await books.findOneAndUpdate(
+        { name: book.name },
+        {
+          $inc: {
+            views: 1,
+          },
+        }
+      );
     } catch (err) {
       console.log(err);
     }
