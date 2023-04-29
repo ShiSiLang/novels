@@ -104,35 +104,39 @@ module.exports = {
       let book = await bookShema.findOne({ name: bookName });
       if (!book) return res.status(400).json({ error: `Not Found` });
 
-      let newChapters = book.chapters.map((v) => {
-        let newComments = Promise.all(
-          v.comments.map(async (c) => {
-            let comment = c;
-            let userData = await profileShema.findOne({
-              id: comment.userID,
-            });
-            return {
-              userID: userData.id,
-              username: userData.username,
-              icon: `https://cdn.discordapp.com/avatars/${userData.id}/${userData.avatar}.png`,
-              date: getTimeDifference(comment.date),
-              comment: comment.comment,
-            };
-          })
-        );
+      let newChapters = await Promise.all(
+        book.chapters.map(async (v) => {
+          let newComments = await Promise.all(
+            v.comments.map(async (c) => {
+              let comment = c;
+              let userData = await profileShema.findOne({
+                id: comment.userID,
+              });
+              return {
+                userID: userData.id,
+                username: userData.username,
+                icon: `https://cdn.discordapp.com/avatars/${userData.id}/${userData.avatar}.png`,
+                date: getTimeDifference(comment.date),
+                comment: comment.comment,
+              };
+            })
+          );
 
-        let newOBJ = {
-          name: v.name,
-          intro: v.intro,
-          credits: v.credits,
-          thumbnail: `data:image/png;base64,${v.thumbnail.toString("base64")}`,
-          type: v.type,
-          images: v.images,
-          novel: v.novel,
-          comments: newComments,
-        };
-        return newOBJ;
-      });
+          let newOBJ = {
+            name: v.name,
+            intro: v.intro,
+            credits: v.credits,
+            thumbnail: `data:image/png;base64,${v.thumbnail.toString(
+              "base64"
+            )}`,
+            type: v.type,
+            images: v.images,
+            novel: v.novel,
+            comments: newComments,
+          };
+          return newOBJ;
+        })
+      );
 
       let newBook = {
         name: book.name,
