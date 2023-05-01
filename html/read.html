@@ -451,20 +451,20 @@
       const div3 = document.getElementById("comments");
       const div4 = document.getElementById("commentstitle");
 
+      function formatString(content) {
+        let step1 = content
+          .split(" ")
+          .join(" ")
+          .replaceAll("\n", "</br>")
+          .replaceAll("\n\n", "</br></br>");
+        let step2 = step1.replaceAll(/\*\*(.*?)\*\*/g, "<b>$1</b>");
+        let step3 = step2.replaceAll(/\*(.*?)\*/g, "<em>$1</em>");
+        let step4 = step3.replaceAll(/\_(.*?)\_/g, "<ins>$1</ins>");
+        return step4;
+      }
+
       if (json.chapters[index].type === "Novel") {
         let novelContent = json.chapters[index].novel;
-
-        function formatString(content) {
-          let step1 = content
-            .split(" ")
-            .join(" ")
-            .replaceAll("\n", "</br>")
-            .replaceAll("\n\n", "</br></br>");
-          let step2 = step1.replaceAll(/\*\*(.*?)\*\*/g, "<b>$1</b>");
-          let step3 = step2.replaceAll(/\*(.*?)\*/g, "<em>$1</em>");
-          let step4 = step3.replaceAll(/\_(.*?)\_/g, "<ins>$1</ins>");
-          return step4;
-        }
 
         novelContent = formatString(novelContent);
 
@@ -477,13 +477,20 @@
           <h1>Credits</h1>
           <p>${formatString(json.chapters[index].credits)}</p>
           `;
-        if (json.chapters[index]?.comments.length === 0) {
-          div4.innerHTML = `
+      }
+
+      if (json.chapters[index].type === "Manga") { }
+
+      if (json.chapters[index].type === "Webtoon") { }
+
+      //Comments
+      if (json.chapters[index]?.comments.length === 0) {
+        div4.innerHTML = `
             <p>No comments for this chapter</p>`;
-        } else {
-          for (let i = 0; i < json.chapters[index].comments.length; i++) {
-            let chapter = json.chapters[index];
-            div3.innerHTML += `<div class="comment">
+      } else {
+        for (let i = 0; i < json.chapters[index].comments.length; i++) {
+          let chapter = json.chapters[index];
+          div3.innerHTML += `<div class="comment">
     <div class="pfp-container">
       <img class="pfp" src="${chapter.comments[i].icon}" alt="Avatar">
     </div>
@@ -493,7 +500,6 @@
       <p class="comment-text">${chapter.comments[i].comment}</p>
     </div>
   </div>`;
-          }
         }
       }
     } catch (err) {
@@ -628,6 +634,10 @@
         <input type="hidden" name="chapter" value="$$chapter$$" />
 
         <textarea rows="4" cols="50" name="comment" form="commentForm" required></textarea>
+
+        <label>
+          <input type="checkbox" name="spoiler" style="margin-bottom:15px"> Spoiler
+        </label>
 
         <div class="clearfix">
           <button type="button" onclick="document.getElementById('modal').style.display='none'" class="cancelbtn">
