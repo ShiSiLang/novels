@@ -167,6 +167,37 @@
     margin-right: 5px;
   }
 
+  .slider {
+    margin: 10px;
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: scroll;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-inline: contain;
+  }
+
+  .slider img {
+    max-height: 300px;
+    margin-right: 5px;
+  }
+
+  .webtoons {
+    display: flex;
+    flex-direction: column;
+    height: 300px;
+    overflow-y: scroll;
+  }
+
+  .slide {
+    flex-shrink: 0;
+    width: 100%;
+    margin-bottom: 5px;
+  }
+
+  .slide img {
+    max-width: 100%;
+  }
+
   .text h1,
   h2,
   p {
@@ -433,8 +464,9 @@
 </style>
 <script type="text/javascript">
   async function changeDivContent() {
+    const div = document.getElementById("content");
     try {
-      let response = await fetch($$novel$$);
+      let response = await fetch($$data$$);
       let json = await response.json();
       let index = Number("$$previous$$");
 
@@ -446,7 +478,6 @@
         const nextButton = document.getElementById("nextButton");
         nextButton.style.display = "none";
       }
-      const div = document.getElementById("novel");
       const div2 = document.getElementById("credits");
       const div3 = document.getElementById("comments");
       const div4 = document.getElementById("commentstitle");
@@ -464,6 +495,7 @@
       }
 
       if (json.chapters[index].type === "Novel") {
+        div.className = 'text text-novel';
         let novelContent = json.chapters[index].novel;
 
         novelContent = formatString(novelContent);
@@ -479,9 +511,27 @@
           `;
       }
 
-      if (json.chapters[index].type === "Manga") { }
+      if (json.chapters[index].type === "Manga") {
+        div.className = 'slider snaps-inline';
+        console.log(json.chapters[index])
+        for (let i = 0; i < json.chapters[index].images.length; i++) {
+          const element = json.chapters[index].images[i];
+          let img = `data:image/png;base64,${element.toString("base64")}`
+          div.innerHTML += `<img src="${img}" alt="Page ${i}">`;
+        }
+      }
 
-      if (json.chapters[index].type === "Webtoon") { }
+      if (json.chapters[index].type === "Webtoon") {
+        div.className = 'webtoons snaps-inline';
+        console.log(json.chapters[index])
+        for (let i = 0; i < json.chapters[index].images.length; i++) {
+          const element = json.chapters[index].images[i];
+          let img = `data:image/png;base64,${element.toString("base64")}`
+          div.innerHTML += `<div class="slide">
+      <img src="${img}" alt="Page ${i}">
+    </div>`;
+        }
+      }
 
       //Comments
       if (json.chapters[index]?.comments.length === 0) {
@@ -504,7 +554,7 @@
       }
     } catch (err) {
       console.log(err);
-      const div = document.getElementById("novel");
+      div.className = 'text text-novel';
       div.innerHTML += `<h1>Chapter not found.</h1>`;
     }
   }
@@ -571,7 +621,7 @@
     </button>
   </div>
 
-  <div class="text text-novel" id="novel"></div>
+  <div id="content"></div>
 
   <div class="flex">
     <button id="previousButton" class="pnButtons" style="width:auto;"

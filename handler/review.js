@@ -72,8 +72,6 @@ module.exports = {
         } else if (data.type === "Manga" || data.type === "Webtoon") {
           bookData.chapters.push({
             name: data.name,
-            intro: data.intro,
-            credits: data.credits,
             thumbnail: data.thumbnail,
             type: data.type,
             images: data.images,

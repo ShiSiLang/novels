@@ -25,7 +25,7 @@ module.exports = {
       let j = { icon: `data:image/png;base64,${book.icon.toString("base64")}` };
 
       file = file.replaceAll(
-        "$$novel$$",
+        "$$data$$",
         `'https://novels-production.up.railway.app/data/book/${book.name}'`
       );
       file = file.replaceAll("$$book$$", book.name);
