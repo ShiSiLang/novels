@@ -28,6 +28,10 @@ module.exports = {
     file = file.replaceAll("$$desc$$", book.description);
     file = file.replaceAll("$$authorID$$", book.author);
     file = file.replaceAll("$$author$$", user.username);
+
+    file = file.replaceAll("$$tags$$", book.tags.join(", "));
+    
+
     file = file.replaceAll("$$icon$$", book.icon);
     file = file.replaceAll("$$views$$", book.views);
     file = file.replaceAll("$$status$$", book.status);
