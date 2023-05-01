@@ -103,7 +103,7 @@ module.exports = {
         url.searchParams.append("email", email);
         url.searchParams.append("password", data.password);
         url.searchParams.append("ok", true);
-        
+
         return res.status(200).redirect(url);
       }
 

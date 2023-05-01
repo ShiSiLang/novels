@@ -3,17 +3,15 @@ const profileShema = require("../models/profiles");
 module.exports = {
   name: "follow-profile",
   run: async (req, res) => {
-    return res.status(400).json({ error: `System currently down!` });
+    //return res.status(400).json({ error: `System currently down!` });
 
     let html = req.body;
 
-    let userObject = JSON.parse(html.user);
-
     let user = await profileShema.findOne({
-      username: userObject.username,
-      id: userObject.id,
-      email: userObject.email,
-      password: userObject.password,
+      username: html.username,
+      id: html.id,
+      email: html.email,
+      password: html.password,
     });
 
     if (!user)
