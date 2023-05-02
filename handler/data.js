@@ -11,7 +11,24 @@ module.exports = {
     let type = req.params.type.toLowerCase();
     if (type === "profiles") {
       let data = await profileShema.find().sort({ username: 1 });
-      let newObj = data.map((v) => v.username);
+      let newObj = data.map((v) => v.id);
+      res.send(newObj);
+    }
+    if (type === "profile") {
+      let id = req.params.other;
+      if (!id) return res.status(400).json({ error: `Please provide an id` });
+      let data = await profileShema.findOne({ id: id });
+      if (!data) return res.status(400).json({ error: `Not found.` });
+
+      let newObj = {
+        username: data.username,
+        id: data.id,
+        avatar: data.avatar,
+        banner: data.banner,
+        author: data.author,
+        books: data.books,
+      };
+
       res.send(newObj);
     }
     if (type === "profilebooks") {

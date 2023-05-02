@@ -764,10 +764,14 @@ ${errorData.error}`;
                 "https://novels-production.up.railway.app/data/profiles/null"
             );
             let json = await response.json();
-            emptyArray = json.filter((data) => {
+            emptyArray = json.filter(async (data) => {
+                let url = await fetch(
+                    `https://novels-production.up.railway.app/data/profile/${data}`
+                );
+                let user = await url.json();
                 return data
                     .toLocaleLowerCase()
-                    .startsWith(userData.toLocaleLowerCase());
+                    .startsWith(user.username.toLocaleLowerCase());
             });
             emptyArray = emptyArray.map((data) => {
                 return (data = `<li>${data}</li>`);
