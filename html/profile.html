@@ -744,6 +744,7 @@ ${errorData.error}`;
     </script>
 </body>
 <script>
+    <script>
     const searchWrapper = document.querySelector(".search-input");
     const inputBox = searchWrapper.querySelector("input");
     const suggBox = searchWrapper.querySelector(".autocom-box");
@@ -769,13 +770,13 @@ ${errorData.error}`;
                     `https://novels-production.up.railway.app/data/profile/${data}`
                 );
                 let user = await url.json();
-                return data
+                return user.username
                     .toLocaleLowerCase()
-                    .startsWith(user.username.toLocaleLowerCase());
+                    .startsWith(userData.toLocaleLowerCase());
             });
-alert(JSON.stringify(emptyArray))
             emptyArray = emptyArray.map((data) => {
-                return (data = `<li>${data}</li>`);
+                let url = `https://novels-production.up.railway.app/profile/${data}`;
+                return `<li><a href="${url}">${data}</a></li>`;
             });
             searchWrapper.classList.add("active");
             showSuggestions(emptyArray);
@@ -809,6 +810,8 @@ alert(JSON.stringify(emptyArray))
         }
         suggBox.innerHTML = listData;
     }
+</script>
+
 </script>
 
 <script>
