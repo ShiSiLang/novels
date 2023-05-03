@@ -327,6 +327,23 @@
     }
 
     /*Search Bar End*/
+
+    #myBtn {
+        display: none;
+        position: fixed;
+        bottom: 20px;
+        right: 30px;
+        z-index: 99;
+        border: none;
+        outline: none;
+        background-color: #ac86b3;
+        color: #FFFFFF;
+        cursor: pointer;
+        padding: 14px 28px;
+        font-size: 16px;
+        font-weight: bold;
+        border-radius: 16px;
+    }
 </style>
 <script type="text/javascript">
     async function changeDivContent() {
@@ -364,6 +381,9 @@
 </script>
 
 <body onload="changeDivContent()">
+
+    <button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+
     <div class="topnav">
         <a href="/home">Home</a>
         <a class="active" href="/explore">Explore</a>
@@ -441,68 +461,85 @@
             </div>
         </div>
     </footer>
-</body>
-<script>
-    const searchWrapper = document.querySelector(".search-input");
-    const inputBox = searchWrapper.querySelector("input");
-    const suggBox = searchWrapper.querySelector(".autocom-box");
-    const icon = searchWrapper.querySelector(".icon");
-    let linkTag = searchWrapper.querySelector("a");
-    let webLink;
+    <script>
+        const searchWrapper = document.querySelector(".search-input");
+        const inputBox = searchWrapper.querySelector("input");
+        const suggBox = searchWrapper.querySelector(".autocom-box");
+        const icon = searchWrapper.querySelector(".icon");
+        let linkTag = searchWrapper.querySelector("a");
+        let webLink;
 
-    inputBox.onkeyup = async (e) => {
-        let userData = e.target.value;
-        let emptyArray = [];
-        if (userData) {
+        inputBox.onkeyup = async (e) => {
+            let userData = e.target.value;
+            let emptyArray = [];
+            if (userData) {
+                icon.onclick = () => {
+                    webLink = `https://novels-production.up.railway.app/explore/${userData}`;
+                    linkTag.setAttribute("href", webLink);
+                    linkTag.click();
+                };
+                let response = await fetch(
+                    "https://novels-production.up.railway.app/data/books/null"
+                );
+                let json = await response.json();
+                emptyArray = json.filter((data) => {
+                    return data.name
+                        .toLocaleLowerCase()
+                        .startsWith(userData.toLocaleLowerCase());
+                });
+                emptyArray = emptyArray.map((data) => {
+                    return (data = `<li>${data.name}</li>`);
+                });
+                searchWrapper.classList.add("active");
+                showSuggestions(emptyArray);
+                let allList = suggBox.querySelectorAll("li");
+                for (let i = 0; i < allList.length; i++) {
+                    allList[i].setAttribute("onclick", "select(this)");
+                }
+            } else {
+                searchWrapper.classList.remove("active");
+            }
+        };
+
+        function select(element) {
+            let selectData = element.textContent;
+            inputBox.value = selectData;
             icon.onclick = () => {
-                webLink = `https://novels-production.up.railway.app/explore/${userData}`;
+                webLink = `https://novels-production.up.railway.app/explore/${selectData}`;
                 linkTag.setAttribute("href", webLink);
                 linkTag.click();
             };
-            let response = await fetch(
-                "https://novels-production.up.railway.app/data/books/null"
-            );
-            let json = await response.json();
-            emptyArray = json.filter((data) => {
-                return data.name
-                    .toLocaleLowerCase()
-                    .startsWith(userData.toLocaleLowerCase());
-            });
-            emptyArray = emptyArray.map((data) => {
-                return (data = `<li>${data.name}</li>`);
-            });
-            searchWrapper.classList.add("active");
-            showSuggestions(emptyArray);
-            let allList = suggBox.querySelectorAll("li");
-            for (let i = 0; i < allList.length; i++) {
-                allList[i].setAttribute("onclick", "select(this)");
-            }
-        } else {
             searchWrapper.classList.remove("active");
         }
-    };
 
-    function select(element) {
-        let selectData = element.textContent;
-        inputBox.value = selectData;
-        icon.onclick = () => {
-            webLink = `https://novels-production.up.railway.app/explore/${selectData}`;
-            linkTag.setAttribute("href", webLink);
-            linkTag.click();
-        };
-        searchWrapper.classList.remove("active");
-    }
-
-    function showSuggestions(list) {
-        let listData;
-        if (!list.length) {
-            userValue = inputBox.value;
-            listData = `<li>${userValue}</li>`;
-        } else {
-            listData = list.join("");
+        function showSuggestions(list) {
+            let listData;
+            if (!list.length) {
+                userValue = inputBox.value;
+                listData = `<li>${userValue}</li>`;
+            } else {
+                listData = list.join("");
+            }
+            suggBox.innerHTML = listData;
         }
-        suggBox.innerHTML = listData;
-    }
-</script>
+    </script>
+
+    <script>
+        let mybutton = document.getElementById("myBtn");
+        window.onscroll = function () { scrollFunction() };
+
+        function scrollFunction() {
+            if (document.body.scrollTop > 500 || document.documentElement.scrollTop > 500) {
+                mybutton.style.display = "block";
+            } else {
+                mybutton.style.display = "none";
+            }
+        }
+        function topFunction() {
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+        }
+    </script>
+</body>
 
 </html>
