@@ -509,9 +509,7 @@
           <h1>Credits</h1>
           <p>${formatString(json.chapters[index].credits)}</p>
           `;
-      }
-
-      if (json.chapters[index].type === "Manga") {
+      } else if (json.chapters[index].type === "Manga") {
         div.className = 'slider snaps-inline';
         console.log(json.chapters[index])
         for (let i = 0; i < json.chapters[index].images.length; i++) {
@@ -519,9 +517,7 @@
           let img = `data:image/png;base64,${element.toString("base64")}`
           div.innerHTML += `<img src="${img}" alt="Page ${i}">`;
         }
-      }
-
-      if (json.chapters[index].type === "Webtoon") {
+      } else if (json.chapters[index].type === "Webtoon") {
         div.className = 'webtoons snaps-inline';
         console.log(json.chapters[index])
         for (let i = 0; i < json.chapters[index].images.length; i++) {
@@ -541,15 +537,15 @@
         for (let i = 0; i < json.chapters[index].comments.length; i++) {
           let chapter = json.chapters[index];
           div3.innerHTML += `<div class="comment">
-    <div class="pfp-container">
-      <img class="pfp" src="${chapter.comments[i].icon}" alt="Avatar">
-    </div>
-    <div class="comment-content">
-      <h4 class="commenter-name">${chapter.comments[i].username}</h4>
-      <span class="comment-date">${chapter.comments[i].date}</span>
-      <p class="comment-text">${chapter.comments[i].comment}</p>
-    </div>
-  </div>`;
+            <div class="pfp-container">
+              <img class="pfp" src="${chapter.comments[i].icon}" alt="Avatar">
+              </div>
+              <div class="comment-content">
+                <h4 class="commenter-name">${chapter.comments[i].username}</h4>
+                <span class="comment-date">${chapter.comments[i].date}</span>
+                <p class="comment-text">${chapter.comments[i].comment}</p>
+                </div>
+                </div>`;
         }
       }
     } catch (err) {
