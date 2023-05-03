@@ -135,6 +135,7 @@ module.exports = {
                 icon: `https://cdn.discordapp.com/avatars/${userData.id}/${userData.avatar}.png`,
                 date: getTimeDifference(comment.date),
                 comment: comment.comment,
+                spoiler: comment?.spoiler === true ? true : false,
               };
             })
           );

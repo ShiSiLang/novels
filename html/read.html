@@ -292,9 +292,13 @@
     font-size: 16px;
   }
 
-  .reply-link {
-    color: #956a9d;
-    font-weight: bold;
+  .spoiler {
+    color: black;
+    background-color: black;
+  }
+
+  .spoiler:hover {
+    background-color: white;
   }
 
   @media screen and (max-width: 600px) {
@@ -543,7 +547,7 @@
               <div class="comment-content">
                 <h4 class="commenter-name">${chapter.comments[i].username}</h4>
                 <span class="comment-date">${chapter.comments[i].date}</span>
-                <p class="comment-text">${chapter.comments[i].comment}</p>
+                <p class="comment-text">${chapter.comments[i].spoiler === true ? `<span class="spoiler"> ${chapter.comments[i].comment} </span>` : chapter.comments[i].comment}</p>
                 </div>
                 </div>`;
         }
