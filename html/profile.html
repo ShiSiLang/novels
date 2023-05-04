@@ -802,11 +802,8 @@ ${errorData.error}`;
                 });
 
                 emptyArray = emptyArray.map((data) => {
-
                     let url = `https://novels-production.up.railway.app/profile/${data}`;
-
                     let username = emptyArray.find(user => user === data);
-
                     return `<li>${username}</li>`;
 
                 });
