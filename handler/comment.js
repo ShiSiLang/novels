@@ -7,7 +7,7 @@ module.exports = {
     //return res.status(400).json({ error: `System currently down!` });
 
     let html = req.body.data;
-
+console.log(html)
     let bookData = await bookShema.findOne({ name: html.book });
 
     if (!bookData)
