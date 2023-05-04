@@ -742,34 +742,106 @@ ${errorData.error}`;
             }
         };
     </script>
-</body>
-    
 
-  <script>
+    <script>
 
-    const searchWrapper = document.querySelector(".search-input");
+        const searchWrapper = document.querySelector(".search-input");
 
-    const inputBox = searchWrapper.querySelector("input");
+        const inputBox = searchWrapper.querySelector("input");
 
-    const suggBox = searchWrapper.querySelector(".autocom-box");
+        const suggBox = searchWrapper.querySelector(".autocom-box");
 
-    const icon = searchWrapper.querySelector(".icon");
+        const icon = searchWrapper.querySelector(".icon");
 
-    let linkTag = searchWrapper.querySelector("a");
+        let linkTag = searchWrapper.querySelector("a");
 
-    let webLink;
+        let webLink;
 
-    inputBox.onkeyup = async (e) => {
+        inputBox.onkeyup = async (e) => {
 
-        let userData = e.target.value;
+            let userData = e.target.value;
 
-        let emptyArray = [];
+            let emptyArray = [];
 
-        if (userData) {
+            if (userData) {
+
+                icon.onclick = () => {
+
+                    webLink = `https://novels-production.up.railway.app/profile/${userData}`;
+
+                    linkTag.setAttribute("href", webLink);
+
+                    linkTag.click();
+
+                };
+
+                let response = await fetch(
+
+                    "https://novels-production.up.railway.app/data/profiles/null"
+
+                );
+
+                let json = await response.json();
+
+                emptyArray = json.filter(async (data) => {
+
+                    let url = await fetch(
+
+                        `https://novels-production.up.railway.app/data/profile/${data}`
+
+                    );
+
+                    let user = await url.json();
+
+                    return data
+
+                        .toLocaleLowerCase()
+
+                        .startsWith(user.username.toLocaleLowerCase());
+
+                });
+
+                emptyArray = emptyArray.map((data) => {
+
+                    let url = `https://novels-production.up.railway.app/profile/${data}`;
+
+                    let username = emptyArray.find(user => user === data);
+
+                    return `<li>${username}</li>`;
+
+                });
+
+                searchWrapper.classList.add("active");
+
+                showSuggestions(emptyArray);
+
+                let allList = suggBox.querySelectorAll("li");
+
+                for (let i = 0; i < allList.length; i++) {
+
+                    allList[i].setAttribute("onclick", "select(this)");
+
+                }
+
+            } else {
+
+                searchWrapper.classList.remove("active");
+
+            }
+
+        };
+
+        function select(element) {
+
+            let selectData = element.textContent;
+
+            let url = `https://novels-production.up.railway.app/profile/${selectData}`;
+
+            inputBox.value = selectData;
 
             icon.onclick = () => {
 
-                webLink = `https://novels-production.up.railway.app/profile/${userData}`;
+                webLink = url;
 
                 linkTag.setAttribute("href", webLink);
 
@@ -777,137 +849,61 @@ ${errorData.error}`;
 
             };
 
-            let response = await fetch(
-
-                "https://novels-production.up.railway.app/data/profiles/null"
-
-            );
-
-            let json = await response.json();
-
-            emptyArray = json.filter(async (data) => {
-
-                let url = await fetch(
-
-                    `https://novels-production.up.railway.app/data/profile/${data}`
-
-                );
-
-                let user = await url.json();
-
-                return data
-
-                    .toLocaleLowerCase()
-
-                    .startsWith(user.username.toLocaleLowerCase());
-
-            });
-
-            emptyArray = emptyArray.map((data) => {
-
-                let url = `https://novels-production.up.railway.app/profile/${data}`;
-
-                let username = emptyArray.find(user => user === data);
-
-                return `<li>${username}</li>`;
-
-            });
-
-            searchWrapper.classList.add("active");
-
-            showSuggestions(emptyArray);
-
-            let allList = suggBox.querySelectorAll("li");
-
-            for (let i = 0; i < allList.length; i++) {
-
-                allList[i].setAttribute("onclick", "select(this)");
-
-            }
-
-        } else {
-
             searchWrapper.classList.remove("active");
 
         }
 
-    };
+        function showSuggestions(list) {
 
-    function select(element) {
+            let listData;
 
-        let selectData = element.textContent;
+            if (!list.length) {
 
-        let url = `https://novels-production.up.railway.app/profile/${selectData}`;
+                userValue = inputBox.value;
 
-        inputBox.value = selectData;
+                listData = `<li>${userValue}</li>`;
 
-        icon.onclick = () => {
+            } else {
 
-            webLink = url;
+                listData = list.join("");
 
-            linkTag.setAttribute("href", webLink);
+            }
 
-            linkTag.click();
-
-        };
-
-        searchWrapper.classList.remove("active");
-
-    }
-
-    function showSuggestions(list) {
-
-        let listData;
-
-        if (!list.length) {
-
-            userValue = inputBox.value;
-
-            listData = `<li>${userValue}</li>`;
-
-        } else {
-
-            listData = list.join("");
+            suggBox.innerHTML = listData;
 
         }
 
-        suggBox.innerHTML = listData;
+    </script>
 
-    }
+    <script>
+        const form = document.getElementById("FormEdit");
+        const error = document.getElementById("error");
+        const success = document.getElementById("success");
 
-</script>
+        form.addEventListener("submit", async (e) => {
+            e.preventDefault();
 
-  
+            const formData = new FormData(form);
 
+            const response = await fetch("/edit-profile", {
+                method: "POST",
+                body: formData,
+            });
 
-<script>
-    const form = document.getElementById("FormEdit");
-    const error = document.getElementById("error");
-    const success = document.getElementById("success");
-
-    form.addEventListener("submit", async (e) => {
-        e.preventDefault();
-
-        const formData = new FormData(form);
-
-        const response = await fetch("/edit-profile", {
-            method: "POST",
-            body: formData,
-        });
-
-        if (response.ok) {
-            // Display success message here
-            const successData = await response.json();
-            success.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+            if (response.ok) {
+                // Display success message here
+                const successData = await response.json();
+                success.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
         <strong>Success!</strong> ${successData.success}`;
-            success.style.display = "block";
-        } else {
-            const errorData = await response.json();
-            error.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                success.style.display = "block";
+            } else {
+                const errorData = await response.json();
+                error.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
     ${errorData.error}`;
-            error.style.display = "block";
-        }
-    });
-</script>
+                error.style.display = "block";
+            }
+        });
+    </script>
+</body>
 
 </html>
