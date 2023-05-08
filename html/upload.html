@@ -536,6 +536,19 @@
           <option value="romance">Romance</option>
           <option value="thriller">Thriller</option>
           <option value="mystery">Mystery</option>
+          <option value="gore">Gore</option>
+          <option value="manga">Manga</option>
+          <option value="novel">Novel</option>
+          <option value="webtoons">Webtoon</option>
+          <option value="horror">Horror</option>
+          <option value="supernatural">Supernatural</option>
+          <option value="action">Action</option>
+          <option value="historical">Historical</option>
+          <option value="mecha">Mecha</option>
+          <option value="tragedy">Tragedy</option>
+          <option value="psychological">Psychological</option>
+          <option value="school life">School Life</option>
+          <option value="comedy">Comedy</option>
         </select>
 
         <div class="selected-tags"></div>
@@ -548,33 +561,6 @@
       </div>
     </form>
   </div>
-
-  <script>
-    const selectEl = document.querySelector('select[name="tags"]');
-    const selectedTagsEl = document.querySelector('.selected-tags');
-
-    selectEl.addEventListener('change', (event) => {
-      const selectedOptions = Array.from(selectEl.selectedOptions);
-      const selectedTags = selectedOptions.map(option => option.value);
-
-      selectedTagsEl.innerHTML = '';
-      selectedTags.forEach(tag => {
-        const tagEl = document.createElement('div');
-        tagEl.classList.add('selected-tag');
-        tagEl.innerHTML = `<span>${tag}</span><button data-tag="${tag}">&times;</button>`;
-        selectedTagsEl.appendChild(tagEl);
-      });
-    });
-
-    selectedTagsEl.addEventListener('click', (event) => {
-      if (event.target.tagName === 'BUTTON') {
-        const tag = event.target.dataset.tag;
-        const option = selectEl.querySelector(`option[value="${tag}"]`);
-        option.selected = false;
-        event.target.parentElement.remove();
-      }
-    });
-  </script>
 
   <div id="pcmodal" class="modal">
     <span onclick="document.getElementById('pcmodal').style.display='none'" class="close"
@@ -689,6 +675,30 @@
         <label for="icon"><b>Book Icon</b></label>
         <input type="file" id="icon" name="icon" accept=".jpg, .jpeg, .png" required />
 
+        <label for="tags"><b>Tags</b></label>
+        <select id="tags" name="tags" multiple>
+          <option value="fantasy">Fantasy</option>
+          <option value="sci-fi">Sci-fi</option>
+          <option value="romance">Romance</option>
+          <option value="thriller">Thriller</option>
+          <option value="mystery">Mystery</option>
+          <option value="gore">Gore</option>
+          <option value="manga">Manga</option>
+          <option value="novel">Novel</option>
+          <option value="webtoons">Webtoon</option>
+          <option value="horror">Horror</option>
+          <option value="supernatural">Supernatural</option>
+          <option value="action">Action</option>
+          <option value="historical">Historical</option>
+          <option value="mecha">Mecha</option>
+          <option value="tragedy">Tragedy</option>
+          <option value="psychological">Psychological</option>
+          <option value="school life">School Life</option>
+          <option value="comedy">Comedy</option>
+        </select>
+
+        <div class="selected-tags"></div>
+
         <label>
           <input type="checkbox" checked="checked" name="ongoing" style="margin-bottom:15px"> Is the book ongoing?
         </label>
@@ -701,6 +711,33 @@
       </div>
     </form>
   </div>
+
+  <script>
+    const selectEl = document.querySelector('select[name="tags"]');
+    const selectedTagsEl = document.querySelector('.selected-tags');
+
+    selectEl.addEventListener('change', (event) => {
+      const selectedOptions = Array.from(selectEl.selectedOptions);
+      const selectedTags = selectedOptions.map(option => option.value);
+
+      selectedTagsEl.innerHTML = '';
+      selectedTags.forEach(tag => {
+        const tagEl = document.createElement('div');
+        tagEl.classList.add('selected-tag');
+        tagEl.innerHTML = `<span>${tag}</span><button data-tag="${tag}">&times;</button>`;
+        selectedTagsEl.appendChild(tagEl);
+      });
+    });
+
+    selectedTagsEl.addEventListener('click', (event) => {
+      if (event.target.tagName === 'BUTTON') {
+        const tag = event.target.dataset.tag;
+        const option = selectEl.querySelector(`option[value="${tag}"]`);
+        option.selected = false;
+        event.target.parentElement.remove();
+      }
+    });
+  </script>
 
   <script>
     if (typeof Storage !== "undefined") {
