@@ -14,6 +14,7 @@ module.exports = {
       let newObj = data.map((v) => v.id);
       res.send(newObj);
     }
+
     if (type === "profile") {
       let id = req.params.other;
       if (!id) return res.status(400).json({ error: `Please provide an id` });

@@ -604,17 +604,6 @@
 
     <div id="myBooks" class="media-scroller snaps-inline"></div>
 
-    <div class="wrapper">
-        <div class="search-input">
-            <a href="" hidden></a>
-            <input type="text" placeholder="Search Profiles" />
-            <div class="autocom-box">
-                <!-- here list are inserted from javascript -->
-            </div>
-            <div class="icon"><i class="fa fa-search"></i></div>
-        </div>
-    </div>
-
     <script>
         myBooks();
         async function myBooks() {
@@ -741,83 +730,6 @@ ${errorData.error}`;
                 modal.style.display = "none";
             }
         };
-    </script>
-
-    <script>
-        const searchWrapper = document.querySelector(".search-input");
-        const inputBox = searchWrapper.querySelector("input");
-        const suggBox = searchWrapper.querySelector(".autocom-box");
-        const icon = searchWrapper.querySelector(".icon");
-        let linkTag = searchWrapper.querySelector("a");
-        let webLink;
-
-        inputBox.onkeyup = async (e) => {
-            let userData = e.target.value;
-            let emptyArray = [];
-            if (userData) {
-                icon.onclick = () => {
-                    webLink = `https://novels-production.up.railway.app/profile/${userData}`;
-                    linkTag.setAttribute("href", webLink);
-                    linkTag.click();
-                };
-
-                let response = await fetch(
-                    "https://novels-production.up.railway.app/data/profiles/null"
-                );
-
-                let json = await response.json();
-                emptyArray = json.filter(async (data) => {
-                    let url = await fetch(
-                        `https://novels-production.up.railway.app/data/profile/${data}`
-                    );
-
-                    let user = await url.json();
-                    return data
-                        .toLocaleLowerCase()
-                        .startsWith(user.username.toLocaleLowerCase());
-                });
-
-                emptyArray = emptyArray.map((data) => {
-                    let url = `https://novels-production.up.railway.app/profile/${data}`;
-                    let username = emptyArray.find(user => user === data);
-                    return `<li>${username}</li>`;
-                });
-                searchWrapper.classList.add("active");
-                showSuggestions(emptyArray);
-                let allList = suggBox.querySelectorAll("li");
-
-                for (let i = 0; i < allList.length; i++) {
-                    allList[i].setAttribute("onclick", "select(this)");
-                }
-            } else {
-                searchWrapper.classList.remove("active");
-            }
-        };
-
-        function select(element) {
-            let selectData = element.textContent;
-            let url = `https://novels-production.up.railway.app/profile/${selectData}`;
-            inputBox.value = selectData;
-            icon.onclick = () => {
-                webLink = url;
-                linkTag.setAttribute("href", webLink);
-                linkTag.click();
-            };
-
-            searchWrapper.classList.remove("active");
-        }
-
-        function showSuggestions(list) {
-            let listData;
-            if (!list.length) {
-                userValue = inputBox.value;
-                listData = `<li>${userValue}</li>`;
-            } else {
-                listData = list.join("");
-            }
-
-            suggBox.innerHTML = listData;
-        }
     </script>
 
     <script>
