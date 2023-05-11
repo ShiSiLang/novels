@@ -512,7 +512,7 @@
         <strong>Success!</strong> Yay.
     </div>
 
-    <footer>
+    <footer id="footer">
         <div class="footer-content">
             <h1>Copyright © 2023 LonelyBall Media</h1>
             <div class="socials">
@@ -521,6 +521,22 @@
             </div>
         </div>
     </footer>
+
+    <script>
+        if (typeof Storage !== "undefined") {
+            if (localStorage.user) {
+                let data = JSON.parse(localStorage.user);
+                if (data.mode === "Dark Mode") {
+                    document.body.style.backgroundColor = "#0f0e0b";
+                    const topnav = document.querySelector(".topnav");
+                    const footer = document.getElementById("footer")
+                    topnav.style.backgroundColor = "#29272d";
+                    footer.style.backgroundColor = "#1b1621";
+                    // alert("Dark Mode On")
+                }
+            }
+        }
+    </script>
 
     <script>
         const form = document.getElementById("FormReview");

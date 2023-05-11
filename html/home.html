@@ -249,64 +249,36 @@
   </div>
 
   <script>
-
-  document.getElementById("loso").addEventListener("click", async (e) => {
-
-    if (e.target.innerText === "Sign out") {
-
-      alert("Signing you out!");
-
-      localStorage.removeItem("user");
-
-      window.location.reload();
-
-    }
-
-  });
-
-  document.getElementById("mode").addEventListener("click", async (e) => {
-
-    if (e.target.innerText === "Normal Mode") {
-
-      alert("Changing to dark mode!");
-
-      e.target.innerText = "Dark Mode";
-
-      if (localStorage.user) {
-
-        const userData = JSON.parse(localStorage.user);
-
-        userData.mode = "Dark Mode";
-
-        localStorage.user = JSON.stringify(userData);
-
+    document.getElementById("loso").addEventListener("click", async (e) => {
+      if (e.target.innerText === "Sign out") {
+        alert("Signing you out!");
+        localStorage.removeItem("user");
         window.location.reload();
-
       }
+    });
 
-    } else if (e.target.innerText === "Dark Mode") {
-
-      alert("Changing to normal mode!");
-
-      e.target.innerText = "Normal Mode";
-
-      if (localStorage.user) {
-
-        const userData = JSON.parse(localStorage.user);
-
-        userData.mode = "Normal Mode";
-
-        localStorage.user = JSON.stringify(userData);
-
-        window.location.reload();
-
+    document.getElementById("mode").addEventListener("click", async (e) => {
+      if (e.target.innerText === "Normal Mode") {
+        alert("Changing to dark mode!");
+        e.target.innerText = "Dark Mode";
+        if (localStorage.user) {
+          const userData = JSON.parse(localStorage.user);
+          userData.mode = "Dark Mode";
+          localStorage.user = JSON.stringify(userData);
+          window.location.reload();
+        }
+      } else if (e.target.innerText === "Dark Mode") {
+        alert("Changing to normal mode!");
+        e.target.innerText = "Normal Mode";
+        if (localStorage.user) {
+          const userData = JSON.parse(localStorage.user);
+          userData.mode = "Normal Mode";
+          localStorage.user = JSON.stringify(userData);
+          window.location.reload();
+        }
       }
-
-    }
-
-  });
-
-</script>
+    });
+  </script>
 
   <script>
     if (typeof Storage !== "undefined") {
@@ -327,8 +299,6 @@
     }
   </script>
 
-
-
   <script>
     function Dropdown() {
       let drop = document.getElementById("drop")
@@ -341,8 +311,6 @@
   </script>
 
   <div class="slideshow-container">
-    <!-- Full-width imagest -->
-    <!-- Images have to be 1000X350 -->
     <div class="mySlides fade">
       <img src="https://www.w3schools.com/howto/img_lights_wide.jpg">
     </div>
@@ -467,7 +435,7 @@
     </p>
   </div>
 
-  <footer>
+  <footer id="footer">
     <div class="footer-content">
       <h1>Copyright © 2023 LonelyBall Media</h1>
       <div class="socials">
@@ -478,33 +446,19 @@
   </footer>
 
   <script>
-
     if (typeof Storage !== "undefined") {
-
       if (localStorage.user) {
-
         let data = JSON.parse(localStorage.user);
-
         if (data.mode === "Dark Mode") {
-
           document.body.style.backgroundColor = "#0f0e0b";
-
           const topnav = document.querySelector(".topnav");
-
-         
-
-  topnav.style.backgroundColor = "#29272d";
-
-         document.footer.style.backgroundColor = "#1b1621";
-
-         // alert("Dark Mode On")
-
+          const footer = document.getElementById("footer")
+          topnav.style.backgroundColor = "#29272d";
+          footer.style.backgroundColor = "#1b1621";
+          // alert("Dark Mode On")
         }
-
       }
-
     }
-
   </script>
 </body>
 
