@@ -327,21 +327,7 @@
     }
   </script>
 
-  <script>
-    if (typeof Storage !== "undefined") {
-      if (localStorage.user) {
-        let data = JSON.parse(localStorage.user);
-        if (data.mode === "Dark Mode") {
-          document.body.style.backgroundColor = "#0f0e0b";
-          const topnav = document.querySelector(".topnav");
-         
-  topnav.style.backgroundColor = "#29272d";
-         document.footer.style.backgroundColor = "#1b1621";
-         // alert("Dark Mode On")
-        }
-      }
-    }
-  </script>
+
 
   <script>
     function Dropdown() {
@@ -490,6 +476,36 @@
       </div>
     </div>
   </footer>
+
+  <script>
+
+    if (typeof Storage !== "undefined") {
+
+      if (localStorage.user) {
+
+        let data = JSON.parse(localStorage.user);
+
+        if (data.mode === "Dark Mode") {
+
+          document.body.style.backgroundColor = "#0f0e0b";
+
+          const topnav = document.querySelector(".topnav");
+
+         
+
+  topnav.style.backgroundColor = "#29272d";
+
+         document.footer.style.backgroundColor = "#1b1621";
+
+         // alert("Dark Mode On")
+
+        }
+
+      }
+
+    }
+
+  </script>
 </body>
 
 </html>
