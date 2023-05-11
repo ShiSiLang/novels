@@ -299,6 +299,7 @@
       if (localStorage.user) {
         let data = JSON.parse(localStorage.user);
         if (data.mode === "Dark Mode") {
+          document.body.style.backgroundColor = "#0f0e0b";
           alert("Dark Mode On")
         }
       }
