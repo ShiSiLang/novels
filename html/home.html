@@ -249,31 +249,64 @@
   </div>
 
   <script>
-    document.getElementById("loso").addEventListener("click", async (e) => {
-      if (e.target.innerText === "Sign out") {
-        alert("Signing you out!");
-        localStorage.removeItem("user");
+
+  document.getElementById("loso").addEventListener("click", async (e) => {
+
+    if (e.target.innerText === "Sign out") {
+
+      alert("Signing you out!");
+
+      localStorage.removeItem("user");
+
+      window.location.reload();
+
+    }
+
+  });
+
+  document.getElementById("mode").addEventListener("click", async (e) => {
+
+    if (e.target.innerText === "Normal Mode") {
+
+      alert("Changing to dark mode!");
+
+      e.target.innerText = "Dark Mode";
+
+      if (localStorage.user) {
+
+        const userData = JSON.parse(localStorage.user);
+
+        userData.mode = "Dark Mode";
+
+        localStorage.user = JSON.stringify(userData);
+
         window.location.reload();
+
       }
-    });
-    document.getElementById("mode").addEventListener("click", async (e) => {
-      if (e.target.innerText === "Normal Mode") {
-        alert("Changing to dark mode!");
-        e.target.innerText = "Dark Mode"
-        if (localStorage.user) {
-          localStorage.user.mode = "Dark Mode";
-          window.location.reload();
-        }
-      } else if (e.target.innerText === "Dark Mode") {
-        alert("Changing to normal mode!");
-        e.target.innerText = "Normal Mode"
-        if (localStorage.user) {
-          localStorage.user.mode = "Normal Mode";
-          window.location.reload();
-        }
+
+    } else if (e.target.innerText === "Dark Mode") {
+
+      alert("Changing to normal mode!");
+
+      e.target.innerText = "Normal Mode";
+
+      if (localStorage.user) {
+
+        const userData = JSON.parse(localStorage.user);
+
+        userData.mode = "Normal Mode";
+
+        localStorage.user = JSON.stringify(userData);
+
+        window.location.reload();
+
       }
-    });
-  </script>
+
+    }
+
+  });
+
+</script>
 
   <script>
     if (typeof Storage !== "undefined") {
