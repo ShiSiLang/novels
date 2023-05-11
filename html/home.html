@@ -261,15 +261,15 @@
         alert("Changing to dark mode!");
         e.target.innerText = "Dark Mode"
         if (localStorage.user) {
-          let data = JSON.parse(localStorage.user);
-          data.mode = "Dark Mode";
+          localStorage.user.mode = "Dark Mode";
+          window.location.reload();
         }
       } else if (e.target.innerText === "Dark Mode") {
         alert("Changing to normal mode!");
         e.target.innerText = "Normal Mode"
         if (localStorage.user) {
-          let data = JSON.parse(localStorage.user);
-          data.mode = "Normal Mode";
+          localStorage.user.mode = "Normal Mode";
+          window.location.reload();
         }
       }
     });
