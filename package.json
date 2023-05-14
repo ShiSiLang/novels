@@ -9,15 +9,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Shinpi-Tekita/novels.git"
+    "url": "git+https://github.com/loneorangeball/novels.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Shinpi-Tekita/novels/issues"
+    "url": "https://github.com/loneorangeball/novels/issues"
   },
-  "homepage": "https://github.com/Shinpi-Tekita/novels",
+  "homepage": "https://github.com/loneorangeball/novels",
   "dependencies": {
     "axios": "^0.27.2",
     "express": "^4.18.1",
