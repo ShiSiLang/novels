@@ -29,11 +29,15 @@ module.exports = {
         data = reviewData.book;
 
         // Send the request to the CDN server
-        let request = await axios.post("https://lonelyballmediacdn-production.up.railway.app/upload", {
-          binaryDataArray: [data.icon.toString("base64")],
-        });
-
-        console.log(request, request.data)
+        let request;
+        try {
+          request = await axios.post("https://lonelyballmediacdn-production.up.railway.app/upload", {
+            binaryDataArray: [data.icon.toString("base64")],
+          });
+        } catch (err) {
+          console.log(err)
+        }
+        return console.log(request, request.data)
 
         let date = new Date();
 
