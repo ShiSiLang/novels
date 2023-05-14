@@ -28,6 +28,13 @@ module.exports = {
       if (html.type2 === "Book") {
         data = reviewData.book;
 
+        // Send the request to the CDN server
+        let request = await axios.post("https://lonelyballmediacdn-production.up.railway.app/upload", {
+          binaryDataArray: [data.icon.toString("base64")],
+        });
+
+        console.log(request, request.data)
+
         let date = new Date();
 
         let newBook = new bookShema({
@@ -70,6 +77,11 @@ module.exports = {
             novel: data.novel,
           });
         } else if (data.type === "Manga" || data.type === "Webtoon") {
+
+          let request = await axios.post("https://lonelyballmediacdn-production.up.railway.app/upload", {
+            binaryDataArray: data.images.map((imageData) => imageData.toString("base64")),
+          });
+
           bookData.chapters.push({
             name: data.name,
             thumbnail: data.thumbnail,
