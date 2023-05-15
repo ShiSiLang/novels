@@ -33,6 +33,7 @@ module.exports = {
         try {
           request = await axios.post("https://lonelyballmediacdn-production.up.railway.app/upload", {
             binaryDataArray: [data.icon.toString("base64")],
+            password: process.env.devPassword
           });
         } catch (err) { console.log(err) }
 
@@ -73,6 +74,7 @@ module.exports = {
           try {
             request = await axios.post("https://lonelyballmediacdn-production.up.railway.app/upload", {
               binaryDataArray: [data.thumbnail.toString("base64")],
+              password: process.env.devPassword
             });
           } catch (err) { console.log(err) }
 
@@ -90,7 +92,8 @@ module.exports = {
           let request;
           try {
             request = await axios.post("https://lonelyballmediacdn-production.up.railway.app/upload", {
-              binaryDataArray
+              binaryDataArray,
+              password: process.env.devPassword
             });
           } catch (err) { console.log(err) }
 

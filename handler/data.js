@@ -112,13 +112,13 @@ module.exports = {
         };
       });
 
-      res.send(mapped.map(function(item) { 
+      res.send(mapped.map(function (item) {
 
-    delete item.chapters; 
-delete item.icon;
-    return item; 
+        delete item.chapters;
+        delete item.icon;
+        return item;
 
-}));
+      }));
     }
 
     if (type === "book") {
@@ -164,7 +164,7 @@ delete item.icon;
       let newBook = {
         name: book.name,
         description: book.description,
-        icon: `https://lonelyballmediacdn-production.up.railway.app/image/${v.icon}`,
+        icon: `https://lonelyballmediacdn-production.up.railway.app/image/${book.icon}`,
         author: book.author,
         followers: book.followers,
         tags: book.tags,
