@@ -48,7 +48,7 @@ module.exports = {
           updated: date,
           published: date,
           status: "Ongoing",
-          views: 0,
+          views: 1,
         }).save();
 
         let authorData = await profileShema.findOne({
