@@ -112,9 +112,9 @@ module.exports = {
         };
       });
 
-      res.send(mapped.chapters.map(function(item) { 
+      res.send(mapped.map(function(item) { 
 
-    delete item.thumbnail; 
+    delete item.chapters; 
 
     return item; 
 
