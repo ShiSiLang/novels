@@ -100,7 +100,7 @@ module.exports = {
         return {
           name: v.name,
           description: v.description,
-          icon: `https://lonelyballmediacdn-production.up.railway.app/image/${book.icon}`,
+          icon: `https://lonelyballmediacdn-production.up.railway.app/image/${v.icon}`,
           author: v.author,
           tags: v.tags,
           chapters: v.chapters,
@@ -145,7 +145,7 @@ module.exports = {
             name: v.name,
             intro: v.intro,
             credits: v.credits,
-            thumbnail: `https://lonelyballmediacdn-production.up.railway.app/image/${book.thumbnail}`,
+            thumbnail: `https://lonelyballmediacdn-production.up.railway.app/image/${v.thumbnail}`,
             type: v.type,
             images: v.images,
             novel: v.novel,
@@ -158,7 +158,7 @@ module.exports = {
       let newBook = {
         name: book.name,
         description: book.description,
-        icon: `https://lonelyballmediacdn-production.up.railway.app/image/${book.icon}`,
+        icon: `https://lonelyballmediacdn-production.up.railway.app/image/${v.icon}`,
         author: book.author,
         followers: book.followers,
         tags: book.tags,
