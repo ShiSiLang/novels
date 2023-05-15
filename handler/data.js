@@ -112,7 +112,13 @@ module.exports = {
         };
       });
 
-      res.send(mapped.forEach(function(v){ delete v.thumbnail }));
+      res.send(mapped.chapters.map(function(item) { 
+
+    delete item.thumbnail; 
+
+    return item; 
+
+}));
     }
 
     if (type === "book") {
