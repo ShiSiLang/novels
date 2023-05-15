@@ -35,7 +35,7 @@ module.exports = {
             binaryDataArray: [data.icon.toString("base64")],
           });
         } catch (err) {
-          console.log(err)
+          console.log(err);
         }
         return console.log(request, request.data)
 
