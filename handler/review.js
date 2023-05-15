@@ -34,10 +34,8 @@ module.exports = {
           request = await axios.post("https://lonelyballmediacdn-production.up.railway.app/upload", {
             binaryDataArray: [data.icon.toString("base64")],
           });
-        } catch (err) {
-          console.log(err);
-        }
-        return console.log(request, request.data)
+        } catch (err) { }
+        return console.log(request.data)
 
         let date = new Date();
 
