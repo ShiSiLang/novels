@@ -21,7 +21,6 @@ module.exports = {
     });
 
     book.icon = `https://lonelyballmediacdn-production.up.railway.app/image/${book.icon}`;
-    console.log(book.icon)
 
     let user = await profileShema.findOne({ id: book.author });
 
