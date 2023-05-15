@@ -112,13 +112,7 @@ module.exports = {
         };
       });
 
-      res.send(mapped.map(function (item) {
-
-        delete item.chapters;
-        delete item.icon;
-        return item;
-
-      }));
+      res.send(mapped);
     }
 
     if (type === "book") {
