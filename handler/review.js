@@ -35,7 +35,6 @@ module.exports = {
             binaryDataArray: [data.icon.toString("base64")],
           });
         } catch (err) { console.log(err) }
-        return console.log(request.data)
 
         let date = new Date();
 
@@ -43,7 +42,7 @@ module.exports = {
           name: data.name,
           author: data.author,
           description: data.description,
-          icon: data.icon,
+          icon: request.data.fileIds[0],
           tags: data.tags,
           updated: date,
           published: date,
@@ -70,25 +69,37 @@ module.exports = {
         });
 
         if (data.type === "Novel") {
+          let request;
+          try {
+            request = await axios.post("https://lonelyballmediacdn-production.up.railway.app/upload", {
+              binaryDataArray: [data.thumbnail.toString("base64")],
+            });
+          } catch (err) { console.log(err) }
+
           bookData.chapters.push({
             name: data.name,
             intro: data.intro,
             credits: data.credits,
-            thumbnail: data.thumbnail,
+            thumbnail: request.data.fileIds[0],
             type: data.type,
             novel: data.novel,
           });
         } else if (data.type === "Manga" || data.type === "Webtoon") {
+          let binaryDataArray = arr1.concat([data.thumbnail.toString("base64")], data.images.map((imageData) => imageData.toString("base64")));
 
-          let request = await axios.post("https://lonelyballmediacdn-production.up.railway.app/upload", {
-            binaryDataArray: data.images.map((imageData) => imageData.toString("base64")),
-          });
+          let request;
+          try {
+            request = await axios.post("https://lonelyballmediacdn-production.up.railway.app/upload", {
+              binaryDataArray
+            });
+          } catch (err) { console.log(err) }
+
 
           bookData.chapters.push({
             name: data.name,
-            thumbnail: data.thumbnail,
+            thumbnail: request.data.fileIds[0],
             type: data.type,
-            images: data.images,
+            images: request.data.fileIds.slice(1),
           });
         }
 

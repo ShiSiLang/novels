@@ -4,16 +4,16 @@ const bookSchema = mongoose.Schema(
   {
     name: String,
     description: String,
-    icon: Buffer,
+    icon: String,
     author: String,
     chapters: [
       {
         name: String,
         intro: String,
         credits: String,
-        thumbnail: Buffer,
+        thumbnail: String,
         type: String, //Novel/Manga/Webtoon
-        images: [Buffer], // Array of binary image data for manga/webtoon
+        images: Array, // Array of image strings data for manga/webtoon
         novel: String, // String for novels
         comments: [
           {

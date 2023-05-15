@@ -22,7 +22,7 @@ module.exports = {
         encoding: "utf8",
       });
 
-      let j = { icon: `data:image/png;base64,${book.icon.toString("base64")}` };
+      let j = { icon: `https://lonelyballmediacdn-production.up.railway.app/image/${book.icon}` };
 
       file = file.replaceAll(
         "$$data$$",

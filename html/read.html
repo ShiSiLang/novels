@@ -518,7 +518,7 @@
         console.log(json.chapters[index])
         for (let i = 0; i < json.chapters[index].images.length; i++) {
           const element = json.chapters[index].images[i];
-          let img = `data:image/png;base64,${element.toString("base64")}`
+          let img = `https://lonelyballmediacdn-production.up.railway.app/image/${element}`
           div.innerHTML += `<img src="${img}" alt="Page ${i}">`;
         }
       } else if (json.chapters[index].type === "Webtoon") {
@@ -526,7 +526,7 @@
         console.log(json.chapters[index])
         for (let i = 0; i < json.chapters[index].images.length; i++) {
           const element = json.chapters[index].images[i];
-          let img = `data:image/png;base64,${element.toString("base64")}`
+          let img = `https://lonelyballmediacdn-production.up.railway.app/image/${element}`
           div.innerHTML += `<div class="slide">
       <img src="${img}" alt="Page ${i}">
     </div>`;

@@ -20,7 +20,7 @@ module.exports = {
       encoding: "utf8",
     });
 
-    book.icon = `data:image/png;base64,${book.icon.toString("base64")}`;
+    book.icon = `https://lonelyballmediacdn-production.up.railway.app/image/${book.icon}`;
 
     let user = await profileShema.findOne({ id: book.author });
 
@@ -30,7 +30,7 @@ module.exports = {
     file = file.replaceAll("$$author$$", user.username);
 
     file = file.replaceAll("$$tags$$", book.tags.join(", "));
-    
+
 
     file = file.replaceAll("$$icon$$", book.icon);
     file = file.replaceAll("$$views$$", book.views);
