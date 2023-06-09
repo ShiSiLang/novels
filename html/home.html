@@ -231,33 +231,6 @@
     opacity: 0.5;
     transition: 0.5s;
   }
-
-  .separator {
-    display: flex;
-    align-items: center;
-    margin: 10px 0;
-    height: 1px;
-    position: relative;
-  }
-
-  .separator:before,
-  .separator:after {
-    content: '';
-    position: absolute;
-    height: 1px;
-    background-color: #2196F3;
-    width: 50%;
-  }
-
-  .separator:before {
-    right: 100%;
-    margin-right: 15px;
-  }
-
-  .separator:after {
-    left: 100%;
-    margin-left: 15px;
-  }
 </style>
 
 <body>
@@ -372,7 +345,7 @@
 
   <div id="latests" class="media-scroller snaps-inline"></div>
 
-<div class="separator"></div>
+<hr style="height:2px;border-width:0;color:#2196F3;background-color:#2196F3">
 
 
   <div class="text">
