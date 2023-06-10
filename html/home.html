@@ -116,6 +116,75 @@
     color: black;
   }
 
+.navbar {
+  overflow: hidden;
+  background-color: #333;
+}
+
+.navbar a {
+  float: left;
+  font-size: 16px;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+.dropdown {
+  float: left;
+  overflow: hidden;
+}
+
+.dropdown .dropbtn {
+  font-size: 16px;
+  border: none;
+  outline: none;
+  color: white;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit; /* Important for vertical align on mobile phones */
+  margin: 0; /* Important for vertical align on mobile phones */
+}
+
+/* Add a red background color to navbar links on hover */
+.navbar a:hover, .dropdown:hover .dropbtn {
+  background-color: #2196F3;
+}
+
+.navbar a:hover, .dropdown:hover .dropbtn {
+  background-color: red;
+}
+
+/* Dropdown content (hidden by default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  float: none;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+/* Add a grey background color to dropdown links on hover */
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+
   footer {
     width: 100vw;
     height: auto;
@@ -237,6 +306,21 @@
 </style>
 
 <body>
+
+<div class="navbar">
+  <div class="dropdown">
+    <button class="dropbtn"><i class="fa-solid fa-bars"></i>
+     <!--<i class="fa fa-caret-down"></i>-->
+    </button>
+    <div class="dropdown-content">
+      <a class="active" href="#">Home</a>
+      <a href="/explore">Explore</a>
+      <a href="https://cash.app/$PerezDeDios" target="_blank">Donate</a>pp
+    </div>
+  </div>
+</div>
+
+<!--
   <div class="topnav">
     <a class="active" href="#">Home</a>
     <a href="/explore">Explore</a>
@@ -249,7 +333,7 @@
         <a id="mode" href="#">Normal Mode</a>
       </div>
     </div>
-  </div>
+  </div>-->
 
   <script>
     document.getElementById("loso").addEventListener("click", async (e) => {
@@ -260,28 +344,7 @@
       }
     });
 
-    document.getElementById("mode").addEventListener("click", async (e) => {
-      if (e.target.innerText === "Normal Mode") {
-        alert("Changing to dark mode!");
-        e.target.innerText = "Dark Mode";
-        if (localStorage.user) {
-          const userData = JSON.parse(localStorage.user);
-          userData.mode = "Dark Mode";
-          localStorage.user = JSON.stringify(userData);
-          window.location.reload();
-        }
-      } else if (e.target.innerText === "Dark Mode") {
-        alert("Changing to normal mode!");
-        e.target.innerText = "Normal Mode";
-        if (localStorage.user) {
-          const userData = JSON.parse(localStorage.user);
-          userData.mode = "Normal Mode";
-          localStorage.user = JSON.stringify(userData);
-          window.location.reload();
-        }
-      }
-    });
-  </script>
+    
 
   <script>
     if (typeof Storage !== "undefined") {
