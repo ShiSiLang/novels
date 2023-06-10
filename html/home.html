@@ -31,7 +31,7 @@
     justify-content: center;
   }
 
-  .topnav {
+ /* .topnav {
     width: 100%;
     background-color: #c499cc;
   }
@@ -114,74 +114,62 @@
   .topnav a:hover {
     background-color: white;
     color: black;
-  }
+  }*/
 
-.navbar {
+.topnav {
+  background-color: #2196F3;
   overflow: hidden;
-  background-color: #333;
 }
 
-.navbar a {
+/* Style the links inside the navigation bar */
+.topnav a {
   float: left;
-  font-size: 16px;
-  color: white;
+  display: block;
+  color: #f2f2f2;
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
+  font-size: 17px;
 }
 
-.dropdown {
-  float: left;
-  overflow: hidden;
-}
-
-.dropdown .dropbtn {
-  font-size: 16px;
-  border: none;
-  outline: none;
-  color: white;
-  padding: 14px 16px;
-  background-color: inherit;
-  font-family: inherit; /* Important for vertical align on mobile phones */
-  margin: 0; /* Important for vertical align on mobile phones */
-}
-
-/* Add a red background color to navbar links on hover */
-.navbar a:hover, .dropdown:hover .dropbtn {
-  background-color: #2196F3;
-}
-
-.navbar a:hover, .dropdown:hover .dropbtn {
-  background-color: red;
-}
-
-/* Dropdown content (hidden by default) */
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f9f9f9;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-}
-
-.dropdown-content a {
-  float: none;
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-  text-align: left;
-}
-
-/* Add a grey background color to dropdown links on hover */
-.dropdown-content a:hover {
+/* Change the color of links on hover */
+.topnav a:hover {
   background-color: #ddd;
+  color: black;
 }
 
-/* Show the dropdown menu on hover */
-.dropdown:hover .dropdown-content {
-  display: block;
+/* Add an active class to highlight the current page */
+.topnav a.active {
+  background-color: #04AA6D;
+  color: white;
+}
+
+/* Hide the link that should open and close the topnav on small screens */
+.topnav .icon {
+  display: none;
+}
+
+@media screen and (max-width: 600px) {
+  .topnav a:not(:first-child) {display: none;}
+  .topnav a.icon {
+    float: right;
+    display: block;
+  }
+}
+
+/* The "responsive" class is added to the topnav with JavaScript when the user clicks on the icon. This class makes the topnav look good on small screens (display the links vertically instead of horizontally) */
+@media screen and (max-width: 600px) {
+  .topnav.responsive {position: relative;}
+  .topnav.responsive a.icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  .topnav.responsive a {
+    float: none;
+    display: block;
+    text-align: left;
+  }
 }
 
 
@@ -307,18 +295,25 @@
 
 <body>
 
-<div class="navbar">
-  <div class="dropdown">
-    <button class="dropbtn"><i class="fa-solid fa-bars"></i>
-     <!--<i class="fa fa-caret-down"></i>-->
-    </button>
-    <div class="dropdown-content">
-      <a class="active" href="#">Home</a>
-      <a href="/explore">Explore</a>
-      <a href="https://cash.app/$PerezDeDios" target="_blank">Donate</a>pp
-    </div>
-  </div>
+<div class="topnav" id="myTopnav">
+  <a href="#" class="active">Home</a>
+  <a href="/explore">Explore</a>
+   <a href="https://cash.app/$PerezDeDios" target="_blank">Donate</a>
+  <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+    <i class="fa-solid fa-bars"></i>
+  </a>
 </div>
+
+<script>
+function myFunction() {
+  var x = document.getElementById("myTopnav");
+  if (x.className === "topnav") {
+    x.className += " responsive";
+  } else {
+    x.className = "topnav";
+  }
+}
+</script>
 
 <!--
   <div class="topnav">
