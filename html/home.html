@@ -67,55 +67,7 @@
     100% {
       opacity: 1;
     }
-  }
-
-  .dropdown {
-    display: inline-block;
-    position: relative
-  }
-
-  .dropdown-menu-right {
-    float: right;
-    top: 65px;
-    right: 160px;
-  }
-
-  .dropdown-content {
-    position: absolute;
-    display: none;
-    background-color: #c499cc;
-    min-width: 160px;
-    box-shadow: 0px 0px 10px #956a9d;
-    z-index: 1;
-  }
-
-  .dropdown-content a {
-    color: white;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-  }
-
-  .topnav>a {
-    display: inline-block;
-    border-radius: 30px;
-    padding: 19px 16px;
-    transition-duration: 0.2s;
-    font-size: 1.0em;
-    font-weight: 650;
-    text-decoration: none;
-    color: white;
-  }
-
-  .topnav a.active {
-    background-color: #956a9d;
-  }
-
-  .topnav a:hover {
-    background-color: white;
-    color: black;
   }*/
-
 
 
 .topnav {
@@ -297,9 +249,13 @@
 <body>
 
 <div class="topnav" id="myTopnav">
-  <a href="#" class="active">Home</a>
-  <a href="/explore">Explore</a>
-   <a href="https://cash.app/$PerezDeDios" target="_blank">Donate</a>
+  <a href="#" class="active"><i class="fa-solid fa-house"></i> Home</a>
+  <a href="/explore"><i class="fa-solid fa-magnifying-glass"></i> Explore</a>
+
+<a id="account" href="#"><i class="fa-solid fa-user"></i> My Account</a>
+        <a id="loso" href="#">$$Log$$</a>
+
+   <a href="https://cash.app/$PerezDeDios" target="_blank"><i class="fa-solid fa-coins"></i> Donate</a>
   <a href="javascript:void(0);" class="icon" onclick="myFunction()">
     <i class="fa-solid fa-bars"></i>
   </a>
@@ -316,44 +272,26 @@ function myFunction() {
 }
 </script>
 
-<!--
-  <div class="topnav">
-    <a class="active" href="#">Home</a>
-    <a href="/explore">Explore</a>
-    <a href="https://cash.app/$PerezDeDios" target="_blank">Donate</a>
-    <img id="userIcon" src="https://i.imgur.com/XjWCCeV.png" alt="LonelyBall Media" onclick="Dropdown()" />
-    <div class="dropdown dropdown-menu-right">
-      <div class="dropdown-content" id="drop">
-        <a id="account" href="#">My Account</a>
-        <a id="loso" href="#">$$Log$$</a>
-        <a id="mode" href="#">Normal Mode</a>
-      </div>
-    </div>
-  </div>-->
-
-  <script>
-    document.getElementById("loso").addEventListener("click", async (e) => {
-      if (e.target.innerText === "Sign out") {
+  <script> document.getElementById("loso").addEventListener("click", async (e) => {
+      if (e.target.innerText === "<i class="fa-solid fa-right-from-bracket"></i> Sign out") {
         alert("Signing you out!");
         localStorage.removeItem("user");
         window.location.reload();
       }
     });
-
-    
+</script>
 
   <script>
     if (typeof Storage !== "undefined") {
       if (localStorage.user) {
-        document.getElementById("loso").innerHTML = "Sign out";
+    document.getElementById("loso").innerHTML = "<i class="fa-solid fa-right-from-bracket"></i> Sign out";
+
         let data = JSON.parse(localStorage.user);
         document.getElementById("account").href = `/profile/${data.id}`;
         document.getElementById("userIcon").src = `${data.avatar}`;
-        document.getElementById("mode").innerHTML = data.mode;
       } else {
-        document.getElementById("loso").innerHTML = "Sign in";
+        document.getElementById("loso").innerHTML = "<i class="fa-solid fa-right-to-bracket"></i> Sign in";
         document.getElementById("loso").href = "/access-portal";
-        document.getElementById("mode").innerHTML = "Normal Mode";
       }
     } else {
       document.getElementById("loso").innerHTML = "<span>&empty;</span>";
