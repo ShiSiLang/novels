@@ -29,7 +29,7 @@ app.get("/home", async (_, res) => res.sendFile(dir("home")));
 
 app.get("/access-portal", (_, res) => res.sendFile(dir("access-portal")));
 
-app.get("/discord", (_, res) => res.redirect("https://discord.gg/j3YamACwPu"));
+app.get("/discord", (_, res) => res.redirect("https://discord.gg/8p9pGarffg"));
 
 app.get("/upload", (_, res) => res.sendFile(dir("upload")));
 
