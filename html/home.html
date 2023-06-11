@@ -222,7 +222,7 @@ function myFunction() {
 
     <script> 
          document.getElementById("toggle").addEventListener("click", async (e) => {
-alert(e.target.innerText)
+navigator.clipboard.writeText(e.target.innerText);
              if (e.target.innerText === "Sign Out") { 
                  alert("Signing you out!"); 
                  localStorage.removeItem("user"); 
