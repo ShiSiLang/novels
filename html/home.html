@@ -220,43 +220,33 @@ function myFunction() {
 }
 </script>
 
-  <script> document.getElementById("loso").addEventListener("click", async (e) => {
-      if (e.target.innerText === "<i class="fa-solid fa-right-from-bracket"></i> Sign out") {
-        alert("Signing you out!");
-        localStorage.removeItem("user");
-        window.location.reload();
-      }
-    });
-</script>
+    <script> 
+         document.getElementById("loso").addEventListener("click", async (e) => { 
+             if (e.target.innerText === "Sign out") { 
+                 alert("Signing you out!"); 
+                 localStorage.removeItem("user"); 
+                 window.location.reload(); 
+             } 
+         }); 
+     </script> 
+  
+     <script> 
+         if (typeof Storage !== "undefined") { 
+             if (localStorage.user) { 
+                 document.getElementById("loso").innerHTML = "Sign out"; 
+                 let data = JSON.parse(localStorage.user); 
+                 document.getElementById("account").href = `/profile/${data.id}`; 
+             } else { 
+    document.getElementById("loso").innerHTML = "Sign in"; 
+                 document.getElementById("loso").href = "/access-portal"; 
+             } 
+         } else { 
+             document.getElementById("loso").innerHTML = "<span>&empty;</span>"; 
+             document.getElementById("account").innerHTML = "<span>&empty;</span>"; 
+         } 
+     </script>
 
-  <script>
-    if (typeof Storage !== "undefined") {
-      if (localStorage.user) {
-    document.getElementById("loso").innerHTML = "<i class="fa-solid fa-right-from-bracket"></i> Sign out";
 
-        let data = JSON.parse(localStorage.user);
-        document.getElementById("account").href = `/profile/${data.id}`;
-        document.getElementById("userIcon").src = `${data.avatar}`;
-      } else {
-        document.getElementById("loso").innerHTML = "<i class="fa-solid fa-right-to-bracket"></i> Sign in";
-        document.getElementById("loso").href = "/access-portal";
-      }
-    } else {
-      document.getElementById("loso").innerHTML = "<span>&empty;</span>";
-      document.getElementById("account").innerHTML = "<span>&empty;</span>";
-    }
-  </script>
-
-  <script>
-    function Dropdown() {
-      let drop = document.getElementById("drop")
-      if (drop.style.display === "block") {
-        drop.style.display = "none";
-      } else {
-        drop.style.display = "block";
-      }
-    }
-  </script>
 
   <div class="slideshow-container">
     <div class="mySlides fade">
