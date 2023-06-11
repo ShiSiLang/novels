@@ -201,7 +201,7 @@
   <a href="/explore"><i class="fa-solid fa-magnifying-glass"></i> Explore</a>
 
 <a id="account" href="#"><i class="fa-solid fa-user"></i> My Account</a>
-        <a id="loso" href="#">$$Log$$</a>
+        <a id="toggle" href="#"><i class="fa-solid fa-arrow-right-from-bracket"></i> Sign Out</a>
 
    <a href="https://cash.app/$PerezDeDios" target="_blank"><i class="fa-solid fa-coins"></i> Donate</a>
   <a href="javascript:void(0);" class="icon" onclick="myFunction()">
@@ -221,8 +221,9 @@ function myFunction() {
 </script>
 
     <script> 
-         document.getElementById("loso").addEventListener("click", async (e) => { 
-             if (e.target.innerText === "Sign out") { 
+         document.getElementById("toggle").addEventListener("click", async (e) => {
+alert(e.target.innerText)
+             if (e.target.innerText === "Sign Out") { 
                  alert("Signing you out!"); 
                  localStorage.removeItem("user"); 
                  window.location.reload(); 
