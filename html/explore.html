@@ -274,7 +274,7 @@
         z-index: 99;
         border: none;
         outline: none;
-        background-color: #ac86b3;
+        background-color: #2196F3;
         color: #FFFFFF;
         cursor: pointer;
         padding: 14px 28px;
@@ -322,56 +322,54 @@
 
     <button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
 
-    <div class="topnav">
-        <a href="/home">Home</a>
-        <a class="active" href="/explore">Explore</a>
-        <a href="https://cash.app/$PerezDeDios" target="_blank">Donate</a>
-        <img id="userIcon" src="https://i.imgur.com/XjWCCeV.png" alt="LonelyBall Media" onclick="Dropdown()" />
-        <div class="dropdown dropdown-menu-right">
-            <div class="dropdown-content" id="drop">
-                <a id="account" href="#">My Account</a>
-                <a id="loso" href="#">$$Log$$</a>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        document.getElementById("loso").addEventListener("click", async (e) => {
-            if (e.target.innerText === "Sign out") {
-                alert("Signing you out!");
-                localStorage.removeItem("user");
-                window.location.reload();
-            }
-        });
-    </script>
-
-    <script>
-        if (typeof Storage !== "undefined") {
-            if (localStorage.user) {
-                document.getElementById("loso").innerHTML = "Sign out";
-                let data = JSON.parse(localStorage.user);
-                document.getElementById("account").href = `/profile/${data.id}`;
-                document.getElementById("userIcon").src = `${data.avatar}`;
-            } else {
-                document.getElementById("loso").innerHTML = "Sign in";
-                document.getElementById("loso").href = "/access-portal";
-            }
-        } else {
-            document.getElementById("loso").innerHTML = "<span>&empty;</span>";
-            document.getElementById("account").innerHTML = "<span>&empty;</span>";
-        }
-    </script>
-
-    <script>
-        function Dropdown() {
-            let drop = document.getElementById("drop");
-            if (drop.style.display === "block") {
-                drop.style.display = "none";
-            } else {
-                drop.style.display = "block";
-            }
-        }
-    </script>
+   <div class="topnav" id="myTopnav"> 
+   <a href="#" class="active"><i class="fa-solid fa-house"></i> Home</a> 
+   <a href="/explore"><i class="fa-solid fa-magnifying-glass"></i> Explore</a> 
+  
+ <a id="account" href="#"><i class="fa-solid fa-user"></i> My Account</a> 
+         <a id="toggle" href="#"><i class="fa-solid fa-arrow-right-from-bracket"></i> Sign Out</a> 
+  
+    <a href="https://cash.app/$PerezDeDios" target="_blank"><i class="fa-solid fa-coins"></i> Donate</a> 
+   <a href="javascript:void(0);" class="icon" onclick="myFunction()"> 
+     <i class="fa-solid fa-bars"></i> 
+   </a> 
+ </div> 
+  
+ <script> 
+ function myFunction() { 
+   var x = document.getElementById("myTopnav"); 
+   if (x.className === "topnav") { 
+     x.className += " responsive"; 
+   } else { 
+     x.className = "topnav"; 
+   } 
+ } 
+ </script> 
+  
+     <script>  
+          document.getElementById("toggle").addEventListener("click", async (e) => { 
+              if (e.target.innerText === " Sign Out") {  
+                  alert("Signing you out!");  
+                  localStorage.removeItem("user");  
+                  window.location.reload();  
+              }  
+          });  
+      </script>  
+  
+      <script>  
+          if (typeof Storage !== "undefined") {  
+              if (localStorage.user) {  
+                  let data = JSON.parse(localStorage.user);  
+     document.getElementById("account").href = `/profile/${data.id}`;  
+              } else {  
+     document.getElementById("toggle").innerHTML = '<i class="fa-solid fa-right-to-bracket"></i> Sign In';  
+                  document.getElementById("toggle").href = "/access-portal";  
+              }  
+          } else {  
+              document.getElementById("toggle").innerHTML = "<span>&empty;</span>";  
+              document.getElementById("account").innerHTML = "<span>&empty;</span>";  
+          }  
+      </script>
 
     <div class="text">
         <h1>Find your next favorite story.</h1>
@@ -389,33 +387,7 @@
     </div>
 
     <div id="image-grid" class="image-grid"></div>
-
-    <footer id="footer">
-        <div class="footer-content">
-            <h1>Copyright © 2023 LonelyBall Media</h1>
-            <div class="socials">
-                <a href="https://discord.gg/j3YamACwPu"><i class="fa fa-discord"></i></a>
-                <a href="https://twitter.com/LoneOrangeBall"><i class="fa fa-twitter"></i></a>
-            </div>
-        </div>
-    </footer>
-
-    <script>
-        if (typeof Storage !== "undefined") {
-            if (localStorage.user) {
-                let data = JSON.parse(localStorage.user);
-                if (data.mode === "Dark Mode") {
-                    document.body.style.backgroundColor = "#0f0e0b";
-                    const topnav = document.querySelector(".topnav");
-                    const footer = document.getElementById("footer")
-                    topnav.style.backgroundColor = "#29272d";
-                    footer.style.backgroundColor = "#1b1621";
-                    // alert("Dark Mode On")
-                }
-            }
-        }
-    </script>
-
+
     <script>
         const searchWrapper = document.querySelector(".search-input");
         const inputBox = searchWrapper.querySelector("input");
