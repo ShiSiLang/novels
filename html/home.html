@@ -236,7 +236,7 @@ function myFunction() {
                  let data = JSON.parse(localStorage.user); 
     document.getElementById("account").href = `/profile/${data.id}`; 
              } else { 
-    document.getElementById("toggle").innerHTML = "Sign In"; 
+    document.getElementById("toggle").innerHTML = '<i class="fa-solid fa-right-to-bracket"></i> Sign In'; 
 alert(document.getElementById("toggle").innerHTML)
                  document.getElementById("toggle").href = "/access-portal"; 
              } 
