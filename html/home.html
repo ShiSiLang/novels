@@ -222,8 +222,7 @@ function myFunction() {
 
     <script> 
          document.getElementById("toggle").addEventListener("click", async (e) => {
-navigator.clipboard.writeText(e.target.innerText);
-             if (e.target.innerText === "Sign Out") { 
+             if (e.target.innerText === " Sign Out") { 
                  alert("Signing you out!"); 
                  localStorage.removeItem("user"); 
                  window.location.reload(); 
@@ -234,20 +233,18 @@ navigator.clipboard.writeText(e.target.innerText);
      <script> 
          if (typeof Storage !== "undefined") { 
              if (localStorage.user) { 
-                 document.getElementById("loso").innerHTML = "Sign out"; 
                  let data = JSON.parse(localStorage.user); 
-                 document.getElementById("account").href = `/profile/${data.id}`; 
+    document.getElementById("account").href = `/profile/${data.id}`; 
              } else { 
-    document.getElementById("loso").innerHTML = "Sign in"; 
-                 document.getElementById("loso").href = "/access-portal"; 
+    document.getElementById("toggle").innerHTML = "Sign In"; 
+alert(document.getElementById("toggle").innerHTML)
+                 document.getElementById("toggle").href = "/access-portal"; 
              } 
          } else { 
-             document.getElementById("loso").innerHTML = "<span>&empty;</span>"; 
+             document.getElementById("toggle").innerHTML = "<span>&empty;</span>"; 
              document.getElementById("account").innerHTML = "<span>&empty;</span>"; 
          } 
      </script>
-
-
 
   <div class="slideshow-container">
     <div class="mySlides fade">
