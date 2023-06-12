@@ -96,6 +96,10 @@
 .text h1 {  
       color: #2196F3;  
     }  
+
+.text h2 {  
+      color: #2196F3;  
+    }  
   
     .text p {   
       color: #FFFFFF;  
@@ -424,7 +428,7 @@
       }
 
       if (json.chapters[index].type === "Novel") {
-        div.className = 'text text-novel';
+        div.className = 'text';
         let novelContent = json.chapters[index].novel;
 
         novelContent = formatString(novelContent);
