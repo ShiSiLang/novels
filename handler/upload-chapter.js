@@ -32,8 +32,6 @@ module.exports = {
         .status(400)
         .json({ error: `Your profile does not have author perms!` });
 
-    let image = req.file.buffer;
-
     let content = html.content.replace(/</g, "&lt;");
     let newID = Date.now();
 
@@ -42,15 +40,14 @@ module.exports = {
     if (req.body.replaceNumber > 0) replaceNumber = req.body.replaceNumber;
 
     let params = {
-      content: `New chapter has been submitted for review.`,
       embeds: [
         {
           title: html.name,
-          description: trim(content, 4095),
+          url: "https://novels-production.up.railway.app/review",
+          description: "New chapter has been submitted for review.",
           footer: { text: newID },
         },
       ],
-      username: "New Chapter Post",
     };
 
     await axios({
@@ -76,7 +73,6 @@ module.exports = {
         name: html.chapterName.replace(/</g, "&lt;"),
         intro: html.intro.replace(/</g, "&lt;"),
         credits: html.credits.replace(/</g, "&lt;"),
-        thumbnail: image,
         type: "Novel", //Novel
         novel: content, // String for novels
         replace,
