@@ -70,24 +70,15 @@ module.exports = {
         });
 
         if (data.type === "Novel") {
-          let request;
-          try {
-            request = await axios.post("https://lonelyballmediacdn-production.up.railway.app/upload", {
-              binaryDataArray: [data.thumbnail.toString("base64")],
-              password: process.env.devPassword
-            });
-          } catch (err) { console.log(err) }
-
           bookData.chapters.push({
             name: data.name,
             intro: data.intro,
             credits: data.credits,
-            thumbnail: request.data.fileIds[0],
             type: data.type,
             novel: data.novel,
           });
-        } else if (data.type === "Manga" || data.type === "Webtoon") {
-          let binaryDataArray = arr1.concat([data.thumbnail.toString("base64")], data.images.map((imageData) => imageData.toString("base64")));
+        } else if (data.type === "Manga") {
+          let binaryDataArray = data.images.map((imageData) => imageData.toString("base64"));
 
           let request;
           try {
@@ -100,9 +91,8 @@ module.exports = {
 
           bookData.chapters.push({
             name: data.name,
-            thumbnail: request.data.fileIds[0],
             type: data.type,
-            images: request.data.fileIds.slice(1),
+            images: request.data.fileIds,
           });
         }
 
@@ -125,17 +115,14 @@ module.exports = {
       });
 
       let params = {
-        content:
-          html.type2 === "Chapter"
-            ? `New Chapter: ${reviewData.chapter.name}`
-            : "New Book Post",
         embeds: [
           {
             title: data.name,
+            url: `https://novels-production.up.railway.app/explore/${reviewData.book.name}`,
+            description: html.type2 === "Chapter" ? `New Chapter: ${reviewData.chapter.name}` : "New Book Post",
             color: 65280,
           },
         ],
-        username: reviewData.book.name,
       };
 
       await reviewShema.findOneAndDelete({ reviewID: html.reviewID });
@@ -159,17 +146,16 @@ module.exports = {
       });
 
       let params = {
-        content:
-          html.type2 === "Chapter"
-            ? `New Chapter: ${bookData.chapter.name} Denied`
-            : "New Book Denied",
         embeds: [
           {
             title: bookData.book.name,
+            description:
+          html.type2 === "Chapter"
+            ? `New Chapter: ${bookData.chapter.name} Denied`
+            : "New Book Denied",
             color: 16711680,
           },
         ],
-        username: bookData.book.name,
       };
 
       await reviewShema.findOneAndDelete({
