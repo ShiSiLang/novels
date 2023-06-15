@@ -38,9 +38,9 @@ module.exports = {
     let params = {
       embeds: [
         {
-          title: html.name,
+          title: html.bookName,
           url: "https://novels-production.up.railway.app/review",
-          description: "New chapter has been submitted for review.",
+          description: "New chapter has been submitted for review!",
           footer: { text: newID },
         },
       ],
