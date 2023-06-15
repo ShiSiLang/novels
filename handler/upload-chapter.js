@@ -9,9 +9,7 @@ module.exports = {
   run: async (req, res) => {
     // return res.status(400).json({ error: `System currently down!` });
 
-    let html = req.body;
-
-console.log(html)
+    let html = req.body.formData;
 
     let userObject = JSON.parse(html.user);
 
