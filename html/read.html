@@ -489,7 +489,7 @@
 </div>
 
  <form id="commentForm" method="post" action="/comment">
-  <input type="hidden" name="user" value="NOTHING" />
+  <input id="userData" type="hidden" name="user" value="NOTHING" />
   <input type="hidden" name="book" value="$$book$$" />
   <input type="hidden" name="chapter" value="$$chapter$$" />
 
@@ -499,6 +499,17 @@
     <button type="submit" class="commentbtn" id="sendComment">Send Comment</button>
   </div>
 </form>
+
+
+<script>
+  if (typeof Storage !== "undefined") {
+    if (localStorage.user) {
+      let data = JSON.parse(localStorage.user);
+      let userObject = JSON.stringify({ username: data.username, id: data.id, email: data.email, password: data.password });
+      document.getElementById("userData").value = userObject;
+ }
+}
+</script>
 
 
 <script>
@@ -553,16 +564,6 @@
   <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
   <strong>Success!</strong> Yay.
 </div>
-
-<script>
-  if (typeof Storage !== "undefined") {
-    if (localStorage.user) {
-      let data = JSON.parse(localStorage.user);
-      let userObject = JSON.stringify({ username: data.username, id: data.id, email: data.email, password: data.password });
-      document.getElementById("user").value = userObject;
- }
-}
-</script>
 
   <div class="comments-container" id="comments"></div>
 
