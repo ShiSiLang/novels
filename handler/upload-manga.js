@@ -6,7 +6,7 @@ let webhook_url = process.env.webhook;
 
 module.exports = {
   name: "upload-manga",
-  fields: [{ name: "thumbnail", maxCount: 1 }, { name: "pages" }],
+  fields: [{ name: "pages" }],
   run: async (req, res) => {
     //return res.status(400).json({ error: `System currently down!` });
 
