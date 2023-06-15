@@ -115,15 +115,16 @@ module.exports = {
       });
 
       let params = {
-        embeds: [
-          {
-            title: data.name,
-            url: `https://novels-production.up.railway.app/explore/${reviewData.book.name}`,
-            description: html.type2 === "Chapter" ? `New Chapter: ${reviewData.chapter.name}` : "New Book Post",
-            color: 65280,
-          },
-        ],
-      };
+  embeds: [
+    {
+      title: data.name,
+      url: new URL(`https://novels-production.up.railway.app/explore/${reviewData.book.name}`).toString(),
+      description: html.type2 === "Chapter" ? `Chapter: ${reviewData.chapter.name} has been accepted!` : "Book Accepted!",
+      color: 65280,
+    },
+  ],
+};
+
 
       await reviewShema.findOneAndDelete({ reviewID: html.reviewID });
 
@@ -151,8 +152,8 @@ module.exports = {
             title: bookData.book.name,
             description:
           html.type2 === "Chapter"
-            ? `New Chapter: ${bookData.chapter.name} Denied`
-            : "New Book Denied",
+            ? `Chapter: ${bookData.chapter.name} has been denied`
+            : "Book Denied",
             color: 16711680,
           },
         ],
