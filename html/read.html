@@ -540,7 +540,7 @@
       },
       body: JSON.stringify({ data }),
     });
-alert(response)
+console.log(response)
 
     if (response.ok) {
       const successData = await response.json();
