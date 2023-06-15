@@ -131,7 +131,7 @@
     .submit {
         cursor: pointer;
         padding: 14px 20px;
-        background-color: #c499cc;
+        background-color: #2196F3;
         color: white;
         float: left;
         width: 100%;
@@ -175,31 +175,31 @@
     }
 
     select {
-        width: 100%;
-        padding: 15px;
-        margin: 5px 0 22px 0;
-        background: transparent;
-        border: none;
-        color: #ffcc99;
-        outline: none;
-    }
+    width: 100%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    background: transparent;
+    border: none;
+    color: #FFFFFF; /* White text color */
+    outline: none;
+}
 
-    select:focus {
-        border: 3px solid #956a9d;
-        border-radius: 16px;
-        color: #ffcc99;
-    }
+select:focus {
+    border-radius: 16px;
+    color: #FFFFFF; /* White text color */
+}
 
-    .IDS {
-        border-radius: 16px;
-        width: 75%;
-        background-color: #956a9d;
-        color: #FFFF;
-    }
+.IDS {
+    border-radius: 16px;
+    width: 75%;
+    background-color: #2196F3;
+    color: #FFFFFF; /* White text color */
+}
 
-    ::placeholder {
-        color: black;
-    }
+::placeholder {
+    color: white;
+}
+
 
     hr {
         border: 1px solid #f1f1f1;
@@ -437,6 +437,9 @@
             const imageElement = document.querySelector('.review-image');
             const titleElement = document.querySelector('.review-title');
             const descriptionElement = document.querySelector('.review-description');
+
+const paragraphElement = document.createElement('p');
+
             const authorElement = document.querySelector('.review-author');
 
             if (reviewData.type === "Book") {
@@ -449,12 +452,16 @@
             }
 
             if (reviewData.type === "Chapter") {
-imageElement.style.display = 'none';
+imageElement.remove();
 
                 typeElement.textContent = reviewData.type;
                 idElement.textContent = `ID: ${reviewData.reviewID}`;
                 titleElement.textContent = reviewData.book.name;
-                descriptionElement.textContent = formatString(reviewData.chapter.novel);
+                
+paragraphElement.innerHTML = formatString(descriptionElement.innerHTML);
+
+descriptionElement.parentNode.replaceChild(paragraphElement, descriptionElement);
+
                 authorElement.textContent = reviewData.book.author;
             }
         });
