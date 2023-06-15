@@ -109,10 +109,8 @@
         text-decoration: none;
         font-family: 'Nunito';
         display: inline-block;
-        border: 2px solid #956a9d;
         border-radius: 16px;
-        box-shadow: 0px 0px 10px #956a9d;
-        background-color: #c499cc;
+        background-color: #2196F3
         cursor: pointer;
         padding: 20px;
         font-size: 30px;
@@ -121,7 +119,7 @@
     }
 
     button:hover {
-        background-color: #956a9d;
+        background-color: #1976D2;
         transition: 1s;
     }
 
@@ -313,6 +311,7 @@
 
     .review-title {
         margin-top: 0;
+color: #2196F3;
     }
 
     .review-description {
@@ -446,7 +445,6 @@
             }
 
             if (reviewData.type === "Chapter") {
-                imageElement.src = reviewData.chapter.thumbnail;
                 typeElement.textContent = reviewData.type;
                 idElement.textContent = `ID: ${reviewData.reviewID}`;
                 titleElement.textContent = reviewData.book.name;
