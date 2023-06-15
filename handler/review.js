@@ -76,7 +76,7 @@ module.exports = {
             chapter.name = data.name;
             chapter.credits = data.credits;
             chapter.intro = data.intro;
-            chapter.novel data.novel;   
+            chapter.novel = data.novel;   
           }
           bookData.chapters.push({
             name: data.name,
