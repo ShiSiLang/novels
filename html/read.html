@@ -546,6 +546,10 @@
       success.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> <strong>Success!</strong> ${successData.success}`;
       success.style.display = "block";
       document.getElementById("sendComment").disabled = false;
+
+const commentBox = document.querySelector('.comment-box');
+
+      commentBox.style.display = 'none';
     } else {
       const errorData = await response.json();
       error.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> ${errorData.error}`;
