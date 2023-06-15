@@ -18,86 +18,93 @@
 </head>
 <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" />
 <style>
-        body {  
-      background-size: 400% 400%;  
-      margin: 0;  
-      background-color: #121212;  
-      font-family: 'Nunito';  
-      font-size: 22px;  
-    }  
-  
-    .flex {  
-      display: flex;  
-      justify-content: center;  
-    }  
-  
-  .topnav {  
-    background-color: #2196F3;  
-    overflow: hidden;  
-  }  
-  
-  /* Style the links inside the navigation bar */  
-  .topnav a {  
-    float: left;  
-    display: block;  
-    color: #ffffff;  
-    text-align: center;  
-    padding: 14px 16px;  
-    text-decoration: none;  
-    font-size: 17px;  
-  }  
-  
-  /* Change the color of links on hover */  
-  .topnav a:hover {  
-    background-color: #1976D2;  
-    color: #ffffff;  
-  }  
-  
-  .topnav a.active {  
-    background-color: #1976D2;  
-    color: white;  
-  }  
-  
-  /* Hide the link that should open and close the topnav on small screens */  
-  .topnav .icon {  
-    display: none;  
-  }  
-  
-  @media screen and (max-width: 600px) {  
-    .topnav a:not(:first-child) {display: none;}  
-    .topnav a.icon {  
-      float: right;  
-      display: block;  
-    }  
-  }  
-  
-  /* The "responsive" class is added to the topnav with JavaScript when the user clicks on the icon. This class makes the topnav look good on small screens (display the links vertically instead of horizontally) */  
-  @media screen and (max-width: 600px) {  
-    .topnav.responsive {position: relative;}  
-    .topnav.responsive a.icon {  
-      position: absolute;  
-      right: 0;  
-      top: 0;  
-    }  
-    .topnav.responsive a {  
-      float: none;  
-      display: block;  
-      text-align: left;  
-    }  
-  }  
-  
-    .text {  
-      margin-bottom: 25px;  
-    }  
-  
-   .text h1 {  
-      text-align: center;  
-      color: #2196F3;  
-    }  
-  
-    .text p {  
-      text-align: center;  
-      color: #FFFFFF;  
+    body {
+        background-size: 400% 400%;
+        margin: 0;
+        background-color: #121212;
+        font-family: 'Nunito';
+        font-size: 22px;
+    }
+
+    .flex {
+        display: flex;
+        justify-content: center;
+    }
+
+    .topnav {
+        background-color: #2196F3;
+        overflow: hidden;
+    }
+
+    /* Style the links inside the navigation bar */
+    .topnav a {
+        float: left;
+        display: block;
+        color: #ffffff;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        font-size: 17px;
+    }
+
+    /* Change the color of links on hover */
+    .topnav a:hover {
+        background-color: #1976D2;
+        color: #ffffff;
+    }
+
+    .topnav a.active {
+        background-color: #1976D2;
+        color: white;
+    }
+
+    /* Hide the link that should open and close the topnav on small screens */
+    .topnav .icon {
+        display: none;
+    }
+
+    @media screen and (max-width: 600px) {
+        .topnav a:not(:first-child) {
+            display: none;
+        }
+
+        .topnav a.icon {
+            float: right;
+            display: block;
+        }
+    }
+
+    /* The "responsive" class is added to the topnav with JavaScript when the user clicks on the icon. This class makes the topnav look good on small screens (display the links vertically instead of horizontally) */
+    @media screen and (max-width: 600px) {
+        .topnav.responsive {
+            position: relative;
+        }
+
+        .topnav.responsive a.icon {
+            position: absolute;
+            right: 0;
+            top: 0;
+        }
+
+        .topnav.responsive a {
+            float: none;
+            display: block;
+            text-align: left;
+        }
+    }
+
+    .text {
+        margin-bottom: 25px;
+    }
+
+    .text h1 {
+        text-align: center;
+        color: #2196F3;
+    }
+
+    .text p {
+        text-align: center;
+        color: #FFFFFF;
     }
 
 
@@ -110,7 +117,7 @@
         font-family: 'Nunito';
         display: inline-block;
         border-radius: 16px;
-        background-color: #2196F3
+        background-color: #2196F3;
         cursor: pointer;
         padding: 20px;
         font-size: 30px;
@@ -175,31 +182,31 @@
     }
 
     select {
-    width: 100%;
-    padding: 15px;
-    margin: 5px 0 22px 0;
-    background: transparent;
-    border: none;
-    color: #FFFFFF; /* White text color */
-    outline: none;
-}
+        width: 100%;
+        padding: 15px;
+        margin: 5px 0 22px 0;
+        background: transparent;
+        border: none;
+        color: #FFFFFF;
+        /* White text color */
+        outline: none;
+    }
 
-select:focus {
-    border-radius: 16px;
-    color: #FFFFFF; /* White text color */
-}
+    select:focus {
+        border-radius: 16px;
+        color: #FFFFFF;
+    }
 
-.IDS {
-    border-radius: 16px;
-    width: 75%;
-    background-color: #2196F3;
-    color: #FFFFFF; /* White text color */
-}
+    .IDS {
+        border-radius: 16px;
+        width: 75%;
+        background-color: #2196F3;
+        color: #FFFFFF;
+    }
 
-::placeholder {
-    color: white;
-}
-
+    ::placeholder {
+        color: white;
+    }
 
     hr {
         border: 1px solid #f1f1f1;
@@ -295,7 +302,7 @@ select:focus {
 
     .review-id {
         margin: 0;
-        font-size: 14px;
+        font-size: 15px;
         color: #2196F3;
     }
 
@@ -316,10 +323,11 @@ select:focus {
     }
 
     .review-description {
-  margin: 10px 0;
-  overflow-y: auto;
-  max-height: 300px; /* Set the maximum height for the scrollable area */
-}
+        margin: 10px 0;
+        overflow-y: auto;
+        max-height: 300px;
+        /* Set the maximum height for the scrollable area */
+    }
 
 
     .review-author {
@@ -329,54 +337,54 @@ select:focus {
 </style>
 
 <body>
-      <div class="topnav" id="myTopnav">  
-    <a href="/home"><i class="fa-solid fa-house"></i> Home</a>  
-    <a href="/explore"><i class="fa-solid fa-magnifying-glass"></i> Explore</a>  
-  
-  <a id="account" href="#"><i class="fa-solid fa-user"></i> My Account</a>  
-          <a id="toggle" href="#"><i class="fa-solid fa-arrow-right-from-bracket"></i> Sign Out</a>  
-  
-     <a href="https://cash.app/$PerezDeDios" target="_blank"><i class="fa-solid fa-coins"></i> Donate</a>  
-    <a href="javascript:void(0);" class="icon" onclick="myFunction()">  
-      <i class="fa-solid fa-bars"></i>  
-    </a>  
-  </div>  
-  
-  <script>  
-  function myFunction() {  
-    var x = document.getElementById("myTopnav");  
-    if (x.className === "topnav") {  
-      x.className += " responsive";  
-    } else {  
-      x.className = "topnav";  
-    }  
-  }  
-  </script>  
-  
-      <script>   
-           document.getElementById("toggle").addEventListener("click", async (e) => {  
-               if (e.target.innerText === " Sign Out") {   
-                   alert("Signing you out!");   
-                   localStorage.removeItem("user");   
-                   window.location.reload();   
-               }   
-           });   
-       </script>   
-  
-       <script>   
-           if (typeof Storage !== "undefined") {   
-               if (localStorage.user) {   
-                   let data = JSON.parse(localStorage.user);   
-      document.getElementById("account").href = `/profile/${data.id}`;   
-               } else {   
-      document.getElementById("toggle").innerHTML = '<i class="fa-solid fa-right-to-bracket"></i> Sign In';   
-                   document.getElementById("toggle").href = "/access-portal";   
-               }   
-           } else {   
-               document.getElementById("toggle").innerHTML = "<span>&empty;</span>";   
-               document.getElementById("account").innerHTML = "<span>&empty;</span>";   
-           }   
-       </script>
+    <div class="topnav" id="myTopnav">
+        <a href="/home"><i class="fa-solid fa-house"></i> Home</a>
+        <a href="/explore"><i class="fa-solid fa-magnifying-glass"></i> Explore</a>
+
+        <a id="account" href="#"><i class="fa-solid fa-user"></i> My Account</a>
+        <a id="toggle" href="#"><i class="fa-solid fa-arrow-right-from-bracket"></i> Sign Out</a>
+
+        <a href="https://cash.app/$PerezDeDios" target="_blank"><i class="fa-solid fa-coins"></i> Donate</a>
+        <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+            <i class="fa-solid fa-bars"></i>
+        </a>
+    </div>
+
+    <script>
+        function myFunction() {
+            var x = document.getElementById("myTopnav");
+            if (x.className === "topnav") {
+                x.className += " responsive";
+            } else {
+                x.className = "topnav";
+            }
+        }  
+    </script>
+
+    <script>
+        document.getElementById("toggle").addEventListener("click", async (e) => {
+            if (e.target.innerText === " Sign Out") {
+                alert("Signing you out!");
+                localStorage.removeItem("user");
+                window.location.reload();
+            }
+        });   
+    </script>
+
+    <script>
+        if (typeof Storage !== "undefined") {
+            if (localStorage.user) {
+                let data = JSON.parse(localStorage.user);
+                document.getElementById("account").href = `/profile/${data.id}`;
+            } else {
+                document.getElementById("toggle").innerHTML = '<i class="fa-solid fa-right-to-bracket"></i> Sign In';
+                document.getElementById("toggle").href = "/access-portal";
+            }
+        } else {
+            document.getElementById("toggle").innerHTML = "<span>&empty;</span>";
+            document.getElementById("account").innerHTML = "<span>&empty;</span>";
+        }   
+    </script>
 
     <div class="flex">
         <select class="IDS" name="reviewIds" id="reviewIds"></select>
@@ -438,7 +446,7 @@ select:focus {
             const titleElement = document.querySelector('.review-title');
             const descriptionElement = document.querySelector('.review-description');
 
-const paragraphElement = document.createElement('p');
+            const paragraphElement = document.createElement('p');
 
             const authorElement = document.querySelector('.review-author');
 
@@ -452,31 +460,31 @@ const paragraphElement = document.createElement('p');
             }
 
             if (reviewData.type === "Chapter") {
-imageElement.remove();
+                imageElement.remove();
 
                 typeElement.textContent = reviewData.type;
                 idElement.textContent = `ID: ${reviewData.reviewID}`;
                 titleElement.textContent = reviewData.book.name;
-                
-paragraphElement.innerHTML = formatString(descriptionElement.innerHTML);
 
-descriptionElement.parentNode.replaceChild(paragraphElement, descriptionElement);
+                paragraphElement.innerHTML = formatString(descriptionElement.innerHTML);
+
+                descriptionElement.parentNode.replaceChild(paragraphElement, descriptionElement);
 
                 authorElement.textContent = reviewData.book.author;
             }
         });
 
-      function formatString(content) { 
-         let step1 = content 
-           .split(" ") 
-           .join(" ") 
-           .replaceAll("\n", "</br>") 
-           .replaceAll("\n\n", "</br></br>"); 
-         let step2 = step1.replaceAll(/\*\*(.*?)\*\*/g, "<b>$1</b>"); 
-         let step3 = step2.replaceAll(/\*(.*?)\*/g, "<em>$1</em>"); 
-         let step4 = step3.replaceAll(/\_(.*?)\_/g, "<ins>$1</ins>"); 
-         return step4; 
-       }   
+        function formatString(content) {
+            let step1 = content
+                .split(" ")
+                .join(" ")
+                .replaceAll("\n", "</br>")
+                .replaceAll("\n\n", "</br></br>");
+            let step2 = step1.replaceAll(/\*\*(.*?)\*\*/g, "<b>$1</b>");
+            let step3 = step2.replaceAll(/\*(.*?)\*/g, "<em>$1</em>");
+            let step4 = step3.replaceAll(/\_(.*?)\_/g, "<ins>$1</ins>");
+            return step4;
+        }   
     </script>
 
     <form id="FormReview" action="/review" method="post">
@@ -520,7 +528,7 @@ descriptionElement.parentNode.replaceChild(paragraphElement, descriptionElement)
         <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
         <strong>Success!</strong> Yay.
     </div>
-    
+
     <script>
         const form = document.getElementById("FormReview");
         const error = document.getElementById("error");
