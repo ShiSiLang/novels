@@ -7,11 +7,13 @@ module.exports = {
     //return res.status(400).json({ error: `System currently down!` });
 
     let html = req.body.data;
-console.log(html)
+
     let bookData = await bookShema.findOne({ name: html.book });
 
     if (!bookData)
       return res.status(400).json({ error: `Something went wrong.` });
+
+console.log(bookData))
 
     let userObject = JSON.parse(html.user);
 
