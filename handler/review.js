@@ -71,7 +71,7 @@ module.exports = {
 
         if (data.type === "Novel") {
           if(data.replace) {
-         let chapter = bookData.chapters[1 - data.replaceNumber)
+         let chapter = bookData.chapters[1 - data.replaceNumber]
 
             chapter.name = data.name;
             chapter.credits = data.credits;
