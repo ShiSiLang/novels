@@ -488,17 +488,17 @@
   </button>
 </div>
 
+  <div class="comment-box" style="display: none;">
+    <h2>Comment</h2>
 <form class="modal-content" id="commentForm" method="post" action="/comment">
-  <input id="user" type="hidden" name="user" value="NOTHING" />
+  <input type="hidden" name="user" value="NOTHING" />
   <input type="hidden" name="book" value="$$book$$" />
   <input type="hidden" name="chapter" value="$$chapter$$" />
-</form>
 
-<div class="comment-box" style="display: none;">
-  <h2>Comment</h2>
-  <textarea rows="4" cols="50" name="comment" form="commentForm" required></textarea>
-  <button class="commentbtn" id="sendComment">Send Comment</button>
-</div>
+    <textarea rows="4" cols="50" name="comment" form="commentForm" required></textarea>
+    <input type="submit" class="commentbtn" id="sendComment" value="Send Comment" />
+</form>
+  </div>
 
 <script>
   document.getElementById("commentButton").addEventListener("click", (e) => {
