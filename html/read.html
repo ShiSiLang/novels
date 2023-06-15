@@ -17,69 +17,76 @@
   <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" />
 </head>
 <style>
-      body {  
-      background-size: 400% 400%;  
-      margin: 0;  
-      background-color: #121212;  
-      font-family: 'Nunito';  
-      font-size: 22px;  
-    }  
-  
-    .flex {  
-      display: flex;  
-      justify-content: center;  
-    }  
-  
-  .topnav {  
-    background-color: #2196F3;  
-    overflow: hidden;  
-  }  
-  
-  .topnav a {  
-    float: left;  
-    display: block;  
-    color: #ffffff;  
-    text-align: center;  
-    padding: 14px 16px;  
-    text-decoration: none;  
-    font-size: 17px;  
-  }  
-   
-  .topnav a:hover {  
-    background-color: #1976D2;  
-    color: #ffffff;  
-  }  
-  
-  .topnav a.active {  
-    background-color: #1976D2;  
-    color: white;  
-  }  
-  
-  .topnav .icon {  
-    display: none;  
-  }  
-  
-  @media screen and (max-width: 600px) {  
-    .topnav a:not(:first-child) {display: none;}  
-    .topnav a.icon {  
-      float: right;  
-      display: block;  
-    }  
-  }  
-  
-  @media screen and (max-width: 600px) {  
-    .topnav.responsive {position: relative;}  
-    .topnav.responsive a.icon {  
-      position: absolute;  
-      right: 0;  
-      top: 0;  
-    }  
-    .topnav.responsive a {  
-      float: none;  
-      display: block;  
-      text-align: left;  
-    }  
-  }  
+  body {
+    background-size: 400% 400%;
+    margin: 0;
+    background-color: #121212;
+    font-family: 'Nunito';
+    font-size: 22px;
+  }
+
+  .flex {
+    display: flex;
+    justify-content: center;
+  }
+
+  .topnav {
+    background-color: #2196F3;
+    overflow: hidden;
+  }
+
+  .topnav a {
+    float: left;
+    display: block;
+    color: #ffffff;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+  }
+
+  .topnav a:hover {
+    background-color: #1976D2;
+    color: #ffffff;
+  }
+
+  .topnav a.active {
+    background-color: #1976D2;
+    color: white;
+  }
+
+  .topnav .icon {
+    display: none;
+  }
+
+  @media screen and (max-width: 600px) {
+    .topnav a:not(:first-child) {
+      display: none;
+    }
+
+    .topnav a.icon {
+      float: right;
+      display: block;
+    }
+  }
+
+  @media screen and (max-width: 600px) {
+    .topnav.responsive {
+      position: relative;
+    }
+
+    .topnav.responsive a.icon {
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+
+    .topnav.responsive a {
+      float: none;
+      display: block;
+      text-align: left;
+    }
+  }
 
   .text {
     text-align: center;
@@ -89,17 +96,17 @@
     text-align: left;
   }
 
-.text h1 {  
-      color: #2196F3;  
-    }  
+  .text h1 {
+    color: #2196F3;
+  }
 
-.text h2 {  
-      color: #2196F3;  
-    }  
-  
-    .text p {   
-      color: #FFFFFF;  
-    }
+  .text h2 {
+    color: #2196F3;
+  }
+
+  .text p {
+    color: #FFFFFF;
+  }
 
   .text-novel {
     border-radius: 16px;
@@ -249,44 +256,44 @@
     }
   }
 
-/*comment box*/
+  /*comment box*/
 
-.comment-box {
-  display: none;
-  max-width: 700px;
-  margin: 0 auto;
-  padding: 10px;
-  background-color: #2196F3;
-  border: none;
-  color: white;
-  border-radius: 16px;
-}
+  .comment-box {
+    display: none;
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 10px;
+    background-color: #2196F3;
+    border: none;
+    color: white;
+    border-radius: 16px;
+  }
 
-.comment-box h2 {
-  color: white;
-  margin: 0 0 9px 0;
-}
+  .comment-box h2 {
+    color: white;
+    margin: 0 0 9px 0;
+  }
 
-.comment-box textarea {
-  background-color: #1976D2;
-  border: none;
-  color: white;
-  outline: none;
-  width: 100%;
-  height: 120px;
-  font-size: 17px;
-}
+  .comment-box textarea {
+    background-color: #1976D2;
+    border: none;
+    color: white;
+    outline: none;
+    width: 100%;
+    height: 120px;
+    font-size: 17px;
+  }
 
   .commentbtn {
-  cursor: pointer;
-  background-color: #1976D2;
-  border: none;
-  color: white !important;
-}
+    cursor: pointer;
+    background-color: #1976D2;
+    border: none;
+    color: white !important;
+  }
 
-.commentbtn:hover {
-  opacity: 1;
-}
+  .commentbtn:hover {
+    opacity: 1;
+  }
 
   /* The alert message box */
   .alert {
@@ -411,57 +418,58 @@
 </script>
 
 <body onload="changeDivContent()">
-    <div class="topnav" id="myTopnav">  
-    <a href="/home"><i class="fa-solid fa-house"></i> Home</a>  
-    <a href="/explore" class="active"><i class="fa-solid fa-magnifying-glass"></i> Explore</a>  
-  
-  <a id="account" href="#"><i class="fa-solid fa-user"></i> My Account</a>  
-          <a id="toggle" href="#"><i class="fa-solid fa-arrow-right-from-bracket"></i> Sign Out</a>  
-  
-     <a href="https://cash.app/$PerezDeDios" target="_blank"><i class="fa-solid fa-coins"></i> Donate</a>  
-    <a href="javascript:void(0);" class="icon" onclick="myFunction()">  
-      <i class="fa-solid fa-bars"></i>  
-    </a>  
-  </div>  
-  
-  <script>  
-  function myFunction() {  
-    var x = document.getElementById("myTopnav");  
-    if (x.className === "topnav") {  
-      x.className += " responsive";  
-    } else {  
-      x.className = "topnav";  
+  <div class="topnav" id="myTopnav">
+    <a href="/home"><i class="fa-solid fa-house"></i> Home</a>
+    <a href="/explore" class="active"><i class="fa-solid fa-magnifying-glass"></i> Explore</a>
+
+    <a id="account" href="#"><i class="fa-solid fa-user"></i> My Account</a>
+    <a id="toggle" href="#"><i class="fa-solid fa-arrow-right-from-bracket"></i> Sign Out</a>
+
+    <a href="https://cash.app/$PerezDeDios" target="_blank"><i class="fa-solid fa-coins"></i> Donate</a>
+    <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+      <i class="fa-solid fa-bars"></i>
+    </a>
+  </div>
+
+  <script>
+    function myFunction() {
+      var x = document.getElementById("myTopnav");
+      if (x.className === "topnav") {
+        x.className += " responsive";
+      } else {
+        x.className = "topnav";
+      }
     }  
-  }  
-  </script>  
-  
-      <script>   
-           document.getElementById("toggle").addEventListener("click", async (e) => {  
-               if (e.target.innerText === " Sign Out") {   
-                   alert("Signing you out!");   
-                   localStorage.removeItem("user");   
-                   window.location.reload();   
-               }   
-           });   
-       </script>   
-  
-       <script>   
-           if (typeof Storage !== "undefined") {   
-               if (localStorage.user) {   
-                   let data = JSON.parse(localStorage.user);   
-      document.getElementById("account").href = `/profile/${data.id}`;   
-               } else {   
-      document.getElementById("toggle").innerHTML = '<i class="fa-solid fa-right-to-bracket"></i> Sign In';   
-                   document.getElementById("toggle").href = "/access-portal";   
-               }   
-           } else {   
-               document.getElementById("toggle").innerHTML = "<span>&empty;</span>";   
-               document.getElementById("account").innerHTML = "<span>&empty;</span>";   
-           }   
-       </script>
+  </script>
+
+  <script>
+    document.getElementById("toggle").addEventListener("click", async (e) => {
+      if (e.target.innerText === " Sign Out") {
+        alert("Signing you out!");
+        localStorage.removeItem("user");
+        window.location.reload();
+      }
+    });   
+  </script>
+
+  <script>
+    if (typeof Storage !== "undefined") {
+      if (localStorage.user) {
+        let data = JSON.parse(localStorage.user);
+        document.getElementById("account").href = `/profile/${data.id}`;
+      } else {
+        document.getElementById("toggle").innerHTML = '<i class="fa-solid fa-right-to-bracket"></i> Sign In';
+        document.getElementById("toggle").href = "/access-portal";
+      }
+    } else {
+      document.getElementById("toggle").innerHTML = "<span>&empty;</span>";
+      document.getElementById("account").innerHTML = "<span>&empty;</span>";
+    }   
+  </script>
 
   <div class="flex">
-    <button class="topButtons" style="width:auto;" onclick="window.location.href='/explore/$$book$$'"><i class="fa-solid fa-book"></i> Book</button>
+    <button class="topButtons" style="width:auto;" onclick="window.location.href='/explore/$$book$$'"><i
+        class="fa-solid fa-book"></i> Book</button>
     <button class="topButtons" style="width:auto;" onclick="toggleText()">
       Toggle Text
     </button>
@@ -482,93 +490,91 @@
     <h1>Comments</h1>
   </div>
 
-<div class="flex">
-  <button class="topButtons" id="commentButton" style="width:auto;">
-    <i class="fa-solid fa-comment"></i> Comment
-  </button>
-</div>
-
- <form id="commentForm" method="post" action="/comment">
-  <input id="userData" type="hidden" name="user" value="NOTHING" />
-  <input type="hidden" name="book" value="$$book$$" />
-  <input type="hidden" name="chapter" value="$$chapter$$" />
-
-  <div class="comment-box" style="display: none;">
-    <h2>Comment</h2>
-    <textarea rows="4" cols="50" name="comment" form="commentForm" required></textarea>
-    <button type="submit" class="commentbtn" id="sendComment">Send Comment</button>
+  <div class="flex">
+    <button class="topButtons" id="commentButton" style="width:auto;">
+      <i class="fa-solid fa-comment"></i> Comment
+    </button>
   </div>
-</form>
 
+  <form id="commentForm" method="post" action="/comment">
+    <input id="userData" type="hidden" name="user" value="NOTHING" />
+    <input type="hidden" name="book" value="$$book$$" />
+    <input type="hidden" name="chapter" value="$$chapter$$" />
 
-<script>
-  if (typeof Storage !== "undefined") {
-    if (localStorage.user) {
-      let data = JSON.parse(localStorage.user);
-      let userObject = JSON.stringify({ username: data.username, id: data.id, email: data.email, password: data.password });
-      document.getElementById("userData").value = userObject;
- }
-}
-</script>
+    <div class="comment-box" style="display: none;">
+      <h2>Comment</h2>
+      <textarea rows="4" cols="50" name="comment" form="commentForm" required></textarea>
+      <button type="submit" class="commentbtn" id="sendComment">Send Comment</button>
+    </div>
+  </form>
 
+  <div id="error" class="alert">
+    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+    Error.
+  </div>
 
-<script>
-  document.getElementById("commentButton").addEventListener("click", (e) => {
-    if (!localStorage.user) {
-      e.preventDefault();
-      const error = document.getElementById("error");
-      error.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> Sign-In to comment!`;
-      error.style.display = "block";
-    } else {
-      const commentBox = document.querySelector('.comment-box');
-      commentBox.style.display = commentBox.style.display === 'none' ? 'block' : 'none';
+  <div id="success" class="alert">
+    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+    <strong>Success!</strong> Yay.
+  </div>
+
+  <script>
+    if (typeof Storage !== "undefined") {
+      if (localStorage.user) {
+        let data = JSON.parse(localStorage.user);
+        let userObject = JSON.stringify({ username: data.username, id: data.id, email: data.email, password: data.password });
+        document.getElementById("userData").value = userObject;
+      }
     }
-  });
+  </script>
 
-  const form = document.getElementById("commentForm");
-  const error = document.getElementById("error");
-  const success = document.getElementById("success");
-
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    document.getElementById("sendComment").disabled = true;
-    const data = Object.fromEntries(new FormData(form).entries());
-    const response = await fetch("/comment", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ data }),
+  <script>
+    document.getElementById("commentButton").addEventListener("click", (e) => {
+      if (!localStorage.user) {
+        e.preventDefault();
+        const error = document.getElementById("error");
+        error.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> Sign-In to comment!`;
+        error.style.display = "block";
+      } else {
+        const commentBox = document.querySelector('.comment-box');
+        commentBox.style.display = commentBox.style.display === 'none' ? 'block' : 'none';
+      }
     });
-console.log(response)
 
-    if (response.ok) {
-      const successData = await response.json();
-      success.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> <strong>Success!</strong> ${successData.success}`;
-      success.style.display = "block";
-      document.getElementById("sendComment").disabled = false;
+    const form = document.getElementById("commentForm");
+    const error = document.getElementById("error");
+    const success = document.getElementById("success");
 
-const commentBox = document.querySelector('.comment-box');
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      document.getElementById("sendComment").disabled = true;
+      const data = Object.fromEntries(new FormData(form).entries());
+      const response = await fetch("/comment", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ data }),
+      });
+      console.log(response)
 
-      commentBox.style.display = 'none';
-    } else {
-      const errorData = await response.json();
-      error.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> ${errorData.error}`;
-      error.style.display = "block";
-      document.getElementById("sendComment").disabled = false;
-    }
-  });
-</script>
+      if (response.ok) {
+        const successData = await response.json();
+        success.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> <strong>Success!</strong> ${successData.success}`;
+        success.style.display = "block";
+        document.getElementById("sendComment").disabled = false;
 
-<div id="error" class="alert">
-  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-  Error.
-</div>
+        const commentBox = document.querySelector('.comment-box');
 
-<div id="success" class="alert">
-  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-  <strong>Success!</strong> Yay.
-</div>
+        commentBox.style.display = 'none';
+      } else {
+        const errorData = await response.json();
+        error.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> ${errorData.error}`;
+        error.style.display = "block";
+        document.getElementById("sendComment").disabled = false;
+      }
+    });
+  </script>
 
   <div class="comments-container" id="comments"></div>
 
