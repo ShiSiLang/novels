@@ -449,6 +449,8 @@
             }
 
             if (reviewData.type === "Chapter") {
+imageElement.style.display = 'none';
+
                 typeElement.textContent = reviewData.type;
                 idElement.textContent = `ID: ${reviewData.reviewID}`;
                 titleElement.textContent = reviewData.book.name;
