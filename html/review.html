@@ -290,12 +290,13 @@
 
     .review-type {
         margin: 0;
+        color: #2196F3;
     }
 
     .review-id {
         margin: 0;
         font-size: 14px;
-        color: #666;
+        color: #2196F3;
     }
 
     .image-container {
@@ -311,12 +312,15 @@
 
     .review-title {
         margin-top: 0;
-color: #2196F3;
+        color: #2196F3;
     }
 
     .review-description {
-        margin: 10px 0;
-    }
+  margin: 10px 0;
+  overflow-y: auto;
+  max-height: 300px; /* Set the maximum height for the scrollable area */
+}
+
 
     .review-author {
         margin: 10px 0;
@@ -448,13 +452,11 @@ color: #2196F3;
                 typeElement.textContent = reviewData.type;
                 idElement.textContent = `ID: ${reviewData.reviewID}`;
                 titleElement.textContent = reviewData.book.name;
-                descriptionElement.textContent = trim(reviewData.chapter.novel, 200);
+                descriptionElement.textContent = reviewData.chapter.novel;
                 authorElement.textContent = reviewData.book.author;
             }
         });
-        function trim(str, max) {
-            return str.length > max ? `${str.slice(0, max - 3)}...` : str;
-        }
+        
     </script>
 
     <form id="FormReview" action="/review" method="post">
