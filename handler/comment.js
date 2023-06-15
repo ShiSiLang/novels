@@ -13,7 +13,7 @@ module.exports = {
     if (!bookData)
       return res.status(400).json({ error: `Something went wrong.` });
 
-console.log(bookData))
+console.log(bookData)
 
     let userObject = JSON.parse(html.user);
 
