@@ -496,7 +496,7 @@
   <div class="comment-box" style="display: none;">
     <h2>Comment</h2>
     <textarea rows="4" cols="50" name="comment" form="commentForm" required></textarea>
-    <input type="submit" class="commentbtn" id="sendComment" value="Send Comment" />
+    <button type="submit" class="commentbtn" id="sendComment">Send Comment</button>
   </div>
 </form>
 
@@ -534,13 +534,11 @@
       const successData = await response.json();
       success.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> <strong>Success!</strong> ${successData.success}`;
       success.style.display = "block";
-      alert(successData.success);
       document.getElementById("sendComment").disabled = false;
     } else {
       const errorData = await response.json();
       error.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> ${errorData.error}`;
       error.style.display = "block";
-      alert(errorData.error);
       document.getElementById("sendComment").disabled = false;
     }
   });
@@ -551,7 +549,7 @@
   Error.
 </div>
 
-<div id="success" class="alert success">
+<div id="success" class="alert">
   <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
   <strong>Success!</strong> Yay.
 </div>
@@ -562,17 +560,9 @@
       let data = JSON.parse(localStorage.user);
       let userObject = JSON.stringify({ username: data.username, id: data.id, email: data.email, password: data.password });
       document.getElementById("user").value = userObject;
-    } else {
-      document.getElementById("pbb").style.display = "none";
-      document.getElementById("pcb").style.display = "none";
-    }
-  } else {
-    document.getElementById("pbb").style.display = "none";
-    document.getElementById("pcb").style.display = "none";
-  }
+ }
+}
 </script>
-
-
 
   <div class="comments-container" id="comments"></div>
 
