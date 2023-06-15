@@ -6,14 +6,10 @@ const { trim, getBase64DataUrl } = require("../util.js");
 
 module.exports = {
   name: "upload-chapter",
-  upload: "thumbnail",
   run: async (req, res) => {
     // return res.status(400).json({ error: `System currently down!` });
 
     let html = req.body;
-
-    if (!req.file)
-      return res.status(400).json({ error: `Please upload an icon.` });
 
     let userObject = JSON.parse(html.user);
 
