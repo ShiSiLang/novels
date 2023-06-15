@@ -396,12 +396,12 @@
             <p class="review-id"></p>
         </div>
         <div class="review-details">
-            <div class="image-container">
+            <div class="image-container" style="display: none;">
                 <img src="" alt="" class="review-image">
             </div>
             <div class="review-text">
                 <h3 class="review-title"></h3>
-                <p class="review-description"></p>
+                <p id="rd" class="review-description"></p>
                 <p class="review-author"></p>
             </div>
         </div>
@@ -444,13 +444,11 @@
             const idElement = document.querySelector('.review-id');
             const imageElement = document.querySelector('.review-image');
             const titleElement = document.querySelector('.review-title');
-            const descriptionElement = document.querySelector('.review-description');
-
-            const paragraphElement = document.createElement('p');
-
+            const descriptionElement = document.getElementById('rd');
             const authorElement = document.querySelector('.review-author');
 
             if (reviewData.type === "Book") {
+                imageElement.style.display = 'block';
                 imageElement.src = reviewData.book.icon;
                 typeElement.textContent = reviewData.type;
                 idElement.textContent = `ID: ${reviewData.reviewID}`;
@@ -460,16 +458,10 @@
             }
 
             if (reviewData.type === "Chapter") {
-                imageElement.src = "";
-
                 typeElement.textContent = reviewData.type;
                 idElement.textContent = `ID: ${reviewData.reviewID}`;
                 titleElement.textContent = reviewData.book.name;
-
-                paragraphElement.innerHTML = formatString(descriptionElement.innerHTML);
-
-                descriptionElement.parentNode.replaceChild(paragraphElement, descriptionElement);
-
+                descriptionElement.innerHTML = formatString(descriptionElement.innerHTML);
                 authorElement.textContent = reviewData.book.author;
             }
         });
