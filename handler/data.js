@@ -76,9 +76,6 @@ module.exports = {
               name: v.chapter.name,
               intro: v.chapter.intro,
               credits: v.chapter.credits,
-              thumbnail: `data:image/png;base64,${v.chapter.thumbnail.toString(
-                "base64"
-              )}`,
               type: v.chapter.type,
               novel: v.chapter.novel,
             },
@@ -145,7 +142,7 @@ module.exports = {
             name: v.name,
             intro: v.intro,
             credits: v.credits,
-            thumbnail: `https://lonelyballmediacdn-production.up.railway.app/image/${v.thumbnail}`,
+            thumbnail: `https://lonelyballmediacdn-production.up.railway.app/image/${book.icon}`,
             type: v.type,
             images: v.images,
             novel: v.novel,
