@@ -474,7 +474,7 @@
               <img class="pfp" src="${chapter.comments[i].icon}" alt="Avatar">
               </div>
               <div class="comment-content">
-                <h4 class="commenter-name"><a href="/profile/${chapter.comments[i].id}">${chapter.comments[i].username}</a></h4>
+                <h4 class="commenter-name"><a href="/profile/${chapter.comments[i].userID}">${chapter.comments[i].username}</a></h4>
                 <span class="comment-date">${chapter.comments[i].date}</span>
                 <p class="comment-text">${chapter.comments[i].spoiler === true ? `<span class="spoiler"> ${chapter.comments[i].comment} </span>` : chapter.comments[i].comment}</p>
                 </div>
