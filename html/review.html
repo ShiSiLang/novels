@@ -460,7 +460,7 @@
             }
 
             if (reviewData.type === "Chapter") {
-                imageElement.remove();
+                imageElement.src = reviewData.book.icon;
 
                 typeElement.textContent = reviewData.type;
                 idElement.textContent = `ID: ${reviewData.reviewID}`;
