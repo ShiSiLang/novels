@@ -482,117 +482,99 @@
     <h1>Comments</h1>
   </div>
 
+<div class="flex">
+  <button class="topButtons" id="commentButton" style="width:auto;">
+    <i class="fa-solid fa-comment"></i> Comment
+  </button>
+</div>
 
-  <div class="comments-container" id="comments"></div>
-
-  <div class="flex">
-    <button class="topButtons" id="commentButton" style="width:auto;"><i class="fa-solid fa-comment"></i>
-      Comment</button>
-  </div>
-
- <form class="modal-content" id="commentForm" method="post" action="/comment">
-        <input id="user" type="hidden" name="user" value="NOTHING" />
-
-        <input type="hidden" name="book" value="$$book$$" />
-
-        <input type="hidden" name="chapter" value="$$chapter$$" />
-    </form>
+<form class="modal-content" id="commentForm" method="post" action="/comment">
+  <input id="user" type="hidden" name="user" value="NOTHING" />
+  <input type="hidden" name="book" value="$$book$$" />
+  <input type="hidden" name="chapter" value="$$chapter$$" />
+</form>
 
 <div class="comment-box" style="display: none;">
   <h2>Comment</h2>
-  <textarea rows="4" cols="50" name="comment" form="commentForm" required</textarea>
-<button class="commentbtn" id="sendComment">Send Comment</button>
+  <textarea rows="4" cols="50" name="comment" form="commentForm" required></textarea>
+  <button class="commentbtn" id="sendComment">Send Comment</button>
 </div>
 
-  <script>
-    document
-      .getElementById("commentButton")
-      .addEventListener("click", async (e) => {
-        if (!localStorage.user) {
-          e.preventDefault();
-          error.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-  Sign-In to comment!`;
-          error.style.display = "block";
-        } else {
-     
-  const commentBox = document.querySelector('.comment-box');
+<script>
+  document.getElementById("commentButton").addEventListener("click", (e) => {
+    if (!localStorage.user) {
+      e.preventDefault();
+      const error = document.getElementById("error");
+      error.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> Sign-In to comment!`;
+      error.style.display = "block";
+    } else {
+      const commentBox = document.querySelector('.comment-box');
+      commentBox.style.display = commentBox.style.display === 'none' ? 'block' : 'none';
+    }
+  });
 
-  
-    commentBox.style.display = commentBox.style.display === 'none' ? 'block' : 'none';
-        }
-      });
-  </script>
+  const form = document.getElementById("commentForm");
+  const error = document.getElementById("error");
+  const success = document.getElementById("success");
 
-  <div id="error" class="alert">
-    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-    Error.
-  </div>
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    document.getElementById("sendComment").disabled = true;
+    const data = Object.fromEntries(new FormData(form).entries());
+    const response = await fetch("/comment", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ data }),
+    });
 
-  <div id="success" class="alert success">
-    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-    <strong>Success!</strong> Yay.
-  </div>
+    if (response.ok) {
+      const successData = await response.json();
+      success.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> <strong>Success!</strong> ${successData.success}`;
+      success.style.display = "block";
+      alert(successData.success);
+      document.getElementById("sendComment").disabled = false;
+    } else {
+      const errorData = await response.json();
+      error.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> ${errorData.error}`;
+      error.style.display = "block";
+      alert(errorData.error);
+      document.getElementById("sendComment").disabled = false;
+    }
+  });
+</script>
 
-  <script>
-    if (typeof Storage !== "undefined") {
-      if (localStorage.user) {
-        let data = JSON.parse(localStorage.user);
-        let userObject = JSON.stringify({ username: data.username, id: data.id, email: data.email, password: data.password })
-        document.getElementById("user").value = userObject;
-      } else {
-        document.getElementById("pbb").style.display = "none";
-        document.getElementById("pcb").style.display = "none";
-      }
+<div id="error" class="alert">
+  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+  Error.
+</div>
+
+<div id="success" class="alert success">
+  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+  <strong>Success!</strong> Yay.
+</div>
+
+<script>
+  if (typeof Storage !== "undefined") {
+    if (localStorage.user) {
+      let data = JSON.parse(localStorage.user);
+      let userObject = JSON.stringify({ username: data.username, id: data.id, email: data.email, password: data.password });
+      document.getElementById("user").value = userObject;
     } else {
       document.getElementById("pbb").style.display = "none";
       document.getElementById("pcb").style.display = "none";
     }
-  </script>
+  } else {
+    document.getElementById("pbb").style.display = "none";
+    document.getElementById("pcb").style.display = "none";
+  }
+</script>
 
-  <script>
-    const form = document.getElementById("commentForm");
-    const error = document.getElementById("error");
-    const success = document.getElementById("success");
 
-    form.addEventListener("submit", async (e) => {
-      e.preventDefault();
-      document.getElementById("submit").disabled = true;
-      const data = Object.fromEntries(new FormData(form).entries());
-      const response = await fetch("/comment", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ data }),
-      });
 
-      if (response.ok) {
-        // Display success message here
-        const successData = await response.json();
-        success.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-      <strong>Success!</strong> ${successData.success}`;
-        success.style.display = "block";
-        alert(successData.success)
-        document.getElementById("submit").disabled = false;
-      } else {
-        const errorData = await response.json();
-        error.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-  ${errorData.error}`;
-        error.style.display = "block";
-        alert(errorData.error)
-        document.getElementById("submit").disabled = false;
-      }
-    });
-  </script>
+  <div class="comments-container" id="comments"></div>
 
-  <script>
-    var modal = document.getElementById("modal");
-    window.onclick = function (event) {
-      if (event.target == modal) {
-        modal.style.display = "none";
-      }
-    };
-  </script>
   <script>
     function toggleText() {
       var element = document.querySelector(".text");
