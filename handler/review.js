@@ -31,11 +31,16 @@ module.exports = {
         // Send the request to the CDN server
         let request;
         try {
-          request = await axios.post("https://lonelyballmediacdn-production.up.railway.app/upload", {
-            binaryDataArray: [data.icon.toString("base64")],
-            password: process.env.devPassword
-          });
-        } catch (err) { console.log(err) }
+          request = await axios.post(
+            "https://lonelyballmediacdn-production.up.railway.app/upload",
+            {
+              binaryDataArray: [data.icon.toString("base64")],
+              password: process.env.devPassword,
+            }
+          );
+        } catch (err) {
+          console.log(err);
+        }
 
         let date = new Date();
 
@@ -70,13 +75,14 @@ module.exports = {
         });
 
         if (data.type === "Novel") {
-          if(data.replace) {
-         let chapter = bookData.chapters[1 - data.replaceNumber]
+          console.log(data);
+          if (data.replace) {
+            let chapter = bookData.chapters[1 - data.replaceNumber];
 
             chapter.name = data.name;
             chapter.credits = data.credits;
             chapter.intro = data.intro;
-            chapter.novel = data.novel;   
+            chapter.novel = data.novel;
           }
           bookData.chapters.push({
             name: data.name,
@@ -86,16 +92,22 @@ module.exports = {
             novel: data.novel,
           });
         } else if (data.type === "Manga") {
-          let binaryDataArray = data.images.map((imageData) => imageData.toString("base64"));
+          let binaryDataArray = data.images.map((imageData) =>
+            imageData.toString("base64")
+          );
 
           let request;
           try {
-            request = await axios.post("https://lonelyballmediacdn-production.up.railway.app/upload", {
-              binaryDataArray,
-              password: process.env.devPassword
-            });
-          } catch (err) { console.log(err) }
-
+            request = await axios.post(
+              "https://lonelyballmediacdn-production.up.railway.app/upload",
+              {
+                binaryDataArray,
+                password: process.env.devPassword,
+              }
+            );
+          } catch (err) {
+            console.log(err);
+          }
 
           bookData.chapters.push({
             name: data.name,
@@ -123,16 +135,20 @@ module.exports = {
       });
 
       let params = {
-  embeds: [
-    {
-      title: data.name,
-      url: new URL(`https://novels-production.up.railway.app/explore/${reviewData.book.name}`).toString(),
-      description: html.type2 === "Chapter" ? `Chapter: ${reviewData.chapter.name} has been accepted!` : "Book Accepted!",
-      color: 65280,
-    },
-  ],
-};
-
+        embeds: [
+          {
+            title: data.name,
+            url: new URL(
+              `https://novels-production.up.railway.app/explore/${reviewData.book.name}`
+            ).toString(),
+            description:
+              html.type2 === "Chapter"
+                ? `Chapter: ${reviewData.chapter.name} has been accepted!`
+                : "Book Accepted!",
+            color: 65280,
+          },
+        ],
+      };
 
       await reviewShema.findOneAndDelete({ reviewID: html.reviewID });
 
@@ -159,9 +175,9 @@ module.exports = {
           {
             title: bookData.book.name,
             description:
-          html.type2 === "Chapter"
-            ? `Chapter: ${bookData.chapter.name} has been denied`
-            : "Book Denied",
+              html.type2 === "Chapter"
+                ? `Chapter: ${bookData.chapter.name} has been denied`
+                : "Book Denied",
             color: 16711680,
           },
         ],
