@@ -9,7 +9,7 @@ module.exports = {
   get: true,
   run: async (req, res) => {
     let id = req.params.id;
-    let user = await profileShema.findOne({ id: id }) || await profileShema.findOne({ username: id })
+    let user = await profileShema.findOne({ id: id });
 
     if (!user) return res.sendFile(dir("error"));
 
