@@ -11,6 +11,8 @@ module.exports = {
 
     let html = req.body;
 
+console.log(html)
+
     let userObject = JSON.parse(html.user);
 
     let user = await profileShema.findOne({
