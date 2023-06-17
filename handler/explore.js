@@ -20,8 +20,6 @@ module.exports = {
       encoding: "utf8",
     });
 
-    book.icon = `https://lonelyballmediacdn-production.up.railway.app/image/${book.icon}`;
-
     let user = await profileShema.findOne({ id: book.author });
 
     file = file.replaceAll("$$name$$", book.name);
