@@ -24,6 +24,11 @@ module.exports = {
       if (!reviewData)
         return res.status(400).json({ error: `Data not found.` });
 
+      const axiosInstance = axios.create({
+        maxContentLength: Infinity,
+        maxBodyLength: Infinity,
+      });
+
       let data;
       if (html.type2 === "Book") {
         data = reviewData.book;
@@ -31,7 +36,7 @@ module.exports = {
         // Send the request to the CDN server
         let request;
         try {
-          request = await axios.post(
+          request = await axiosInstance.post(
             "https://lonelyballmediacdn-production.up.railway.app/upload",
             {
               binaryDataArray: [data.icon.toString("base64")],
