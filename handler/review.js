@@ -84,14 +84,14 @@ module.exports = {
             chapter.intro = data.intro;
             chapter.novel = data.novel;
           } else {
-          bookData.chapters.push({
-            name: data.name,
-            intro: data.intro,
-            credits: data.credits,
-            type: data.type,
-            novel: data.novel,
-          });
-}
+            bookData.chapters.push({
+              name: data.name,
+              intro: data.intro,
+              credits: data.credits,
+              type: data.type,
+              novel: data.novel,
+            });
+          }
         } else if (data.type === "Manga") {
           let binaryDataArray = data.images.map((imageData) =>
             imageData.toString("base64")

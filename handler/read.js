@@ -31,7 +31,10 @@ module.exports = {
       file = file.replaceAll("$$bookDescription$$", book.description);
       file = file.replaceAll("$$next$$", `${chapter + 1}`);
       file = file.replaceAll("$$previous$$", `${chapter - 1}`);
-      file = file.replaceAll("$$thumbnail$$", `https://lonelyballmediacdn-production.up.railway.app/image/${book.icon}`);
+      file = file.replaceAll(
+        "$$thumbnail$$",
+        `https://lonelyballmediacdn-production.up.railway.app/image/${book.icon}`
+      );
 
       async function addBook(book) {
         let getSystem = await system.findOne({
