@@ -26,7 +26,6 @@ module.exports = {
         "$$data$$",
         `'https://novels-production.up.railway.app/data/book/${book.name}'`
       );
-      file = file.replaceAll("$$icon$$", book.icon);
       file = file.replaceAll("$$chapter$$", book.chapters[chapter - 1]?.name);
       file = file.replaceAll("$$bookDescription$$", book.description);
       file = file.replaceAll("$$next$$", `${chapter + 1}`);
