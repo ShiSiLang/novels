@@ -296,10 +296,10 @@
         const avatar = urlParams.get('avatar');
         const email = urlParams.get('email');
         const author = urlParams.get('author');
-        const password = urlParams.get('password');
+        const dataID = urlParams.get('dataID');
 
         let params = {
-          id, username, avatar, email, author, password
+          id, username, avatar, email, author, dataID
         }
         localStorage.setItem("user", JSON.stringify(params));
       } else {

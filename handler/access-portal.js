@@ -76,19 +76,6 @@ module.exports = {
       const banner = userData.banner;
       const avatarURL = `https://cdn.discordapp.com/avatars/${userId}/${avatar}.png`;
 
-      function generatePassword() {
-        let charset =
-          "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_-+=`~?/.>,<;:'}{[]|";
-        let n = charset.length,
-          a = [];
-        for (let i = 0, l = 20; i < l; i++) {
-          a.push(charset[Math.floor(Math.random() * n)]);
-        }
-        return a.join("");
-      }
-
-      let chosenPassword = generatePassword();
-
       let date = new Date();
 
       let data = await profileShema.findOne({ id: userId });
@@ -101,8 +88,7 @@ module.exports = {
         url.searchParams.append("id", userId);
         url.searchParams.append("username", username);
         url.searchParams.append("email", email);
-        url.searchParams.append("password", data.password);
-        url.searchParams.append("ok", true);
+        url.searchParams.append("dataID", data._id);
 
         return res.status(200).redirect(url);
       }
@@ -119,7 +105,6 @@ module.exports = {
         discord: null,
         twitter: null,
         author: false,
-        password: chosenPassword,
       }).save();
 
       url.searchParams.append("avatar", avatarURL);
@@ -127,8 +112,7 @@ module.exports = {
       url.searchParams.append("id", userId);
       url.searchParams.append("username", username);
       url.searchParams.append("email", email);
-      url.searchParams.append("password", chosenPassword);
-      url.searchParams.append("ok", true);
+      url.searchParams.append("dataID", data._id);
 
       return res.status(200).redirect(url);
     } catch (error) {

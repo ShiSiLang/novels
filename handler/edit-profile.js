@@ -14,7 +14,7 @@ module.exports = {
       username: userObject.username,
       id: userObject.id,
       email: userObject.email,
-      password: userObject.password,
+      _id: userObject.dataID,
     });
 
     if (!data)

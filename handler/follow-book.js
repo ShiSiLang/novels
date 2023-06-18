@@ -12,7 +12,7 @@ module.exports = {
       username: html.username,
       id: html.id,
       email: html.email,
-      password: html.password,
+      _id: html.dataID,
     });
 
     if (!user)
