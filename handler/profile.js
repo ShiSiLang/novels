@@ -19,6 +19,12 @@ module.exports = {
 
     let data = await bookShema.find().sort({ name: 1 });
 
+    console.log(
+      data.filter((v) => {
+        return v?.chapters;
+      })
+    );
+
     let comments = data.filter((v) => {
       return v?.chapters?.filter((e) => {
         return e.comments.filter((c) => {
