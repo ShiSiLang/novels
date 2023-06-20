@@ -19,25 +19,17 @@ module.exports = {
 
     let data = await bookShema.find().sort({ name: 1 });
 
-    let comments = data
-      .filter((v) => {
-        return (
-          v?.chapters?.filter((e) => {
-            return (
-              e.comments.filter((c) => {
-                return c.id === user.id;
-              }).length > 0
-            );
-          }).length > 0
-        );
-      })
-      .flatMap((v) => {
-        return v.chapters.flatMap((e) => {
-          return e.comments.filter((c) => {
-            return c.id === user.id;
-          });
-        });
-      });
+    let comments = data.filter((v) => {
+      return (
+        v?.chapters?.filter((e) => {
+          return (
+            e.comments.filter((c) => {
+              return c.id === user.id;
+            }).length > 0
+          );
+        }).length > 0
+      );
+    });
 
     console.log(comments);
 
