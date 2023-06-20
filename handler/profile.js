@@ -51,7 +51,7 @@ module.exports = {
       `https://cdn.discordapp.com/avatars/${id}/${user.avatar}.png`
     );
     file = file.replaceAll("$$followers$$", user.followers);
-    file = file.replaceAll("$$comments$$", comments.length);
+    file = file.replaceAll("$$comments$$", comments);
     file = file.replace("$$discord$$", user.discord || "#");
     file = file.replace("$$twitter$$", user.twitter || "#");
     file = file.replace(
