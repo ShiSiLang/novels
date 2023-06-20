@@ -29,15 +29,9 @@ module.exports = {
         }
       }
     }
-
-    console.log(dataComments);
-
-    let comments = data.filter((v) => {
-      return v?.chapters?.filter((e) => {
-        return e.comments.filter((c) => {
-          return c.id === user.id;
-        });
-      });
+    
+    let comments = dataComments.filter((c) => {
+      return c.userID === user.id;
     }).length;
 
     console.log(comments);
