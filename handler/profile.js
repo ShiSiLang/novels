@@ -19,9 +19,16 @@ module.exports = {
 
     let data = await bookShema.find().sort({ name: 1 });
 
-    let dataComments = data.forEach((b) => {
-      return b.chapters.forEach((c) => c.comments);
-    });
+    let dataComments = [];
+    for (let i = 0; i < data.length; i++) {
+      const book = data[i];
+      for (let ci = 0; ci < book?.chapters?.length; ci++) {
+        const chapter = book?.chapters[ci];
+        for (let index = 0; index < chapter?.comments?.length; index++) {
+          dataComments.push(chapter?.comments[index]);
+        }
+      }
+    }
 
     console.log(dataComments);
 
