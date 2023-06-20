@@ -39,6 +39,8 @@ module.exports = {
         });
       });
 
+    console.log(comments);
+
     function formatString(content) {
       let step1 = content.split(" ").join(" ").replaceAll("\n\n", "</br></br>");
       let step2 = step1.replaceAll(/\*\*(.*?)\*\*/g, "<b>$1</b>");
