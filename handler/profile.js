@@ -24,8 +24,8 @@ module.exports = {
         return e.comments.filter((c) => {
           return c.id === user.id;
         });
-      }).length;
-    });
+      });
+    }).length;
 
     console.log(comments);
 
