@@ -29,12 +29,10 @@ module.exports = {
         }
       }
     }
-    
+
     let comments = dataComments.filter((c) => {
       return c.userID === user.id;
     }).length;
-
-    console.log(comments);
 
     function formatString(content) {
       let step1 = content.split(" ").join(" ").replaceAll("\n\n", "</br></br>");
