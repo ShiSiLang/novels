@@ -283,34 +283,32 @@
   const urlParams = new URLSearchParams(queryString);
   const id = urlParams.get('id');
   const username = urlParams.get('username');
-  const ok = urlParams.get('ok');
+  const dataID = urlParams.get('dataID');
 
-  if (id && username && ok) {
-    if (ok === "true") {
-      const success = document.getElementById('success');
-      success.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+  if (id && username && dataID) {
+    const success = document.getElementById('success');
+    success.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
                       <strong>Success!</strong> ${username}, you have successfully signed in with Discord. Check out your <a href="/profile/${id}">profile</a>!`;
-      success.style.display = "block";
-      if (typeof (Storage) !== "undefined") {
-        // Store
-        const avatar = urlParams.get('avatar');
-        const email = urlParams.get('email');
-        const author = urlParams.get('author');
-        const dataID = urlParams.get('dataID');
+    success.style.display = "block";
+    if (typeof (Storage) !== "undefined") {
+      // Store
+      const avatar = urlParams.get('avatar');
+      const email = urlParams.get('email');
+      const author = urlParams.get('author');
 
-        let params = {
-          id, username, avatar, email, author, dataID
-        }
-        localStorage.setItem("user", JSON.stringify(params));
-      } else {
-        document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
+
+      let params = {
+        id, username, avatar, email, author, dataID
       }
-    } else if (!ok || ok !== "true") {
-      const error = document.getElementById('error');
-      error.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-                      Something went wrong`;
-      error.style.display = "block";
+      localStorage.setItem("user", JSON.stringify(params));
+    } else {
+      document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
     }
+  } else {
+    const error = document.getElementById('error');
+    error.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                      Something went wrong`;
+    error.style.display = "block";
   }
 </script>
 </body>
