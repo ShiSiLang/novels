@@ -29,8 +29,6 @@ module.exports = {
     if (!user)
       return res.status(400).json({ error: `Could not fetch user data.` });
 
-      if(user.emai)
-
     if (user.author !== true)
       return res
         .status(400)
