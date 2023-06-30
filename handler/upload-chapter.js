@@ -11,16 +11,20 @@ module.exports = {
 
     let html = req.body.formData;
 
-    console.log(html)
-
     let userObject = JSON.parse(html.user);
 
+    console.log(userObject);
+
     let user = await profileShema.findOne({
+      _id: userObject.dataID,
+    });
+
+    /*let user = await profileShema.findOne({
       username: userObject.username,
       id: userObject.id,
       email: userObject.email,
       _id: userObject.dataID,
-    });
+    });*/
 
     if (!user)
       return res.status(400).json({ error: `Could not fetch user data.` });
