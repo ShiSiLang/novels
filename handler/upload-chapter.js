@@ -13,11 +13,11 @@ module.exports = {
 
     let userObject = JSON.parse(html.user);
 
-    console.log(userObject);
-
     let user = await profileShema.findOne({
       _id: userObject.dataID,
     });
+
+    return console.log(user);
 
     /*let user = await profileShema.findOne({
       username: userObject.username,
@@ -28,6 +28,8 @@ module.exports = {
 
     if (!user)
       return res.status(400).json({ error: `Could not fetch user data.` });
+
+      if(user.emai)
 
     if (user.author !== true)
       return res
