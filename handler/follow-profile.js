@@ -8,13 +8,17 @@ module.exports = {
     let html = req.body;
 
     let user = await profileShema.findOne({
-      username: html.username,
-      id: html.id,
-      email: html.email,
       _id: html.dataID,
     });
 
     if (!user)
+      return res.status(400).json({ error: `Could not fetch user data.` });
+
+    if (
+      user.username !== html.username &&
+      user.id !== html.id &&
+      user.email !== html.email
+    )
       return res.status(400).json({ error: `Could not fetch user data.` });
 
     if (user.id === html.follow)

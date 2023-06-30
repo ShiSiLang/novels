@@ -80,8 +80,7 @@ module.exports = {
         });
 
         if (data.type === "Novel") {
-          console.log(data);
-          if (data.replace) {
+          if (data.replace === true) {
             let chapter = bookData.chapters[1 - data.replaceNumber];
 
             chapter.name = data.name;

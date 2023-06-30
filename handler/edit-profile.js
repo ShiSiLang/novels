@@ -11,13 +11,17 @@ module.exports = {
     let userObject = JSON.parse(html.user);
 
     let data = await profileShema.findOne({
-      username: userObject.username,
-      id: userObject.id,
-      email: userObject.email,
       _id: userObject.dataID,
     });
 
     if (!data)
+      return res.status(400).json({ error: `Could not fetch user data.` });
+
+    if (
+      data.username !== userObject.username &&
+      data.id !== userObject.id &&
+      data.email !== userObject.email
+    )
       return res.status(400).json({ error: `Could not fetch user data.` });
 
     let params = {
