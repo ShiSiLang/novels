@@ -24,11 +24,10 @@ module.exports = {
 
     let bookData = await bookShema.findOne({ name: book.name });
 
-    const totalViews = 0;
+    let totalViews = 0;
 
     bookData.chapters.forEach((e) => {
-      let views = e.views;
-      totalViews += views;
+      totalViews += e?.views || 0;
     });
 
     file = file.replaceAll("$$name$$", book.name);
