@@ -58,6 +58,8 @@ module.exports = {
       console.log(bookData.chapters[chapter - 1].views);
 
       await bookData.save();
+
+      console.log(bookData.chapters[chapter - 1].views);
     } catch (err) {
       console.log(err);
     }
