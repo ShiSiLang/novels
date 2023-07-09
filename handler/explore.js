@@ -23,7 +23,7 @@ module.exports = {
     let user = await profileShema.findOne({ id: book.author });
 
     let bookData = await bookShema.findOne({ name: book.name });
-    let totalViews = 0;
+    /*let totalViews = 0;
 
     bookData.chapters.forEach((e) => {
       let views = e.views;
@@ -34,7 +34,12 @@ module.exports = {
       }
 
       totalViews += views;
-    });
+    });*/
+
+    const totalViews = bookData.chapters.reduce(
+      (total, chapter) => total + chapter?.views || 0,
+      0
+    );
 
     console.log("Total views:", totalViews);
 
