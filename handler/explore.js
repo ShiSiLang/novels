@@ -29,12 +29,11 @@ module.exports = {
 
     file = file.replaceAll("$$tags$$", book.tags.join(", "));
 
-
-          file = file.replaceAll( 
-         "$$icon$$", 
-         `https://lonelyballmediacdn-production.up.railway.app/image/${book.icon}` 
-       );
-    file = file.replaceAll("$$views$$", book.views);
+    file = file.replaceAll(
+      "$$icon$$",
+      `https://lonelyballmediacdn-production.up.railway.app/image/${book.icon}`
+    );
+    file = file.replaceAll("$$views$$", book.views === 0 ? 0 : book.views);
     file = file.replaceAll("$$status$$", book.status);
     file = file.replaceAll("$$favorites$$", book.followers.length);
     file = file.replaceAll("$$published$$", getTimeDifference(book.published));
