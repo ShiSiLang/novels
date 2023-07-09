@@ -27,6 +27,7 @@ module.exports = {
     let totalViews = 0;
 
     bookData.chapters.forEach((e) => {
+      console.log(e?.views || 0);
       totalViews += e?.views || 0;
     });
 
