@@ -53,7 +53,9 @@ module.exports = {
 
       let bookData = await bookShema.findOne({ name: book.name });
 
-      console.log(bookData.chapters[chapter - 1]);
+      bookData.chapters[chapter - 1].views++;
+
+      await bookData.save();
     } catch (err) {
       console.log(err);
     }

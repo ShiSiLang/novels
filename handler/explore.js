@@ -22,6 +22,11 @@ module.exports = {
 
     let user = await profileShema.findOne({ id: book.author });
 
+    const totalViews = book.chapters.reduce(
+      (total, chapter) => total + (chapter?.views || 0),
+      0
+    );
+
     file = file.replaceAll("$$name$$", book.name);
     file = file.replaceAll("$$desc$$", book.description);
     file = file.replaceAll("$$authorID$$", book.author);
@@ -33,7 +38,7 @@ module.exports = {
       "$$icon$$",
       `https://lonelyballmediacdn-production.up.railway.app/image/${book.icon}`
     );
-    file = file.replaceAll("$$views$$", book.views === 0 ? 0 : book.views);
+    file = file.replaceAll("$$views$$", totalViews);
     file = file.replaceAll("$$status$$", book.status);
     file = file.replaceAll("$$favorites$$", book.followers.length);
     file = file.replaceAll("$$published$$", getTimeDifference(book.published));
