@@ -57,7 +57,6 @@ module.exports = {
         bookData.chapters[chapter - 1].views = 1;
       else bookData.chapters[chapter - 1].views++;
 
-      console.log(bookData.chapters[chapter - 1].views);
       await bookShema.findOneAndUpdate({ name: book.name }, bookData);
     } catch (err) {
       console.log(err);
