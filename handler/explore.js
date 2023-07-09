@@ -33,7 +33,6 @@ module.exports = {
         views = 0;
       }
 
-      console.log(views);
       totalViews += views;
     });
 
