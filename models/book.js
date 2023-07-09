@@ -23,6 +23,7 @@ const bookSchema = mongoose.Schema(
             date: Date,
           },
         ],
+        views: { type: Number, default: 0 },
       },
     ],
     followers: Array, // Array of ids
@@ -30,7 +31,6 @@ const bookSchema = mongoose.Schema(
     updated: String,
     status: String,
     published: String,
-    views: { type: Number, default: 0 },
   },
   { typeKey: "$type" }
 );

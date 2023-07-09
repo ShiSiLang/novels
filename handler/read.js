@@ -51,14 +51,9 @@ module.exports = {
 
       res.send(file);
 
-      await bookShema.findOneAndUpdate(
-        { name: book.name },
-        {
-          $inc: {
-            views: 1,
-          },
-        }
-      );
+      let bookData = await bookShema.findOne({ name: book.name });
+
+      console.log(bookData);
     } catch (err) {
       console.log(err);
     }
