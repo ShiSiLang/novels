@@ -27,6 +27,8 @@ module.exports = {
       0
     );
 
+    console.log(totalViews)
+
     file = file.replaceAll("$$name$$", book.name);
     file = file.replaceAll("$$desc$$", book.description);
     file = file.replaceAll("$$authorID$$", book.author);
