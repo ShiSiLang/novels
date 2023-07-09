@@ -53,20 +53,8 @@ module.exports = {
 
       let bookData = await bookShema.findOne({ name: book.name });
 
-      if (typeof bookData.chapters[chapter - 1].views === "number") {
-        bookData.chapters[chapter - 1].views++;
-      } else {
-        bookData.chapters[chapter - 1].views = parseInt(
-          bookData.chapters[chapter - 1].views
-        );
-
-        if (isNaN(bookData.chapters[chapter - 1].views)) {
-          console.error("Invalid views field or unable to parse into a number");
-        } else {
-          bookData.chapters[chapter - 1].views++;
-        }
-      }
-
+      bookData.chapters[chapter - 1].views++;
+      console.log(bookData.chapters[chapter - 1].views);
       await bookData.save();
     } catch (err) {
       console.log(err);
