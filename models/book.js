@@ -23,7 +23,6 @@ const bookSchema = mongoose.Schema(
             date: Date,
           },
         ],
-        views: Number,
       },
     ],
     followers: Array, // Array of ids
