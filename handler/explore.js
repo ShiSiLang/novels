@@ -23,25 +23,11 @@ module.exports = {
     let user = await profileShema.findOne({ id: book.author });
 
     let bookData = await bookShema.findOne({ name: book.name });
-    /*let totalViews = 0;
-
-    bookData.chapters.forEach((e) => {
-      let views = e.views;
-      if (typeof views === "object" && Object.keys(views).length === 0) {
-        views = 0;
-      } else if (views === null || views === undefined || isNaN(views)) {
-        views = 0;
-      }
-
-      totalViews += views;
-    });*/
 
     const totalViews = bookData.chapters.reduce(
       (total, chapter) => total + chapter?.views || 0,
       0
     );
-
-    console.log("Total views:", totalViews);
 
     file = file.replaceAll("$$name$$", book.name);
     file = file.replaceAll("$$desc$$", book.description);
