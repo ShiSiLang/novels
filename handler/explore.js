@@ -22,7 +22,9 @@ module.exports = {
 
     let user = await profileShema.findOne({ id: book.author });
 
-    const totalViews = book.chapters.reduce(
+    let bookData = await bookShema.findOne({ name: book.name });
+
+    const totalViews = bookData.chapters.reduce(
       (total, chapter) => total + (chapter?.views || 0),
       0
     );
