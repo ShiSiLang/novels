@@ -26,10 +26,14 @@ module.exports = {
     let totalViews = 0;
 
     bookData.chapters.forEach((e) => {
-      let views =
-        typeof e.views === "object" && Object.keys(e.views).length === 0
-          ? 0
-          : e.views;
+      let views = e.views;
+      if (typeof views === "object" && Object.keys(views).length === 0) {
+        views = 0;
+      } else if (views === null || views === undefined || isNaN(views)) {
+        views = 0;
+      }
+
+      console.log(views);
       totalViews += views;
     });
 
