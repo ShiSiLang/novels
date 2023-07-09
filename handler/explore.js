@@ -24,12 +24,14 @@ module.exports = {
 
     let bookData = await bookShema.findOne({ name: book.name });
 
+    console.log(bookData.chapters);
+
     const totalViews = bookData.chapters.reduce(
       (total, chapter) => total + (chapter?.views || 0),
       0
     );
 
-    console.log(totalViews)
+    console.log(totalViews);
 
     file = file.replaceAll("$$name$$", book.name);
     file = file.replaceAll("$$desc$$", book.description);
