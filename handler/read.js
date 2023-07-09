@@ -52,14 +52,10 @@ module.exports = {
       res.send(file);
 
       let bookData = await bookShema.findOne({ name: book.name });
-      console.log(bookData.chapters[chapter - 1]);
-      bookData.chapters[chapter - 1].views;
 
-      console.log(bookData.chapters[chapter - 1].views);
+      bookData.chapters[chapter - 1].views++;
 
       await bookData.save();
-
-      console.log(bookData.chapters[chapter - 1].views);
     } catch (err) {
       console.log(err);
     }
