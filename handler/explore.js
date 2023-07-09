@@ -23,15 +23,17 @@ module.exports = {
     let user = await profileShema.findOne({ id: book.author });
 
     let bookData = await bookShema.findOne({ name: book.name });
-
     let totalViews = 0;
 
     bookData.chapters.forEach((e) => {
-      console.log(e);
-      let views = e.views === {} ? 0 : e.views;
-      console.log(e.views);
+      let views =
+        typeof e.views === "object" && Object.keys(e.views).length === 0
+          ? 0
+          : e.views;
       totalViews += views;
     });
+
+    console.log("Total views:", totalViews);
 
     file = file.replaceAll("$$name$$", book.name);
     file = file.replaceAll("$$desc$$", book.description);
