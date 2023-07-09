@@ -24,7 +24,7 @@ module.exports = {
 
     let bookData = await bookShema.findOne({ name: book.name });
 
-    const totalViews = 0;
+    let totalViews = 0;
 
     bookData.chapters.forEach((e) => {
       totalViews += e?.views || 0;
