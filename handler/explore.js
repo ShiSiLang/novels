@@ -26,10 +26,11 @@ module.exports = {
 
     console.log(bookData.chapters);
 
-    const totalViews = bookData.chapters.reduce(
-      (total, chapter) => total + (chapter?.views || 0),
-      0
-    );
+    const totalViews = 0;
+
+    bookData.chapters.forEach((e) => {
+      totalViews += e?.views || 0;
+    });
 
     console.log(totalViews);
 
