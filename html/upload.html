@@ -107,407 +107,156 @@
     color: #FFFFFF;
   }
 
-  .uploadButtons {
-    width: 1300px;
-    padding: 10px;
+  .create-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background-color: #2196F3;
+    cursor: pointer;
+    margin: 0 auto 20px;
+    font-size: 36px;
+    color: white;
+    border: none;
+    transition: background-color 0.5s;
+  }
+
+  .create-button:hover {
+    background-color: #1976D2;
+  }
+
+  .create-button::before {
+    content: '\002B';
+  }
+
+  .create-button:hover::before {
+    content: 'Create Book';
+  }
+
+  .books {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .book {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 200px;
     margin: 10px;
+    height: 280px;
+    padding: 10px;
+    background-color: #FFFFFF;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   }
 
-  /*Modal Start*/
-  * {
-    box-sizing: border-box;
-  }
-
-  label {
-    color: white
-  }
-
-  input[type=file] {
-    width: 100%;
-    padding: 15px;
-    margin: 5px 0 22px 0;
-  }
-
-  input[type=text],
-  input[type=password],
-  input[type=number] {
-    width: 100%;
-    padding: 15px;
-    margin: 5px 0 22px 0;
-    display: inline-block;
-    border: none;
-    background: transparent;
-  }
-
-  input[type=text]:focus,
-  input[type=password]:focus,
-  input[type=number]:focus {
-    border: 3px solid #956a9d;
-    border-radius: 16px;
-    color: black;
-    outline: none;
-  }
-
-  ::placeholder {
-    color: black;
-  }
-
-  .container select {
-    width: 100%;
-    padding: 15px;
-    margin: 5px 0 22px 0;
-    background: transparent;
-    border: none;
-  }
-
-  .container select:focus {
-    outline: none;
-  }
-
-  .container {
-    margin: auto;
-    width: 50%;
-    padding: 16px;
-  }
-
-  .container h1 {
-    color: #2196F3;
-    text-align: center;
-    margin-top: 10px;
-  }
-
-  .container p {
-    text-align: center;
-  }
-
-  .clearfix::after {
-    content: "";
-    clear: both;
-    display: table;
-  }
-
-  .modal {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.4);
-  }
-
-  .modal-content {
-    background-color: #fefefe;
-    margin: 5% auto 15% auto;
-    border: 1px solid #888;
-    width: 80%;
-  }
-
-  .uploadForm {
-    padding: 16px;
-  }
-
-  .uploadForm input[type=file] {
+  .book img {
+    width: 150px;
+    height: 200px;
+    object-fit: cover;
     margin-bottom: 10px;
   }
 
-  .uploadForm .uploadButtons {
-    margin-top: 16px;
+  .book-title {
+    text-align: center;
+    font-size: 18px;
+    color: #333333;
+    margin-bottom: 5px;
   }
 
-  .close {
-    color: #aaaaaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
+  .book-category {
+    text-align: center;
+    font-size: 14px;
+    color: #777777;
+    margin-bottom: 10px;
   }
 
-  .close:hover,
-  .close:focus {
-    color: #000;
-    text-decoration: none;
+  .add-chapter {
+    text-align: center;
+    color: #2196F3;
     cursor: pointer;
+    transition: color 0.3s;
   }
 
-  /*Modal End*/
+  .add-chapter:hover {
+    color: #1976D2;
+  }
+
+  @media screen and (max-width: 768px) {
+    .book {
+      width: 160px;
+    }
+
+    .book img {
+      width: 120px;
+      height: 160px;
+    }
+
+    .book-title {
+      font-size: 16px;
+    }
+
+    .book-category {
+      font-size: 12px;
+    }
+  }
 </style>
 
 <body>
   <div class="topnav" id="myTopnav">
-    <a href="/">Home</a>
-    <a href="/pages/upload">Upload</a>
-    <a href="/pages/about">About</a>
-    <a href="/pages/contact">Contact</a>
+    <a href="#home" class="active">Home</a>
+    <a href="#upload">Upload</a>
+    <a href="#about">About</a>
     <a href="javascript:void(0);" class="icon" onclick="myFunction()">
       <i class="fa fa-bars"></i>
     </a>
   </div>
 
   <div class="text">
-    <h1>Welcome to LonelyBall Media!</h1>
-    <p>We have a great selection of graphic novels and stories for you to read. Dive into our imaginative worlds and
-      enjoy reading our engaging books.</p>
+    <h1>Welcome to LonelyBall Media</h1>
+    <p>We have a great selection of graphic novels and stories for you to read. Dive into our imaginative worlds and enjoy reading our engaging books.</p>
   </div>
 
-  <div id="pagination" class="flex">
-    <!-- Pagination buttons will be added here dynamically -->
+  <div class="flex">
+    <button class="create-button"></button>
   </div>
 
-  <!-- Modal for uploading a book -->
-  <div id="pbmodal" class="modal">
-    <div class="modal-content">
-      <span class="close" onclick="hideModal()">&times;</span>
-      <div class="container">
-        <h1>Upload a Book</h1>
-        <p>Please fill in this form to upload a book.</p>
-        <hr>
-        <form class="uploadForm" method="post" enctype="multipart/form-data" id="bookForm">
-          <input type="text" placeholder="Title" name="bookTitle" required>
-          <input type="number" placeholder="Year" name="bookYear" required>
-          <input type="text" placeholder="Author" name="bookAuthor" required>
-          <input type="file" name="bookFile" accept=".pdf" required>
-          <div class="clearfix">
-            <button type="button" class="uploadButtons closebtn" onclick="hideModal()">Cancel</button>
-            <button type="submit" class="uploadButtons">Upload</button>
-          </div>
-        </form>
-      </div>
+  <div class="books">
+    <div class="book">
+      <img src="book1.jpg" alt="Book 1">
+      <div class="book-title">Book 1</div>
+      <div class="book-category">Novel</div>
+      <div class="add-chapter">Add Chapter</div>
     </div>
-  </div>
-
-  <!-- Modal for uploading a chapter -->
-  <div id="pcmodal" class="modal">
-    <div class="modal-content">
-      <span class="close" onclick="hideModal()">&times;</span>
-      <div class="container">
-        <h1>Upload a Chapter</h1>
-        <p>Please fill in this form to upload a chapter.</p>
-        <hr>
-        <form class="uploadForm" method="post" enctype="multipart/form-data" id="chapterForm">
-          <input type="text" placeholder="Book Title" name="chapterBookTitle" required>
-          <input type="text" placeholder="Chapter Title" name="chapterTitle" required>
-          <input type="number" placeholder="Chapter Number" name="chapterNumber" required>
-          <input type="file" name="chapterFile" accept=".pdf" required>
-          <div class="clearfix">
-            <button type="button" class="uploadButtons closebtn" onclick="hideModal()">Cancel</button>
-            <button type="submit" class="uploadButtons">Upload</button>
-          </div>
-        </form>
-      </div>
+    <div class="book">
+      <img src="book2.jpg" alt="Book 2">
+      <div class="book-title">Book 2</div>
+      <div class="book-category">Manga</div>
+      <div class="add-chapter">Add Chapter</div>
     </div>
-  </div>
-
-  <!-- Modal for uploading a manga -->
-  <div id="pmmodal" class="modal">
-    <div class="modal-content">
-      <span class="close" onclick="hideModal()">&times;</span>
-      <div class="container">
-        <h1>Upload a Manga</h1>
-        <p>Please fill in this form to upload a manga.</p>
-        <hr>
-        <form class="uploadForm" method="post" enctype="multipart/form-data" id="mangaForm">
-          <input type="text" placeholder="Title" name="mangaTitle" required>
-          <input type="number" placeholder="Year" name="mangaYear" required>
-          <input type="text" placeholder="Author" name="mangaAuthor" required>
-          <input type="file" name="mangaFile" accept=".pdf" required>
-          <div class="clearfix">
-            <button type="button" class="uploadButtons closebtn" onclick="hideModal()">Cancel</button>
-            <button type="submit" class="uploadButtons">Upload</button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-
-  <!-- Modal for editing a book -->
-  <div id="ebmodal" class="modal">
-    <div class="modal-content">
-      <span class="close" onclick="hideModal()">&times;</span>
-      <div class="container">
-        <h1>Edit a Book</h1>
-        <p>Please fill in this form to edit a book.</p>
-        <hr>
-        <form class="uploadForm" method="post" enctype="multipart/form-data" id="editBookForm">
-          <input type="text" placeholder="Book Title" name="editBookTitle" required>
-          <input type="number" placeholder="Year" name="editBookYear" required>
-          <input type="text" placeholder="Author" name="editBookAuthor" required>
-          <input type="file" name="editBookFile" accept=".pdf">
-          <div class="clearfix">
-            <button type="button" class="uploadButtons closebtn" onclick="hideModal()">Cancel</button>
-            <button type="submit" class="uploadButtons">Edit</button>
-          </div>
-        </form>
-      </div>
+    <div class="book">
+      <img src="book3.jpg" alt="Book 3">
+      <div class="book-title">Book 3</div>
+      <div class="book-category">Webtoon</div>
+      <div class="add-chapter">Add Chapter</div>
     </div>
   </div>
 
   <script>
-    const paginationContainer = document.getElementById("pagination");
-
-    // Array to store book data (replace with your own data)
-    const books = [
-      {
-        id: 1,
-        title: "Book 1",
-        year: 2021,
-        author: "Author 1",
-      },
-      {
-        id: 2,
-        title: "Book 2",
-        year: 2022,
-        author: "Author 2",
-      },
-      {
-        id: 3,
-        title: "Book 3",
-        year: 2023,
-        author: "Author 3",
-      },
-      {
-        id: 4,
-        title: "Book 4",
-        year: 2024,
-        author: "Author 4",
-      },
-      {
-        id: 5,
-        title: "Book 5",
-        year: 2025,
-        author: "Author 5",
-      },
-      {
-        id: 6,
-        title: "Book 6",
-        year: 2026,
-        author: "Author 6",
-      },
-      {
-        id: 7,
-        title: "Book 7",
-        year: 2027,
-        author: "Author 7",
-      },
-      {
-        id: 8,
-        title: "Book 8",
-        year: 2028,
-        author: "Author 8",
-      },
-      {
-        id: 9,
-        title: "Book 9",
-        year: 2029,
-        author: "Author 9",
-      },
-      {
-        id: 10,
-        title: "Book 10",
-        year: 2030,
-        author: "Author 10",
-      },
-    ];
-
-    const booksPerPage = 5;
-    let currentPage = 1;
-
-    function displayBooks(page) {
-      const startIndex = (page - 1) * booksPerPage;
-      const endIndex = startIndex + booksPerPage;
-      const displayedBooks = books.slice(startIndex, endIndex);
-
-      const bookContainer = document.createElement("div");
-      bookContainer.className = "flex";
-      bookContainer.style.marginTop = "20px";
-
-      displayedBooks.forEach((book) => {
-        const bookCard = document.createElement("div");
-        bookCard.className = "card";
-        bookCard.style.width = "200px";
-        bookCard.style.margin = "10px";
-        bookCard.style.padding = "10px";
-        bookCard.style.backgroundColor = "#FFFFFF";
-        bookCard.style.borderRadius = "8px";
-        bookCard.style.boxShadow = "0 0 8px rgba(0, 0, 0, 0.3)";
-
-        const bookTitle = document.createElement("h3");
-        bookTitle.innerText = book.title;
-        bookTitle.style.color = "#2196F3";
-
-        const bookInfo = document.createElement("p");
-        bookInfo.innerText = `Author: ${book.author}\nYear: ${book.year}`;
-
-        bookCard.appendChild(bookTitle);
-        bookCard.appendChild(bookInfo);
-
-        bookContainer.appendChild(bookCard);
-      });
-
-      paginationContainer.innerHTML = "";
-      paginationContainer.appendChild(bookContainer);
-    }
-
-    function generatePaginationButtons() {
-      const totalPages = Math.ceil(books.length / booksPerPage);
-
-      for (let i = 1; i <= totalPages; i++) {
-        const button = document.createElement("button");
-        button.innerText = i;
-        button.className = "pagination-button";
-        button.style.margin = "5px";
-        button.style.padding = "5px 10px";
-        button.style.borderRadius = "4px";
-        button.style.backgroundColor = "#2196F3";
-        button.style.color = "#FFFFFF";
-        button.style.border = "none";
-        button.style.cursor = "pointer";
-
-        button.addEventListener("click", () => {
-          currentPage = i;
-          displayBooks(currentPage);
-        });
-
-        paginationContainer.appendChild(button);
-      }
-    }
-
+    // Function to toggle the responsive class for the navigation menu
     function myFunction() {
-      const topnav = document.getElementById("myTopnav");
-      if (topnav.className === "topnav") {
-        topnav.className += " responsive";
+      var x = document.getElementById("myTopnav");
+      if (x.className === "topnav") {
+        x.className += " responsive";
       } else {
-        topnav.className = "topnav";
+        x.className = "topnav";
       }
     }
-
-    function showModal(modalId) {
-      const modal = document.getElementById(modalId);
-      modal.style.display = "block";
-    }
-
-    function hideModal() {
-      const modals = document.getElementsByClassName("modal");
-      for (let i = 0; i < modals.length; i++) {
-        modals[i].style.display = "none";
-      }
-    }
-
-    window.onclick = function (event) {
-      const modals = document.getElementsByClassName("modal");
-      for (let i = 0; i < modals.length; i++) {
-        if (event.target == modals[i]) {
-          modals[i].style.display = "none";
-        }
-      }
-    };
-
-    // Initial page load
-    displayBooks(currentPage);
-    generatePaginationButtons();
   </script>
 </body>
 
 </html>
-
