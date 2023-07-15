@@ -452,12 +452,15 @@
           console.log(user)
 
           for (let i = 0; i < user.books.length; i++) {
-            let book = await fetch(`https://novels-production.up.railway.app/data/book/${data.id}`);
+            let name = user.books[i]
+            let book = await fetch(`https://novels-production.up.railway.app/data/book/${name}`);
+
+            if (!book) return;
 
             div3.innerHTML += `<div class="book">
-      <img src="book1.jpg" alt="Book 1">
-      <div class="book-title">Book 1</div>
-      <div class="book-category">Novel</div>
+      <img src="${book.icon}" alt="${book.name}">
+      <div class="book-title">${book.name}</div>
+      <div class="book-category">${book.type}</div>
       <div class="add-chapter">Add Chapter</div>
     </div>`;
           }
