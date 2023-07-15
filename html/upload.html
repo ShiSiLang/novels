@@ -448,17 +448,14 @@
           let data = JSON.parse(localStorage.user);
           let userFetch = await fetch(`https://novels-production.up.railway.app/data/profile/${data.id}`);
           let user = await userFetch.json()
-          console.log(user)
 
           for (let i = 0; i < user.books.length; i++) {
             let name = user.books[i]
-            console.log(name)
             let bookFetch = await fetch(`https://novels-production.up.railway.app/data/book/${name}`);
             let book = await bookFetch.json()
-            console.log(book.name)
             if (!book) return;
 
-            div3.innerHTML += `<div class="book">
+            div.innerHTML += `<div class="book">
       <img src="${book.icon}" alt="${book.name}">
       <div class="book-title">${book.name}</div>
       <div class="book-category">${book.type}</div>
