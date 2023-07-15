@@ -469,7 +469,7 @@
       <img src="${book.icon}" alt="${book.name}">
       <div class="book-title">${book.name}</div>
       <div class="book-category">${book.type}</div>
-      <button class="add-chapter">Edit Book</button>
+      <button class="add-chapter" onclick="openEditBookModal('${book.name}')">Edit Book</button>
       <button class="add-chapter">Add Chapter</button>
     </div>`;
           }
@@ -717,7 +717,6 @@
         <input id="user4" type="hidden" name="user" value="NOTHING" />
 
         <label for="bookName"><b>Book Name</b></label>
-        <select name="bookName" id="ebooks2" form="ebForm" required></select>
 
         <label for="description"><b>Book Description</b></label>
         <textarea rows="3" cols="50" name="description" form="ebForm" required></textarea>
@@ -763,34 +762,20 @@
   </div>
 
   <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      const selectEl = document.querySelector('select[name="tags"]');
-      const selectedTagsEl = document.querySelector('.selected-tags');
+    function openEditBookModal(bookName) {
+      const modal = document.getElementById("ebmodal");
 
-      selectEl.addEventListener('change', (event) => {
-        const selectedOptions = Array.from(selectEl.selectedOptions);
-        const selectedTags = selectedOptions.map(option => option.value);
+      // Populate the form fields with the book information
+      const bookNameInput = document.querySelector("#ebmodal input[name='bookName']");
+      bookNameInput.value = bookName;
 
-        selectedTagsEl.innerHTML = '';
-        selectedTags.forEach(tag => {
-          const tagEl = document.createElement('div');
-          tagEl.classList.add('selected-tag');
-          tagEl.innerHTML = `<span>${tag}</span><button data-tag="${tag}">&times;</button>`;
-          selectedTagsEl.appendChild(tagEl);
-        });
-      });
+      // Display the modal
+      modal.style.display = "block";
+    }
+  </script>
 
-      selectedTagsEl.addEventListener('click', (event) => {
-        if (event.target.tagName === 'BUTTON') {
-          const tag = event.target.dataset.tag;
-          const option = selectEl.querySelector(`option[value="${tag}"]`);
-          option.selected = false;
-          event.target.parentElement.remove();
-        }
-      });
-    });
-
-    /*const selectEl = document.querySelector('select[name="tags"]');
+  <script>
+    const selectEl = document.querySelector('select[name="tags"]');
     const selectedTagsEl = document.querySelector('.selected-tags');
 
     selectEl.addEventListener('change', (event) => {
@@ -813,7 +798,7 @@
         option.selected = false;
         event.target.parentElement.remove();
       }
-    });*/
+    });
   </script>
 
   <script>
@@ -868,13 +853,11 @@
 
         var selectBox = document.getElementById('ebooks');
         var selectBox2 = document.getElementById('ebooks2');
-        var selectBox3 = document.getElementById('ebooks3');
 
         for (var i = 0, l = options.length; i < l; i++) {
           var option = options[i];
           selectBox.options.add(new Option(option.text, option.value, option.selected));
           selectBox2.options.add(new Option(option.text, option.value, option.selected));
-          selectBox3.options.add(new Option(option.text, option.value, option.selected));
         }
       } catch (err) { console.log(err) }
     }
