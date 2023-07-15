@@ -360,7 +360,7 @@
         return step4;
       }
 
-      if (json.chapters[index].type === "Novel") {
+      if (json.type === "Novel") {
         div.className = 'text';
         let novelContent = json.chapters[index].novel;
 
@@ -375,7 +375,7 @@
           <h1>Credits</h1>
           <p>${formatString(json.chapters[index].credits)}</p>
           `;
-      } else if (json.chapters[index].type === "Manga") {
+      } else if (json.type === "Manga") {
         div.className = 'slider snaps-inline';
         console.log(json.chapters[index])
         for (let i = 0; i < json.chapters[index].images.length; i++) {
@@ -383,7 +383,7 @@
           let img = `https://lonelyballmediacdn-production.up.railway.app/image/${element}`
           div.innerHTML += `<img src="${img}" alt="Page ${i}">`;
         }
-      } else if (json.chapters[index].type === "Webtoon") {
+      } else if (json.type === "Webtoon") {
         div.className = 'webtoons snaps-inline';
         console.log(json.chapters[index])
         for (let i = 0; i < json.chapters[index].images.length; i++) {

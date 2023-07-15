@@ -153,8 +153,7 @@
 
   .create-button:hover::before {
     content: 'Create Book';
-    font-size: 20px;
-
+    font-size: 25px;
   }
 
   .books {
@@ -439,6 +438,34 @@
     color: black;
   }
 </style>
+<script type="text/javascript">
+  async function changeDivContent() {
+    const div = document.getElementById("Books");
+
+    try {
+      if (typeof Storage !== "undefined") {
+        if (localStorage.user) {
+          let data = JSON.parse(localStorage.user);
+          let userFetch = await fetch(`https://novels-production.up.railway.app/data/profile/${data.id}`);
+          let user = userFetch.json()
+          console.log(user)
+
+          for (let i = 0; i < user.books.length; i++) {
+            let book = await fetch(`https://novels-production.up.railway.app/data/book/${data.id}`);
+
+            div3.innerHTML += `<div class="book">
+      <img src="book1.jpg" alt="Book 1">
+      <div class="book-title">Book 1</div>
+      <div class="book-category">Novel</div>
+      <div class="add-chapter">Add Chapter</div>
+    </div>`;
+          }
+        }
+      }
+
+    } catch (error) { }
+  }
+</script>
 
 <body>
   <div class="topnav" id="myTopnav">
@@ -502,26 +529,7 @@
     <button class="create-button"></button>
   </div>
 
-  <div class="books">
-    <div class="book">
-      <img src="book1.jpg" alt="Book 1">
-      <div class="book-title">Book 1</div>
-      <div class="book-category">Novel</div>
-      <div class="add-chapter">Add Chapter</div>
-    </div>
-    <div class="book">
-      <img src="book2.jpg" alt="Book 2">
-      <div class="book-title">Book 2</div>
-      <div class="book-category">Manga</div>
-      <div class="add-chapter">Add Chapter</div>
-    </div>
-    <div class="book">
-      <img src="book3.jpg" alt="Book 3">
-      <div class="book-title">Book 3</div>
-      <div class="book-category">Webtoon</div>
-      <div class="add-chapter">Add Chapter</div>
-    </div>
-  </div>
+  <div class="books" id="Books"></div>
 
   <!--<body>
 
