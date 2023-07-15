@@ -446,6 +446,7 @@
       if (typeof Storage !== "undefined") {
         if (localStorage.user) {
           let data = JSON.parse(localStorage.user);
+          console.log(data)
           let userFetch = await fetch(`https://novels-production.up.railway.app/data/profile/${data.id}`);
           let user = userFetch.json()
           console.log(user)
