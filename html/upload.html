@@ -763,7 +763,34 @@
   </div>
 
   <script>
-    const selectEl = document.querySelector('select[name="tags"]');
+    document.addEventListener('DOMContentLoaded', function () {
+      const selectEl = document.querySelector('select[name="tags"]');
+      const selectedTagsEl = document.querySelector('.selected-tags');
+
+      selectEl.addEventListener('change', (event) => {
+        const selectedOptions = Array.from(selectEl.selectedOptions);
+        const selectedTags = selectedOptions.map(option => option.value);
+
+        selectedTagsEl.innerHTML = '';
+        selectedTags.forEach(tag => {
+          const tagEl = document.createElement('div');
+          tagEl.classList.add('selected-tag');
+          tagEl.innerHTML = `<span>${tag}</span><button data-tag="${tag}">&times;</button>`;
+          selectedTagsEl.appendChild(tagEl);
+        });
+      });
+
+      selectedTagsEl.addEventListener('click', (event) => {
+        if (event.target.tagName === 'BUTTON') {
+          const tag = event.target.dataset.tag;
+          const option = selectEl.querySelector(`option[value="${tag}"]`);
+          option.selected = false;
+          event.target.parentElement.remove();
+        }
+      });
+    });
+
+    /*const selectEl = document.querySelector('select[name="tags"]');
     const selectedTagsEl = document.querySelector('.selected-tags');
 
     selectEl.addEventListener('change', (event) => {
@@ -786,7 +813,7 @@
         option.selected = false;
         event.target.parentElement.remove();
       }
-    });
+    });*/
   </script>
 
   <script>
