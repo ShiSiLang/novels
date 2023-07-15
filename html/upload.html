@@ -446,14 +446,14 @@
       if (typeof Storage !== "undefined") {
         if (localStorage.user) {
           let data = JSON.parse(localStorage.user);
-          console.log(data)
           let userFetch = await fetch(`https://novels-production.up.railway.app/data/profile/${data.id}`);
-          let user = userFetch.json()
+          let user = await userFetch.json()
           console.log(user)
 
           for (let i = 0; i < user.books.length; i++) {
             let name = user.books[i]
-            let book = await fetch(`https://novels-production.up.railway.app/data/book/${name}`);
+            let bookFetch = await fetch(`https://novels-production.up.railway.app/data/book/${name}`);
+            let book = await bookFetch.json()
 
             if (!book) return;
 
