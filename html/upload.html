@@ -198,13 +198,22 @@
 
   .add-chapter {
     text-align: center;
-    color: #2196F3;
+    font-weight: bold;
+    text-decoration: none;
+    font-family: 'Nunito';
+    display: inline-block;
+    border-radius: 16px;
+    background-color: #2196F3;
     cursor: pointer;
-    transition: color 0.3s;
+    padding: 10px 20px;
+    font-size: 18px;
+    color: white;
+    margin: auto;
   }
 
   .add-chapter:hover {
-    color: #1976D2;
+    background-color: #1976D2;
+    transition: 1.5s;
   }
 
   .uploadButtons {
@@ -459,7 +468,7 @@
       <img src="${book.icon}" alt="${book.name}">
       <div class="book-title">${book.name}</div>
       <div class="book-category">${book.type}</div>
-      <div class="add-chapter">Add Chapter</div>
+      <button class="add-chapter">Add Chapter</button>
     </div>`;
           }
         }

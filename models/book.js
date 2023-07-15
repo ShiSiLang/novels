@@ -16,6 +16,7 @@ const bookSchema = mongoose.Schema(
         images: Array, // Array of image strings data for manga/webtoon
         novel: String, // String for novels
         views: Number,
+        published: String,
         comments: [
           {
             username: String,
