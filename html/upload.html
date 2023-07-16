@@ -469,8 +469,8 @@
       <img src="${book.icon}" alt="${book.name}">
       <div class="book-title">${book.name}</div>
       <div class="book-category">${book.type}</div>
-      <button class="add-chapter" onclick="openEditBookModal('${book.name}'); document.getElementById('ebmodal').style.display='block';">Edit Book</button>
-      <button class="add-chapter">Add Chapter</button>
+      <button class="add-chapter" onclick="openEditBookModal('${book.name}')">Edit Book</button>
+      <button class="add-chapter" onclick="openAddChapter('${book.name}', '${book.type}')">Add Chapter</button>
     </div>`;
           }
         }
@@ -618,16 +618,13 @@
       title="Close Modal">&times;</span>
     <form id="pcForm" class="modal-content" action="/upload-chapter" enctype="multipart/form-data">
       <div class="container">
-        <h1>Upload Chapter</h1>
+        <h1 id="bookNamePN">Upload Chapter For</h1>
         <p>Please fill in this form to upload a chapter.</p>
         <hr>
 
         <input id="user2" type="hidden" name="user" value="NOTHING" />
 
-        <label for="bookName"><b>Book Name</b></label>
-        <select name="bookName" id="ebooks" form="pcForm" required></select>
-
-        <input id="type" type="hidden" name="type" value="novel" />
+        <input id="bookNamePNINPUT" type="hidden" name="bookName" value="" />
 
         <label for="chapterName"><b>Chapter Name</b></label>
         <input type="text" placeholder="Enter Chapter Name" name="chapterName" autocomplete="off" required />
@@ -705,13 +702,13 @@
       title="Close Modal">&times;</span>
     <form id="ebForm" class="modal-content" action="/edit-book" enctype="multipart/form-data">
       <div class="container">
-        <h1>Edit Book</h1>
+        <h1 id="bookNameEB">Edit Book: </h1>
         <p>Please fill in this form to edit your book.</p>
         <hr>
 
         <input id="user4" type="hidden" name="user" value="NOTHING" />
 
-        <label for="bookName" id="bookNameEB"><b>Book Name</b></label>
+        <input id="bookNameEBINPUT" type="hidden" name="bookName" value="" />
 
         <label for="description"><b>Book Description</b></label>
         <textarea rows="3" cols="50" name="description" form="ebForm" required></textarea>
@@ -761,13 +758,29 @@
       const modal = document.getElementById("ebmodal");
 
       // Populate the form fields with the book information
-      const bookNameInput = document.getElementById("bookNameEB");
+      const bookNameInput = document.getElementById("bookNameEBINPUT");
+      const bookNameLabel = document.getElementById("bookNameEB");
 
-      bookNameInput.innerText = bookName;
+      bookNameLabel.innerText = "Edit Book: " + bookName;
       bookNameInput.value = bookName;
 
       // Display the modal
       modal.style.display = "block";
+    }
+    function openAddChapter(bookName, type) {
+      if (type === "Novel") {
+        const modal = document.getElementById("pcmodal");
+
+        // Populate the form fields with the book information
+        const bookNameInput = document.getElementById("bookNamePNINPUT");
+        const bookNameLabel = document.getElementById("bookNamePN");
+
+        bookNameLabel.innerText = "Upload Chapter For " + bookName;
+        bookNameInput.value = bookName;
+
+        // Display the modal
+        modal.style.display = "block";
+      }
     }
   </script>
 
