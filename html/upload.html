@@ -715,7 +715,7 @@
 
         <input id="user4" type="hidden" name="user" value="NOTHING" />
 
-        <label for="bookName"><b>Book Name</b></label>
+        <label for="bookName" id="bookNameEB"><b>Book Name</b></label>
 
         <label for="description"><b>Book Description</b></label>
         <textarea rows="3" cols="50" name="description" form="ebForm" required></textarea>
@@ -765,7 +765,7 @@
       const modal = document.getElementById("ebmodal");
 
       // Populate the form fields with the book information
-      const bookNameInput = document.querySelector("#ebmodal input[name='bookName']");
+      const bookNameInput = document.getElementById("bookNameEB");
 
       console.log(bookNameInput)
       bookNameInput.value = bookName;
