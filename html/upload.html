@@ -767,8 +767,8 @@
       // Populate the form fields with the book information
       const bookNameInput = document.getElementById("bookNameEB");
 
-      console.log(bookNameInput)
       bookNameInput.innerText = bookName;
+      bookNameInput.value = bookName;
 
       // Display the modal
       modal.style.display = "block";
