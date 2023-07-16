@@ -469,7 +469,7 @@
       <img src="${book.icon}" alt="${book.name}">
       <div class="book-title">${book.name}</div>
       <div class="book-category">${book.type}</div>
-      <button class="add-chapter" onclick="openEditBookModal('${book.name}')">Edit Book</button>
+      <button class="add-chapter" onclick="openEditBookModal('${book.name}'); document.getElementById('ebmodal').style.display='block';">Edit Book</button>
       <button class="add-chapter">Add Chapter</button>
     </div>`;
           }
@@ -552,8 +552,7 @@
   <div class="flex">
     <button id="pmb" class="uploadButtons" onclick="document.getElementById('pmmodal').style.display='block'">Upload
       Manga</button>
-    <button id="ebb" class="uploadButtons" onclick="document.getElementById('ebmodal').style.display='block'">Edit
-      Book</button>
+
   </div>
 
   <div id="error" class="alert">
