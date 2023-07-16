@@ -660,14 +660,14 @@
       title="Close Modal">&times;</span>
     <form id="pmForm" class="modal-content" action="/upload-manga" enctype="multipart/form-data">
       <div class="container">
-        <h1>Upload Chapter</h1>
+        <h1 id="bookNamePM">Upload Chapter For</h1>
         <p>Please fill in this form to upload a manga chapter.</p>
         <hr>
 
-        <input id="user3" type="hidden" name="user" value="NOTHING" />
 
-        <label for="bookName"><b>Book Name</b></label>
-        <select name="bookName" id="ebooks2" form="pmForm" required></select>
+        <input id="bookNamePMINPUT" type="hidden" name="bookName" value="" />
+
+        <input id="user3" type="hidden" name="user" value="NOTHING" />
 
         <label for="type"><b>Chapter Type</b></label>
         <select name="type" id="type" form="pmForm" required>
@@ -780,6 +780,18 @@
 
         // Display the modal
         modal.style.display = "block";
+      } else if (type === "Manga") {
+        const modal = document.getElementById("pmmodal");
+
+        // Populate the form fields with the book information
+        const bookNameInput = document.getElementById("bookNamePMINPUT");
+        const bookNameLabel = document.getElementById("bookNamePM");
+
+        bookNameLabel.innerText = "Upload Chapter For " + bookName;
+        bookNameInput.value = bookName;
+
+        // Display the modal
+        modal.style.display = "block";
       }
     }
   </script>
@@ -843,33 +855,6 @@
       document.getElementById("pmb").style.display = "none";
       document.getElementById("ebb").style.display = "none";
 
-    }
-  </script>
-
-  <script>
-    updateSelect()
-    async function updateSelect() {
-      try {
-        let data = JSON.parse(localStorage.user);
-        let response = await fetch(`https://novels-production.up.railway.app/data/profileBooks/${data.id}`);
-        let json = await response.json();
-
-        var options = json.map(v => {
-          return {
-            "text": v,
-            "value": v
-          }
-        });
-
-        var selectBox = document.getElementById('ebooks');
-        var selectBox2 = document.getElementById('ebooks2');
-
-        for (var i = 0, l = options.length; i < l; i++) {
-          var option = options[i];
-          selectBox.options.add(new Option(option.text, option.value, option.selected));
-          selectBox2.options.add(new Option(option.text, option.value, option.selected));
-        }
-      } catch (err) { console.log(err) }
     }
   </script>
 
