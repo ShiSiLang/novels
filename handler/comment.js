@@ -5,7 +5,7 @@ const jwt = require("jsonwebtoken");
 module.exports = {
   name: "comment",
   run: async (req, res) => {
-    //return res.status(400).json({ error: `System currently down!` });
+    return res.status(400).json({ error: `System currently down!` });
 
     let formData = req.body.data;
 
