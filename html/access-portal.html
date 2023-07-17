@@ -271,26 +271,26 @@
 
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
-  const id = urlParams.get('id');
-  const username = urlParams.get('username');
-  const dataID = urlParams.get('dataID');
 
-  if (id && username && dataID) {
-    const success = document.getElementById('success');
-    success.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-                      <strong>Success!</strong> ${username}, you have successfully signed in with Discord. Check out your <a href="/profile/${id}">profile</a>!`;
-    success.style.display = "block";
+  const token = urlParams.get('token');
+
+  if (token) {
     if (typeof (Storage) !== "undefined") {
       // Store
+      const id = urlParams.get('id');
+      const username = urlParams.get('username');
       const avatar = urlParams.get('avatar');
-      const email = urlParams.get('email');
-      const author = urlParams.get('author');
 
 
       let params = {
-        id, username, avatar, email, author, dataID
+        id, username, avatar, token
       }
       localStorage.setItem("user", JSON.stringify(params));
+
+      const success = document.getElementById('success');
+      success.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                      <strong>Success!</strong> ${username}, you have successfully signed in with Discord. Check out your <a href="/profile/${id}">profile</a>!`;
+      success.style.display = "block";
     } else {
       document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
     }
