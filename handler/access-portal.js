@@ -4,6 +4,7 @@ const REDIRECT_URI =
   "https://novels-production.up.railway.app/auth/discord/callback";
 const axios = require("axios");
 const profileShema = require("../models/profiles");
+const jwt = require("jsonwebtoken");
 
 module.exports = {
   name: "auth/discord/callback",
@@ -71,9 +72,9 @@ module.exports = {
 
       const userId = userData.id;
       const username = userData.username;
-      const email = userData.email;
       const avatar = userData.avatar;
       const banner = userData.banner;
+      const email = userData.email;
       const avatarURL = `https://cdn.discordapp.com/avatars/${userId}/${avatar}.png`;
 
       let date = new Date();
@@ -83,12 +84,27 @@ module.exports = {
         "https://novels-production.up.railway.app/access-portal"
       );
       if (data) {
+        const userObject = {
+          _id: data._id,
+          userID: userId,
+          username: username,
+          permissionsLevel: data.permissionsLevel,
+        };
+
+        const token = jwt.sign(process.env.ACCESS_TOKEN_SECRET, userObject);
+
         url.searchParams.append("avatar", avatarURL);
-        url.searchParams.append("author", data.author);
+        url.searchParams.append("token", token);
         url.searchParams.append("id", userId);
         url.searchParams.append("username", username);
-        url.searchParams.append("email", email);
-        url.searchParams.append("dataID", data._id);
+
+        data.id = userId;
+        data.username = username;
+        data.avatar = avatar;
+        data.banner = banner;
+        data.email = email;
+
+        await data.save();
 
         return res.status(200).redirect(url);
       }
@@ -104,18 +120,26 @@ module.exports = {
         followers: 0,
         discord: null,
         twitter: null,
-        author: false,
+        permissionsLevel: 1,
       }).save();
 
+      const userObject = {
+        _id: newProfile._id,
+        userID: userId,
+        username: username,
+        permissionsLevel: newProfile.permissionsLevel,
+      };
+
+      const token = jwt.sign(process.env.ACCESS_TOKEN_SECRET, userObject);
+
       url.searchParams.append("avatar", avatarURL);
-      url.searchParams.append("author", data.author);
+      url.searchParams.append("token", token);
       url.searchParams.append("id", userId);
       url.searchParams.append("username", username);
-      url.searchParams.append("email", email);
-      url.searchParams.append("dataID", data._id);
 
       return res.status(200).redirect(url);
     } catch (error) {
+      console.log(error);
       return res.status(400).send({ error: error.message });
     }
   },

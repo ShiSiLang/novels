@@ -11,9 +11,9 @@ const profileSchema = mongoose.Schema({
   following: Array,
   discord: String,
   twitter: String,
-  author: Boolean,
   books: Array,
   email: String,
+  permissionsLevel: Number,
 });
 
 module.exports = mongoose.model("profileSchema", profileSchema);
