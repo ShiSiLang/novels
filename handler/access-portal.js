@@ -91,7 +91,7 @@ module.exports = {
           permissionsLevel: data.permissionsLevel,
         };
 
-        const token = jwt.sign(process.env.ACCESS_TOKEN_SECRET, userObject);
+        const token = jwt.sign(userObject, process.env.ACCESS_TOKEN_SECRET);
 
         url.searchParams.append("avatar", avatarURL);
         url.searchParams.append("token", token);
@@ -130,7 +130,7 @@ module.exports = {
         permissionsLevel: newProfile.permissionsLevel,
       };
 
-      const token = jwt.sign(process.env.ACCESS_TOKEN_SECRET, userObject);
+      const token = jwt.sign(userObject, process.env.ACCESS_TOKEN_SECRET);
 
       url.searchParams.append("avatar", avatarURL);
       url.searchParams.append("token", token);
