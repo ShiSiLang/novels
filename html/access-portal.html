@@ -292,13 +292,11 @@
                       <strong>Success!</strong> ${username}, you have successfully signed in with Discord. Check out your <a href="/profile/${id}">profile</a>!`;
       success.style.display = "block";
     } else {
-      document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
-    }
-  } else {
-    const error = document.getElementById('error');
-    error.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+      const error = document.getElementById('error');
+      error.innerHTML = `<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
                       Something went wrong`;
-    error.style.display = "block";
+      error.style.display = "block";
+    }
   }
 </script>
 </body>
