@@ -7,7 +7,7 @@ const { trim, getBase64DataUrl } = require("../util.js");
 module.exports = {
   name: "upload-chapter",
   run: async (req, res) => {
-    // return res.status(400).json({ error: `System currently down!` });
+    return res.status(400).json({ error: `System currently down!` });
 
     let html = req.body.formData;
 

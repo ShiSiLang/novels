@@ -504,7 +504,7 @@
   </div>
 
   <form id="commentForm" method="post" action="/comment">
-    <input id="userData" type="hidden" name="user" value="NOTHING" />
+    <input id="token" type="hidden" name="token" value="" />
     <input type="hidden" name="book" value="$$book$$" />
     <input type="hidden" name="chapter" value="$$chapter$$" />
 
@@ -529,8 +529,7 @@
     if (typeof Storage !== "undefined") {
       if (localStorage.user) {
         let data = JSON.parse(localStorage.user);
-        let userObject = JSON.stringify({ username: data.username, id: data.id, email: data.email, dataID: data.dataID, });
-        document.getElementById("userData").value = userObject;
+        document.getElementById("token").value = data.token;
       }
     }
   </script>

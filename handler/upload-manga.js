@@ -8,7 +8,7 @@ module.exports = {
   name: "upload-manga",
   fields: [{ name: "pages" }],
   run: async (req, res) => {
-    //return res.status(400).json({ error: `System currently down!` });
+    return res.status(400).json({ error: `System currently down!` });
 
     let html = req.body;
 
@@ -32,7 +32,7 @@ module.exports = {
       user.email !== userObject.email
     )
       return res.status(400).json({ error: `Could not fetch user data.` });
-      
+
     if (user.author !== true)
       return res
         .status(400)

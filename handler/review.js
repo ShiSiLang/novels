@@ -9,7 +9,7 @@ let webhook_url = process.env.webhook;
 module.exports = {
   name: "review",
   run: async (req, res) => {
-    //return res.status(400).json({ error: `System currently down!` });
+    return res.status(400).json({ error: `System currently down!` });
 
     let html = req.body.data; //type, type2, reviewID, password
 
