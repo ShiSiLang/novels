@@ -19,8 +19,10 @@ if(type === "auth") {
        const tokenDetails = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET); 
        console.log(tokenDetails); 
        
-}catch {
-}
+    } catch (err) { 
+       console.log(err); 
+       return res.status(400).json({ error: `Token is invalid` }); 
+     }
 }
 
     if (type === "profiles") {
