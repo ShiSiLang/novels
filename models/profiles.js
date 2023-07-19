@@ -12,6 +12,7 @@ const profileSchema = mongoose.Schema({
   discord: String,
   twitter: String,
   books: Array,
+  favorites: Array,
   email: String,
   permissionsLevel: Number,
 });
