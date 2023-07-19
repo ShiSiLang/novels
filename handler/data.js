@@ -3,7 +3,7 @@ const bookShema = require("../models/book");
 const system = require("../models/system");
 const reviewShema = require("../models/review");
 const { trim, getTimeDifference } = require("../util.js");
-const jwt = require("jsonwebtoken"); 
+const jwt = require("jsonwebtoken");
 
 module.exports = {
   name: "data/:type/:other",
@@ -11,19 +11,20 @@ module.exports = {
   run: async (req, res) => {
     let type = req.params.type.toLowerCase();
 
-if(type === "auth") {
-    const token = req.params.other; 
-     if (!token) return res.status(400).json({ error: `Provide a token.` }); 
-  
-     try { 
-       const tokenDetails = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET); 
-       console.log(tokenDetails); 
-       
-    } catch (err) { 
-       console.log(err); 
-       return res.status(400).json({ error: `Token is invalid` }); 
-     }
-}
+    if (type === "auth") {
+      const token = req.params.other;
+      if (!token) return res.status(400).json({ error: `Provide a token.` });
+
+      try {
+        const tokenDetails = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
+        console.log(tokenDetails);
+
+        res.status(200).json({ data: tokenDetails });
+      } catch (err) {
+        console.log(err);
+        return res.status(400).json({ error: `Token is invalid` });
+      }
+    }
 
     if (type === "profiles") {
       let data = await profileShema.find().sort({ username: 1 });
